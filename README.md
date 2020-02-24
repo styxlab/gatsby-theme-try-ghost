@@ -5,7 +5,7 @@ Turn your Ghost blog into a lightning fast static website. This Gatsby theme is 
 
 ## Demo
 
-Play with the [Demo](https://styxlab.gihub.io) in order to see what to expect.
+Play with the [Demo](https://styxlab.github.io) in order to see what to expect.
 
 ## Features
 - Casper v3 skin and functionality
