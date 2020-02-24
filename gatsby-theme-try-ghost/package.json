@@ -10,9 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "resolutions": {
     "sharp": "0.23.4"
   },
@@ -32,7 +29,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "lint": "eslint . --ext .js --cache",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
