@@ -15,7 +15,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - SEO optimized
 - composable and extensible
 
-## Install
+## Installation
 
 > Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-ghost) to get up and running quickly! 
 
