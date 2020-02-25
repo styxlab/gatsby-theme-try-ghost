@@ -12,13 +12,13 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 ## Features
 
-- Casper v3 skin and functionality
-- sticky navigation headers
-- hover on author avatar
-- styled 404 page
+- Ghost Casper skin and functionality
+- Sticky navigation headers
+- Hover on author avatar
+- Styled 404 page
 - SEO optimized
-- fully responsive
-- composable and extensible
+- Fully responsive
+- Composable and extensible
 
 
 ## Quick Start
