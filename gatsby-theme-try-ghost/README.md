@@ -72,7 +72,7 @@ If you want to add this blog theme to an existing site, follow these instruction
 
 3. Update siteConfig
 
-    In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and      `siteDescriptionMeta`. Update at least those to fit your needs.
+    In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and      `siteDescriptionMeta`. Update at least those to fit your needs. Als make sure your `favicon.png` can be found in folder `static` of your working directory.
 
 4. Ghost Content API Keys
 
