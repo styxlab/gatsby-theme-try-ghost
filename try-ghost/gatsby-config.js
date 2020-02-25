@@ -2,7 +2,7 @@ let siteConfig
 let ghostConfig
 
 try {
-    siteConfig = require(`./.siteConfig`)
+    siteConfig = require(`./siteConfig`)
 } catch (e) {
     siteConfig = null
 }
