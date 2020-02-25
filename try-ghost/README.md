@@ -1,6 +1,6 @@
 # Gatsby Theme Minimal Example
 
-> See the [base README](../README.md) for instructions on how to use this example.
+> See the [base README](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/README.md) for instructions on how to use this example.
 
 # Copyright & License
 
