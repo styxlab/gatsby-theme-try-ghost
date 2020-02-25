@@ -3,9 +3,13 @@ A Gatsby theme plugin for creating blogs from headless Ghost CMS.
 
 Turn your Ghost blog into a lightning fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Casper 3 skin and functionality. All content is sourced from a headless Ghost CMS.
 
+&nbsp;
+
 ## Demo
 
 Play with the [Demo](https://styxlab.github.io) to get a first impression.
+
+&nbsp;
 
 ## Features
 - Casper v3 skin and functionality
@@ -15,6 +19,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - SEO optimized
 - composable and extensible
 
+&nbsp;
 
 ## Installation
 
@@ -76,6 +81,7 @@ In the configuration shown above, the most important fields to be changed are `s
 
 Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
 
+&nbsp;
 
 # Running
 
@@ -85,6 +91,7 @@ Start the development server. You now have a Gatsby site pulling content from he
 gatsby develop
 ```
 
+&nbsp;
 
 # Optimizing
 
