@@ -72,11 +72,11 @@ If you want to add this blog theme to an existing site, follow these instruction
 
 3. Update siteConfig
 
-In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and `siteDescriptionMeta`. Update at least those to fit your needs.
+    In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and      `siteDescriptionMeta`. Update at least those to fit your needs.
 
 4. Ghost Content API Keys
 
-Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+    Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
 
 
 # Running
