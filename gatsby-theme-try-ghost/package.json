@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-try-ghost",
   "description": "A Gatsby theme plugin for creating blogs from headless Ghost CMS.",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",
@@ -21,8 +21,16 @@
   },
   "keywords": [
     "gatsby",
+    "gatsby-plugin",
+    "gatsby-theme",
     "ghost",
-    "casper"
+    "ghost-theme",
+    "casper",
+    "blogging",
+    "static-site",
+    "static-site-generator",
+    "gatsbyjs",
+    "react"
   ],
   "scripts": {
     "serve": "gatsby build && NODE_ENV=production gatsby serve",
