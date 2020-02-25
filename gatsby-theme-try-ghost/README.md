@@ -15,86 +15,56 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - SEO optimized
 - composable and extensible
 
-## Installing a new site
+## Install
 
-If you're creating a new site you should **not** use this plugin directly. Instead, use the starter which is based on this plugin and comes with added benefits such as suitable pre-configurations.
+> Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-ghost) to get up and running quickly! 
 
-```bash
-# With Gatsby CLI
-gatsby new try-ghost https://github.com/styxlab/gatsby-starter-try-ghost 
-```
-
-```bash
-# From Source
-git clone https://github.com/styxlab/gatsby-starter-try-ghost.git
-cd gatsby-starter-try-ghost
-```
-
-Then install dependencies
-
-```bash
-yarn
-```
-
-## Adding to existing site
-
-If you want to add this blog theme to an existing site, then you can do so by directly adding and manually configuring it. 
+If you want to add this blog theme to an existing site, follow these instructions:
 
 1. Install the blog theme
 
-```bash
-# With Gatsby CLI
-gatsby new gatsby-theme-try-ghost https://github.com/styxlab/gatsby-theme-try-ghost.git
-```
-
-```bash
-# From Source
-git clone https://github.com/styxlab/gatsby-theme-try-ghost.git
-cd gatsby-theme-try-ghost
-```
-
-Then install dependencies
-
-```bash
-yarn
-```
+    ```bash
+    yarn add gatsby-theme-try-ghost
+    # or
+    npm install gatsby-theme-try-ghost --save
+    ```
 
 2. Add the configuration to your `gatsby-config.js` file
 
-```js
-// gatsby-config.js
-module.exports = {
-  plugins: [
-    {
-      resolve: `gatsby-theme-try-ghost`,
-      options: {
-        siteConfig: {
-          siteUrl: `https://your-bog.com`,
-          postsPerPage: 12,
-          siteTitleMeta: `Gatsby Frontend powered by headless Ghost CMS`,
-          siteDescriptionMeta: `Turn your Ghost blog into a lightning fast static website with Gatsby`, 
-          shareImageWidth: 1000,
-          shareImageHeight: 523,
-          shortTitle: `Ghost`,
-          siteIcon: `favicon.png`,
-          backgroundColor: `#e9e9e9`,
-          themeColor: `#15171A`,
-        },
-        ghostConfig: {
-          "development": {
-            "apiUrl": "http://localhost:2368",
-            "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
+    ```js
+    // gatsby-config.js
+    module.exports = {
+    plugins: [
+        {
+        resolve: `gatsby-theme-try-ghost`,
+        options: {
+            siteConfig: {
+            siteUrl: `https://your-bog.com`,
+            postsPerPage: 12,
+            siteTitleMeta: `Gatsby Frontend powered by headless Ghost CMS`,
+            siteDescriptionMeta: `Turn your Ghost blog into a lightning fast static website with Gatsby`, 
+            shareImageWidth: 1000,
+            shareImageHeight: 523,
+            shortTitle: `Ghost`,
+            siteIcon: `favicon.png`,
+            backgroundColor: `#e9e9e9`,
+            themeColor: `#15171A`,
+            },
+            ghostConfig: {
+                "development": {
+                    "apiUrl": "http://localhost:2368",
+                    "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
+                },
+                "production": {
+                    "apiUrl": "https://your-ghost-cms.com",
+                    "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
+                },
+            },
           },
-          "production": {
-            "apiUrl": "https://your-bog.com",
-            "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
-          },
-        },
-      },
-    },
-  ],
-}
-```
+       },
+    ],  
+    }
+    ```
 
 4. Update siteConfig
 
