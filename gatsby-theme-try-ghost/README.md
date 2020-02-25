@@ -15,9 +15,11 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - SEO optimized
 - composable and extensible
 
+
 ## Installation
 
 > Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-ghost) to get up and running quickly! 
+
 
 If you want to add this blog theme to an existing site, follow these instructions:
 
@@ -29,7 +31,7 @@ If you want to add this blog theme to an existing site, follow these instruction
     npm install gatsby-theme-try-ghost --save
     ```
 
-2. Add the configuration to your `gatsby-config.js` file
+2. Add the following configuration to your `gatsby-config.js` file
 
     ```js
     // gatsby-config.js
@@ -66,13 +68,14 @@ If you want to add this blog theme to an existing site, follow these instruction
     }
     ```
 
-4. Update siteConfig
+3. Update siteConfig
 
-The most important fields to be changed are `siteUrl`, `siteTitleMeta` and `siteDescriptionMeta`. Update at least those to fit your configuration.
+In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and `siteDescriptionMeta`. Update at least those to fit your needs.
 
-3. Replace Ghost Keys
+4. Ghost Content API Keys
 
-Change the `apiUrl` value to the URL of your Ghost site. Next, update the `contentApiKey` value to a key associated with the Ghost site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+
 
 # Running
 
@@ -82,12 +85,12 @@ Start the development server. You now have a Gatsby site pulling content from he
 gatsby develop
 ```
 
-# Optimising
+
+# Optimizing
 
 You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
 
 &nbsp;
-
 
 # Copyright & License
 
