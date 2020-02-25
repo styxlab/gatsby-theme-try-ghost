@@ -17,7 +17,7 @@ import '../../styles/screen.css'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page }) => {
+const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
@@ -38,7 +38,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 {header}
 
                 {/* The main content area */}
-                <main ref={isHome && sticky && sticky.anchorRef} id="site-main" className="site-main outer">
+                <main ref={isHome && sticky && sticky.anchorRef} id="site-main" className={`site-main outer ${errorClass}`}>
                     {/* All the main content gets inserted here, index.js, post.js */}
                     {children}
                 </main>
@@ -91,6 +91,7 @@ DefaultLayout.propTypes = {
         PropTypes.object.isRequired,
     ),
     page: PropTypes.object,
+    errorClass: PropTypes.string,
 }
 
 const DefaultLayoutSettingsQuery = props => (
