@@ -82,7 +82,8 @@ If you want to add this blog theme to an existing site, follow these instruction
     Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
 
 
-# Running
+
+## Running
 
 Start the development server. You now have a Gatsby site pulling content from headless Ghost.
 
@@ -91,7 +92,7 @@ gatsby develop
 ```
 
 
-# Optimizing
+## Optimizing
 
 You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
 
