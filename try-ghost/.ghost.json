@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://atmolabs.org",
-    "contentApiKey": "7bef1d4718af732ab93024b9d1"
+    "apiUrl": "http://localhost:2368",
+    "contentApiKey": "<key>"
   },
   "production": {
-    "apiUrl": "https://atmolabs.org",
-    "contentApiKey": "7bef1d4718af732ab93024b9d1"
+    "apiUrl": "http://localhost:2368",
+    "contentApiKey": "<key>"
   }
 }
