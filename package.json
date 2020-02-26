@@ -1,10 +1,11 @@
 {
   "name": "gatsby-theme-try-ghost-workspace",
   "private": true,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "develop": "yarn workspace try-ghost develop",
     "build": "yarn workspace try-ghost build"
   },
   "workspaces": [
