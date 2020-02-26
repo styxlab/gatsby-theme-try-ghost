@@ -1,6 +1,8 @@
 const path = require(`path`)
 
-const config = require(`./src/utils/siteConfigDefaults`)
+const siteConfigDefaults = require(`./src/utils/siteConfigDefaults`)
+const ghostConfigDefaults = require(`./src/utils/.ghost.json`)
+
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 
 /**
@@ -11,7 +13,8 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 *
 */
 module.exports = (themeOptions) => {
-    const siteConfig = themeOptions.siteConfig || config
+    const siteConfig = themeOptions.siteConfig || siteConfigDefaults
+    const ghostConfig = themeOptions.ghostConfig || ghostConfigDefaults
 
     return {
         siteMetadata: siteConfig,
@@ -41,8 +44,8 @@ module.exports = (themeOptions) => {
                 resolve: `gatsby-source-ghost`,
                 options:
                     process.env.NODE_ENV === `development`
-                        ? themeOptions.ghostConfig.development
-                        : themeOptions.ghostConfig.production,
+                        ? ghostConfig.development
+                        : ghostConfig.production,
             },
             /**
              *  Utility Plugins
