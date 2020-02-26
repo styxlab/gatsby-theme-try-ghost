@@ -20,7 +20,8 @@ const SiteNav = ({ data, className, postTitle }) => {
                 <div className="site-nav-left">
                     {site.logo ?
                         <a className="site-nav-logo" href={config.siteUrl}><img src={site.logo} alt={site.title} /></a>
-                        : <a className="site-nav-logo" href={config.siteUrl}>{site.title}</a>
+                        :
+                        <a className="site-nav-logo" href={config.siteUrl}>{site.title}</a>
                     }
                     <div className="site-nav-content">
                         <Navigation data={site.navigation} />
@@ -31,11 +32,15 @@ const SiteNav = ({ data, className, postTitle }) => {
                 </div>
             </div>
             <div className="site-nav-right">
-                <div className="social-links">
-                    { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
-                    { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
-                    <a className="rss-button" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer" title="Rss"><RssIcon /></a>
-                </div>
+                {site.secondary_navigation ?
+                    <Navigation data={site.secondary_navigation} />
+                    :
+                    <div className="social-links">
+                        { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
+                        { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
+                        <a className="rss-button" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/` } target="_blank" rel="noopener noreferrer" title="Rss"><RssIcon /></a>
+                    </div>
+                }
             </div>
         </nav>
     )

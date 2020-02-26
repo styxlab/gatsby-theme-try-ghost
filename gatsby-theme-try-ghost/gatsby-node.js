@@ -2,6 +2,27 @@ const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 
 /**
+ * Here is the place where Gatsby creates schema customizations.
+ * This is needed to make the secondary_navigation field optional.
+ */
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+        type Navigation {
+            label: String
+            url: String
+        }
+        type allGhostSettings implements Node {
+            secondary_navigation: [Navigation!]!
+        }
+        type GhostSettings implements Node {
+            secondary_navigation: [Navigation!]!
+        }
+    `
+    createTypes(typeDefs)
+}
+
+/**
  * Here is the place where Gatsby creates the URLs for all the
  * posts, tags, pages and authors that we fetched from the Ghost site.
  */
