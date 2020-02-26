@@ -2,6 +2,13 @@
 
 npm-upgrade
 
+cd gatsby-theme-try-ghost
+npm-upgrade
+
+cd ../try-ghost
+npm-upgrade
+
+cd ..
 mkdir ./compare
 
 github="https://raw.githubusercontent.com"

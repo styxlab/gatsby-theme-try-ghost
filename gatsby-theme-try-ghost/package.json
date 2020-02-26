@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-try-ghost",
   "description": "A Gatsby theme plugin for creating blogs from headless Ghost CMS.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",
@@ -40,11 +40,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
+    "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-ghost": "^1.0.0",
     "eslint-plugin-react": "^7.18.3",
-    "gatsby": "^2.19.19",
+    "gatsby": "^2.19.22",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
@@ -64,10 +64,10 @@
     "gatsby-background-image": "^0.10.2",
     "gatsby-image": "^2.2.41",
     "gatsby-plugin-advanced-sitemap": "^1.5.1",
-    "gatsby-plugin-catch-links": "^2.1.25",
+    "gatsby-plugin-catch-links": "^2.1.26",
     "gatsby-plugin-feed": "^2.3.27",
     "gatsby-plugin-force-trailing-slashes": "^1.0.4",
-    "gatsby-plugin-manifest": "^2.2.41",
+    "gatsby-plugin-manifest": "^2.2.42",
     "gatsby-plugin-offline": "^3.0.35",
     "gatsby-plugin-postcss": "^2.1.20",
     "gatsby-plugin-react-helmet": "^3.1.22",
