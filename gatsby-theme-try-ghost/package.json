@@ -49,7 +49,7 @@
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
-    "gatsby": "^2.19.19",
+    "gatsby": "^2.19.22",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
