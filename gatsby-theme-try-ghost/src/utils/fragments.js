@@ -144,6 +144,14 @@ export const ghostPostFields = graphql`
         codeinjection_styles
         comment_id
         reading_time
+
+        # Parsed html
+        children {
+            ... on GhostPostHtml {
+                html
+            }
+        }
+
     }
 `
 
