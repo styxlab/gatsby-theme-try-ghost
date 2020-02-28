@@ -12,9 +12,6 @@ exports.createSchemaCustomization = ({ actions }) => {
             label: String
             url: String
         }
-        type GhostPostHtml implements Node {
-            html: String
-        }
         type allGhostSettings implements Node {
             secondary_navigation: [Navigation!]!
             children: [GhostPostHtml!]!

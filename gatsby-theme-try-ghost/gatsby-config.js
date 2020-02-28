@@ -48,7 +48,7 @@ module.exports = (themeOptions) => {
                         : ghostConfig.production,
             },
             {
-                resolve: require.resolve(`./plugins/gatsby-transform-ghost-html`),
+                resolve: require.resolve(`./plugins/gatsby-transform-html`),
                 options: {
                     transformLinks: true,
                 },
