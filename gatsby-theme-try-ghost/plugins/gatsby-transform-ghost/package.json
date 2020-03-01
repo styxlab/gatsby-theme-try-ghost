@@ -6,8 +6,10 @@
     "dependencies": {
         "@babel/runtime": "7.7.2",
         "bluebird": "3.7.1",
-        "sharp": "0.22.1",
-        "lodash": "^4.17.15"
+        "lodash": "^4.17.15",
+        "path": "^0.12.7",
+        "rehype": "^9.0.1",
+        "sharp": "0.22.1"
     },
     "devDependencies": {
         "@babel/cli": "7.7.0",

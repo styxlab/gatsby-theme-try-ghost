@@ -48,9 +48,13 @@ module.exports = (themeOptions) => {
                         : ghostConfig.production,
             },
             {
-                resolve: require.resolve(`./plugins/gatsby-transform-html`),
+                resolve: require.resolve(`./plugins/gatsby-transform-ghost`),
                 options: {
-                    transformLinks: true,
+                    plugins: [
+                        {
+                            resolve: require.resolve(`./plugins/gatsby-remark-prismjs`),
+                        },
+                    ],
                 },
             },
             /**

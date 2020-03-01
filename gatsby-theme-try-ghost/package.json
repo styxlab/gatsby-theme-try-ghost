@@ -51,7 +51,8 @@
   "peerDependencies": {
     "gatsby": "^2.19.22",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "rehype": "^9.0.1"
   },
   "dependencies": {
     "@tryghost/helpers": "^1.1.22",
@@ -79,10 +80,14 @@
     "gatsby-source-ghost": "^4.0.3",
     "gatsby-transformer-sharp": "^2.3.14",
     "lodash": "^4.17.15",
+    "parse-numeric-range": "^0.0.2",
     "postcss-color-function": "^4.1.0",
     "postcss-custom-properties": "^9.1.1",
     "postcss-easy-import": "^3.0.0",
+    "prismjs": "^1.19.0",
     "react-helmet": "^5.2.1",
-    "styled-components": "^5.0.1"
+    "rehype": "^9.0.1",
+    "styled-components": "^5.0.1",
+    "unist-builder": "^2.0.3"
   }
 }

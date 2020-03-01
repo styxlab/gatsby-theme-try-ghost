@@ -35,23 +35,21 @@ module.exports = async function onCreateNode(
     }
     createNode(htmlNode)
     createParentChildLink({ parent: node, child: htmlNode })
-    return htmlNode
   }
 
-  const content
+  let content = { content: node.html }
 
-  if (_.isFunction(loadNodeContent)) {
-    content = await loadNodeContent(node.file)
-  } else {
-    content = { html: node.html }
-  }
+  //if (_.isFunction(loadNodeContent)) {
+  //  content = await loadNodeContent(node.file)
+  //} else {
+  //content = { content: node.html }
+  //}
 
   try {
     return transformObject(
         content,
         createNodeId(`${node.id} >>> HTML`),
         `GhostPostHtml`)
-    )
   } catch (err) {
     reporter.panicOnBuild(
       `Error processing HTML in node ${node.id} :\n ${err.message}`
