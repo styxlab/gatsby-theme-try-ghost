@@ -63,21 +63,7 @@ module.exports = (
             return Promise.resolve()
           }
         })
-        const markdownAST = remark.parse(htmlNode.content)
-        console.log(markdownAST)
-
-        var tree = u('root', [
-          u('code', '1'),
-          u('node', [u('code', '2')]),
-          u('void'),
-          u('code', '3')
-        ])
-
-        console.log(tree)
-
-        visit(markdownAST, `code`, node => {
-            console.log("visit")
-        })
+        const htmlAST = rehype.parse(htmlNode.content)
 
         await Promise.each(pluginOptions.plugins, plugin => {
           const requiredPlugin = require(plugin.resolve)
@@ -92,7 +78,7 @@ module.exports = (
             console.log(defaultFunction)
             return defaultFunction(
               {
-                markdownAST,
+                htmlAST,
                 htmlNode,
                 getNode,
                 basePath,
@@ -109,10 +95,8 @@ module.exports = (
             return Promise.resolve()
           }
         })
-        return markdownAST
+        return htmlAST
     }
-
-    console.log("ghost2")
 
     async function getHtmlAst(htmlNode) {
         const htmlAst = await getAST(htmlNode)

@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-transform-html",
+    "name": "gatsby-transform-rehype",
     "description": "Gatsby plugin to transform html into hast to be used by child plugins",
     "version": "1.0.0",
     "author": "styxlab",
