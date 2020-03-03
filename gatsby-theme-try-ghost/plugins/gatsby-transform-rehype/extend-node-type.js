@@ -1,9 +1,9 @@
 const _ = require(`lodash`)
 const Promise = require(`bluebird`)
+const unified = require(`unified`)
 const Rehype = require(`rehype`)
 const Remark = require(`remark`)
-const visit = require(`unist-util-visit`)
-var u = require('unist-builder')
+var stringify = require('rehype-stringify')
 
 module.exports = (
   {
@@ -75,7 +75,6 @@ module.exports = (
             : undefined
 
           if (defaultFunction) {
-            console.log(defaultFunction)
             return defaultFunction(
               {
                 htmlAST,
@@ -98,22 +97,35 @@ module.exports = (
         return htmlAST
     }
 
-    async function getHtmlAst(htmlNode) {
-        const htmlAst = await getAST(htmlNode)
-        return htmlAst
+    async function gethtmlAST(htmlNode) {
+        const htmlAST = await getAST(htmlNode)
+        return htmlAST
+    }
+
+    async function getHTML(htmlNode) {
+        const htmlAST = await getAST(htmlNode)
+        return unified()
+            .use(stringify)
+            .stringify(htmlAST)
     }
 
     return resolve({
       html: {
         type: `String`,
         resolve(htmlNode) {
+            return getHTML(htmlNode)
+        },
+      },
+      htmlOriginal: {
+        type: `String`,
+        resolve(htmlNode) {
             return htmlNode.content
         },
       },
-      htmlAst: {
+      htmlAST: {
         type: `JSON`,
         resolve(htmlNode) {
-            return getHtmlAst(htmlNode).then(ast => {
+            return gethtmlAST(htmlNode).then(ast => {
                 return ast
             })
         },

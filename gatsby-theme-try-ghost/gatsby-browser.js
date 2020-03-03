@@ -9,6 +9,7 @@
  * via ids/classnames etc.
  *
  */
+
 var trustAllScripts = function () {
     var scriptNodes = document.querySelectorAll('.load-external-scripts script');
 

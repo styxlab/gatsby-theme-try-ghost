@@ -43,8 +43,7 @@ async function onCreateNode({ node, actions, createNodeId, createContentDigest }
     }
 
     //
-    console.log(node.url)
-
+    //console.log(node.url)
 
     let contentHtml = node.html
 
