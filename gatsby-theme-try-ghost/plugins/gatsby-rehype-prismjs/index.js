@@ -9,7 +9,7 @@ const commandLine = require(`./command-line`)
 const Rehype = require(`rehype`)
 
 module.exports = (
-  { htmlAST },
+  { htmlAst },
   {
     classPrefix = `language-`,
     inlineCodeMarker = null,
@@ -36,7 +36,7 @@ module.exports = (
   //Load language extension if defined
   loadLanguageExtension(languageExtensions)
 
-  visit(htmlAST, {tagName: `pre`}, parent => {
+  visit(htmlAst, {tagName: `pre`}, parent => {
     visit(parent, {tagName: `code`}, node => {
 
     if (parent.type === `temporary`) {
@@ -102,7 +102,7 @@ module.exports = (
 
     // prettier-ignore
     //codeHtml = ``
-    //+ `<pre class="${highlightClassName}" data-language="${languageName}">`
+    //+ `<div class="${highlightClassName}" data-language="${languageName}">`
     //+   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
     //+     `<code class="${className}">`
     //+       `${useCommandLine ? commandLine(value, outputLines, promptUser, promptHost) : ``}`
@@ -110,7 +110,7 @@ module.exports = (
     //+     `</code>`
     //+     `${numLinesNumber}`
     //+   `</pre>`
-    //+ `</pre>`
+    //+ `</div>`
     //
     //codeAST = rehype.parse(codeHtml)
     //visit(codeAST, {tagName: `body`}, body => {
@@ -144,7 +144,7 @@ module.exports = (
 })
 
   if (!noInlineHighlight) {
-    visit(htmlAST, `inlineCode`, node => {
+    visit(htmlAst, `inlineCode`, node => {
       let languageName = `text`
 
       if (inlineCodeMarker) {

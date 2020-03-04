@@ -1,5 +1,5 @@
 {
-    "name": "gatsby-transform-ghost-html",
+    "name": "gatsby-rehype-ghost-links",
     "description": "Gatsby plugin to transform html of posts and pages sourced from headless Ghost CMS",
     "version": "0.0.1",
     "author": "styxlab",

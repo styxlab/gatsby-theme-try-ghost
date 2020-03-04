@@ -1,9 +1,21 @@
 const _ = require(`lodash`)
 const Promise = require(`bluebird`)
-const unified = require(`unified`)
 const Rehype = require(`rehype`)
-const Remark = require(`remark`)
-var stringify = require('rehype-stringify')
+
+let pluginsCacheStr = ``
+let pathPrefixCacheStr = ``
+const htmlCacheKey = node =>
+  `transformer-remark-markdown-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+const htmlAstCacheKey = node =>
+  `transformer-remark-markdown-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+
+// TODO: remove this check with next major release
+const safeGetCache = ({ getCache, cache }) => id => {
+  if (!getCache) {
+    return cache
+  }
+  return getCache(id)
+}
 
 module.exports = (
   {
@@ -11,23 +23,31 @@ module.exports = (
     basePath,
     getNode,
     getNodesByType,
+    cache,
+    getCache: possibleGetCache,
     reporter,
     ...rest
   },
   pluginOptions
 ) => {
-  const nodeType = pluginOptions.type || `HtmlRehype`
+  const { type: nodeType } = _.merge({}, { type: `HtmlRehype` }, pluginOptions)
 
   if (type.name !== nodeType) {
     return {}
   }
 
-  console.log(type.name)
+  pluginsCacheStr = pluginOptions.plugins.map(p => p.name).join(``)
+  pathPrefixCacheStr = basePath || ``
+
+  const getCache = safeGetCache({ cache, getCache: possibleGetCache })
 
   return new Promise((resolve, reject) => {
+    const rehypeOptions = { fragment, space, emitParseErrors, verbose } = _.merge({}, {
+        fragment: true, space: `html`, emitParseErrors: false, verbose: false
+    }, pluginOptions)
+
     // Setup rehype.
-    let rehype = new Rehype() //.data(`settings`, htmlOptions)
-    let remark = new Remark()
+    let rehype = new Rehype().data(`settings`, rehypeOptions)
 
     for (let plugin of pluginOptions.plugins) {
       const requiredPlugin = require(plugin.resolve)
@@ -55,9 +75,11 @@ module.exports = (
                 htmlNode,
                 getNode,
                 reporter,
+                cache: getCache(plugin.name),
+                getCache,
                 compiler: {
                   parseString: rehype.parse.bind(rehype),
-                  generateHTML: null,
+                  generateHTML: getHTML,
                 },
                 ...rest,
               },
@@ -67,7 +89,7 @@ module.exports = (
             return Promise.resolve()
           }
         })
-        const htmlAST = rehype.parse(htmlNode.content)
+        const htmlAst = rehype.parse(htmlNode.content)
 
         await Promise.each(pluginOptions.plugins, plugin => {
           const requiredPlugin = require(plugin.resolve)
@@ -81,11 +103,13 @@ module.exports = (
           if (defaultFunction) {
             return defaultFunction(
               {
-                htmlAST,
+                htmlAst,
                 htmlNode,
                 getNode,
                 basePath,
                 reporter,
+                cache: getCache(plugin.name),
+                getCache,
                 compiler: {
                   parseString: rehype.parse.bind(rehype),
                   generateHTML: null,
@@ -98,19 +122,38 @@ module.exports = (
             return Promise.resolve()
           }
         })
-        return htmlAST
+        return htmlAst
     }
 
-    async function gethtmlAST(htmlNode) {
-        const htmlAST = await getAST(htmlNode)
-        return htmlAST
+    async function getHTMLAst(htmlNode) {
+        const cachedAst = await cache.get(htmlAstCacheKey(htmlNode))
+        if (cachedAst) {
+            return cachedAst
+        } else {
+            const htmlAst = await getAST(htmlNode)
+
+            // Save new HTML AST to cache and return
+            cache.set(htmlAstCacheKey(htmlNode), htmlAst)
+            return htmlAst
+        }
     }
 
     async function getHTML(htmlNode) {
-        const htmlAST = await getAST(htmlNode)
-        return unified()
-            .use(stringify)
-            .stringify(htmlAST)
+        const shouldCache = htmlNode
+        const cachedHTML = shouldCache && (await cache.get(htmlCacheKey(htmlNode)))
+        if (cachedHTML) {
+            return cachedHTML
+        } else {
+            const htmlAst = await getAST(htmlNode)
+            const html = rehype.stringify(htmlAst)
+
+            if (shouldCache) {
+                // Save new HTML to cache
+                cache.set(htmlCacheKey(htmlNode), html)
+            }
+
+            return html
+        }
     }
 
     return resolve({
@@ -120,10 +163,10 @@ module.exports = (
             return getHTML(htmlNode)
         },
       },
-      htmlAST: {
+      htmlAst: {
         type: `JSON`,
         resolve(htmlNode) {
-            return gethtmlAST(htmlNode).then(ast => {
+            return getHTMLAst(htmlNode).then(ast => {
                 return ast
             })
         },

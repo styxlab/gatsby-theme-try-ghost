@@ -15,7 +15,7 @@ module.exports = async function onCreateNode(
   const { filter, type } = _.merge({}, { filter: () => false, type: `HtmlRehype` }, pluginOptions)
 
  if (
-    node.internal.mediaType !== `text/html` &&
+    node.internal.mediatype !== `text/html` &&
     !filter(node)
   ) {
     return {}
