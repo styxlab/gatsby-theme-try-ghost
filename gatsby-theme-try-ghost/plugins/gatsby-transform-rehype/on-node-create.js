@@ -12,9 +12,7 @@ module.exports = async function onCreateNode(
   pluginOptions,
 ) {
   const { createNode, createParentChildLink } = actions
-  let { filter, type } = pluginOptions
-  //filter = filter || () => false
-  type = type || `HtmlRehype`
+  const { filter, type } = _.merge({}, { filter: () => false, type: `HtmlRehype` }, pluginOptions)
 
  if (
     node.internal.mediaType !== `text/html` &&
@@ -22,8 +20,6 @@ module.exports = async function onCreateNode(
   ) {
     return {}
   }
-
-  console.log(node.slug)
 
   function transformObject(obj, id, type) {
     const htmlNode = {
@@ -40,17 +36,17 @@ module.exports = async function onCreateNode(
     createParentChildLink({ parent: node, child: htmlNode })
   }
 
-  let content = {}
-
-  if (node.file){
-    content = await loadNodeContent(node.file)
+  let data = {}
+  if (node.internal.type === `File`){
+    data.content = await loadNodeContent(node)
+    data.fileAbsolutePath = node.absolutePath
   } else {
-    content = { content: node.html }
+    data = { content: node.html }
   }
 
   try {
     return transformObject(
-        content,
+        data,
         createNodeId(`${node.id} >>> ${type}`),
         type)
   } catch (err) {
