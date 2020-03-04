@@ -16,9 +16,13 @@ module.exports = (
   },
   pluginOptions
 ) => {
-  if (type.name !== `GhostPostHtml`) {
+  const nodeType = pluginOptions.type || `HtmlRehype`
+
+  if (type.name !== nodeType) {
     return {}
   }
+
+  console.log(type.name)
 
   return new Promise((resolve, reject) => {
     // Setup rehype.
@@ -116,18 +120,18 @@ module.exports = (
             return getHTML(htmlNode)
         },
       },
-      htmlOriginal: {
-        type: `String`,
-        resolve(htmlNode) {
-            return htmlNode.content
-        },
-      },
       htmlAST: {
         type: `JSON`,
         resolve(htmlNode) {
             return gethtmlAST(htmlNode).then(ast => {
                 return ast
             })
+        },
+      },
+      htmlSource: {
+        type: `String`,
+        resolve(htmlNode) {
+            return htmlNode.content
         },
       },
     })

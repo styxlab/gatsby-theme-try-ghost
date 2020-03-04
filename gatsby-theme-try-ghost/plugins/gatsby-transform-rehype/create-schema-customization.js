@@ -1,5 +1,5 @@
 const typeDefs = `
-    type GhostPostHtml implements Node {
+    type HtmlRehype implements Node {
         html: String
     }
 `

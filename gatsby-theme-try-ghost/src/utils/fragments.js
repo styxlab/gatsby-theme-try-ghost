@@ -145,9 +145,9 @@ export const ghostPostFields = graphql`
         comment_id
         reading_time
 
-        # Parsed html
+        # Transformed html
         children {
-            ... on GhostPostHtml {
+            ... on HtmlRehype {
                 html
             }
         }

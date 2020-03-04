@@ -96,7 +96,7 @@ const Post = ({ data, location, pageContext }) => {
 Post.propTypes = {
     data: PropTypes.shape({
         post: PropTypes.shape({
-            codeinjection_styles: PropTypes.object,
+            codeinjection_styles: PropTypes.string,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             custom_excerpt: PropTypes.string,

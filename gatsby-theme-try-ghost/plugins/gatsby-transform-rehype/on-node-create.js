@@ -9,18 +9,21 @@ module.exports = async function onCreateNode(
     reporter,
     createContentDigest,
   },
-  pluginOptions
+  pluginOptions,
 ) {
   const { createNode, createParentChildLink } = actions
+  let { filter, type } = pluginOptions
+  //filter = filter || () => false
+  type = type || `HtmlRehype`
 
-  // We only care about GhostPost content.
-  // ToDo: Also support loading html from file
-  // ToDo: Make node type configurable -> plugin Options
-  if (
-    node.internal.type !== `GhostPost` || node.slug === 'data-schema'
+ if (
+    node.internal.mediaType !== `text/html` &&
+    !filter(node)
   ) {
-    return
+    return {}
   }
+
+  console.log(node.slug)
 
   function transformObject(obj, id, type) {
     const htmlNode = {
@@ -37,19 +40,19 @@ module.exports = async function onCreateNode(
     createParentChildLink({ parent: node, child: htmlNode })
   }
 
-  let content = { content: node.html }
+  let content = {}
 
-  //if (_.isFunction(loadNodeContent)) {
-  //  content = await loadNodeContent(node.file)
-  //} else {
-  //content = { content: node.html }
-  //}
+  if (node.file){
+    content = await loadNodeContent(node.file)
+  } else {
+    content = { content: node.html }
+  }
 
   try {
     return transformObject(
         content,
-        createNodeId(`${node.id} >>> HTML`),
-        `GhostPostHtml`)
+        createNodeId(`${node.id} >>> ${type}`),
+        type)
   } catch (err) {
     reporter.panicOnBuild(
       `Error processing HTML in node ${node.id} :\n ${err.message}`
