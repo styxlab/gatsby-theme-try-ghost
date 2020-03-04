@@ -11,6 +11,7 @@
   },
   "workspaces": [
     "gatsby-theme-try-ghost",
-    "try-ghost"
+    "try-ghost",
+    "gatsby-theme-try-ghost/plugins/gatsby-transform-rehype"
   ]
 }

@@ -7,9 +7,7 @@
         "@babel/runtime": "7.7.2",
         "bluebird": "3.7.1",
         "lodash": "^4.17.15",
-        "path": "^0.12.7",
-        "rehype": "^9.0.1",
-        "sharp": "0.22.1"
+        "rehype": "^9.0.1"
     },
     "devDependencies": {
         "@babel/cli": "7.7.0",
@@ -18,25 +16,19 @@
         "cross-env": "6.0.3"
     },
     "keywords": [
-        "gatsby",
-        "gatsby-plugin",
-        "favicon",
-        "icons",
-        "manifest.webmanifest",
-        "progressive-web-app",
-        "pwa"
+      "gatsby",
+      "gatsby-plugin",
+      "html",
+      "rehype"
     ],
-    "resolutions": {
-        "sharp": "0.22.1"
-    },
     "license": "MIT",
-    "main": "index.js",
     "peerDependencies": {
         "gatsby": ">2.0.0-alpha"
     },
     "scripts": {
         "build": "babel src --out-dir . --ignore **/__tests__",
         "prepare": "cross-env NODE_ENV=production npm run build",
-        "watch": "babel -w src --out-dir . --ignore **/__tests__"
+        "watch": "babel -w src --out-dir . --ignore **/__tests__",
+        "develop": "gatsby develop"
     }
 }
