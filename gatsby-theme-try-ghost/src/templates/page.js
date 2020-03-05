@@ -17,6 +17,7 @@ import { MetaData } from '../components/common/meta'
 const Page = ({ data, location }) => {
     const page = data.ghostPage
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: page.feature_image && true })
+    const transformedHtml = page.children[0] && page.children[0].html
 
     return (
         <>
@@ -42,7 +43,7 @@ const Page = ({ data, location }) => {
                         {/* The main page content */}
                         <section className="post-full-content">
                             <div className="post-content load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: page.html }} />
+                                dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
                         </section>
                     </article>
                 </div>
@@ -60,6 +61,9 @@ Page.propTypes = {
             feature_image: PropTypes.string,
             tags: PropTypes.arrayOf(
                 PropTypes.object
+            ),
+            children: PropTypes.arrayOf(
+                PropTypes.object,
             ),
         }).isRequired,
     }).isRequired,

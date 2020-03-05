@@ -4,12 +4,16 @@ const Promise = require(`bluebird`);
 
 const Rehype = require(`rehype`);
 
+const stripPosition = require(`unist-util-remove-position`);
+
+const hastReparseRaw = require(`hast-util-raw`);
+
 let pluginsCacheStr = ``;
 let pathPrefixCacheStr = ``;
 
-const htmlCacheKey = node => `transformer-remark-markdown-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`;
+const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`;
 
-const htmlAstCacheKey = node => `transformer-remark-markdown-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`; // TODO: remove this check with next major release
+const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`; // TODO: remove this check with next major release
 
 
 const safeGetCache = ({
@@ -23,11 +27,20 @@ const safeGetCache = ({
   return getCache(id);
 };
 
+const pluginDefaults = {
+  type: `HtmlRehype`
+};
+const rehypeDefaults = {
+  fragment: true,
+  space: `html`,
+  emitParseErrors: false,
+  verbose: false
+};
+
 module.exports = ({
   type,
   basePath,
   getNode,
-  getNodesByType,
   cache,
   getCache: possibleGetCache,
   reporter,
@@ -35,9 +48,7 @@ module.exports = ({
 }, pluginOptions) => {
   const {
     type: nodeType
-  } = _.merge({}, {
-    type: `HtmlRehype`
-  }, pluginOptions);
+  } = _.merge({}, pluginDefaults, pluginOptions);
 
   if (type.name !== nodeType) {
     return {};
@@ -49,18 +60,20 @@ module.exports = ({
     cache,
     getCache: possibleGetCache
   });
-  return new Promise((resolve, reject) => {
-    const rehypeOptions = ({
+  return new Promise(resolve => {
+    const {
       fragment,
       space,
       emitParseErrors,
       verbose
-    } = _.merge({}, {
-      fragment: true,
-      space: `html`,
-      emitParseErrors: false,
-      verbose: false
-    }, pluginOptions)); // Setup rehype.
+    } = pluginOptions;
+
+    const rehypeOptions = _.merge({}, rehypeDefaults, {
+      fragment,
+      space,
+      emitParseErrors,
+      verbose
+    }); // Setup rehype.
 
 
     let rehype = new Rehype().data(`settings`, rehypeOptions);
@@ -102,7 +115,7 @@ module.exports = ({
           return Promise.resolve();
         }
       });
-      const htmlAst = rehype.parse(htmlNode.content);
+      const htmlAst = rehype.parse(htmlNode.internal.content);
       await Promise.each(pluginOptions.plugins, plugin => {
         const requiredPlugin = require(plugin.resolve); // Allow both exports = function(), and exports.default = function()
 
@@ -177,16 +190,9 @@ module.exports = ({
 
         resolve(htmlNode) {
           return getHTMLAst(htmlNode).then(ast => {
-            return ast;
+            const strippedAst = stripPosition(_.clone(ast), true);
+            return hastReparseRaw(strippedAst);
           });
-        }
-
-      },
-      htmlSource: {
-        type: `String`,
-
-        resolve(htmlNode) {
-          return htmlNode.content;
         }
 
       }

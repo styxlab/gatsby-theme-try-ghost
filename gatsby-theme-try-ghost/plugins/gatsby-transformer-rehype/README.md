@@ -1,10 +1,10 @@
-# gatsby-transformer-remark
+# gatsby-transformer-rehype
 
-Parses Markdown files using [Remark](http://remark.js.org/).
+Parses HTML files and GrapghQL nodes using [rehype](https://github.com/rehypejs/rehype/).
 
 ## Install
 
-`npm install --save gatsby-transformer-remark`
+`npm install --save gatsby-transformer-rehype`
 
 ## How to use
 
@@ -12,7 +12,7 @@ Parses Markdown files using [Remark](http://remark.js.org/).
 // In your gatsby-config.js
 plugins: [
   {
-    resolve: `gatsby-transformer-remark`,
+    resolve: `gatsby-transformer-rehype`,
     options: {
       // CommonMark mode (default: true)
       commonmark: true,
@@ -20,7 +20,7 @@ plugins: [
       footnotes: true,
       // Pedantic mode (default: true)
       pedantic: true,
-      // GitHub Flavored Markdown mode (default: true)
+      // GitHub Flavored HTML mode (default: true)
       gfm: true,
       // Plugins configs
       plugins: [],
@@ -29,43 +29,43 @@ plugins: [
 ],
 ```
 
-The following parts of `options` are passed down to Remark as options:
+The following parts of `options` are passed down to rehype as options:
 
 - `options.commonmark`
 - `options.footnotes`
 - `options.pedantic`
 - `options.gfm`
 
-The details of the Remark options above could be found in [`remark-parse`'s documentation](https://github.com/remarkjs/remark/tree/master/packages/remark-parse#processoruseparse-options)
+The details of the rehype options above could be found in [`rehype-parse`'s documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#processoruseparse-options)
 
-A full explanation of how to use markdown in Gatsby can be found here:
+A full explanation of how to use HTML in Gatsby can be found here:
 [Creating a Blog with Gatsby](https://www.gatsbyjs.org/blog/2017-07-19-creating-a-blog-with-gatsby/)
 
-There are many Gatsby Remark plugins which you can install to customize how Markdown is processed. Many of them are demoed at https://using-remark.gatsbyjs.org/. See also the [source code for using-remark](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-remark).
+There are many Gatsby rehype plugins which you can install to customize how HTML is processed. Many of them are demoed at https://using-rehype.gatsbyjs.org/. See also the [source code for using-rehype](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-rehype).
 
 ## Parsing algorithm
 
-It recognizes files with the following extensions as Markdown:
+It recognizes files with the following extensions as HTML:
 
 - md
-- markdown
+- HTML
 
-Each Markdown file is parsed into a node of type `MarkdownRemark`.
+Each HTML file is parsed into a node of type `HTMLrehype`.
 
 All frontmatter fields are converted into GraphQL fields. TODO link to docs on
 auto-inferring types/fields.
 
-This plugin adds additional fields to the `MarkdownRemark` GraphQL type
+This plugin adds additional fields to the `HTMLrehype` GraphQL type
 including `html`, `excerpt`, `headings`, etc. Other Gatsby plugins can also add
 additional fields.
 
 ## How to query
 
-A sample GraphQL query to get MarkdownRemark nodes:
+A sample GraphQL query to get HTMLrehype nodes:
 
 ```graphql
 {
-  allMarkdownRemark {
+  allHTMLrehype {
     edges {
       node {
         html
@@ -89,7 +89,7 @@ Using the following GraphQL query you'll be able to get the table of contents
 
 ```graphql
 {
-  allMarkdownRemark {
+  allHTMLrehype {
     edges {
       node {
         html
@@ -106,7 +106,7 @@ By default the tableOfContents is using the field `slug` to generate absolute UR
 
 ```graphql
 {
-  allMarkdownRemark {
+  allHTMLrehype {
     edges {
       node {
         html
@@ -132,7 +132,7 @@ To pass default options to the plugin generating the tableOfContents, configure 
 // In your gatsby-config.js
 plugins: [
   {
-    resolve: `gatsby-transformer-remark`,
+    resolve: `gatsby-transformer-rehype`,
     options: {
       tableOfContents: {
         heading: null,
@@ -143,46 +143,14 @@ plugins: [
 ]
 ```
 
-### Excerpts
 
-#### Length
 
-By default, excerpts have a maximum length of 140 characters. You can change the default using the `pruneLength` argument. For example, if you need 500 characters, you can specify:
 
-```graphql
-{
-  allMarkdownRemark {
-    edges {
-      node {
-        html
-        excerpt(pruneLength: 500)
-      }
-    }
-  }
-}
-```
-
-#### Format
-
-By default, Gatsby will return excerpts as plain text. This might be useful for populating [opengraph](https://en.wikipedia.org/wiki/Facebook_Platform#Open_Graph_protocol) HTML tags for SEO reasons. You can also explicitly specify a `PLAIN` format like so:
+You can also get excerpts in HTML format.
 
 ```graphql
 {
-  allMarkdownRemark {
-    edges {
-      node {
-        excerpt(format: PLAIN)
-      }
-    }
-  }
-}
-```
-
-It's also possible to ask Gatsby to return excerpts formatted as HTML. You might use this if you have a blog post whose an excerpt contains markdown content--e.g. header, link, etc.--and you want these links to render as HTML.
-
-```graphql
-{
-  allMarkdownRemark {
+  allHTMLrehype {
     edges {
       node {
         excerpt(format: HTML)
@@ -192,23 +160,9 @@ It's also possible to ask Gatsby to return excerpts formatted as HTML. You might
 }
 ```
 
-You can also get excerpts in Markdown format.
-
-```graphql
-{
-  allMarkdownRemark {
-    edges {
-      node {
-        excerpt(format: MARKDOWN)
-      }
-    }
-  }
-}
-```
-
 ## gray-matter options
 
-`gatsby-transformer-remark` uses [gray-matter](https://github.com/jonschlinkert/gray-matter) to parse markdown frontmatter, so you can specify any of the options mentioned [here](https://github.com/jonschlinkert/gray-matter#options) in the `gatsby-config.js` file.
+`gatsby-transformer-rehype` uses [gray-matter](https://github.com/jonschlinkert/gray-matter) to parse HTML frontmatter, so you can specify any of the options mentioned [here](https://github.com/jonschlinkert/gray-matter#options) in the `gatsby-config.js` file.
 
 ### Example: Excerpts
 
@@ -216,7 +170,7 @@ If you don't want to use `pruneLength` for excerpts but a custom separator, you 
 
 ```javascript
 {
-  "resolve": `gatsby-transformer-remark`,
+  "resolve": `gatsby-transformer-rehype`,
   "options": {
     "excerpt_separator": `<!-- end -->`
   }
@@ -235,30 +189,30 @@ If that is the case, you can set `truncate` option on `excerpt` field, like:
 
 ```graphql
 {
-  markdownRemark {
+  HTMLrehype {
     excerpt(truncate: true)
   }
 }
 ```
 
-### Excerpts for HTML embedded in Markdown files
+### Excerpts for HTML embedded in HTML files
 
-If your Markdown file contains HTML, `excerpt` will not return a value.
+If your HTML file contains HTML, `excerpt` will not return a value.
 
 In that case, you can set an `excerpt_separator` in the `gatsby-config.js` file:
 
 ```javascript
 {
-  "resolve": `gatsby-transformer-remark`,
+  "resolve": `gatsby-transformer-rehype`,
   "options": {
     "excerpt_separator": `<!-- endexcerpt -->`
   }
 }
 ```
 
-Edit your Markdown files to include that HTML tag after the text you'd like to appear in the excerpt:
+Edit your HTML files to include that HTML tag after the text you'd like to appear in the excerpt:
 
-```markdown
+```HTML
 ---
 title: "my little pony"
 date: "2017-09-18T23:19:51.246Z"
@@ -269,12 +223,12 @@ date: "2017-09-18T23:19:51.246Z"
 <p>Is he in the stable or down by the stream?</p>
 ```
 
-Then specify `MARKDOWN` as the format in your graphql query:
+Then specify `HTML` as the format in your graphql query:
 
 ```graphql
 {
-  markdownRemark {
-    excerpt(format: MARKDOWN)
+  HTMLrehype {
+    excerpt(format: HTML)
   }
 }
 ```

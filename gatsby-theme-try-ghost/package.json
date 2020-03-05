@@ -77,7 +77,7 @@
     "gatsby-plugin-styled-components": "^3.1.19",
     "gatsby-source-filesystem": "^2.1.48",
     "gatsby-source-ghost": "^4.0.3",
-    "gatsby-transform-rehype": "1.0.0",
+    "gatsby-transformer-rehype": "1.0.0",
     "gatsby-transformer-sharp": "^2.3.14",
     "lodash": "^4.17.15",
     "parse-numeric-range": "^0.0.2",

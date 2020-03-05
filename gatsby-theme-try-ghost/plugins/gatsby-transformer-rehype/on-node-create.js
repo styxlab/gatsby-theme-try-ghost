@@ -1,5 +1,10 @@
 const _ = require(`lodash`);
 
+const pluginDefaults = {
+  filter: () => false,
+  type: `HtmlRehype`
+};
+
 module.exports = async function onCreateNode({
   node,
   actions,
@@ -16,25 +21,27 @@ module.exports = async function onCreateNode({
   const {
     filter,
     type
-  } = _.merge({}, {
-    filter: () => false,
-    type: `HtmlRehype`
-  }, pluginOptions);
+  } = _.merge({}, pluginDefaults, pluginOptions);
 
   if (node.internal.mediatype !== `text/html` && !filter(node)) {
     return {};
   }
 
-  function transformObject(obj, id, type) {
+  function transformObject(data, id, type) {
+    const {
+      content,
+      ...obj
+    } = data;
     const htmlNode = { ...obj,
       id,
       children: [],
       parent: node.id,
       internal: {
-        contentDigest: createContentDigest(obj),
-        type
+        content: content,
+        type: type
       }
     };
+    htmlNode.internal.contentDigest = createContentDigest(htmlNode);
     createNode(htmlNode);
     createParentChildLink({
       parent: node,
@@ -42,21 +49,19 @@ module.exports = async function onCreateNode({
     });
   }
 
-  let data = {};
+  const data = {};
 
   if (node.internal.type === `File`) {
     data.content = await loadNodeContent(node);
     data.fileAbsolutePath = node.absolutePath;
   } else {
-    data = {
-      content: node.html
-    };
+    data.content = node.html;
   }
 
   try {
     return transformObject(data, createNodeId(`${node.id} >>> ${type}`), type);
   } catch (err) {
-    reporter.panicOnBuild(`Error processing HTML in node ${node.id} :\n ${err.message}`);
-    return {}; // eslint
+    reporter.panicOnBuild(`Error processing HTML ${node.absolutePath ? `file ${node.absolutePath}` : `in node ${node.id}`}:\n ${err.message}`);
+    return {};
   }
 };

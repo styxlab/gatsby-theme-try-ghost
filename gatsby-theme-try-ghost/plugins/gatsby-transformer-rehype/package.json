@@ -1,13 +1,15 @@
 {
-    "name": "gatsby-transform-rehype",
+    "name": "gatsby-transformer-rehype",
     "description": "Gatsby plugin to transform html into hast to be used by child plugins",
     "version": "1.0.0",
     "author": "styxlab",
     "dependencies": {
         "@babel/runtime": "7.7.2",
         "bluebird": "3.7.1",
+        "hast-util-raw": "^5.0.2",
         "lodash": "^4.17.15",
-        "rehype": "^9.0.1"
+        "rehype": "^9.0.1",
+        "unist-util-remove-position": "^2.0.1"
     },
     "devDependencies": {
         "@babel/cli": "7.7.0",
@@ -16,10 +18,10 @@
         "cross-env": "6.0.3"
     },
     "keywords": [
-      "gatsby",
-      "gatsby-plugin",
-      "html",
-      "rehype"
+        "gatsby",
+        "gatsby-plugin",
+        "html",
+        "rehype"
     ],
     "license": "MIT",
     "peerDependencies": {
