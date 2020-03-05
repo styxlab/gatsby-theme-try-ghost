@@ -3,6 +3,7 @@
     "description": "Gatsby plugin to transform html into hast to be used by child plugins",
     "version": "1.0.0",
     "author": "styxlab",
+    "main": "gatsby-node.js",
     "dependencies": {
         "@babel/runtime": "7.7.2",
         "bluebird": "3.7.1",
