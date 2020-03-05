@@ -7,7 +7,7 @@ module.exports = async function onCreateNode({ node, actions,
     const { createNode, createParentChildLink } = actions
     const { filter, type } = _.merge({}, pluginDefaults, pluginOptions)
 
-    if (node.internal.mediatype !== `text/html` && !filter(node)) {
+    if (node.internal.mediaType !== `text/html` && !filter(node)) {
         return {}
     }
 
