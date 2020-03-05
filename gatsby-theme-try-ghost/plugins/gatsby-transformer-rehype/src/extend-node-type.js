@@ -6,6 +6,7 @@ const hastReparseRaw = require(`hast-util-raw`)
 
 let pluginsCacheStr = ``
 let pathPrefixCacheStr = ``
+const astCacheKey = node => `transformer-rehype-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 
@@ -16,6 +17,14 @@ const safeGetCache = ({ getCache, cache }) => (id) => {
     }
     return getCache(id)
 }
+
+/**
+ * Map that keeps track of generation of AST to not generate it multiple
+ * times in parallel.
+ *
+ * @type {Map<string,Promise>}
+ */
+const ASTPromiseMap = new Map()
 
 const pluginDefaults = { type: `HtmlRehype` }
 const rehypeDefaults = { fragment: true, space: `html`, emitParseErrors: false, verbose: false }
@@ -54,7 +63,7 @@ module.exports = ({ type, basePath, getNode,
             }
         }
 
-        async function getAST(htmlNode) {
+        async function processHtmlAst(htmlNode) {
             // Use Bluebird's Promise function "each" to run rehype plugins serially.
             await Promise.each(pluginOptions.plugins, (plugin) => {
                 const requiredPlugin = require(plugin.resolve)
@@ -63,7 +72,7 @@ module.exports = ({ type, basePath, getNode,
                         reporter, cache: getCache(plugin.name), getCache,
                         compiler: {
                             parseString: rehype.parse.bind(rehype),
-                            generateHTML: getHTML,
+                            generateHTML: getHtml,
                         },
                         ...rest }, plugin.pluginOptions)
                 } else {
@@ -89,26 +98,37 @@ module.exports = ({ type, basePath, getNode,
             return htmlAst
         }
 
-        async function getHTMLAst(htmlNode) {
-            const cachedAst = await cache.get(htmlAstCacheKey(htmlNode))
-            if (cachedAst) {
-                return cachedAst
+        async function getAst(htmlNode) {
+            const cacheKey = astCacheKey(htmlNode)
+            const cachedAST = await cache.get(cacheKey)
+            if (cachedAST) {
+                return cachedAST
+            } else if (ASTPromiseMap.has(cacheKey)) {
+                // We are already generating AST, so let's wait for it
+                return await ASTPromiseMap.get(cacheKey)
             } else {
-                const htmlAst = await getAST(htmlNode)
-
-                // Save new HTML AST to cache and return
-                cache.set(htmlAstCacheKey(htmlNode), htmlAst)
-                return htmlAst
+                const ASTGenerationPromise = processHtmlAst(htmlNode)
+                ASTGenerationPromise.then((htmlAst) => {
+                    ASTPromiseMap.delete(cacheKey)
+                    return cache.set(cacheKey, htmlAst)
+                }).catch((err) => {
+                    ASTPromiseMap.delete(cacheKey)
+                    return err
+                })
+                // Save new AST to cache and return
+                // We can now release promise, as we cached result
+                ASTPromiseMap.set(cacheKey, ASTGenerationPromise)
+                return ASTGenerationPromise
             }
         }
 
-        async function getHTML(htmlNode) {
+        async function getHtml(htmlNode) {
             const shouldCache = htmlNode
             const cachedHTML = shouldCache && (await cache.get(htmlCacheKey(htmlNode)))
             if (cachedHTML) {
                 return cachedHTML
             } else {
-                const htmlAst = await getAST(htmlNode)
+                const htmlAst = await getAst(htmlNode)
                 const html = rehype.stringify(htmlAst)
 
                 if (shouldCache) {
@@ -120,17 +140,30 @@ module.exports = ({ type, basePath, getNode,
             }
         }
 
+        async function getHtmlAst(htmlNode) {
+            const cachedAst = await cache.get(htmlAstCacheKey(htmlNode))
+            if (cachedAst) {
+                return cachedAst
+            } else {
+                const htmlAst = await getAst(htmlNode)
+
+                // Save new HTML AST to cache and return
+                cache.set(htmlAstCacheKey(htmlNode), htmlAst)
+                return htmlAst
+            }
+        }
+
         return resolve({
             html: {
                 type: `String`,
                 resolve(htmlNode) {
-                    return getHTML(htmlNode)
+                    return getHtml(htmlNode)
                 },
             },
             htmlAst: {
                 type: `JSON`,
                 resolve(htmlNode) {
-                    return getHTMLAst(htmlNode).then((ast) => {
+                    return getHtmlAst(htmlNode).then((ast) => {
                         const strippedAst = stripPosition(_.clone(ast), true)
                         return hastReparseRaw(strippedAst)
                     })
