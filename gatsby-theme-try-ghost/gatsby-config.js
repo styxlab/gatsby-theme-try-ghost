@@ -48,7 +48,7 @@ module.exports = (themeOptions) => {
                         : ghostConfig.production,
             },
             {
-                resolve: require.resolve(`./plugins/gatsby-transformer-rehype`),
+                resolve: `gatsby-transformer-rehype`,
                 options: {
                     filter: node => (
                         node.internal.type === `GhostPost` ||
@@ -56,7 +56,7 @@ module.exports = (themeOptions) => {
                     ) && node.slug !== `data-schema`,
                     plugins: [
                         {
-                            resolve: require.resolve(`./plugins/gatsby-rehype-prismjs`),
+                            resolve: `gatsby-rehype-prismjs`,
                         },
                     ],
                 },

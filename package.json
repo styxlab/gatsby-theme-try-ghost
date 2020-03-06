@@ -10,8 +10,8 @@
     "clean": "yarn workspace try-ghost clean"
   },
   "workspaces": [
+    "packages/*",
     "gatsby-theme-try-ghost",
-    "try-ghost",
-    "gatsby-theme-try-ghost/plugins/gatsby-transformer-rehype"
+    "try-ghost"
   ]
 }

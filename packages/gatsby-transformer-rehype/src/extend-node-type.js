@@ -123,19 +123,15 @@ module.exports = ({ type, basePath, getNode,
         }
 
         async function getHtml(htmlNode) {
-            const shouldCache = htmlNode
-            const cachedHTML = shouldCache && (await cache.get(htmlCacheKey(htmlNode)))
+            const cachedHTML = await cache.get(htmlCacheKey(htmlNode))
             if (cachedHTML) {
                 return cachedHTML
             } else {
                 const htmlAst = await getAst(htmlNode)
                 const html = rehype.stringify(htmlAst)
 
-                if (shouldCache) {
-                    // Save new HTML to cache
-                    cache.set(htmlCacheKey(htmlNode), html)
-                }
-
+                // Save new HTML to cache
+                cache.set(htmlCacheKey(htmlNode), html)
                 return html
             }
         }
