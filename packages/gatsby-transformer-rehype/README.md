@@ -17,7 +17,7 @@ plugins: [
     resolve: `gatsby-transformer-rehype`,
     options: {
       // Condition for selecting an existing GrapghQL node (optional)
-      // If not set, the transformer only reacts on new file nodes.
+      // If not set, the transformer operates on file nodes.
       filter: node => node.internal.type === `GhostPost`,
       // Only needed when using filter (optional, default: node.html)
       // Source location of the html to be transformed
