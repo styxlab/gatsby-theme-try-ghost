@@ -58,6 +58,9 @@ module.exports = (themeOptions) => {
                         {
                             resolve: `gatsby-rehype-prismjs`,
                         },
+                        {
+                            resolve: `gatsby-rehype-ghost-links`,
+                        },
                     ],
                 },
             },

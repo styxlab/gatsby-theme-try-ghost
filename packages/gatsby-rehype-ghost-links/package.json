@@ -1,39 +1,43 @@
 {
     "name": "gatsby-rehype-ghost-links",
-    "description": "Gatsby plugin to transform html of posts and pages sourced from headless Ghost CMS",
+    "description": "Gatsby plugin to create realtive links in html processed by Remark sourced in from Ghost",
     "version": "1.0.0",
-    "author": "styxlab",
-    "dependencies": {
-        "@babel/runtime": "7.7.2",
-        "bluebird": "3.7.1",
-        "sharp": "0.22.1"
-    },
-    "devDependencies": {
-        "@babel/cli": "7.7.0",
-        "@babel/core": "7.7.2",
-        "babel-preset-gatsby-package": "0.2.11",
-        "cross-env": "6.0.3"
-    },
-    "keywords": [
-        "gatsby",
-        "gatsby-plugin",
-        "favicon",
-        "icons",
-        "manifest.webmanifest",
-        "progressive-web-app",
-        "pwa"
-    ],
-    "resolutions": {
-        "sharp": "0.22.1"
-    },
     "license": "MIT",
-    "main": "index.js",
-    "peerDependencies": {
-        "gatsby": ">2.0.0-alpha"
+    "author": "styxlab",
+    "homepage": "https://github.com/styxlab/",
+    "main": "gatsby-node.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/htmlAST/packages/gatsby-rehype-ghost-links"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
     },
     "scripts": {
         "build": "babel src --out-dir . --ignore **/__tests__",
         "prepare": "cross-env NODE_ENV=production npm run build",
         "watch": "babel -w src --out-dir . --ignore **/__tests__"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "rehype",
+        "html",
+        "ghost",
+        "ghost-cms"
+    ],
+    "devDependencies": {
+        "@babel/cli": "7.8.4",
+        "@babel/core": "7.8.7",
+        "babel-preset-gatsby-package": "0.2.16",
+        "cross-env": "7.0.2"
+    },
+    "peerDependencies": {
+        "gatsby": "^2.19.29"
+    },
+    "dependencies": {
+        "@babel/runtime": "7.8.7",
+        "lodash": "^4.17.15",
+        "unist-util-visit": "^2.0.2"
     }
 }

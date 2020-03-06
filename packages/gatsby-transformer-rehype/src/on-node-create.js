@@ -34,6 +34,12 @@ module.exports = async function onCreateNode({ node, actions,
         data.fileAbsolutePath = node.absolutePath
     } else {
         data.content = source(node)
+        if (node.url) {
+            data.url = node.url
+        }
+        if (node.slug) {
+            data.slug = node.slug
+        }
     }
 
     try {
