@@ -122,7 +122,7 @@ module.exports = (
     //})
 
     // prettier-ignore
-    codeHtml = ``
+    const codeHtml = ``
     +   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
     +     `<code class="${className}">`
     +       `${useCommandLine ? commandLine(value, outputLines, promptUser, promptHost) : ``}`
@@ -131,7 +131,7 @@ module.exports = (
     +     `${numLinesNumber}`
     +   `</pre>`
 
-    codeAST = rehype.parse(codeHtml)
+    const codeAST = rehype.parse(codeHtml)
     visit(codeAST, {tagName: `body`}, body => {
         let divElement = _.head(body.children)
         parent.tagName = divElement.tagName

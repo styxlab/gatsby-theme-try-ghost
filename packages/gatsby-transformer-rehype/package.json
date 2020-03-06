@@ -40,6 +40,6 @@
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": ">2.19.29"
+        "gatsby": "^2.19.29"
     }
 }
