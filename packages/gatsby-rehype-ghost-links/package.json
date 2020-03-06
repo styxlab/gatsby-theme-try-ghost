@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-ghost-links",
     "description": "Gatsby plugin to transform html of posts and pages sourced from headless Ghost CMS",
-    "version": "0.0.1",
+    "version": "1.0.0",
     "author": "styxlab",
     "dependencies": {
         "@babel/runtime": "7.7.2",
