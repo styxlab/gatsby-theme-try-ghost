@@ -6,9 +6,11 @@
   "license": "MIT",
   "scripts": {
     "develop": "yarn workspace try-ghost develop",
-    "build": "yarn workspace try-ghost build"
+    "build": "yarn workspace try-ghost build",
+    "clean": "yarn workspace try-ghost clean"
   },
   "workspaces": [
+    "packages/*",
     "gatsby-theme-try-ghost",
     "try-ghost"
   ]

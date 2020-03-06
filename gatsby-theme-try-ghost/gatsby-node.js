@@ -14,9 +14,11 @@ exports.createSchemaCustomization = ({ actions }) => {
         }
         type allGhostSettings implements Node {
             secondary_navigation: [Navigation!]!
+            children: [GhostPostHtml!]!
         }
         type GhostSettings implements Node {
             secondary_navigation: [Navigation!]!
+            children: [GhostPostHtml!]!
         }
     `
     createTypes(typeDefs)

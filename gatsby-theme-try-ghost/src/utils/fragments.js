@@ -144,6 +144,14 @@ export const ghostPostFields = graphql`
         codeinjection_styles
         comment_id
         reading_time
+
+        # Transformed html
+        children {
+            ... on HtmlRehype {
+                html
+            }
+        }
+
     }
 `
 
@@ -235,6 +243,13 @@ export const ghostPageFields = graphql`
         codeinjection_styles
         comment_id
         reading_time
+
+        # Transformed html
+        children {
+            ... on HtmlRehype {
+                html
+            }
+        }
     }
 `
 

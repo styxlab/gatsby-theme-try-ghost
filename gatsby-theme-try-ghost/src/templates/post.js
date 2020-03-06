@@ -26,6 +26,7 @@ const Post = ({ data, location, pageContext }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
+    const transformedHtml = post.children[0] && post.children[0].html
 
     return (
         <>
@@ -82,7 +83,7 @@ const Post = ({ data, location, pageContext }) => {
 
                             <section className="post-full-content">
                                 <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: post.html }}/>
+                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
                         </article>
                     </div>
@@ -95,7 +96,7 @@ const Post = ({ data, location, pageContext }) => {
 Post.propTypes = {
     data: PropTypes.shape({
         post: PropTypes.shape({
-            codeinjection_styles: PropTypes.object,
+            codeinjection_styles: PropTypes.string,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             custom_excerpt: PropTypes.string,
@@ -113,6 +114,9 @@ Post.propTypes = {
             }),
             published_at: PropTypes.string.isRequired,
             published_at_pretty: PropTypes.string.isRequired,
+            children: PropTypes.arrayOf(
+                PropTypes.object,
+            ),
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,

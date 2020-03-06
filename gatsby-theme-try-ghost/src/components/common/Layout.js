@@ -8,6 +8,7 @@ import { BodyClass } from './helpers'
 
 // Styles
 import '../../styles/screen.css'
+import 'prismjs/themes/prism.css'
 
 /**
 * Main layout component
