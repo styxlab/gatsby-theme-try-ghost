@@ -1,10 +1,12 @@
 # gatsby-transformer-rehype
 
-Parses HTML files and GrapghQL nodes using [rehype](https://github.com/rehypejs/rehype/).
+This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes using [rehype](https://github.com/rehypejs/rehype/). This package is heavily inspired by [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/), the difference being that the content source is HTML instead of [Remark](http://remark.js.org/).
+
+The general idea of this package is to convert an input HTML blob into a [HAST syntax tree](https://github.com/syntax-tree/hast), which is called `HtmlAst` from hereon. This `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML to be consumed in your projects.
 
 ## Install
 
-`npm install --save gatsby-transformer-rehype`
+`yarn add gatsby-transformer-rehype`
 
 ## How to use
 
@@ -14,111 +16,80 @@ plugins: [
   {
     resolve: `gatsby-transformer-rehype`,
     options: {
-      // CommonMark mode (default: true)
-      commonmark: true,
-      // Footnotes mode (default: true)
-      footnotes: true,
-      // Pedantic mode (default: true)
-      pedantic: true,
-      // GitHub Flavored HTML mode (default: true)
-      gfm: true,
-      // Plugins configs
+      // Condition for selecting an existing GrapghQL node (optional)
+      // If not set, the transformer only reacts on new file nodes.
+      filter: node => ( node.internal.type === `GhostPost` ),
+      // Only needed when using filter (optional)
+      // Source location of the html to be transformed
+      source: node => node.html,
+      // Fragment mode (optional, default: true)
+      fragment: true,
+      // Space mode (optional, default: `html`)
+      space: `html`,
+      // EmitParseErrors mode (optional, default: false)
+      emitParseErrors: false,
+      // Verbose mode (optional, default: false)
+      verbose: false,
+      // Plugins configs (optional but most likely you need one)
       plugins: [],
     },
   },
 ],
 ```
 
+The filter option allows you to transform HTML nodes that come from other GraphQL nodes. If your HTML is sourced in from files, `mediaType` must be set to `text/html`. If you are sourcing in from other GraphQL nodes, the default location is `node.html`, otherwise use the `source` option above. 
+
 The following parts of `options` are passed down to rehype as options:
 
-- `options.commonmark`
-- `options.footnotes`
-- `options.pedantic`
-- `options.gfm`
+- `options.fragment`
+- `options.space`
+- `options.emitParseErrors`
+- `options.verbose`
 
-The details of the rehype options above could be found in [`rehype-parse`'s documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#processoruseparse-options)
+The details of the rehype options above can be found in [`rehype-parse`'s documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#options).
 
-A full explanation of how to use HTML in Gatsby can be found here:
-[Creating a Blog with Gatsby](https://www.gatsbyjs.org/blog/2017-07-19-creating-a-blog-with-gatsby/)
+This transformer is most useful when combined with Gatsby rehype plugins which you can install to customize how HTML is processed. The following `gatsby-rehype-*` plugins are soon available
 
-There are many Gatsby rehype plugins which you can install to customize how HTML is processed. Many of them are demoed at https://using-rehype.gatsbyjs.org/. See also the [source code for using-rehype](https://github.com/gatsbyjs/gatsby/tree/master/examples/using-rehype).
+- `gatsby-rehype-prismjs`
+- `gatsby-rehype-ghost-links`
+
+If you are missing a plugin, consider collaborating with me to contribute your own. Writing plugins for `gatsby-transformer-rehype` is easy!
 
 ## Parsing algorithm
 
-It recognizes files with the following extensions as HTML:
+Each HTML file or HTML GraphQL node is parsed into a node of type `HtmlRehype`.
 
-- md
-- HTML
-
-Each HTML file is parsed into a node of type `HTMLrehype`.
-
-All frontmatter fields are converted into GraphQL fields. TODO link to docs on
-auto-inferring types/fields.
-
-This plugin adds additional fields to the `HTMLrehype` GraphQL type
-including `html`, `excerpt`, `headings`, etc. Other Gatsby plugins can also add
-additional fields.
+This plugin adds additional fields to the `HtmlRehype` GraphQL node including `html`, `htmlAst` and `internal.content`. The latter contains the source HTML. The transformed HTML can be found in `html`. All transformations should be made on `htmlAst` which is passed to all sub-plugins. Other Gatsby plugins can also add additional fields.
 
 ## How to query
 
-A sample GraphQL query to get HTMLrehype nodes:
+A sample GraphQL query to get HtmlRehype nodes:
 
 ```graphql
 {
-  allHTMLrehype {
+  allHtmlRehype {
     edges {
       node {
         html
-        headings {
-          depth
-          value
-        }
-        frontmatter {
-          # Assumes you're using title in your frontmatter.
-          title
-        }
       }
     }
   }
 }
 ```
 
-### Getting table of contents
+### Access from parents
 
-Using the following GraphQL query you'll be able to get the table of contents
-
-```graphql
-{
-  allHTMLrehype {
-    edges {
-      node {
-        html
-        tableOfContents
-      }
-    }
-  }
-}
-```
-
-### Configuring the tableOfContents
-
-By default the tableOfContents is using the field `slug` to generate absolute URLs. You can however provide another field using the pathToSlugField parameter. **Note** that providing a non existing field will cause the result to be null. You can also pass `absolute: false` to generate relative path. To alter the default values for tableOfContents generation, include values for `heading` (string) and/or `maxDepth` (number 1 to 6) in graphQL query. If a value for `heading` is given, the first heading that matches will be omitted and the toc is generated from the next heading of the same depth onwards. Value for `maxDepth` sets the maximum depth of the toc (i.e. if a maxDepth of 3 is set, only h1 to h3 headings will appear in the toc).
+Your source HTML comes either from a file or from some other HTML GraphQL node. Assuming that you sourced your HTML from the `GhostPost` node, you can reach your transformed HTML also on the children node:
 
 ```graphql
 {
-  allHTMLrehype {
+  allGhostPost {
     edges {
       node {
-        html
-        tableOfContents(
-          absolute: true
-          pathToSlugField: "frontmatter.path"
-          heading: "only show toc from this heading onwards"
-          maxDepth: 2
-        )
-        frontmatter {
-          # Assumes you're using path in your frontmatter.
-          path
+        children {
+          ... on HtmlRehype {
+            html
+          }
         }
       }
     }
@@ -126,109 +97,17 @@ By default the tableOfContents is using the field `slug` to generate absolute UR
 }
 ```
 
-To pass default options to the plugin generating the tableOfContents, configure it in gatsby-config.js as shown below. The options shown below are the defaults used by the plugin.
-
-```javascript
-// In your gatsby-config.js
-plugins: [
-  {
-    resolve: `gatsby-transformer-rehype`,
-    options: {
-      tableOfContents: {
-        heading: null,
-        maxDepth: 6,
-      },
-    },
-  },
-]
-```
-
-
-
-
-You can also get excerpts in HTML format.
-
-```graphql
-{
-  allHTMLrehype {
-    edges {
-      node {
-        excerpt(format: HTML)
-      }
-    }
-  }
-}
-```
-
-## gray-matter options
-
-`gatsby-transformer-rehype` uses [gray-matter](https://github.com/jonschlinkert/gray-matter) to parse HTML frontmatter, so you can specify any of the options mentioned [here](https://github.com/jonschlinkert/gray-matter#options) in the `gatsby-config.js` file.
-
-### Example: Excerpts
-
-If you don't want to use `pruneLength` for excerpts but a custom separator, you can specify an `excerpt_separator` in the `gatsby-config.js` file:
-
-```javascript
-{
-  "resolve": `gatsby-transformer-rehype`,
-  "options": {
-    "excerpt_separator": `<!-- end -->`
-  }
-}
-```
-
-Any file that does not have the given `excerpt_separator` will fall back to the default pruning method.
+This allows for minimal changes in your original GraphQL queries.
 
 ## Troubleshooting
 
-### Excerpts for non-latin languages
+`gatsby-transformer-rehype` hooks into the Gatsby `onCreateNode` method. This method is only called if a new node is created. If nodes were previously generated, they might have been cached and `onCreateNode` is not called again. During development, or when adding new plugins to the options, you have to call
 
-By default, `excerpt` uses `underscore.string/prune` which doesn't handle non-latin characters ([https://github.com/epeli/underscore.string/issues/418](https://github.com/epeli/underscore.string/issues/418)).
+`yarn clean`
 
-If that is the case, you can set `truncate` option on `excerpt` field, like:
+in order to trigger the transformer again. Please always do a `yarn clean` before reporting a bug to this project.
 
-```graphql
-{
-  HTMLrehype {
-    excerpt(truncate: true)
-  }
-}
-```
 
-### Excerpts for HTML embedded in HTML files
+# Copyright & License
 
-If your HTML file contains HTML, `excerpt` will not return a value.
-
-In that case, you can set an `excerpt_separator` in the `gatsby-config.js` file:
-
-```javascript
-{
-  "resolve": `gatsby-transformer-rehype`,
-  "options": {
-    "excerpt_separator": `<!-- endexcerpt -->`
-  }
-}
-```
-
-Edit your HTML files to include that HTML tag after the text you'd like to appear in the excerpt:
-
-```HTML
----
-title: "my little pony"
-date: "2017-09-18T23:19:51.246Z"
----
-
-<p>Where oh where is that pony?</p>
-<!-- endexcerpt -->
-<p>Is he in the stable or down by the stream?</p>
-```
-
-Then specify `HTML` as the format in your graphql query:
-
-```graphql
-{
-  HTMLrehype {
-    excerpt(format: HTML)
-  }
-}
-```
+Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).

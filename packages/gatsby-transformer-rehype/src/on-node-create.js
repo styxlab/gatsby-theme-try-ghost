@@ -1,11 +1,11 @@
 const _ = require(`lodash`)
 
-const pluginDefaults = { filter: () => false, type: `HtmlRehype` }
+const pluginDefaults = { filter: () => false, source: (n) => n.html, type: `HtmlRehype` }
 
 module.exports = async function onCreateNode({ node, actions,
     loadNodeContent, createNodeId, reporter, createContentDigest }, pluginOptions) {
     const { createNode, createParentChildLink } = actions
-    const { filter, type } = _.merge({}, pluginDefaults, pluginOptions)
+    const { filter, source, type } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (node.internal.mediaType !== `text/html` && !filter(node)) {
         return {}
@@ -33,7 +33,7 @@ module.exports = async function onCreateNode({ node, actions,
         data.content = await loadNodeContent(node)
         data.fileAbsolutePath = node.absolutePath
     } else {
-        data.content = node.html
+        data.content = source(node)
     }
 
     try {
