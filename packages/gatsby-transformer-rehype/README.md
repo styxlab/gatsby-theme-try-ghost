@@ -2,7 +2,7 @@
 
 This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes using [rehype](https://github.com/rehypejs/rehype/). This package is heavily inspired by [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/), the difference being that the content source is HTML instead of [Remark](http://remark.js.org/).
 
-The general idea of this package is to convert an input HTML blob into a [HAST syntax tree](https://github.com/syntax-tree/hast), which is called `HtmlAst` from hereon. This `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML to be consumed in your projects.
+The general idea of this package is to convert an input HTML blob into an [HAST syntax tree](https://github.com/syntax-tree/hast), which we call `HtmlAst`. This `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML.
 
 ## Install
 
@@ -18,8 +18,8 @@ plugins: [
     options: {
       // Condition for selecting an existing GrapghQL node (optional)
       // If not set, the transformer only reacts on new file nodes.
-      filter: node => ( node.internal.type === `GhostPost` ),
-      // Only needed when using filter (optional)
+      filter: node => node.internal.type === `GhostPost`,
+      // Only needed when using filter (optional, default: node.html)
       // Source location of the html to be transformed
       source: node => node.html,
       // Fragment mode (optional, default: true)
@@ -37,7 +37,8 @@ plugins: [
 ],
 ```
 
-The filter option allows you to transform HTML nodes that come from other GraphQL nodes. If your HTML is sourced in from files, `mediaType` must be set to `text/html`. If you are sourcing in from other GraphQL nodes, the default location is `node.html`, otherwise use the `source` option above. 
+The filter option allows you to transform HTML nodes that come from other GraphQL nodes. In conjunction
+with the source option, you can also define a different location of your source `html`. If your HTML is sourced in from files, `mediaType` must be set to `text/html`.
 
 The following parts of `options` are passed down to rehype as options:
 
@@ -46,9 +47,9 @@ The following parts of `options` are passed down to rehype as options:
 - `options.emitParseErrors`
 - `options.verbose`
 
-The details of the rehype options above can be found in [`rehype-parse`'s documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#options).
+The details of the rehype options above can be found in the [rehype-parse documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#options).
 
-This transformer is most useful when combined with Gatsby rehype plugins which you can install to customize how HTML is processed. The following `gatsby-rehype-*` plugins are soon available
+This transformer is most useful when combined with Gatsby **rehype plugins** which you can install to customize how HTML is transformed. The following `gatsby-rehype-*` plugins are soon available
 
 - `gatsby-rehype-prismjs`
 - `gatsby-rehype-ghost-links`
