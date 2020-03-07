@@ -1,14 +1,14 @@
 {
     "name": "gatsby-rehype-ghost-links",
     "description": "Gatsby plugin to create realtive links in html processed by Remark sourced in from Ghost",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
     "main": "gatsby-node.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/htmlAST/packages/gatsby-rehype-ghost-links"
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links"
     },
     "bugs": {
         "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
@@ -34,7 +34,7 @@
     },
     "peerDependencies": {
         "gatsby": "^2.19.29",
-        "gatsby-transformer-rehype": "1.0.2"
+        "gatsby-transformer-rehype": "1.0.3"
     },
     "dependencies": {
         "@babel/runtime": "7.8.7",

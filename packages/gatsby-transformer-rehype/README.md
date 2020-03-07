@@ -1,6 +1,6 @@
 # gatsby-transformer-rehype
 
-This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes using [rehype](https://github.com/rehypejs/rehype/). This package is heavily inspired by [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/), the difference being that the content source is HTML instead of [Remark](http://remark.js.org/).
+This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes using [rehype](https://github.com/rehypejs/rehype/). This package is heavily inspired by [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/), the difference being that the content source is [HTML](https://www.w3schools.com/html/) instead of Remark.
 
 The general idea of this package is to convert an input HTML blob into an [HAST syntax tree](https://github.com/syntax-tree/hast), that is put into the `HtmlAst` object. `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML.
 

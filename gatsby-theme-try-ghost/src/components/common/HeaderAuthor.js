@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { SiteNav, HeaderBackground } from '.'
 
+import AvatarIcon from './icons/avatar-icon'
+
 const HeaderAuthor = ({ author, numberOfPosts }) => {
     const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
@@ -17,8 +19,9 @@ const HeaderAuthor = ({ author, numberOfPosts }) => {
             <HeaderBackground backgroundImage={author.cover_image}>
                 <div className="inner">
                     <div className="site-header-content author-header">
-                        {author.profile_image &&
+                        {author.profile_image ?
                             <img className="author-profile-image" src={author.profile_image} alt={author.name} />
+                            : <div className="author-profile-image"><AvatarIcon /></div>
                         }
                         <div className="author-header-content">
                             <h1 className="site-title">{author.name}</h1>
