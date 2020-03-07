@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-try-ghost",
   "description": "A Gatsby theme plugin for creating blogs from headless Ghost CMS.",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",
@@ -57,7 +57,6 @@
     "@tryghost/helpers": "^1.1.22",
     "@tryghost/url-utils": "^0.6.13",
     "autoprefixer": "^9.7.4",
-    "babel-plugin-prismjs": "^2.0.1",
     "babel-plugin-styled-components": "^1.10.7",
     "babel-preset-gatsby": "^0.2.31",
     "cheerio": "^1.0.0-rc.3",
@@ -76,6 +75,7 @@
     "gatsby-plugin-sharp": "^2.4.7",
     "gatsby-plugin-styled-components": "^3.1.20",
     "gatsby-rehype-ghost-links": "^1.0.1",
+    "gatsby-rehype-prismjs": "^0.0.9",
     "gatsby-source-filesystem": "^2.1.50",
     "gatsby-source-ghost": "^4.0.4",
     "gatsby-transformer-rehype": "^1.0.3",
@@ -85,7 +85,6 @@
     "postcss-color-function": "^4.1.0",
     "postcss-custom-properties": "^9.1.1",
     "postcss-easy-import": "^3.0.0",
-    "prismjs": "^1.19.0",
     "react-helmet": "^5.2.1",
     "styled-components": "^5.0.1"
   }
