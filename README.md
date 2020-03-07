@@ -14,8 +14,8 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 - Ghost Casper skin and functionality
 - Sticky navigation headers
-- Syntax highlighting with PrismJS (**New**)
-- Rewrite CMS links to relative (**New**)
+- Syntax highlighting with PrismJS **NEW**
+- Rewrite CMS links to relative **NEW**
 - Hover on author avatar
 - Secondary navigation
 - Styled 404 page
