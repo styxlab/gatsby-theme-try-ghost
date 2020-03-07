@@ -1,7 +1,9 @@
 # gatsby-rehype-prismjs
 
-Adds syntax highlighting to code blocks in html files and GraphQL nodes using
-[PrismJS](http://prismjs.com/). This package is heavily inspired by [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/), the difference being that we work on HTML instead of Remark.
+Adds syntax highlighting to code tags in HTML fragments using [PrismJS](http://prismjs.com/). This package is inspired by [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/), the difference being that the content source is [HTML](https://www.w3schools.com/html/) instead of remark.
+
+This plugin is part of the *rehype* collection and intended to be used with [gatsby-transformer-rehype](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-transformer-rehype).
+
 
 ## Install
 
@@ -63,46 +65,36 @@ plugins: [
 
 #### Required: Pick a PrismJS theme or create your own
 
-PrismJS ships with a number of [themes][5] (previewable on the [PrismJS
-website][6]) that you can easily include in your Gatsby site, or you can build
-your own by copying and modifying an example (which is what we've done for
-[gatsbyjs.org](https://gatsbyjs.org)).
-
-To load a theme, just require its CSS file in your `gatsby-browser.js` file, e.g.
+PrismJS ships with a number of themes that you can easily include in your Gatsby site. To load a theme, just require its CSS file in your `gatsby-browser.js` file, e.g.
 
 ```javascript
 // gatsby-browser.js
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-You must ensure that this CSS file is loaded after any other css. If you load a global CSS file in your `Layout.js`, this might be a better place to put this CSS file into.
+Alternatively, if you load a global CSS file in your layout component (e.g. in `Layout.js`), you should require it in your component and import the prism CSS directly after any existing CSS.
 
 ### Usage in HTML
 
 This is some beautiful code:
 
-    ```html
-    <pre>
-        <code class="language-javascript">
-            var app = express();
-        </code>
-    </pre>
-    ```
-
+```html
+<pre>
+    <code class="language-javascript">
+        var app = express();
+    </code>
+</pre>
+```
 
 ### Inline code blocks
 
-In addition to fenced code blocks, inline code blocks will be passed through
-PrismJS as well.
-
-If you set the `inlineCodeMarker`, then you can also specify a format style.
+In addition to fenced code blocks, inline code blocks will be passed through PrismJS as well. If you set the `inlineCodeMarker`, then you can also specify a format style.
 
 Here's an example of how to use this if the `inlineCodeMarker` was set to `±`:
 
-    I can highlight `css±.some-class { background-color: red }` with CSS syntax.
+I can highlight `css±.some-class { background-color: red }` with CSS syntax.
 
-This will be rendered in a `<code class=language-css>` with just the (syntax
-highlighted) text of `.some-class { background-color: red }`
+This will be rendered in a `<code class=language-css>` with just the (syntax highlighted) text of `.some-class { background-color: red }`
 
 ### Disabling syntax highlighting
 
