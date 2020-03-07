@@ -1,14 +1,14 @@
 {
     "name": "gatsby-transformer-rehype",
     "description": "Gatsby transformer plugin for HTML using the Rehype library and ecosystem",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
     "main": "gatsby-node.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/htmlAST/packages/gatsby-transformer-rehype"
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-transformer-rehype"
     },
     "bugs": {
         "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
