@@ -19,6 +19,11 @@ plugins: [
         {
           resolve: `gatsby-rehype-prismjs`,
           options: {
+            // All code blocks will be wrapped in an additional <div>
+            // containter to allow for better styling. This might break
+            // your current theme. You might therefore have to provide
+            // additional styling classes (below is just an example).
+            divClassNames: "kg-card kg-code-card",
             // Class prefix for <pre> tags containing syntax highlighting;
             // defaults to 'language-' (e.g. <pre class="language-js">).
             // If your site loads Prism into the browser at runtime,
@@ -39,9 +44,9 @@ plugins: [
             // the language "sh" which will highlight using the
             // bash highlighter.
             aliases: {},
-            // If setting this to true, the parser won't handle and highlight inline
-            // code used in markdown i.e. single backtick code like `this`.
-            noInlineHighlight: false,
+            // If setting this to false, the parser handles and highlights inline
+            // code, i.e. single backtick code like `this`.
+            noInlineHighlight: true,
             // By default the HTML entities <>&'" are escaped.
             // Add additional HTML escapes by providing a mapping
             // of HTML entities and their escape value IE: { '}': '&#123;' }
