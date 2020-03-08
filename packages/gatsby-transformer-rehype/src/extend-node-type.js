@@ -29,8 +29,15 @@ const ASTPromiseMap = new Map()
 const pluginDefaults = { type: `HtmlRehype` }
 const rehypeDefaults = { fragment: true, space: `html`, emitParseErrors: false, verbose: false }
 
-module.exports = ({ type, basePath, getNode,
-    cache, getCache: possibleGetCache, reporter, ...rest }, pluginOptions) => {
+module.exports = ({
+    type,
+    basePath,
+    getNode,
+    cache,
+    getCache: possibleGetCache,
+    reporter,
+    ...rest
+}, pluginOptions) => {
     const { type: nodeType } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (type.name !== nodeType) {

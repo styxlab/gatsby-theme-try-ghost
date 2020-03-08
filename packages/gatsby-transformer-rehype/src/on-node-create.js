@@ -3,7 +3,7 @@ const _ = require(`lodash`)
 const pluginDefaults = {
     filter: () => false,
     source: n => n.html,
-    copyFields: [`url`, `slug`, `feature_image`],
+    contextFields: [`url`, `slug`, `feature_image`],
     type: `HtmlRehype`,
 }
 
@@ -16,19 +16,20 @@ module.exports = async function onCreateNode({
     createContentDigest,
 }, pluginOptions) {
     const { createNode, createParentChildLink } = actions
-    const { filter, source, copyFields, type } = _.merge({}, pluginDefaults, pluginOptions)
+    const { filter, source, contextFields, type } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (node.internal.mediaType !== `text/html` && !filter(node)) {
         return {}
     }
 
     function transformObject(data, id, type) {
-        const { content, ...obj } = data
+        const { content, context, ...obj } = data
         const htmlNode = {
             ...obj,
             id,
             children: [],
             parent: node.id,
+            context: context,
             internal: {
                 content: content,
                 type: type,
@@ -45,8 +46,9 @@ module.exports = async function onCreateNode({
         data.fileAbsolutePath = node.absolutePath
     } else {
         data.content = source(node)
-        copyFields.map((field) => {
-            data.content[field] = node[field]
+        data.context = {}
+        contextFields.map((field) => {
+            data.context[field] = node[field]
         })
     }
 

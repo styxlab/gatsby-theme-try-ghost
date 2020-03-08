@@ -1,10 +1,46 @@
 const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
-    console.log(htmlNode.content.feature_image)
+const getContext = (node, field) => node && node.context && node.context[field]
 
-    if (!htmlNode && htmlNode.url && htmlNode.slug){
+module.exports = async ({
+    htmlAst,
+    htmlNode,
+    actions: { createNode },
+    createNodeId,
+    store,
+    cache,
+    reporter,
+}, pluginOptions) => {
+    const featureImage = getContext(htmlNode, `feature_image`)
+    const url = getContext(htmlNode, `url`)
+    const slug = getContext(htmlNode, `slug`)
+
+    if (!featureImage) {
+        return htmlAst
+    }
+
+    //let fileNode
+    //try {
+    //    fileNode = await createRemoteFileNode({
+    //        url: featureImage,
+    //        parentNodeId: htmlNode.id, //htmlNode.parent,
+    //        createNode,
+    //        createNodeId,
+    //        cache,
+    //        store,
+    //    })
+    //} catch (e){
+    //    reporter.warn(`Remote image failure.`)
+    //}
+
+    // if the file was created, attach the new node to the parent node
+    //if (fileNode) {
+    //    htmlNode.featureImage___NODE = fileNode.id
+    //}
+
+    if (!url && slug){
         reporter.warn(`Expected url and slug not defined.`)
         return htmlAst
     }
@@ -14,7 +50,7 @@ module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
         return regexp.test(s)
     }
 
-    const cmsUrl = _.head(_.split(htmlNode.url, htmlNode.slug, 1))
+    const cmsUrl = _.head(_.split(url, slug, 1))
     if (!isUrl(cmsUrl)) {
         return htmlAst
     }

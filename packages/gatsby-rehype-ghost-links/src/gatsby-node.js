@@ -2,7 +2,10 @@ const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 
 module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
-    if (!htmlNode && htmlNode.url && htmlNode.slug){
+    const url = htmlNode && htmlNode.context && htmlNode.context.url
+    const slug = htmlNode && htmlNode.context && htmlNode.context.slug
+
+    if (!url && slug){
         reporter.warn(`Expected url and slug not defined.`)
         return htmlAst
     }
@@ -12,7 +15,7 @@ module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
         return regexp.test(s)
     }
 
-    const cmsUrl = _.head(_.split(htmlNode.url, htmlNode.slug, 1))
+    const cmsUrl = _.head(_.split(url, slug, 1))
     if (!isUrl(cmsUrl)) {
         return htmlAst
     }
