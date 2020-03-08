@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, StaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image'
 
 import { SiteNav, HeaderBackground } from '.'
 
@@ -15,12 +14,12 @@ const HeaderIndex = ({ data }) => {
                     <SiteNav className="site-nav" />
                     <div className="site-header-content">
                         <h1 className="site-title">
-                            <Link to="/">
-                                {site.logo ?
+                            {site.logo ?
+                                <Link to="/">
                                     <img className="site-logo" src={site.logo} alt={site.title} />
-                                    : <Img fixed={data.file.childImageSharp.fixed} alt={site.title} />
-                                }
-                            </Link>
+                                </Link>
+                                : site.title
+                            }
                         </h1>
                         <h2 className="site-description">{site.description}</h2>
                     </div>

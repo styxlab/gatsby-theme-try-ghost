@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from "styled-components"
@@ -10,10 +11,16 @@ const BackgroundSheet = styled.div`
 `
 
 const HeaderBackground = ({ localImage, backgroundImage, children }) => {
+    //Todo: Will be replaced when all images are preloaded
     const localBackgroundImage = localImage.desktop.childImageSharp.fluid
+    const bgImageName = backgroundImage && _.last(_.split(backgroundImage,`/`))
+    const localImageName = localBackgroundImage && _.last(_.split(localBackgroundImage.src,`/`))
+    let isLocal = false
     let isRemote = backgroundImage && true || false
-    const isLocal = localBackgroundImage && isRemote || false
-    isRemote = backgroundImage && !isLocal || false
+    if (localImageName && localImageName === bgImageName) {
+        isRemote = false
+        isLocal = true
+    }
     const isNoImage = !(isLocal || isRemote)
 
     return (

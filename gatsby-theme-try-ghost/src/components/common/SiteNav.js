@@ -10,6 +10,7 @@ import FacebookIcon from './icons/facebook-icon'
 const SiteNav = ({ data, className, postTitle }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
+    const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
 
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
@@ -32,7 +33,7 @@ const SiteNav = ({ data, className, postTitle }) => {
                 </div>
             </div>
             <div className="site-nav-right">
-                {site.secondary_navigation ?
+                { secondaryNav ?
                     <Navigation data={site.secondary_navigation} />
                     :
                     <div className="social-links">
