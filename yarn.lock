@@ -5823,6 +5823,15 @@ gatsby-react-router-scroll@^2.1.23:
     scroll-behavior "^0.9.10"
     warning "^3.0.0"
 
+gatsby-rehype-ghost-links@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-rehype-ghost-links/-/gatsby-rehype-ghost-links-1.0.1.tgz#37515a7427567c9fbc58c371888a6679b08f92c2"
+  integrity sha512-+GtTOvevSpw/6Gwc2dhSO4YKdu+N9IYfpW+b8ZGQgG4ybSlbt+xAmL9V1uIsPOOz5H7XTAdpmHIFDgJKX60BQA==
+  dependencies:
+    "@babel/runtime" "7.8.7"
+    lodash "^4.17.15"
+    unist-util-visit "^2.0.2"
+
 gatsby-source-filesystem@^2.1.50:
   version "2.1.50"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-2.1.50.tgz#cce82defe88bb280e5d206caac26fc6b880c1cd9"

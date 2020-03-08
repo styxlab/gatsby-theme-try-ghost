@@ -2,8 +2,6 @@ const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 
 module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
-    console.log(htmlNode.content.feature_image)
-
     if (!htmlNode && htmlNode.url && htmlNode.slug){
         reporter.warn(`Expected url and slug not defined.`)
         return htmlAst
@@ -21,7 +19,7 @@ module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
 
     visit(htmlAst, { tagName: `img` }, (node) => {
         const src = node.properties && node.properties.src
-        //console.log(src)
+        console.log(src)
         //if (href && _.startsWith(href, cmsUrl)) {
         //    node.properties.href = _.replace(href, cmsUrl ,`/`)
         //}
