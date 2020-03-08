@@ -78,7 +78,7 @@
     "gatsby-rehype-prismjs": "^0.0.9",
     "gatsby-source-filesystem": "^2.1.50",
     "gatsby-source-ghost": "^4.0.4",
-    "gatsby-transformer-rehype": "^1.0.3",
+    "gatsby-transformer-rehype": "^1.0.4",
     "gatsby-transformer-sharp": "^2.3.17",
     "lodash": "^4.17.15",
     "parse-numeric-range": "^0.0.2",
