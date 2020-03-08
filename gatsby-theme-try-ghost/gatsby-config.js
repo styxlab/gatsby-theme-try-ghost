@@ -61,6 +61,12 @@ module.exports = (themeOptions) => {
                         {
                             resolve: `gatsby-rehype-ghost-links`,
                         },
+                        {
+                            resolve: `gatsby-rehype-remote-images`,
+                            options: {
+
+                            },
+                        },
                     ],
                 },
             },

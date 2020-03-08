@@ -17,11 +17,12 @@ module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
         return htmlAst
     }
 
-    visit(htmlAst, { tagName: `a` }, (node) => {
-        const href = node.properties && node.properties.href
-        if (href && _.startsWith(href, cmsUrl)) {
-            node.properties.href = _.replace(href, cmsUrl ,`/`)
-        }
+    visit(htmlAst, { tagName: `img` }, (node) => {
+        const src = node.properties && node.properties.src
+        console.log(src)
+        //if (href && _.startsWith(href, cmsUrl)) {
+        //    node.properties.href = _.replace(href, cmsUrl ,`/`)
+        //}
     })
 
     return htmlAst
