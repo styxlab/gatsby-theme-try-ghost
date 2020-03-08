@@ -51,8 +51,8 @@ The details of the rehype options above can be found in the [rehype-parse docume
 
 This transformer is most useful when combined with Gatsby **rehype plugins** which you can install to customize how HTML is transformed. The following `gatsby-rehype-*` plugins are soon available
 
-- `gatsby-rehype-prismjs`
-- `gatsby-rehype-ghost-links`
+- [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs)
+- [gatsby-rehype-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
 
 If you are missing a plugin, consider collaborating with me to contribute your own. Writing plugins for `gatsby-transformer-rehype` is easy!
 
