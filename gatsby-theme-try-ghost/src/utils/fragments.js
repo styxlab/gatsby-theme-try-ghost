@@ -152,6 +152,16 @@ export const ghostPostFields = graphql`
             }
         }
 
+        #responsive images
+        featureImg {
+            base
+            childImageSharp {
+                fluid {
+                    ...GatsbyImageSharpFluid
+                }
+            }
+        }
+
     }
 `
 
@@ -248,6 +258,16 @@ export const ghostPageFields = graphql`
         children {
             ... on HtmlRehype {
                 html
+            }
+        }
+
+        #responsive images
+        featureImg {
+            base
+            childImageSharp {
+                fluid {
+                    ...GatsbyImageSharpFluid
+                }
             }
         }
     }

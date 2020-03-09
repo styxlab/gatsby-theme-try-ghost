@@ -10,7 +10,7 @@ const pluginDefaults = {
     type: `HtmlRehype`,
 }
 
-exports.onCreateNode = async function({
+exports.onCreateNode = async function ({
     node,
     actions,
     loadNodeContent,
@@ -57,34 +57,29 @@ exports.onCreateNode = async function({
         })
     }
 
-    const featureImage = getContext(node, `feature_image`)
-    console.log(featureImage)
+    const featureImg = getContext(node, `feature_image`)
+    console.log(featureImg)
 
+    let fileNode
     try {
-    	let fileNode
-    	try {
-    	    fileNode = await createRemoteFileNode({
-    	        url: featureImage,
-    	        parentNodeId: node.id, //htmlNode.parent,
-    	        createNode,
-    	        createNodeId,
-    	        cache,
-    	        store,
-    	    })
-    	} catch (e){
-            console.log(e)
-    	    reporter.warn(`Remote image failure.`)
-    	}
-
-    	// if the file was created, attach the new node to the parent node
-    	if (fileNode) {
-        	node.featureImage___NODE = fileNode.id
-    	}
-    	return {}
-        //return transformObject(data, createNodeId(`${node.id} >>> ${type}`), type)
+        fileNode = await createRemoteFileNode({
+            url: featureImg,
+            parentNodeId: node.id, //htmlNode.parent,
+            createNode,
+            createNodeId,
+            cache,
+            store,
+        })
     } catch (err) {
-        reporter.panicOnBuild(`Error processing HTML ${node.absolutePath ?
+        reporter.panicOnBuild(`Error processing images ${node.absolutePath ?
             `file ${node.absolutePath}` : `in node ${node.id}` }:\n ${err.message}`)
         return {}
     }
+
+    // if the file was created, attach the new node to the parent node
+    if (fileNode) {
+        node.featureImg___NODE = fileNode.id
+    }
+    return {}
+    //return transformObject(data, createNodeId(`${node.id} >>> ${type}`), type)
 }

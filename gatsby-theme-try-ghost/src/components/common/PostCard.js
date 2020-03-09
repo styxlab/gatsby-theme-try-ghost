@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import Img from "gatsby-image"
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
@@ -10,14 +11,20 @@ import { PostClass } from './helpers'
 const PostCard = ({ post, num, isHome }) => {
     const url = `/${post.slug}/`
     const featImg = post.feature_image
+    const fluidFeatureImg = featImg && post.featureImg && post.featureImg.childImageSharp && post.featureImg.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
 
     return (
         <article className={`post-card ${postClass} ${featImg && isHome && 0 === num % 6 && `post-card-large` || `` }`}>
-            { post.feature_image &&
+
+            { fluidFeatureImg ?
                 <Link className="post-card-image-link" to={url}>
-                    <img className="post-card-image" src={post.feature_image} alt={post.title} />
+                    <Img className="post-card-image" fluid={fluidFeatureImg} alt={post.title} />
+                </Link>
+                : featImg &&
+                <Link className="post-card-image-link" to={url}>
+                    <img className="post-card-image" src={featImg} alt={post.title} />
                 </Link>
             }
 
@@ -76,6 +83,7 @@ PostCard.propTypes = {
         }),
         published_at: PropTypes.string.isRequired,
         published_at_pretty: PropTypes.string.isRequired,
+        featureImg: PropTypes.object,
     }).isRequired,
     num: PropTypes.number,
     isHome: PropTypes.bool,

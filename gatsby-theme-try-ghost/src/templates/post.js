@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
+import Img from "gatsby-image"
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { Layout, HeaderPost, AuthorList, PreviewPosts } from '../components/common'
@@ -23,7 +24,8 @@ const Post = ({ data, location, pageContext }) => {
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post)
     const featImg = post.feature_image
-    const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
+    const fluidFeatureImg = featImg && post.featureImg && post.featureImg.childImageSharp && post.featureImg.childImageSharp.fluid
+    const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
     const transformedHtml = post.children[0] && post.children[0].html
@@ -74,10 +76,13 @@ const Post = ({ data, location, pageContext }) => {
                                 </div>
                             </header>
 
-                            { post.feature_image &&
+                            { fluidFeatureImg ?
                                 <figure className="post-full-image">
-                                    {/* Make image responsive */}
-                                    <img src={ post.feature_image } alt={ post.title } />
+                                    <Img className="kg-card kg-code-card" fluid={fluidFeatureImg} alt={post.title} />
+                                </figure>
+                                : featImg &&
+                                <figure className="post-full-image">
+                                    <img src={featImg} alt={post.title} />
                                 </figure>
                             }
 
@@ -117,6 +122,7 @@ Post.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
+            featureImg: PropTypes.object,
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,
