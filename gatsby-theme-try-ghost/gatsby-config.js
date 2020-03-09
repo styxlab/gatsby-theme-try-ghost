@@ -48,6 +48,15 @@ module.exports = (themeOptions) => {
                         : ghostConfig.production,
             },
             {
+                resolve: `gatsby-plugin-ghost-images`,
+                options: {
+                    filter: node => (
+                        node.internal.type === `GhostPost` ||
+                        node.internal.type === `GhostPage`
+                    ) && node.slug !== `data-schema`,
+                },
+            },
+            {
                 resolve: `gatsby-transformer-rehype`,
                 options: {
                     filter: node => (
@@ -60,12 +69,6 @@ module.exports = (themeOptions) => {
                         },
                         {
                             resolve: `gatsby-rehype-ghost-links`,
-                        },
-                        {
-                            resolve: `gatsby-rehype-remote-images`,
-                            options: {
-
-                            },
                         },
                     ],
                 },

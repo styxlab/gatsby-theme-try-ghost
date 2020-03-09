@@ -61,6 +61,7 @@
     "gatsby-plugin-catch-links": "^2.1.27",
     "gatsby-plugin-feed": "^2.3.28",
     "gatsby-plugin-force-trailing-slashes": "^1.0.4",
+    "gatsby-plugin-ghost-images": "*",
     "gatsby-plugin-manifest": "^2.2.44",
     "gatsby-plugin-offline": "^3.0.37",
     "gatsby-plugin-postcss": "^2.1.21",

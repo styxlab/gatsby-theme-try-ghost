@@ -1,29 +1,90 @@
 const _ = require(`lodash`)
-const visit = require(`unist-util-visit`)
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
-module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
-    if (!htmlNode && htmlNode.url && htmlNode.slug){
-        reporter.warn(`Expected url and slug not defined.`)
-        return htmlAst
+const getContext = (node, field) => node && node[field]
+
+const pluginDefaults = {
+    filter: () => false,
+    source: n => n.html,
+    contextFields: [`url`, `slug`, `feature_image`],
+    type: `HtmlRehype`,
+}
+
+exports.onCreateNode = async function({
+    node,
+    actions,
+    loadNodeContent,
+    createNodeId,
+    reporter,
+    cache,
+    store,
+    createContentDigest,
+}, pluginOptions) {
+    const { createNode, createParentChildLink } = actions
+    const { filter, source, contextFields, type } = _.merge({}, pluginDefaults, pluginOptions)
+
+    if (node.internal.mediaType !== `text/html` && !filter(node)) {
+        return {}
     }
 
-    function isUrl(s) {
-        const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
-        return regexp.test(s)
+    //function transformObject(data, id, type) {
+    //    const { content, context, ...obj } = data
+    //    const htmlNode = {
+    //        ...obj,
+    //        id,
+    //        children: [],
+    //        parent: node.id,
+    //        context: context,
+    //        internal: {
+    //            content: content,
+    //            type: type,
+    //        },
+    //    }
+    //    htmlNode.internal.contentDigest = createContentDigest(htmlNode)
+    //    createNode(htmlNode)
+    //    createParentChildLink({ parent: node, child: htmlNode })
+    //}
+
+    const data = {}
+    if (node.internal.type === `File`){
+        data.content = await loadNodeContent(node)
+        data.fileAbsolutePath = node.absolutePath
+    } else {
+        data.content = source(node)
+        data.context = {}
+        contextFields.map((field) => {
+            data.context[field] = node[field]
+        })
     }
 
-    const cmsUrl = _.head(_.split(htmlNode.url, htmlNode.slug, 1))
-    if (!isUrl(cmsUrl)) {
-        return htmlAst
+    const featureImage = getContext(node, `feature_image`)
+    console.log(featureImage)
+
+    try {
+    	let fileNode
+    	try {
+    	    fileNode = await createRemoteFileNode({
+    	        url: featureImage,
+    	        parentNodeId: node.id, //htmlNode.parent,
+    	        createNode,
+    	        createNodeId,
+    	        cache,
+    	        store,
+    	    })
+    	} catch (e){
+            console.log(e)
+    	    reporter.warn(`Remote image failure.`)
+    	}
+
+    	// if the file was created, attach the new node to the parent node
+    	if (fileNode) {
+        	node.featureImage___NODE = fileNode.id
+    	}
+    	return {}
+        //return transformObject(data, createNodeId(`${node.id} >>> ${type}`), type)
+    } catch (err) {
+        reporter.panicOnBuild(`Error processing HTML ${node.absolutePath ?
+            `file ${node.absolutePath}` : `in node ${node.id}` }:\n ${err.message}`)
+        return {}
     }
-
-    visit(htmlAst, { tagName: `img` }, (node) => {
-        const src = node.properties && node.properties.src
-        console.log(src)
-        //if (href && _.startsWith(href, cmsUrl)) {
-        //    node.properties.href = _.replace(href, cmsUrl ,`/`)
-        //}
-    })
-
-    return htmlAst
 }
