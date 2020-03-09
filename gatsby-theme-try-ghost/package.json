@@ -32,13 +32,6 @@
     "gatsbyjs",
     "react"
   ],
-  "scripts": {
-    "serve": "gatsby build && NODE_ENV=production gatsby serve",
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "lint": "eslint . --ext .js --cache",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",

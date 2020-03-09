@@ -7,11 +7,16 @@
   "scripts": {
     "develop": "yarn workspace try-ghost develop",
     "build": "yarn workspace try-ghost build",
-    "clean": "yarn workspace try-ghost clean"
+    "clean": "yarn workspace try-ghost clean",
+    "bootstrap": "lerna bootstrap --use-workspaces"
+
   },
   "workspaces": [
     "packages/*",
     "gatsby-theme-try-ghost",
     "try-ghost"
-  ]
+  ],
+  "devDependencies": {
+    "lerna": "^3.20.2"
+  }
 }
