@@ -50,10 +50,20 @@ module.exports = (themeOptions) => {
             {
                 resolve: `gatsby-plugin-ghost-images`,
                 options: {
-                    filter: node => (
-                        node.internal.type === `GhostPost` ||
-                        node.internal.type === `GhostPage`
-                    ) && node.slug !== `data-schema`,
+                    lookup: [
+                        {
+                            type: `GhostPost`,
+                            imgTags: [`feature_image`],
+                        },
+                        {
+                            type: `GhostPage`,
+                            imgTags: [`feature_image`],
+                        },
+                        {
+                            type: `GhostSettings`,
+                            imgTags: [`cover_image`],
+                        },
+                    ],
                 },
             },
             {

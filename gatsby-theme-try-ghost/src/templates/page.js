@@ -2,9 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import Img from "gatsby-image"
 
-import { HeaderPage, Layout } from '../components/common'
+import { HeaderPage, Layout, ImgSharp } from '../components/common'
 
 import { PostClass } from '../components/common/helpers'
 import { MetaData } from '../components/common/meta'
@@ -18,7 +17,7 @@ import { MetaData } from '../components/common/meta'
 const Page = ({ data, location }) => {
     const page = data.ghostPage
     const featImg = page.feature_image
-    const fluidFeatureImg = featImg && page.featureImg && page.featureImg.childImageSharp && page.featureImg.childImageSharp.fluid
+    const fluidFeatureImg = page.featureImage && page.featureImage.childImageSharp && page.featureImage.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
     const transformedHtml = page.children[0] && page.children[0].html
 
@@ -36,15 +35,9 @@ const Page = ({ data, location }) => {
                             <h1 className="post-full-title">{page.title}</h1>
                         </header>
 
-                        { fluidFeatureImg ?
-                            <figure className="post-full-image">
-                                <Img className="kg-card kg-code-card" fluid={fluidFeatureImg} alt={page.title} />
-                            </figure>
-                            : featImg &&
-                            <figure className="post-full-image">
-                                <img src={featImg} alt={page.title} />
-                            </figure>
-                        }
+                        <figure className="post-full-image">
+                            <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
+                        </figure>
 
                         {/* The main page content */}
                         <section className="post-full-content">
@@ -71,7 +64,7 @@ Page.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
-            featureImg: PropTypes.object,
+            featureImage: PropTypes.object,
         }).isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,

@@ -152,11 +152,11 @@ export const ghostPostFields = graphql`
             }
         }
 
-        #responsive images
-        featureImg {
+        # ImgSharp
+        featureImage {
             base
             childImageSharp {
-                fluid {
+                fluid(maxWidth: 1040) {
                     ...GatsbyImageSharpFluid
                 }
             }
@@ -261,11 +261,11 @@ export const ghostPageFields = graphql`
             }
         }
 
-        #responsive images
-        featureImg {
+        # ImgSharp
+        featureImage {
             base
             childImageSharp {
-                fluid {
+                fluid(maxWidth: 1040) {
                     ...GatsbyImageSharpFluid
                 }
             }

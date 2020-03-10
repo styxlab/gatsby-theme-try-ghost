@@ -2,10 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import Img from "gatsby-image"
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { Layout, HeaderPost, AuthorList, PreviewPosts } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -24,7 +23,7 @@ const Post = ({ data, location, pageContext }) => {
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post)
     const featImg = post.feature_image
-    const fluidFeatureImg = featImg && post.featureImg && post.featureImg.childImageSharp && post.featureImg.childImageSharp.fluid
+    const fluidFeatureImg = post.featureImage && post.featureImage.childImageSharp && post.featureImage.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
@@ -76,15 +75,9 @@ const Post = ({ data, location, pageContext }) => {
                                 </div>
                             </header>
 
-                            { fluidFeatureImg ?
-                                <figure className="post-full-image">
-                                    <Img className="kg-card kg-code-card" fluid={fluidFeatureImg} alt={post.title} />
-                                </figure>
-                                : featImg &&
-                                <figure className="post-full-image">
-                                    <img src={featImg} alt={post.title} />
-                                </figure>
-                            }
+                            <figure className="post-full-image">
+                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                            </figure>
 
                             <section className="post-full-content">
                                 <div className="post-content load-external-scripts"
@@ -122,7 +115,7 @@ Post.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
-            featureImg: PropTypes.object,
+            featureImage: PropTypes.object,
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,
