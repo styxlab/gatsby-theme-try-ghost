@@ -24,6 +24,10 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - Fully responsive
 - Composable and extensible
 
+## Performance
+
+![Lighthouse Score](https://cms.gotsby.org/content/images/gotsby-lighthouse.png)
+
 
 ## Installation
 
