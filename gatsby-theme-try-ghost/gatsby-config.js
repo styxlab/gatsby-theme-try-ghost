@@ -29,7 +29,7 @@ module.exports = (themeOptions) => {
                     name: `pages`,
                 },
             },
-            // Setup for optimised images.
+            // Setup for optimized images.
             // See https://www.gatsbyjs.org/packages/gatsby-image/
             {
                 resolve: `gatsby-source-filesystem`,
@@ -67,7 +67,7 @@ module.exports = (themeOptions) => {
                     exclude: node => (
                         node.ghostId === undefined
                     ),
-                    verbose: true,
+                    verbose: false,
                 },
             },
             {
