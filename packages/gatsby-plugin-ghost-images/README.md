@@ -1,6 +1,6 @@
 # gatsby-plugin-ghost-images
 
-Downloads images from Ghost CMS so they can be processed with the [Gatsby image toolchain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seemlessly work with the headless Ghost CMS, but it should also work with other content management systems.
+Downloads images from [Ghost CMS](https://ghost.org/changelog/jamstack/) so they can be processed with the [Gatsby image tool chain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seamlessly work with the headless Ghost CMS, but it should also work with other content management systems.
 
 ## Install
 
@@ -11,7 +11,7 @@ Note that `gatsby-source-filesystem` is installed as a dependency of this plugin
 
 ## Works best with...
 
-While you can use `gatsby-plugin-ghost-images` on its own, you most likely want to use it in conjunction with the Gastby image and sharp plugins:
+While you can use `gatsby-plugin-ghost-images` on its own, you most likely want to use it in conjunction with the Gatsby image and sharp plugins:
 
 `yarn add gatsby-plugin-sharp gatsby-transformer-sharp gatsby-image`
 
@@ -57,10 +57,10 @@ plugins: [
 
 ## Image nodes
 
-Where can you find the downlowded images? For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. Here we have adapted a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camelCase. For example:
+Where can you find the downloaded images? For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. Here we have adapted a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camel Case. For example:
 
 ```
-feature_image -> feature_image_sharp -> featureImageSharp
+feature_image &rarr; feature_image_sharp &rarr; featureImageSharp
 
 ```
 

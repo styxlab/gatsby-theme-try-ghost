@@ -1,6 +1,6 @@
 # gatsby-rehype-ghost-links
 
-Rewrites absolute links to relative links coming from a Ghost CMS.
+Rewrites absolute links to relative links coming from a [Ghost CMS](https://ghost.org/changelog/jamstack/).
 
 ## Install
 
