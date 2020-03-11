@@ -1,10 +1,10 @@
-# gatsby-rehype-ghost-links
+# gatsby-plugin-ghost-images
 
-Rewrites absolute links to relative links coming from a Ghost CMS.
+Downloads images from Ghost CMS so they can be automatically processed with Gatsby image tools.
 
 ## Install
 
-`yarn add gatsby-transformer-rehype gatsby-rehype-ghost-links`
+`yarn add gatsby-plugin-ghost-images `
 
 ## How to use
 

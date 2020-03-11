@@ -64,6 +64,12 @@ module.exports = (themeOptions) => {
                             imgTags: [`cover_image`],
                         },
                     ],
+                    exclude: node => (
+                        node.slug === `data-schema` ||
+                        node.slug === `data-schema-page` ||
+                        node.ghostId === undefined
+                    ),
+                    verbose: true,
                 },
             },
             {

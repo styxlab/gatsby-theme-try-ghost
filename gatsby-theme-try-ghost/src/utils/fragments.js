@@ -153,7 +153,7 @@ export const ghostPostFields = graphql`
         }
 
         # ImgSharp
-        featureImage {
+        featureImageSharp {
             base
             childImageSharp {
                 fluid(maxWidth: 1040) {
@@ -262,7 +262,7 @@ export const ghostPageFields = graphql`
         }
 
         # ImgSharp
-        featureImage {
+        featureImageSharp {
             base
             childImageSharp {
                 fluid(maxWidth: 1040) {
@@ -295,6 +295,16 @@ export const ghostSettingsFields = graphql`
         secondary_navigation {
             label
             url
+        }
+
+        # ImgSharp
+        coverImageSharp {
+            base
+            childImageSharp {
+                fluid(quality: 90, maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
         }
     }
 `

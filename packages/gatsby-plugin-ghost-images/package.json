@@ -1,6 +1,6 @@
 {
     "name": "gatsby-plugin-ghost-images",
-    "description": "Gatsby plugin to download feature images from Ghost CMS",
+    "description": "Gatsby plugin that downloads images from Ghost CMS to be used with Gatsby image tools.",
     "version": "1.0.0",
     "license": "MIT",
     "author": "styxlab",

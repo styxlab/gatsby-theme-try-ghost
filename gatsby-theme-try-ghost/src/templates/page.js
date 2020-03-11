@@ -17,7 +17,7 @@ import { MetaData } from '../components/common/meta'
 const Page = ({ data, location }) => {
     const page = data.ghostPage
     const featImg = page.feature_image
-    const fluidFeatureImg = page.featureImage && page.featureImage.childImageSharp && page.featureImage.childImageSharp.fluid
+    const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
     const transformedHtml = page.children[0] && page.children[0].html
 
@@ -64,7 +64,7 @@ Page.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
-            featureImage: PropTypes.object,
+            featureImageSharp: PropTypes.object,
         }).isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,

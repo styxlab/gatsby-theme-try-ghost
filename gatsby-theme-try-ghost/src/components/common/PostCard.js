@@ -10,7 +10,7 @@ import { PostClass } from './helpers'
 const PostCard = ({ post, num, isHome }) => {
     const url = `/${post.slug}/`
     const featImg = post.feature_image
-    const fluidFeatureImg = post.featureImage && post.featureImage.childImageSharp && post.featureImage.childImageSharp.fluid
+    const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
 
@@ -78,7 +78,7 @@ PostCard.propTypes = {
         }),
         published_at: PropTypes.string.isRequired,
         published_at_pretty: PropTypes.string.isRequired,
-        featureImage: PropTypes.object,
+        featureImageSharp: PropTypes.object,
     }).isRequired,
     num: PropTypes.number,
     isHome: PropTypes.bool,

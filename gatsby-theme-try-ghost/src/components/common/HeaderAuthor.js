@@ -16,7 +16,7 @@ const HeaderAuthor = ({ author, numberOfPosts }) => {
                     <SiteNav className="site-nav" />
                 </div>
             </div>
-            <HeaderBackground backgroundImage={author.cover_image}>
+            <HeaderBackground srcImg={author.cover_image}>
                 <div className="inner">
                     <div className="site-header-content author-header">
                         {author.profile_image ?

@@ -23,7 +23,7 @@ const Post = ({ data, location, pageContext }) => {
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post)
     const featImg = post.feature_image
-    const fluidFeatureImg = post.featureImage && post.featureImage.childImageSharp && post.featureImage.childImageSharp.fluid
+    const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
@@ -115,7 +115,7 @@ Post.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
-            featureImage: PropTypes.object,
+            featureImageSharp: PropTypes.object,
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,

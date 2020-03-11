@@ -8,6 +8,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "clean": "gatsby clean",
+    "serve": "gatsby serve",
     "deploy": "gatsby build && gh-pages -d public -b master -r git@github.com:styxlab/styxlab.github.io"
   },
   "devDependencies": {
