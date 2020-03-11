@@ -9,8 +9,8 @@
     "build": "yarn workspace try-ghost build",
     "clean": "yarn workspace try-ghost clean",
     "serve": "yarn workspace try-ghost serve",
-    "bootstrap": "lerna bootstrap --use-workspaces"
-
+    "bootstrap": "lerna bootstrap --use-workspaces",
+    "pack": "lerna run build --scope={$(ls ./packages | xargs echo | sed 's/ /,/g')}"
   },
   "workspaces": [
     "packages/*",
