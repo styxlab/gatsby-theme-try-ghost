@@ -65,8 +65,6 @@ module.exports = (themeOptions) => {
                         },
                     ],
                     exclude: node => (
-                        node.slug === `data-schema` ||
-                        node.slug === `data-schema-page` ||
                         node.ghostId === undefined
                     ),
                     verbose: true,

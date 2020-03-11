@@ -9,23 +9,6 @@ const pluginDefaults = {
     verbose: false,
 }
 
-exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions
-    const typeDefs = `
-        type GhostPost implements Node {
-            featureImageSharp: FeatureImageSharp
-        }
-        type GhostPage implements Node {
-            featureImageSharp: FeatureImageSharp
-        }
-        type FeatureImageSharp implements Node {
-            base: String!
-            childImageSharp: ImageSharp!
-        }
-    `
-    createTypes(typeDefs)
-}
-
 exports.onCreateNode = async function ({
     node,
     actions,
@@ -59,9 +42,9 @@ exports.onCreateNode = async function ({
     // remaining image fields
     const promises = allImgTags.map(async (tag) => {
         const imgUrl = node[tag]
-        //if (verbose) {
-        //    reporter.info(`${node.internal.type}/${tag}/${node.slug}: ${imgUrl}/`)
-        //}
+        if (verbose) {
+            reporter.info(`${node.internal.type}/${tag}/${node.slug}/${imgUrl}`)
+        }
 
         return await createRemoteFileNode({
             url: imgUrl,
@@ -75,7 +58,6 @@ exports.onCreateNode = async function ({
 
     try {
         const fileNodes = await Promise.all(promises)
-        fileNodes.map((fileNode, i) => console.log(`${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE / ${fileNode.url} / ${node.slug}`))
         fileNodes.map((fileNode, i) => node[`${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`] = fileNode.id)
     } catch (err) {
         reporter.panicOnBuild(`Error processing images ${node.absolutePath ?
