@@ -60,8 +60,7 @@ plugins: [
 Where can you find the downloaded images? For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. Here we have adapted a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camel Case. For example:
 
 ```
-feature_image &rarr; feature_image_sharp &rarr; featureImageSharp
-
+feature_image -> feature_image_sharp -> featureImageSharp
 ```
 
 With this naming convention there is no need to provide a target name.
