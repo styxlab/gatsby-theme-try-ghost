@@ -152,6 +152,16 @@ export const ghostPostFields = graphql`
             }
         }
 
+        # ImgSharp
+        featureImageSharp {
+            base
+            childImageSharp {
+                fluid(maxWidth: 1040) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
+        }
+
     }
 `
 
@@ -250,6 +260,16 @@ export const ghostPageFields = graphql`
                 html
             }
         }
+
+        # ImgSharp
+        featureImageSharp {
+            base
+            childImageSharp {
+                fluid(maxWidth: 1040) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
+        }
     }
 `
 
@@ -275,6 +295,16 @@ export const ghostSettingsFields = graphql`
         secondary_navigation {
             label
             url
+        }
+
+        # ImgSharp
+        coverImageSharp {
+            base
+            childImageSharp {
+                fluid(quality: 90, maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid
+                }
+            }
         }
     }
 `

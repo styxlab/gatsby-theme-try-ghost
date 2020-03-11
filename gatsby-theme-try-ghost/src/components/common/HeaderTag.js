@@ -10,7 +10,7 @@ const HeaderTag = ({ tag, numberOfPosts }) => (
                 <SiteNav className="site-nav" />
             </div>
         </div>
-        <HeaderBackground backgroundImage={tag.feature_image}>
+        <HeaderBackground srcImg={tag.feature_image}>
             <div className="inner site-header-content">
                 <h1 className="site-title">{tag.name}</h1>
                 <h2 className="site-description">

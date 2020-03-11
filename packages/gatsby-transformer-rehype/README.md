@@ -22,6 +22,9 @@ plugins: [
       // Only needed when using filter (optional, default: node.html)
       // Source location of the html to be transformed
       source: node => node.html,
+      // Additional fields of the sourced node can be added here (optional)
+      // These fields are then available on the htmlNode on `htmlNode.context`
+      contextFields: [],
       // Fragment mode (optional, default: true)
       fragment: true,
       // Space mode (optional, default: `html`)

@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { Layout, HeaderPost, AuthorList, PreviewPosts } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -23,7 +23,8 @@ const Post = ({ data, location, pageContext }) => {
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post)
     const featImg = post.feature_image
-    const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
+    const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
+    const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
     const transformedHtml = post.children[0] && post.children[0].html
@@ -74,12 +75,9 @@ const Post = ({ data, location, pageContext }) => {
                                 </div>
                             </header>
 
-                            { post.feature_image &&
-                                <figure className="post-full-image">
-                                    {/* Make image responsive */}
-                                    <img src={ post.feature_image } alt={ post.title } />
-                                </figure>
-                            }
+                            <figure className="post-full-image">
+                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                            </figure>
 
                             <section className="post-full-content">
                                 <div className="post-content load-external-scripts"
@@ -117,6 +115,7 @@ Post.propTypes = {
             children: PropTypes.arrayOf(
                 PropTypes.object,
             ),
+            featureImageSharp: PropTypes.object,
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,

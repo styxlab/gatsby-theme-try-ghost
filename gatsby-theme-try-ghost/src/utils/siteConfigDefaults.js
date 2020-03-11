@@ -3,8 +3,8 @@ module.exports = {
 
     postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
 
-    siteTitleMeta: `Gatsby Ghost Casper`, // This allows an alternative site title for meta data for pages.
-    siteDescriptionMeta: `Gastby with Ghost CMS and Casper Theme`, // This allows an alternative site description for meta data for pages.
+    siteTitleMeta: `Gatsby Headless Ghost Casper`, // This allows an alternative site title for meta data for pages.
+    siteDescriptionMeta: `Gastby with Ghost CMS and Casper Skin`, // This allows an alternative site description for meta data for pages.
 
     shareImageWidth: 1000, // Change to the width of your default share image
     shareImageHeight: 523, // Change to the height of your default share image

@@ -1,23 +1,35 @@
 const _ = require(`lodash`)
 
-const pluginDefaults = { filter: () => false, source: (n) => n.html, type: `HtmlRehype` }
+const pluginDefaults = {
+    filter: () => false,
+    source: n => n.html,
+    contextFields: [`url`, `slug`, `feature_image`],
+    type: `HtmlRehype`,
+}
 
-module.exports = async function onCreateNode({ node, actions,
-    loadNodeContent, createNodeId, reporter, createContentDigest }, pluginOptions) {
+module.exports = async function onCreateNode({
+    node,
+    actions,
+    loadNodeContent,
+    createNodeId,
+    reporter,
+    createContentDigest,
+}, pluginOptions) {
     const { createNode, createParentChildLink } = actions
-    const { filter, source, type } = _.merge({}, pluginDefaults, pluginOptions)
+    const { filter, source, contextFields, type } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (node.internal.mediaType !== `text/html` && !filter(node)) {
         return {}
     }
 
     function transformObject(data, id, type) {
-        const { content, ...obj } = data
+        const { content, context, ...obj } = data
         const htmlNode = {
             ...obj,
             id,
             children: [],
             parent: node.id,
+            context: context,
             internal: {
                 content: content,
                 type: type,
@@ -34,12 +46,10 @@ module.exports = async function onCreateNode({ node, actions,
         data.fileAbsolutePath = node.absolutePath
     } else {
         data.content = source(node)
-        if (node.url) {
-            data.url = node.url
-        }
-        if (node.slug) {
-            data.slug = node.slug
-        }
+        data.context = {}
+        contextFields.map((field) => {
+            data.context[field] = node[field]
+        })
     }
 
     try {

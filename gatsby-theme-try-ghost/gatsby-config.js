@@ -29,7 +29,7 @@ module.exports = (themeOptions) => {
                     name: `pages`,
                 },
             },
-            // Setup for optimised images.
+            // Setup for optimized images.
             // See https://www.gatsbyjs.org/packages/gatsby-image/
             {
                 resolve: `gatsby-source-filesystem`,
@@ -46,6 +46,29 @@ module.exports = (themeOptions) => {
                     process.env.NODE_ENV === `development`
                         ? ghostConfig.development
                         : ghostConfig.production,
+            },
+            {
+                resolve: `gatsby-plugin-ghost-images`,
+                options: {
+                    lookup: [
+                        {
+                            type: `GhostPost`,
+                            imgTags: [`feature_image`],
+                        },
+                        {
+                            type: `GhostPage`,
+                            imgTags: [`feature_image`],
+                        },
+                        {
+                            type: `GhostSettings`,
+                            imgTags: [`cover_image`],
+                        },
+                    ],
+                    exclude: node => (
+                        node.ghostId === undefined
+                    ),
+                    verbose: false,
+                },
             },
             {
                 resolve: `gatsby-transformer-rehype`,
