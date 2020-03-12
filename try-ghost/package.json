@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "gatsby": "^2.19.39",
+    "gatsby-plugin-ackee-tracker": "^1.2.0",
     "gatsby-theme-try-ghost": "*",
     "react": "^16.13.0",
     "react-dom": "^16.13.0"

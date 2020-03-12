@@ -29,9 +29,23 @@ try {
 }
 
 module.exports = {
-    plugins: [{ resolve: `gatsby-theme-try-ghost`,
-        options: {
-            ghostConfig: ghostConfig,
-            siteConfig: siteConfig,
-        } }],
+    plugins: [
+        {
+            resolve: `gatsby-theme-try-ghost`,
+            options: {
+                ghostConfig: ghostConfig,
+                siteConfig: siteConfig,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-ackee-tracker`,
+            options: {
+                domainId: `YOUR_ACKEE_DOMAIN_ID`,
+                server: `https://analytics.atmolabs.org`,
+                ignoreLocalhost: true,
+                // If enabled it will collect info on OS, BrowserInfo, Device  & ScreenSize
+                detailed: true,
+            },
+        },
+    ],
 }

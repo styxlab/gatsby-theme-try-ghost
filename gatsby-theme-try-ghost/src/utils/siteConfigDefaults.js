@@ -1,16 +1,30 @@
 module.exports = {
-    siteUrl: `https://styxlab.github.io`, // Site domain. Do not include a trailing slash!
 
-    postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
+    // Site domain. Do not include a trailing slash!
+    siteUrl: `https://styxlab.github.io`,
 
-    siteTitleMeta: `Gatsby Headless Ghost Casper`, // This allows an alternative site title for meta data for pages.
-    siteDescriptionMeta: `Gastby with Ghost CMS and Casper Skin`, // This allows an alternative site description for meta data for pages.
+    // Not used - will be removed in next release
+    postsPerPage: 12,
 
-    shareImageWidth: 1000, // Change to the width of your default share image
-    shareImageHeight: 523, // Change to the height of your default share image
+    // This allows an alternative site title for meta data for pages.
+    siteTitleMeta: `Gatsby Headless Ghost Casper`,
 
-    shortTitle: `Ghost`, // Used for App manifest e.g. Mobile Home Screen
-    siteIcon: `favicon.png`, // Logo in /static dir used for SEO, RSS, and App manifest
-    backgroundColor: `#e9e9e9`, // Used for Offline Manifest
-    themeColor: `#15171A`, // Used for Offline Manifest
+    // This allows an alternative site description for meta data for pages.
+    siteDescriptionMeta: `Gastby with Ghost CMS and Casper Skin`,
+
+    // Width and height of your meta default share image
+    shareImageWidth: 1000,
+    shareImageHeight: 523,
+
+    // Used for App manifest e.g. Mobile Home Screen
+    shortTitle: `Ghost`,
+
+    // Logo in /static dir used for SEO, RSS, and App manifest
+    siteIcon: `favicon.png`,
+    backgroundColor: `#e9e9e9`,
+    themeColor: `#15171A`,
+
+    // Exclude Pages from being imported based on slug name.
+    excludePages: [`contact`],
+
 }

@@ -6,7 +6,6 @@ import { SiteNav, HeaderBackground } from '.'
 
 const HeaderIndex = ({ data }) => {
     const site = data.allGhostSettings.edges[0].node
-    console.log(site.coverImageSharp)
 
     return (
         <header className="site-home-header">
