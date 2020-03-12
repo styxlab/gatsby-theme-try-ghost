@@ -35,12 +35,15 @@ module.exports = {
             options: {
                 ghostConfig: ghostConfig,
                 siteConfig: siteConfig,
+                // Downloads and caches images from Ghost CMS to the local filesystem.
+                // Use for awesome performance and usability (default: true)
+                downloadLocal: true,
             },
         },
         {
             resolve: `gatsby-plugin-ackee-tracker`,
             options: {
-                domainId: `YOUR_ACKEE_DOMAIN_ID`,
+                domainId: `8af98f2e-a3a0-44dd-85fe-91c6dd3d2f62`,
                 server: `https://analytics.atmolabs.org`,
                 ignoreLocalhost: true,
                 // If enabled it will collect info on OS, BrowserInfo, Device  & ScreenSize

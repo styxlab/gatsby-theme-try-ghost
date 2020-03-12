@@ -7,6 +7,7 @@ const pluginDefaults = {
     lookup: [],
     exclude: () => false,
     verbose: false,
+    disable: false,
 }
 
 exports.onCreateNode = async function ({
@@ -18,10 +19,10 @@ exports.onCreateNode = async function ({
     store,
 }, pluginOptions) {
     const { createNode } = actions
-    const { lookup, exclude, verbose } = _.merge({}, pluginDefaults, pluginOptions)
+    const { lookup, exclude, verbose, disable } = _.merge({}, pluginDefaults, pluginOptions)
 
     // leave if node is excluded by user
-    if (exclude(node)) {
+    if (exclude(node) || disable) {
         return {}
     }
 
