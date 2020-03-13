@@ -50,6 +50,8 @@ plugins: [
             ),
             // Additional information messages useful for debugging
             verbose: true,
+            // Option to disable the module (default: false)
+            disable: false,
         },
     },
 ]
