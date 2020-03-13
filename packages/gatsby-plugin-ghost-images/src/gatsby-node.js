@@ -57,14 +57,23 @@ exports.onCreateNode = async function ({
         })
     })
 
+    let fileNodes
     try {
-        const fileNodes = await Promise.all(promises)
-        fileNodes.map((fileNode, i) => node[`${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`] = fileNode.id)
+        fileNodes = await Promise.all(promises)
     } catch (err) {
         reporter.panicOnBuild(`Error processing images ${node.absolutePath ?
-            `file ${node.absolutePath}` : `in node ${node.id}` }:\n ${err.message}`)
+            `file ${node.absolutePath}` : `in node ${node.id}` }:\n ${err}`)
         return {}
     }
+
+    fileNodes.map((fileNode, i) => {
+        const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`
+
+        if (verbose) {
+            reporter.info(`${node.slug}/${allImgTags[i]}/${id}/${fileNode.id}`)
+        }
+        node[id] = fileNode.id
+    })
 
     return {}
 }
