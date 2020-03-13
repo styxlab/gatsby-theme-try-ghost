@@ -15,7 +15,7 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 module.exports = (themeOptions) => {
     const siteConfig = themeOptions.siteConfig || siteConfigDefaults
     const ghostConfig = themeOptions.ghostConfig || ghostConfigDefaults
-    const downloadLocal = false || themeOptions.downloadLocal
+    //const downloadLocal = false || themeOptions.downloadLocal
 
     return {
         siteMetadata: siteConfig,
@@ -70,7 +70,7 @@ module.exports = (themeOptions) => {
                     ),
                     verbose: false,
                     // Option to disable this module (default: false)
-                    disable: !downloadLocal,
+                    disable: false,
                 },
             },
             {
