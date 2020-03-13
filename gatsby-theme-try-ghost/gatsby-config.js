@@ -68,7 +68,7 @@ module.exports = (themeOptions) => {
                     exclude: node => (
                         node.ghostId === undefined
                     ),
-                    verbose: false,
+                    verbose: true,
                     // Option to disable this module (default: false)
                     disable: false,
                 },
