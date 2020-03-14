@@ -88,7 +88,6 @@ exports.createPages = async ({ graphql, actions }) => {
     const pages = result.data.allGhostPage.edges
     const posts = result.data.allGhostPost.edges
     const postsPerPage = result.data.site.siteMetadata.postsPerPage
-    const excludePages = result.data.site.siteMetadata.excludePages
 
     // Load templates
     const indexTemplate = require.resolve(`./src/templates/index.js`)
@@ -185,22 +184,19 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Create pages
     pages.forEach(({ node }) => {
-        // Skip excluded pages
-        if (0 <= _.findIndex(excludePages, node.slug)) {
-            // This part here defines, that our pages will use
-            // a `/:slug/` permalink.
-            node.url = `/${node.slug}/`
+        // This part here defines, that our pages will use
+        // a `/:slug/` permalink.
+        node.url = `/${node.slug}/`
 
-            createPage({
-                path: node.url,
-                component: pageTemplate,
-                context: {
-                    // Data passed to context is available
-                    // in page queries as GraphQL variables.
-                    slug: node.slug,
-                },
-            })
-        }
+        createPage({
+            path: node.url,
+            component: pageTemplate,
+            context: {
+                // Data passed to context is available
+                // in page queries as GraphQL variables.
+                slug: node.slug,
+            },
+        })
     })
 
     // Create post pages

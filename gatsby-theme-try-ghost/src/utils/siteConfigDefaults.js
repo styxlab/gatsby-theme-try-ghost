@@ -24,7 +24,4 @@ module.exports = {
     backgroundColor: `#e9e9e9`,
     themeColor: `#15171A`,
 
-    // Exclude Pages from being imported based on slug name.
-    excludePages: [`contact`],
-
 }
