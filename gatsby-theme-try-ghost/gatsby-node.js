@@ -15,10 +15,12 @@ exports.createSchemaCustomization = ({ actions }) => {
         type allGhostSettings implements Node {
             secondary_navigation: [Navigation!]!
             children: [GhostPostHtml!]!
+            coverImageSharp: File @link
         }
         type GhostSettings implements Node {
             secondary_navigation: [Navigation!]!
             children: [GhostPostHtml!]!
+            coverImageSharp: File @link
         }
     `
     createTypes(typeDefs)
