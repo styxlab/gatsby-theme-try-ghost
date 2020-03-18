@@ -1,0 +1,42 @@
+{
+    "name": "gatsby-plugin-ghost-contact",
+    "description": "Gatsby plugin that downloads images from Ghost CMS to be used with Gatsby image tools.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "styxlab",
+    "homepage": "https://github.com/styxlab/",
+    "main": "gatsby-node.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-plugin-ghost-images"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-image",
+        "remote",
+        "download",
+        "ghost",
+        "ghost-cms"
+    ],
+    "scripts": {
+        "build": "babel src --out-dir . --ignore **/__tests__",
+        "prepare": "cross-env NODE_ENV=production npm run build",
+        "watch": "babel -w src --out-dir . --ignore **/__tests__"
+    },
+    "dependencies": {
+        "@babel/runtime": "^7.8.7",
+        "gatsby-source-filesystem": "^2.1.56",
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.8.7",
+        "babel-preset-gatsby-package": "^0.2.18",
+        "cross-env": "^7.0.2",
+        "gatsby": "^2.19.45"
+    }
+}
