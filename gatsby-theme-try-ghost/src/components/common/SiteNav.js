@@ -15,6 +15,11 @@ const SiteNav = ({ data, className, postTitle }) => {
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
+    let navigation = site.navigation
+    if (config.navigation && config.navigation.length >= 0) {
+        config.navigation.map(item => navigation.indexOf(item) === -1 && navigation.push(item))
+    }
+
     return (
         <nav className={className}>
             <div className="site-nav-left-wrapper">
@@ -25,7 +30,7 @@ const SiteNav = ({ data, className, postTitle }) => {
                         <a className="site-nav-logo" href={config.siteUrl}>{site.title}</a>
                     }
                     <div className="site-nav-content">
-                        <Navigation data={site.navigation} />
+                        <Navigation data={navigation} />
                         { postTitle &&
                             <span className={`nav-post-title ${site.logo || `dash`}`}>{postTitle}</span>
                         }

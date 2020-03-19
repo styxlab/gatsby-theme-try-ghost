@@ -41,6 +41,24 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-theme-ghost-contact`,
+            options: {
+                siteMetadata: {
+                    navigation: [{ label: `Contact`, url: `/contact/` }],
+                },
+                pageContext: {
+                    title: `Contact Us`,
+                    slug: `contact`,
+                    feature_image: ``,
+                    custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
+                    form_topics: [`I want to give feedback`, `I want to ask a question`],
+                    meta_title: `Contact Us`,
+                    meta_description: `A contact form page.`,
+                    html: ``,
+                },
+            },
+        },
+        {
             resolve: `gatsby-plugin-ackee-tracker`,
             options: {
                 domainId: `8af98f2e-a3a0-44dd-85fe-91c6dd3d2f62`,

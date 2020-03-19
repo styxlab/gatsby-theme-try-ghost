@@ -19,7 +19,7 @@ const Page = ({ data, location }) => {
     const featImg = page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
-    const transformedHtml = page.children[0] && page.children[0].html
+    const transformedHtml = page.children && page.children[0] && page.children[0].html
 
     return (
         <>

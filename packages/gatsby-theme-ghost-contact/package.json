@@ -1,11 +1,11 @@
 {
-    "name": "gatsby-plugin-ghost-contact",
-    "description": "Gatsby plugin that downloads images from Ghost CMS to be used with Gatsby image tools.",
+    "name": "gatsby-theme-ghost-contact",
+    "description": "Gatsby theme to add a contact page to gatsby-theme-try-ghost",
     "version": "1.0.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
-    "main": "gatsby-node.js",
+    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-plugin-ghost-images"
