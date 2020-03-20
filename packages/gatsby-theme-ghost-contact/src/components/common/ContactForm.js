@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from "styled-components"
-import { css } from "styled-components"
+import styled from 'styled-components'
+import { css } from 'styled-components'
+import { useFormik } from 'formik'
 
 const themeStyle = css`
     font-family: avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
@@ -67,7 +68,7 @@ const Textarea = styled.textarea`
 `
 const Button = styled.button`
     ${themeStyle}
-    margin-bottom: 0;
+    margin-bottom: 1rem;
     color: white;
     background-color: #3eb0ef;
     border-color: #3eb0ef;
@@ -81,26 +82,157 @@ const Button = styled.button`
     }
 `
 
-const ContactForm = ({ topics }) => (
-    <>
-        <Form id="contact-form" method="post" data-format="inline" data-netlify="true" data-netlify-honeypot="bot-field">
-            <Input type="text" id="name" placeholder="Full Name" pattern=".{2,30}" required />
-            <Input type="email" id="email" placeholder="Email Address" required />
-            { topics.length >= 0 &&
-                <Select defaultValue="topic" id="subject" pattern=".{1,20}" required>
-                    <option value="topic" disabled hidden>Please select...</option>
-                    { topics.map((topic, i) => (
-                        <option num={i} value={`option-${i}`} key={`option-${i}`} >{topic}</option>
-                    ))}
-                </Select>
+const Span = styled.span`
+    ${themeStyle}
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: #ed3c3c;
+    font-size: smaller;
+    font-style: oblique;
+    height: 4rem;
+`
+const Response = styled.span`
+    ${themeStyle}
+    margin-bottom: 0;
+    padding-bottom: 0;
+    color: silver;
+    font-size: smaller;
+    font-style: oblique;
+    height: 4rem;
+`
+const printError = (touched, errors) => {
+    if (touched.name && errors.name) {
+        return errors.name
+    }
+    if (touched.email && errors.email) {
+        return errors.email
+    }
+    if (touched.subject && errors.subject) {
+        return errors.subject
+    }
+    if (touched.message && errors.message) {
+        return errors.message
+    }
+    return null
+}
+
+// A custom validation function. This must return an object
+// which keys are symmetrical to our values/initialValues
+const validate = (values) => {
+    const errors = {}
+    if (!values.name) {
+        errors.name = `Full Name is required.`
+    } else if (values.name.length < 3) {
+        errors.name = `Full Name must be at least 3 characters long.`
+    } else if (values.name.length > 20) {
+        errors.name = `Full Name Must be 20 characters or less.`
+    }
+
+    if (!values.email) {
+        errors.email = `Email is required.`
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+        errors.email = `Invalid email address.`
+    }
+
+    if (!values.subject) {
+        errors.subject = `Please select one subject.`
+    }
+
+    if (!values.message) {
+        errors.message = `A message text is required.`
+    } else if (values.message.length < 15) {
+        errors.message = `Your message must be at least 15 characters long.`
+    } else if (values.message.length > 4000) {
+        errors.message = `Your message must be 4000 characters or less.`
+    }
+
+    return errors
+}
+
+const ContactForm = ({ topics }) => {
+    const formik = useFormik({
+        initialValues: {
+            name: ``,
+            email: ``,
+            subject: ``,
+            message: ``,
+        },
+        validate,
+        onSubmit: async (values, actions) => {
+            actions.setSubmitting(false)
+            // const response = await api.post('/send_email', {
+            //   name: values.name,
+            //   email: values.email,
+            //   subject: values.subject,
+            //   message: values.message
+            // })
+            const response = {}
+            response.status = 200
+            if (response.status === 200) {
+                actions.resetForm()
+                actions.setStatus({ success: `Thank you for your message!` })
             }
-            <Textarea rows="5" id="message" placeholder="Your message" pattern=".{10,4000}" required></Textarea>
-            <Robot type="hidden" name="form-name" value="contact-form" />
-            <Button className="btn" type="submit" id="submit" value="Submit" onClick="formProcessor.process();return false;">Submit</Button>
-            <span id="responsemsg"></span>
-        </Form>
-    </>
-)
+        },
+    })
+
+    return (
+        <>
+            <Span id="response">
+                <div>{printError(formik.touched, formik.errors)}</div>
+            </Span>
+            <Form
+                id="contact-form"
+                onSubmit={formik.handleSubmit}
+                data-netlify="true"
+                data-netlify-honeypot="bot-field">
+                <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.name}
+                    placeholder="Full Name"
+                />
+                <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.email}
+                    placeholder="Email Address"
+                />
+                { topics.length >= 0 &&
+                    <Select
+                        id="subject"
+                        name="subject"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.subject}
+                        defaultValue="topic">
+                        <option value="topic" hidden>Please select...</option>
+                        { topics.map((topic, i) => (
+                            <option num={i} value={`option-${i}`} key={`option-${i}`} >{topic}</option>
+                        ))}
+                    </Select>
+                }
+                <Textarea
+                    id="message"
+                    name="message"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.message}
+                    placeholder="Your message"
+                    rows="5"
+                />
+                <Robot type="hidden" name="form-name" value="contact-form" />
+                <Button id="submit" type="submit" value="Submit">Submit</Button>
+                <Response id="responsemsg">{formik.status && formik.status.success}</Response>
+            </Form>
+        </>
+    )
+}
 
 ContactForm.propTypes = {
     topics: PropTypes.arrayOf(

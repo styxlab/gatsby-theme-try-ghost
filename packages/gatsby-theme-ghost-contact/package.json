@@ -18,13 +18,14 @@
         "gatsby-theme",
         "gatsby-theme-ghost",
         "contact",
+        "form",
         "ghost",
         "ghost-cms"
     ],
     "dependencies": {
         "@babel/runtime": "^7.8.7",
+        "formik": "^2.1.4",
         "gatsby-node-helpers": "^0.3.0",
-        "gatsby-source-filesystem": "^2.1.56",
         "lodash": "^4.17.15"
     },
     "devDependencies": {
