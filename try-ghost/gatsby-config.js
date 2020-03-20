@@ -49,7 +49,7 @@ module.exports = {
                 pageContext: {
                     title: `Contact Us`,
                     slug: `contact`,
-                    feature_image: ``,
+                    feature_image: `https://images.unsplash.com/photo-1517373215983-015fff593a53?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80`,
                     custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
                     form_topics: [`I want to give feedback`, `I want to ask a question`],
                     meta_title: `Contact Us`,

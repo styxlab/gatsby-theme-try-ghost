@@ -1,6 +1,6 @@
 {
     "name": "gatsby-theme-ghost-contact",
-    "description": "Gatsby theme to add a contact page to gatsby-theme-try-ghost",
+    "description": "Gatsby theme to easily add a contact page to gatsby-theme-try-ghost",
     "version": "1.0.0",
     "license": "MIT",
     "author": "styxlab",
@@ -8,27 +8,22 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-plugin-ghost-images"
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact"
     },
     "bugs": {
         "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
     },
     "keywords": [
         "gatsby",
-        "gatsby-plugin",
-        "gatsby-image",
-        "remote",
-        "download",
+        "gatsby-theme",
+        "gatsby-theme-ghost",
+        "contact",
         "ghost",
         "ghost-cms"
     ],
-    "scripts": {
-        "build": "babel src --out-dir . --ignore **/__tests__",
-        "prepare": "cross-env NODE_ENV=production npm run build",
-        "watch": "babel -w src --out-dir . --ignore **/__tests__"
-    },
     "dependencies": {
         "@babel/runtime": "^7.8.7",
+        "gatsby-node-helpers": "^0.3.0",
         "gatsby-source-filesystem": "^2.1.56",
         "lodash": "^4.17.15"
     },

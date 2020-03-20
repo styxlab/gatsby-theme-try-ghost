@@ -86,9 +86,9 @@ const Button = styled.button`
     }
 `
 
-const ContactPage = ({ data, location, pageContext }) => {
+const ContactPage = ({ data, location }) => {
+    const page = data.contactPage
     const posts = data.allGhostPost.edges
-    const page = pageContext
     const featImg = page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
@@ -116,7 +116,7 @@ const ContactPage = ({ data, location, pageContext }) => {
                         }
 
                         <section className="post-full-content">
-                            <Form id="contact-form" method="post" data-format="inline">
+                            <Form id="contact-form" method="post" data-format="inline" data-netlify="true" data-netlify-honeypot="bot-field">
                                 <Input type="text" id="name" placeholder="Full Name" pattern=".{2,30}" required />
                                 <Input type="email" id="email" placeholder="Email Address" required />
                                 { page.form_topics.length >= 0 &&
@@ -128,7 +128,7 @@ const ContactPage = ({ data, location, pageContext }) => {
                                     </Select>
                                 }
                                 <Textarea rows="5" id="message" placeholder="Your message" pattern=".{10,4000}" required></Textarea>
-                                <Robot type="text" name="_norobots" />
+                                <Robot type="hidden" name="form-name" value="contact-form" />
                                 <Button className="btn" type="submit" id="submit" value="Submit" onClick="formProcessor.process();return false;">Submit</Button>
                                 <span id="responsemsg"></span>
                             </Form>
@@ -152,16 +152,19 @@ const ContactPage = ({ data, location, pageContext }) => {
 
 ContactPage.propTypes = {
     data: PropTypes.shape({
+        contactPage: PropTypes.object.isRequired,
         allGhostPost: PropTypes.object.isRequired,
     }).isRequired,
-    pageContext: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
 }
 
 export default ContactPage
 
 export const pageQuery = graphql`
-  query GhostContactQuery {
+  query GhostContactQuery($slug: String!) {
+    contactPage(slug: { eq: $slug }) {
+        ...ContactPageFields
+    }
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
         limit: 3,

@@ -15,9 +15,11 @@ const SiteNav = ({ data, className, postTitle }) => {
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
+    // allow plugins to add menu items
     let navigation = site.navigation
+    let urls = navigation.map(item => item.url)
     if (config.navigation && config.navigation.length >= 0) {
-        config.navigation.map(item => navigation.indexOf(item) === -1 && navigation.push(item))
+        config.navigation.map(item => urls.indexOf(item.url) === -1 && navigation.push(item))
     }
 
     return (
