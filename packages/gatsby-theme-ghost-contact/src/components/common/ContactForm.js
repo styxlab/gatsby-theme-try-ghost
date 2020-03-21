@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { useFormik } from 'formik'
+import axios from 'axios'
 
 const themeStyle = css`
     font-family: avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
@@ -160,17 +161,22 @@ const ContactForm = ({ topics }) => {
         validate,
         onSubmit: async (values, actions) => {
             actions.setSubmitting(false)
-            // const response = await api.post('/send_email', {
-            //   name: values.name,
-            //   email: values.email,
-            //   subject: values.subject,
-            //   message: values.message
-            // })
-            const response = {}
-            response.status = 200
+            console.log(`one second`)
+            console.log(values)
+            const url = ``
+            let postURL = (url || `https://api.atmolabs.org/v1/contact`)
+            console.log(postURL)
+            values.source_url = window.location.href
+            const response = await axios.post(postURL, values,
+                { headers: { 'Content-Type': `application/json` } })
+            console.log(response.data)
+            //const response = {}
+            //response.status = 200
+            actions.resetForm()
             if (response.status === 200) {
-                actions.resetForm()
-                actions.setStatus({ success: `Thank you for your message!` })
+                actions.setStatus({ success: `Thank you, your message has been sent!` })
+            } else {
+                actions.setStatus({ success: `Oops :-( sending failed.` })
             }
         },
     })
