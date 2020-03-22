@@ -4,7 +4,9 @@ const _ = require(`lodash`)
 
 const generateItem = function generateItem(post) {
     const itemUrl = post.canonical_url || post.url
-    const html = post.html
+    const html = post.html || ``
+    console.log(post.title)
+    console.log(html)
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
         title: post.title,

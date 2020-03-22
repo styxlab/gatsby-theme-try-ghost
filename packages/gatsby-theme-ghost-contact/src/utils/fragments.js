@@ -31,6 +31,11 @@ export const contactPageFields = graphql`
         # Forms
         form_topics
 
+        # External Service
+        serviceConfig {
+            url
+        }
+
         # ImgSharp
         featureImageSharp {
             base

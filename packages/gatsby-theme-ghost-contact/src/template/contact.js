@@ -39,7 +39,7 @@ const ContactPage = ({ data, location }) => {
 
                         <section className="post-full-content">
 
-                            <ContactForm topics={page.form_topics} />
+                            <ContactForm topics={page.form_topics} serviceConfig={page.serviceConfig} />
 
                             <div className="post-content"
                                 dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />

@@ -46,6 +46,9 @@ module.exports = {
                 siteMetadata: {
                     navigation: [{ label: `Contact`, url: `/contact/` }],
                 },
+                serviceConfig: {
+                    url: `http://localhost:7000/v1/contact`,
+                },
                 pageContext: {
                     title: `Contact Us`,
                     slug: `contact`,

@@ -150,7 +150,7 @@ const validate = (values) => {
     return errors
 }
 
-const ContactForm = ({ topics }) => {
+const ContactForm = ({ topics, serviceConfig }) => {
     const formik = useFormik({
         initialValues: {
             name: ``,
@@ -163,8 +163,7 @@ const ContactForm = ({ topics }) => {
             actions.setSubmitting(false)
             console.log(`one second`)
             console.log(values)
-            const url = ``
-            let postURL = (url || `https://api.atmolabs.org/v1/contact`)
+            const postURL = (serviceConfig.url || `http://localhost:7000/v1/contact`)
             console.log(postURL)
             values.source_url = window.location.href
             const response = await axios.post(postURL, values,
@@ -244,6 +243,7 @@ ContactForm.propTypes = {
     topics: PropTypes.arrayOf(
         PropTypes.string
     ).isRequired,
+    serviceConfig: PropTypes.object.isRequired,
 }
 
 export default ContactForm
