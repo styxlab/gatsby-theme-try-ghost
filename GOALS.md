@@ -5,7 +5,7 @@ Gatsby static web app served from headless Ghost CMS
 - [x] Gatsby frontend replacement
 - [x] Ghost headless CMS
 - [x] Ghost Casper look and feel
-- [x] Support for *Sticky Nav Title*, [~*Gallery Card*, *Infinite Scroll*]
+- [x] Support for *Sticky Nav Title*, [~*Gallery Card*, *Infinite Scroll*~]
 - [x] PrismJS
 - [x] Lazy image loading
 - [x] Lighthouse score \~400

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { css } from 'styled-components'
 import { useFormik } from 'formik'
-import axios from 'axios'
 
 const themeStyle = css`
     font-family: avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
@@ -141,8 +140,8 @@ const validate = (values) => {
 
     if (!values.message) {
         errors.message = `A message text is required.`
-    } else if (values.message.length < 15) {
-        errors.message = `Your message must be at least 15 characters long.`
+    } else if (values.message.length < 10) {
+        errors.message = `Your message must be at least 10 characters long.`
     } else if (values.message.length > 4000) {
         errors.message = `Your message must be 4000 characters or less.`
     }
@@ -155,27 +154,33 @@ const ContactForm = ({ topics, serviceConfig }) => {
         initialValues: {
             name: ``,
             email: ``,
-            subject: ``,
+            subject: `topic`,
             message: ``,
         },
         validate,
         onSubmit: async (values, actions) => {
             actions.setSubmitting(false)
-            console.log(`one second`)
-            console.log(values)
             const postURL = (serviceConfig.url || `http://localhost:7000/v1/contact`)
-            console.log(postURL)
+            const xhr = new XMLHttpRequest()
+            xhr.open(`POST`, postURL, true)
+            xhr.setRequestHeader(`Content-Type`, `application/json`)
             values.source_url = window.location.href
-            const response = await axios.post(postURL, values,
-                { headers: { 'Content-Type': `application/json` } })
-            console.log(response.data)
-            //const response = {}
-            //response.status = 200
-            actions.resetForm()
-            if (response.status === 200) {
-                actions.setStatus({ success: `Thank you, your message has been sent!` })
-            } else {
-                actions.setStatus({ success: `Oops :-( sending failed.` })
+            values.subject = topics[values.subject]
+            xhr.send(JSON.stringify(values))
+            xhr.onload = () => {
+                //remove message after 10 seconds
+                window.setTimeout(() => {
+                    actions.setStatus({ success: `` })
+                }, 10000)
+            }
+            xhr.onreadystatechange = () => {
+                actions.resetForm()
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    //console.log(xhr.responseText)
+                    actions.setStatus({ success: `Thank you, your message has been sent!` })
+                } else {
+                    actions.setStatus({ success: `Oops :-( sending failed.` })
+                }
             }
         },
     })
@@ -188,6 +193,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
             <Form
                 id="contact-form"
                 onSubmit={formik.handleSubmit}
+                method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field">
                 <Input
@@ -214,11 +220,10 @@ const ContactForm = ({ topics, serviceConfig }) => {
                         name="subject"
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.subject}
-                        defaultValue="topic">
+                        value={formik.values.subject}>
                         <option value="topic" hidden>Please select...</option>
                         { topics.map((topic, i) => (
-                            <option num={i} value={`option-${i}`} key={`option-${i}`} >{topic}</option>
+                            <option num={i} value={i} key={`option-${i}`} >{topic}</option>
                         ))}
                     </Select>
                 }

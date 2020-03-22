@@ -47,7 +47,7 @@ module.exports = {
                     navigation: [{ label: `Contact`, url: `/contact/` }],
                 },
                 serviceConfig: {
-                    url: `http://localhost:7000/v1/contact`,
+                    url: `https://api.gotsby.org/v1/contact`,
                 },
                 pageContext: {
                     title: `Contact Us`,
