@@ -1,19 +1,24 @@
-# gatsby-plugin-ghost-images
+# gatsby-theme-ghost-contact
 
-Downloads images from [Ghost CMS](https://ghost.org/changelog/jamstack/) so they can be processed with the [Gatsby image tool chain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seamlessly work with the headless Ghost CMS, but it should also work with other content management systems.
+Adds a contact form page to [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost). This theme makes use of latent-component-shadowing and showcases best practices for adding custom themes to `gatsby-theme-try-ghost`.
 
 ## Install
 
-`yarn add gatsby-plugin-ghost-images`
+`yarn add gatsby-theme-ghost-contact`
 
-Note that `gatsby-source-filesystem` is installed as a dependency of this plugin. It is *not required* to include `gatsby-source-filesystem` in your `gatsby-config.js` as all images are fetched remotely from the CMS.
+
+## Dependencies
+
+This theme is an add-on theme designed to seamlessly integrate with [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost). The theme uses functions provided by `gatsby-theme-try-ghost`, so installing `gatsby-theme-try-ghost` is required.
+
+`yarn add gatsby-theme-try-ghost`
 
 
 ## Works best with...
 
-While you can use `gatsby-plugin-ghost-images` on its own, you most likely want to use it in conjunction with the Gatsby image and sharp plugins:
+If you are using a feature image on your contact page, it is highly recommended to also install `gatsby-plugin-ghost-images` in order to get your image lazy loaded with `gatsby-images`.
 
-`yarn add gatsby-plugin-sharp gatsby-transformer-sharp gatsby-image`
+`yarn add gatsby-plugin-ghost-images`
 
 
 ## How to use
@@ -21,106 +26,55 @@ While you can use `gatsby-plugin-ghost-images` on its own, you most likely want 
 ```javascript
 // In your gatsby-config.js
 plugins: [
-    // sharp plugins are only needed if you want to use gatsby image processing tools
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
-        resolve: `gatsby-plugin-ghost-images`,
+        resolve: `gatsby-theme-ghost-contact`,
         options: {
-            // An array of node types and image fields per node
-            // Image fields must contain a valid absolute path to the image to be downloaded
-            lookup: [
-                {
-                    type: `GhostPost`,
-                    imgTags: [`feature_image`],
-                },
-                {
-                    type: `GhostPage`,
-                    imgTags: [`feature_image`],
-                },
-                {
-                    type: `GhostSettings`,
-                    imgTags: [`cover_image`],
-                },
-            ],
-            // Additional condition to exclude nodes 
-            // Takes precedence over lookup
-            exclude: node => (
-                node.ghostId === undefined
-            ),
-            // Additional information messages useful for debugging
-            verbose: true,
-            // Option to disable the module (default: false)
-            disable: false,
+            siteMetadata: {
+                // This will be added to your navigation menu
+                navigation: [{ label: `Contact`, url: `/contact/` }],
+            },
+            serviceConfig: {
+                // This is the endpoint where your form data is sent to
+                url: `https://api.your-server.com/contact`,
+            },
+            // Customize your page content here
+            pageContext: {
+                title: `Contact Us`,
+                slug: `contact`,
+                custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
+                feature_image: `https://static.gotsby.org/v1/assets/images/contact-bluish.png`,
+                // Can be disabled by providing an empty list []
+                form_topics: [`I want to give feedback`, `I want to ask a question`],
+                meta_title: `Contact Us`,
+                meta_description: `A contact form page.`,
+                // All content below the contact form
+                html: ``,
+            },
         },
     },
 ]
 ```
 
-## Image nodes
-
-Where can you find the downloaded images? For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. Here we have adapted a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camel Case. For example:
-
-```
-feature_image -> feature_image_sharp -> featureImageSharp
-```
-
-With this naming convention there is no need to provide a target name.
-
-
 ## Details
 
-This plugin will dramatically improve user experience and site performance! Gatsby provides amazing image processing tools that natively ship with lazy loading, adaptive image resolutions and much more. Get *all these image features* into your Ghost site with this plugin.
+This plugin provides a simple contact page to your Gatsby-Ghost static website. The page style is inherited from the base theme and the form is styled using styled components. The plugin also does form validations. All configuration can be done in one place, namely in your `gatsby-config.js`. If you provide the navigation data shown above, a menu entry will be automatically added to your navigation bar.
 
+You will have to change the `serviceConfig.url` to connect to your backend. The backend receives the form data and initiates an action such as sending you an email. Some guidance about your backend options can be found below.
 
-## How to query
+If you want to integrate other pages or if you want to customize the base theme provided with `gatsby-theme-try-ghost`, please inspect the source code of `gatsby-theme-ghost-contact` closely. The latent-component-shadowing approach used here is very general and is an amazing concept. All additions to `gatsby-theme-try-ghost` will be based on these principles.
 
-```graphql
-{
-  allGhostPost {
-    edges {
-      node {
-        featureImageSharp {
-          id
-        }
-      }
-    }
-  }
-}
-```
+## Backends
 
-## How to query images created by sharp
+All backend options described in the [Gatsby Docs](https://www.gatsbyjs.org/docs/building-a-contact-form/) should work with this theme as well. One of the following two options should get you started quickly:
 
-```graphql
-{
-  allGhostPost {
-    edges {
-      node {
-        featureImageSharp {
-          childImageSharp {
-            fluid(maxWidth: 1024) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
+### Netlify
 
-## How to access in React code
+If you deploy your site to netlify, this may be the easiest approach for you. As all necessary [netlify fields](https://docs.netlify.com/forms/setup/) have been added to the form, you will automatically see form submissions in your netlify dashboards. No configuration needed.
 
-```javascript
-import Img from "gatsby-image"
+### Run your own server
 
-...
+Running your own server will give you most control of the data and how it is processed. An initial implementation of such a micro-service is explained in this tutorial: [Contact Forms in Ghost — Without External Services](https://atmolabs.org/contact-forms-in-ghost/). Note that only chapters on the node micro-service are relevant here. Once your micro-service is up and running, just change `serviceConfig.url` to point to your endpoint.
 
-const fluidImg = ghostPost.featureImageSharp.childImageSharp.fluid
-
-<Img fluid={fluidImg} />
-
-```
 
 # Copyright & License
 
