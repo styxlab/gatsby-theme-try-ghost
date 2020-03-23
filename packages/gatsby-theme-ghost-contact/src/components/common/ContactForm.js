@@ -167,6 +167,10 @@ const ContactForm = ({ topics, serviceConfig }) => {
             xhr.setRequestHeader(`Content-Type`, `application/json`)
             values.source_url = window.location.href
             values.subject = topics[values.subject]
+            if (typeof values[`form-name`] === `string` && values[`form-name`].length === 0) {
+                values[`form-name`] = `gatsby-theme-ghost-contact`
+            }
+            console.log(values)
             xhr.send(JSON.stringify(values))
             xhr.onload = () => {
                 //remove message after 10 seconds
