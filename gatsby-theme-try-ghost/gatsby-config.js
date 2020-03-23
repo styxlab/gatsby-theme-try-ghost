@@ -74,18 +74,6 @@ module.exports = (themeOptions) => {
                 },
             },
             {
-                resolve: `gatsby-plugin-ghost-images`,
-                options: {
-                    lookup: [
-                        {
-                            type: `ContactPage`,
-                            imgTags: [`feature_image`],
-                        },
-                    ],
-                    verbose: true,
-                },
-            },
-            {
                 resolve: `gatsby-transformer-rehype`,
                 options: {
                     filter: node => (

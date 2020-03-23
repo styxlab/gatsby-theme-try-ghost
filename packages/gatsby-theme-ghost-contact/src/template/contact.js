@@ -15,9 +15,12 @@ const ContactPage = ({ data, location }) => {
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
     const transformedHtml = page.children && page.children[0] && page.children[0].html
 
+    //fill ghostPage in order to reuse meta functions
+    const metadata = { ghostPage: page }
+
     return (
         <>
-            <MetaData data={data} location={location} type="website"/>
+            <MetaData data={metadata} location={location} type="website"/>
             <Layout page={page} tags={page.tags} header={<HeaderPage />}>
                 <div className="inner">
                     <article className={`post-full ${postClass}`}>
@@ -63,6 +66,7 @@ ContactPage.propTypes = {
     data: PropTypes.shape({
         contactPage: PropTypes.object.isRequired,
         allGhostPost: PropTypes.object.isRequired,
+        ghostPage: PropTypes.object,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
