@@ -156,6 +156,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
             email: ``,
             subject: `topic`,
             message: ``,
+            'form-name': ``,
         },
         validate,
         onSubmit: async (values, actions) => {
@@ -192,6 +193,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
             </Span>
             <Form
                 id="contact-form"
+                name="contact"
                 onSubmit={formik.handleSubmit}
                 method="POST"
                 data-netlify="true"
@@ -236,7 +238,13 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     placeholder="Your message"
                     rows="5"
                 />
-                <Robot type="hidden" name="form-name" value="contact-form" />
+                <Robot
+                    type="hidden"
+                    name="form-name"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[`form-name`]}
+                />
                 <Button id="submit" type="submit" value="Submit">Submit</Button>
                 <Response id="responsemsg">{formik.status && formik.status.success}</Response>
             </Form>
