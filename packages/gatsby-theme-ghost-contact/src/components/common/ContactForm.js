@@ -193,9 +193,8 @@ const ContactForm = ({ topics, serviceConfig }) => {
             </Span>
             <Form
                 id="contact-form"
-                name="contact"
+                name="gatsby-theme-ghost-contact"
                 onSubmit={formik.handleSubmit}
-                method="POST"
                 data-netlify="true"
                 data-netlify-honeypot="bot-field">
                 <Input
