@@ -28,6 +28,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 ![Lighthouse Score](https://cms.gotsby.org/content/images/gotsby-lighthouse.png)
 
+
 ## Addons
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
