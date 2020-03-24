@@ -13,7 +13,7 @@ Gatsby static web app served from headless Ghost CMS
 
 ## Additions
 - [x] Tracking
-- [ ] Contact Page
+- [x] Contact Page
 - [ ] Search
 
 ## Not supported
