@@ -4,6 +4,15 @@ A Gatsby theme plugin for creating blogs from headless [Ghost CMS](https://ghost
 
 Turn your Ghost blog into a lightning fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
 
+<p align="center">
+    <a href="https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="gatsby-theme-try-ghost is released under the MIT license." />
+    </a>
+    <a href="https://www.npmjs.org/package/gatsby-theme-try-ghost">
+        <img src="https://img.shields.io/npm/v/gatsby-theme-try-ghost.svg" alt="Current npm package version." />
+    </a>
+    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
+</p>
 
 ## Demo
 
