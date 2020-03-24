@@ -37,7 +37,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-ghost": "^1.0.0",
     "eslint-plugin-react": "^7.19.0",
-    "gatsby": "^2.20.3",
+    "gatsby": "^2.20.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -66,7 +66,7 @@
     "gatsby-plugin-offline": "^3.1.1",
     "gatsby-plugin-postcss": "^2.2.1",
     "gatsby-plugin-react-helmet": "^3.2.1",
-    "gatsby-plugin-sharp": "^2.5.2",
+    "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-rehype-ghost-links": "^1.1.0",
     "gatsby-rehype-prismjs": "^0.0.9",

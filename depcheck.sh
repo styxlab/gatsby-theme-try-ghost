@@ -2,10 +2,10 @@
 
 npm-upgrade
 
-cd gatsby-theme-try-ghost
+cd packages/gatsby-theme-try-ghost
 npm-upgrade
 
-cd ../try-ghost
+cd ../../demo
 npm-upgrade
 
 cd ..
@@ -18,7 +18,7 @@ branch="master"
 wget -q -P compare -N ${github}/${repo}/${branch}/assets/css/global.css
 wget -q -P compare -N ${github}/${repo}/${branch}/assets/css/screen.css
 
-diff -q -s compare/global.css gatsby-theme-try-ghost/src/styles/global.css
-diff -q -s compare/screen.css gatsby-theme-try-ghost/src/styles/screen.css
+diff -q -s compare/global.css packages/gatsby-theme-try-ghost/src/styles/global.css
+diff -q -s compare/screen.css packages/gatsby-theme-try-ghost/src/styles/screen.css
 
 rm -rf compare
