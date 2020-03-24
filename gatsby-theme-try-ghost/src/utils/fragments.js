@@ -24,6 +24,10 @@ export const siteMetadataFields = graphql`
         siteIcon
         backgroundColor
         themeColor
+        navigation {
+            label
+            url
+        }
     }
 `
 

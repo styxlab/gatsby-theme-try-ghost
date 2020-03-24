@@ -27,7 +27,7 @@ const Post = ({ data, location, pageContext }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
-    const transformedHtml = post.children[0] && post.children[0].html
+    const transformedHtml = post.children && post.children[0] && post.children[0].html
 
     return (
         <>

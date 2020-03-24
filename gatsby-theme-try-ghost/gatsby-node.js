@@ -22,6 +22,12 @@ exports.createSchemaCustomization = ({ actions }) => {
             children: [GhostPostHtml!]!
             coverImageSharp: File @link
         }
+        type allSiteSiteMetadata {
+            navigation: [Navigation!]
+        }
+        type SiteSiteMetadata {
+            navigation: [Navigation!]
+        }
     `
     createTypes(typeDefs)
 }

@@ -1,4 +1,4 @@
-# Gatsby Theme Minimal Example
+# Gatsby Theme Demo
 
 > See the [base README](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/README.md) for instructions on how to use this example.
 

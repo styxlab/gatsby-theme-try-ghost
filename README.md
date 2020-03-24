@@ -48,7 +48,7 @@ cd gatsby-theme-try-ghost
 
 2. Run `yarn` to install dependencies.
 
-3. Run `yarn workspace try-ghost develop` to start the example locally.
+3. Run `yarn workspace demo develop` to start the example locally.
 
 
 # Copyright & License

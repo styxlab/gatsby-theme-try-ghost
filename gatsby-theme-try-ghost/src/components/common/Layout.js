@@ -26,6 +26,8 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
+    errorClass = errorClass || ``
+
     return (
         <>
             <Helmet>

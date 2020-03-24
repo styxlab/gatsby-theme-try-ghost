@@ -2,18 +2,18 @@
 Gatsby static web app served from headless Ghost CMS
 
 ## Project goals
-- [x] Ghost should serve as headless CMS
-- [x] Gatsby should do all frontend processing
-- [x] Ghost Casper v3 look and feel
-- [x] Casper v3 features like *Sticky Nav Title*, [*Gallery Card*, *Infinite Scroll*] should be supported
-- [ ] PrismJS support
-- [ ] Lazy image loading support
-- [ ] Lighthouse score \~400
+- [x] Gatsby frontend replacement
+- [x] Ghost headless CMS
+- [x] Ghost Casper look and feel
+- [x] Support for *Sticky Nav Title*, [~*Gallery Card*, *Infinite Scroll*~]
+- [x] PrismJS
+- [x] Lazy image loading
+- [x] Lighthouse score \~400
 - [ ] JS Widget support
 
 ## Additions
+- [x] Tracking
 - [ ] Contact Page
-- [ ] Tracking 
 - [ ] Search
 
 ## Not supported

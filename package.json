@@ -5,17 +5,17 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "develop": "yarn workspace try-ghost develop",
-    "build": "yarn workspace try-ghost build",
-    "clean": "yarn workspace try-ghost clean",
-    "serve": "yarn workspace try-ghost serve",
+    "develop": "yarn workspace demo develop",
+    "build": "yarn workspace demo build",
+    "clean": "yarn workspace demo clean",
+    "serve": "yarn workspace demo serve",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "pack": "lerna run build --scope={$(ls ./packages | xargs echo | sed 's/ /,/g')}"
   },
   "workspaces": [
     "packages/*",
     "gatsby-theme-try-ghost",
-    "try-ghost"
+    "demo"
   ],
   "devDependencies": {
     "lerna": "^3.20.2"
