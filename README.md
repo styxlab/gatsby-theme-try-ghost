@@ -6,10 +6,10 @@ Turn your Ghost blog into a lightning fast static website. This Gatsby theme is 
 
 <p align="center">
     <a href="https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE">
-        <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="gatsby-theme-try-ghost is released under the MIT license." />
+        <img src="/github/license/micromatch/micromatch" alt="gatsby-theme-try-ghost is released under the MIT license." />
     </a>
     <a href="https://www.npmjs.org/package/gatsby-theme-try-ghost">
-        <img src="https://img.shields.io/npm/v/gatsby-theme-try-ghost.svg" alt="Current npm package version." />
+        <img src="https://badgen.net/npm/v/gatsby-theme-try-ghost" alt="npm package version" />
     </a>
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome!" />
 </p>
