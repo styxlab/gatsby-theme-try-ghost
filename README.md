@@ -34,7 +34,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
 
- - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-ghost-contact)
+ - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-ghost-contact) :new:
  - Site tracking with [Ackee](https://github.com/burnsy/gatsby-plugin-ackee-tracker)
 
 
