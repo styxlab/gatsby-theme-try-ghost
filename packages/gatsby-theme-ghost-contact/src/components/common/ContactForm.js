@@ -134,7 +134,7 @@ const validate = (values) => {
         errors.email = `Invalid email address.`
     }
 
-    if (!values.subject) {
+    if (values.subject === `topic`) {
         errors.subject = `Please select one subject.`
     }
 
@@ -165,7 +165,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
         initialValues: {
             name: ``,
             email: ``,
-            subject: `topic`,
+            subject: topics.length > 0 ? `topic` : ``,
             message: ``,
             'form-name': ``,
         },
@@ -232,7 +232,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     value={formik.values.email}
                     placeholder="Email Address"
                 />
-                { topics.length >= 0 &&
+                { topics.length > 0 &&
                     <Select
                         id="subject"
                         name="subject"

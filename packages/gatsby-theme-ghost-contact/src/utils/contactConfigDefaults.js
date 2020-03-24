@@ -19,7 +19,7 @@ module.exports = {
     // For future use
     visibility: true,
 
-    form_topics: [`I want to give feedback`, `I want to ask a question`],
+    form_topics: [],
 
     meta_title: `Contact Us`,
 

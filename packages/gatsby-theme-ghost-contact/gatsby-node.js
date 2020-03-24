@@ -6,6 +6,23 @@ const createNodeHelpers = require(`gatsby-node-helpers`).default
 const { createNodeFactory } = createNodeHelpers({ typePrefix: `Contact` })
 const PageNode = createNodeFactory(`Page`)
 
+/**
+ * Here is the place where Gatsby creates schema customizations.
+ * This is needed to make the form_topics field optional.
+ */
+exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions
+    const typeDefs = `
+        type allContactPage implements Node {
+            form_topics: [String!]
+        }
+        type ContactPage implements Node {
+            form_topics: [String!]
+        }
+    `
+    createTypes(typeDefs)
+}
+
 // Standard way to create nodes
 exports.sourceNodes = ({ actions }, themeOptions) => {
     const { createNode } = actions
