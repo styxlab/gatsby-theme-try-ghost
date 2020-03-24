@@ -67,11 +67,11 @@ If you want to integrate other pages or if you want to customize the base theme 
 Form validations are currently hard-coded and cannot be changed by configuration. The following restrictions have been chosen which should cover a wide range of use cases:
 
 - Name: Number of characters must be in the range of 3 to 20.
-- Email: Must conform to the standard
-- Subject: A subject must be chosen, if configured
+- Email: Must conform to the standard.
+- Subject: A subject must be chosen, if configured.
 - Message: Number of characters must be in the range of 10 to 4000.
 
-In addition, the honeyspot only visible to robots must be left empty.
+In addition, the honeyspot is only visible to robots and must be left empty.
 
 ## Backends
 
