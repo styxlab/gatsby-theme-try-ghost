@@ -34,6 +34,8 @@ export const contactPageFields = graphql`
         # External Service
         serviceConfig {
             url
+            contentType
+            encodeFormData
         }
 
         # ImgSharp

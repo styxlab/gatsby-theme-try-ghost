@@ -150,6 +150,17 @@ const validate = (values) => {
 }
 
 const ContactForm = ({ topics, serviceConfig }) => {
+    const encodeFormData = (data) => {
+        if (serviceConfig.encodeFormData === `json`) {
+            return JSON.stringify(data)
+        }
+        if (serviceConfig.encodeFormData === `url`) {
+            return Object.keys(data)
+                .map(key => encodeURIComponent(key) + `=` + encodeURIComponent(data[key]))
+                .join(`&`)
+        }
+        return data
+    }
     const formik = useFormik({
         initialValues: {
             name: ``,
@@ -176,7 +187,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
             fetch(postURL, {
                 method: `POST`,
                 headers: { 'Content-Type': serviceConfig.contentType },
-                body: serviceConfig.encodeFormData(values),
+                body: encodeFormData(values),
             }).then(() => {
                 actions.resetForm()
                 actions.setStatus({ success: `Thank you, your message has been sent!` })
