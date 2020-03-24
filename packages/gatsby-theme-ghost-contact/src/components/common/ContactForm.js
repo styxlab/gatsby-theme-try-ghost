@@ -161,32 +161,33 @@ const ContactForm = ({ topics, serviceConfig }) => {
         validate,
         onSubmit: async (values, actions) => {
             actions.setSubmitting(false)
-            const postURL = (serviceConfig.url || `http://localhost:7000/v1/contact`)
-            const xhr = new XMLHttpRequest()
-            xhr.open(`POST`, postURL, true)
-            xhr.setRequestHeader(`Content-Type`, `application/json`)
+
             values.source_url = window.location.href
             values.subject = topics[values.subject]
             if (typeof values[`form-name`] === `string` && values[`form-name`].length === 0) {
                 values[`form-name`] = `gatsby-theme-ghost-contact`
-            }
-            console.log(values)
-            xhr.send(JSON.stringify(values))
-            xhr.onload = () => {
-                //remove message after 10 seconds
-                window.setTimeout(() => {
-                    actions.setStatus({ success: `` })
-                }, 10000)
-            }
-            xhr.onreadystatechange = () => {
+            } else { //early return if robot
                 actions.resetForm()
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    //console.log(xhr.responseText)
-                    actions.setStatus({ success: `Thank you, your message has been sent!` })
-                } else {
-                    actions.setStatus({ success: `Oops :-( sending failed.` })
-                }
+                actions.setStatus({ success: `Thank you, your message has been sent!` })
+                return
             }
+
+            const postURL = (serviceConfig.url || `/`)
+            fetch(postURL, {
+                method: `POST`,
+                headers: { 'Content-Type': serviceConfig.contentType },
+                body: serviceConfig.encodeFormData(values),
+            }).then(() => {
+                actions.resetForm()
+                actions.setStatus({ success: `Thank you, your message has been sent!` })
+                //remove message after 10 seconds
+                window.setTimeout(() => actions.setStatus({ success: `` }), 10000)
+            }).catch((error) => {
+                actions.resetForm()
+                actions.setStatus({ success: `Oops :-( sending failed. Error: ${error}.` })
+                //remove message after 10 seconds
+                window.setTimeout(() => actions.setStatus({ success: `` }), 10000)
+            })
         },
     })
 
@@ -196,8 +197,9 @@ const ContactForm = ({ topics, serviceConfig }) => {
                 <div>{printError(formik.touched, formik.errors)}</div>
             </Span>
             <Form
-                id="contact-form"
                 name="gatsby-theme-ghost-contact"
+                method="post"
+                action=""
                 onSubmit={formik.handleSubmit}
                 data-netlify="true"
                 data-netlify-honeypot="bot-field">
@@ -245,7 +247,6 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     type="hidden"
                     name="form-name"
                     onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
                     value={formik.values[`form-name`]}
                 />
                 <Button id="submit" type="submit" value="Submit">Submit</Button>

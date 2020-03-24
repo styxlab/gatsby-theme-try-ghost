@@ -13,14 +13,6 @@ This theme is an add-on theme designed to seamlessly integrate with [gatsby-them
 
 `yarn add gatsby-theme-try-ghost`
 
-
-## Works best with...
-
-If you are using a feature image on your contact page, it is highly recommended to also install `gatsby-plugin-ghost-images` in order to get your image lazy loaded with `gatsby-images`.
-
-`yarn add gatsby-plugin-ghost-images`
-
-
 ## How to use
 
 ```javascript
@@ -33,9 +25,16 @@ plugins: [
                 // This will be added to your navigation menu
                 navigation: [{ label: `Contact`, url: `/contact/` }],
             },
+            //For netlify users only: remove serviceConfig or read section on netlify below.
             serviceConfig: {
-                // This is the endpoint where your form data is sent to
+                // This is the endpoint where your form data is sent to (optional, default: `/`)
                 url: `https://api.your-server.com/contact`,
+                // Must match the content type your service endpoint is expecting
+                // optional, default: `application/x-www-form-urlencoded`
+                contentType: `application/json`,
+                // The data is a regular json object
+                // optional, default: url encoding
+                encodeFormData: data => JSON.stringify(data),
             },
             // Customize your page content here
             pageContext: {
@@ -63,17 +62,44 @@ You will have to change the `serviceConfig.url` to connect to your backend. The 
 
 If you want to integrate other pages or if you want to customize the base theme provided with `gatsby-theme-try-ghost`, please inspect the source code of `gatsby-theme-ghost-contact` closely. The latent-component-shadowing approach used here is very general and is an amazing concept. All additions to `gatsby-theme-try-ghost` will be based on these principles.
 
+## Validations
+
+Form validations are currently hard-coded and cannot be changed by configuration. The following restrictions have been chosen which should cover a wide range of use cases:
+
+- Name: Number of characters must be in the range of 3 to 20.
+- Email: Must conform to the standard
+- Subject: A subject must be chosen, if configured
+- Message: Number of characters must be in the range of 10 to 4000.
+
+In addition, the honeyspot only visible to robots must be left empty.
+
 ## Backends
 
 All backend options described in the [Gatsby Docs](https://www.gatsbyjs.org/docs/building-a-contact-form/) should work with this theme as well. One of the following two options should get you started quickly:
 
 ### Netlify
 
-If you deploy your site to netlify, this may be the easiest approach for you. As all necessary [netlify fields](https://docs.netlify.com/forms/setup/) have been added to the form, you will automatically see form submissions in your netlify dashboards. No configuration needed.
+If you deploy your site to netlify, this may be the easiest approach for you. As all necessary [netlify fields](https://docs.netlify.com/forms/setup/) have been added to the form, you will automatically see form submissions in your netlify dashboards. The `serviceConfig` defaults have been set to match what netlify expects. Easiest is therefore to remove the `serviceConfig` object in the above configuration. If you want to explicitely see or control the values used, here are the default values for netlify:
+
+```javascript
+    serviceConfig: {
+        url: `/`,
+        contentType: `application/x-www-form-urlencoded`,
+        encodeFormData: data => JSON.stringify(data),
+    }
+```
 
 ### Run your own server
 
-Running your own server will give you most control of the data and how it is processed. An initial implementation of such a micro-service is explained in this tutorial: [Contact Forms in Ghost — Without External Services](https://atmolabs.org/contact-forms-in-ghost/). Note that only chapters on the node micro-service are relevant here. Once your micro-service is up and running, just change `serviceConfig.url` to point to your endpoint.
+Running your own server will give you most control of the data and how it is processed. An initial implementation of such a micro-service is explained in this tutorial: [Contact Forms in Ghost — Without External Services](https://atmolabs.org/contact-forms-in-ghost/). Note that only chapters on the node micro-service are relevant here. Once your micro-service is up and running, just change `serviceConfig` to point to your endpoint. The micro-service described in the tutorial expects `json`, so the settings should look like:
+
+```javascript
+    serviceConfig: {
+        url: `https://api.your-server.com/contact`,
+        contentType: `application/json`,
+        encodeFormData: data => JSON.stringify(data),
+    }
+```
 
 
 # Copyright & License
