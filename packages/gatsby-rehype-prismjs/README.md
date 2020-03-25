@@ -91,7 +91,7 @@ and put it into the following location:
 
 ## Usage in HTML
 
-This is some beautiful code:
+Syntax highlighting is applied to HTML `<code>` blocks that are enclosed by a parent `<pre>` blocks.
 
 ```html
 <pre>
