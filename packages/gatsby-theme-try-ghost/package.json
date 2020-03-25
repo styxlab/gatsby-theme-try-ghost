@@ -69,7 +69,6 @@
     "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-plugin-styled-components": "^3.2.1",
     "gatsby-rehype-ghost-links": "^1.1.0",
-    "gatsby-rehype-prismjs": "^0.0.9",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-source-ghost": "^4.0.4",
     "gatsby-transformer-rehype": "^1.1.1",

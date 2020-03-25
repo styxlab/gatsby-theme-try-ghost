@@ -24,8 +24,10 @@
   "dependencies": {
     "gatsby": "^2.20.4",
     "gatsby-plugin-ackee-tracker": "^1.2.0",
+    "gatsby-rehype-prismjs": "*",
     "gatsby-theme-try-ghost": "*",
     "gatsby-theme-ghost-contact": "*",
+    "gatsby-transformer-rehype": "*",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

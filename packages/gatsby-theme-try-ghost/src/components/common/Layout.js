@@ -8,6 +8,8 @@ import { BodyClass } from './helpers'
 
 // Styles
 import '../../styles/screen.css'
+
+// Styles from other plugins
 import 'prismjs/themes/prism.css'
 
 /**
