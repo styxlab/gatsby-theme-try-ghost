@@ -71,7 +71,7 @@ PrismJS ships with a number of themes that you can easily include in your Gatsby
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-If your base theme is [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `custom-styles.js` where you import a PrismJS style:
+If your base theme is [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `custom-styles.js` where you import your PrismJS style:
 
 ```javascript
 // custom-styles.js
