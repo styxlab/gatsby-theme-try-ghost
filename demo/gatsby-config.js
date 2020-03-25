@@ -49,6 +49,9 @@ module.exports = {
                 ) && node.slug !== `data-schema`,
                 plugins: [
                     {
+                        resolve: `gatsby-rehype-ghost-links`,
+                    },
+                    {
                         resolve: `gatsby-rehype-prismjs`,
                     },
                 ],

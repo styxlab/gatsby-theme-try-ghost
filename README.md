@@ -17,8 +17,6 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - Ghost Casper look and feel
 - Sticky navigation headers
 - [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) :rocket: :new:
-- Syntax highlighting with PrismJS :new:
-- Rewrite CMS links to relative :new:
 - Hover on author avatar
 - Secondary navigation
 - Styled 404 page
@@ -34,9 +32,10 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
 
+ - Rewrite CMS links to relative with [gatsby-plugin-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/packages/gatsby-plugin-ghost-links)
+ - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/packages/gatsby-theme-ghost-contact)
  - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-ghost-contact) :new:
  - Site tracking with [Ackee](https://github.com/burnsy/gatsby-plugin-ackee-tracker)
-
 
 ## Quick Start
 

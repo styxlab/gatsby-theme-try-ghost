@@ -7284,18 +7284,6 @@ gatsby-telemetry@^1.2.1:
     stack-utils "1.0.2"
     uuid "3.4.0"
 
-gatsby-transformer-rehype@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/gatsby-transformer-rehype/-/gatsby-transformer-rehype-1.1.1.tgz#d7ff0f46e47cd7a620bd7dfdfdb8ec5a33f49c15"
-  integrity sha512-Q4wkQrXC3/IZeK+1qPFL4blI8vvCT9sk4a7Tg8VaAQ7h/IDu6GjGzxT4xQRt114Mxr8l7t97xoADWd78ycQAjw==
-  dependencies:
-    "@babel/runtime" "7.8.7"
-    bluebird "3.7.2"
-    hast-util-raw "^5.0.2"
-    lodash "^4.17.15"
-    rehype "^9.0.1"
-    unist-util-remove-position "^2.0.1"
-
 gatsby-transformer-sharp@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/gatsby-transformer-sharp/-/gatsby-transformer-sharp-2.4.2.tgz#a2649d623ea8c5e42a9920d008e7b9bd64ef75b9"
@@ -7310,9 +7298,9 @@ gatsby-transformer-sharp@^2.4.2:
     sharp "^0.25.1"
 
 gatsby@^2.19.45, gatsby@^2.20.4:
-  version "2.20.4"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.20.4.tgz#b1acdb75a0dcedbba8d7898372b804624cc7a542"
-  integrity sha512-0OHQqYn0+67+PEKuBnjNYGMG9NC8CgMHzoqwZZJu1UvLT/IbVpev+hZSaWX8gStlHBPw2Un8+GIp2QmFeJKxlg==
+  version "2.20.5"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.20.5.tgz#07966b1f900951319b1b02556bbb3595c9cb0566"
+  integrity sha512-XxKxhdnRxB8TF/kj5uS9TXtIuG9yCsXF6g8TN4UM4E7C9Ixj7JWd7eyghbRysFzdGyWkSLOE+mVBvA2GCy3PzA==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.8.7"

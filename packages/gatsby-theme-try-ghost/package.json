@@ -68,17 +68,14 @@
     "gatsby-plugin-react-helmet": "^3.2.1",
     "gatsby-plugin-sharp": "^2.5.3",
     "gatsby-plugin-styled-components": "^3.2.1",
-    "gatsby-rehype-ghost-links": "^1.1.0",
     "gatsby-source-filesystem": "^2.2.2",
     "gatsby-source-ghost": "^4.0.4",
-    "gatsby-transformer-rehype": "^1.1.1",
     "gatsby-transformer-sharp": "^2.4.2",
     "lodash": "^4.17.15",
     "parse-numeric-range": "^0.0.2",
     "postcss-color-function": "^4.1.0",
     "postcss-custom-properties": "^9.1.1",
     "postcss-easy-import": "^3.0.0",
-    "prismjs": "^1.19.0",
     "react-helmet": "^5.2.1",
     "styled-components": "^5.0.1"
   }
