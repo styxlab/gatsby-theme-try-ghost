@@ -71,7 +71,14 @@ PrismJS ships with a number of themes that you can easily include in your Gatsby
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-If your base theme is `gatsby-theme-try-ghost`, *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it an inject it in the right place:
+If your base theme is `gatsby-theme-try-ghost`, *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `ustom-styles.js` wher you import a PrismJS style:
+
+```javascript
+// custom-styles.js
+import 'prismjs/themes/prism-solarizedlight.css'
+````
+
+and put it into the following location:
 
 ```text
 // in your base directory
@@ -81,11 +88,6 @@ If your base theme is `gatsby-theme-try-ghost`, *do not* put the CSS file into `
         └── styles
             └── custom-styles.js
 ```
-
-```javascript
-// custom-styles.js
-import 'prismjs/themes/prism-solarizedlight.css.css'
-````
 
 ## Usage in HTML
 
@@ -108,6 +110,7 @@ Here's an example of how to use this if the `inlineCodeMarker` was set to `±`:
 I can highlight `css±.some-class { background-color: red }` with CSS syntax.
 
 This will be rendered in a `<code class=language-css>` with just the (syntax highlighted) text of `.some-class { background-color: red }`
+
 
 ## Disable syntax highlighting
 
