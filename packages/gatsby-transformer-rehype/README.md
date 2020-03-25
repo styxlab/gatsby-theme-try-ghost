@@ -1,8 +1,11 @@
 # gatsby-transformer-rehype
+[![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
+[![gatsby-transformer-rehype npm package version.](https://badgen.net/npm/v/gatsby-transformer-rehype)](https://www.npmjs.org/package/gatsby-transformer-rehype)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes using [rehype](https://github.com/rehypejs/rehype/). This package is heavily inspired by [gatsby-transformer-remark](https://www.gatsbyjs.org/packages/gatsby-transformer-remark/), the difference being that the content source is [HTML](https://www.w3schools.com/html/) instead of Remark.
 
-The general idea of this package is to convert an input HTML blob into an [HAST syntax tree](https://github.com/syntax-tree/hast), that is put into the `HtmlAst` object. `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML.
+The general idea of this package is to convert an input HTML fragment into an [HAST syntax tree](https://github.com/syntax-tree/hast), that is put into the `HtmlAst` object. `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML.
 
 ## Install
 
@@ -52,7 +55,7 @@ The following parts of `options` are passed down to rehype as options:
 
 The details of the rehype options above can be found in the [rehype-parse documentation](https://github.com/rehypejs/rehype/tree/master/packages/rehype-parse#options).
 
-This transformer is most useful when combined with Gatsby **rehype plugins** which you can install to customize how HTML is transformed. The following `gatsby-rehype-*` plugins are soon available
+This transformer is most useful when combined with Gatsby **rehype plugins** which you can install to customize how HTML is transformed. The following `gatsby-rehype-*` plugins are currently available:
 
 - [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs)
 - [gatsby-rehype-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
@@ -105,7 +108,7 @@ This allows for minimal changes in your original GraphQL queries.
 
 ## Troubleshooting
 
-`gatsby-transformer-rehype` hooks into the Gatsby `onCreateNode` method. This method is only called if a new node is created. If nodes were previously generated, they might have been cached and `onCreateNode` is not called again. During development, or when adding new plugins to the options, you have to call
+`gatsby-transformer-rehype` hooks into the Gatsby `onCreateNode` method. This method is only called if a new node is created. If nodes were previously generated, they might have been cached and `onCreateNode` is not called again. During development, or when adding new plugins to the options, don't forget to call
 
 `yarn clean`
 

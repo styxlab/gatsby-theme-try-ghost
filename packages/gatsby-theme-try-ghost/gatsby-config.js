@@ -73,23 +73,6 @@ module.exports = (themeOptions) => {
                     disable: false,
                 },
             },
-            {
-                resolve: `gatsby-transformer-rehype`,
-                options: {
-                    filter: node => (
-                        node.internal.type === `GhostPost` ||
-                        node.internal.type === `GhostPage`
-                    ) && node.slug !== `data-schema`,
-                    plugins: [
-                        {
-                            resolve: `gatsby-rehype-prismjs`,
-                        },
-                        {
-                            resolve: `gatsby-rehype-ghost-links`,
-                        },
-                    ],
-                },
-            },
             /**
              *  Utility Plugins
              */

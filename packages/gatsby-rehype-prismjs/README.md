@@ -1,4 +1,7 @@
 # gatsby-rehype-prismjs
+[![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
+[![gatsby-rehype-prismjs npm package version.](https://badgen.net/npm/v/gatsby-rehype-prismjs)](https://www.npmjs.org/package/gatsby-rehype-prismjs)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 Adds syntax highlighting to code tags in HTML fragments using [PrismJS](http://prismjs.com/). This package is inspired by [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/), the difference being that the content source is [HTML](https://www.w3schools.com/html/) instead of remark.
 
@@ -8,6 +11,7 @@ This plugin is part of the *rehype* collection and intended to be used with [gat
 ## Install
 
 `yarn add gatsby-transformer-rehype gatsby-rehype-prismjs prismjs`
+
 
 ## How to use
 
@@ -61,9 +65,7 @@ plugins: [
 ]
 ```
 
-### Include CSS
-
-#### Required: Pick a PrismJS theme or create your own
+## Pick a PrismJS theme (required)
 
 PrismJS ships with a number of themes that you can easily include in your Gatsby site. To load a theme, just require its CSS file in your `gatsby-browser.js` file, e.g.
 
@@ -72,11 +74,27 @@ PrismJS ships with a number of themes that you can easily include in your Gatsby
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-Alternatively, if you load a global CSS file in your layout component (e.g. in `Layout.js`), you should require it in your component and import the prism CSS directly after any existing CSS.
+If your base theme is [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `custom-styles.js` where you import your PrismJS style:
 
-### Usage in HTML
+```javascript
+// custom-styles.js
+import 'prismjs/themes/prism-solarizedlight.css'
+````
 
-This is some beautiful code:
+and put it into the following location:
+
+```text
+// in your base directory
+└── gatsby-config.js
+└── src/
+    └── gatsby-theme-try-ghost
+        └── styles
+            └── custom-styles.js
+```
+
+## Usage in HTML
+
+Syntax highlighting is applied to HTML `<code>` blocks that are enclosed by a parent `<pre>` blocks.
 
 ```html
 <pre>
@@ -86,7 +104,7 @@ This is some beautiful code:
 </pre>
 ```
 
-### Inline code blocks
+## Inline code blocks
 
 In addition to fenced code blocks, inline code blocks will be passed through PrismJS as well. If you set the `inlineCodeMarker`, then you can also specify a format style.
 
@@ -96,10 +114,11 @@ I can highlight `css±.some-class { background-color: red }` with CSS syntax.
 
 This will be rendered in a `<code class=language-css>` with just the (syntax highlighted) text of `.some-class { background-color: red }`
 
-### Disabling syntax highlighting
 
-If you need to prevent any escaping or highlighting, you can use the `none`
-language; the inner contents will not be changed at all.
+## Disable syntax highlighting
+
+If you want to disable syntax highlighting in specific code blocks, use the `none` language.
+
 
 # Copyright & License
 

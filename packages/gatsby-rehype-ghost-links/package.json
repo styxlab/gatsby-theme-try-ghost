@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-ghost-links",
     "description": "Gatsby plugin to create realtive links in html processed by Remark sourced in from Ghost",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
