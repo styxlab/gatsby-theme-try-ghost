@@ -9,6 +9,7 @@ This plugin is part of the *rehype* collection and intended to be used with [gat
 
 `yarn add gatsby-transformer-rehype gatsby-rehype-prismjs prismjs`
 
+
 ## How to use
 
 ```javascript
@@ -61,9 +62,7 @@ plugins: [
 ]
 ```
 
-### Include CSS
-
-#### Required: Pick a PrismJS theme or create your own
+## Pick a PrismJS theme (required)
 
 PrismJS ships with a number of themes that you can easily include in your Gatsby site. To load a theme, just require its CSS file in your `gatsby-browser.js` file, e.g.
 
@@ -72,9 +71,23 @@ PrismJS ships with a number of themes that you can easily include in your Gatsby
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-Alternatively, if you load a global CSS file in your layout component (e.g. in `Layout.js`), you should require it in your component and import the prism CSS directly after any existing CSS.
+If your base theme is `gatsby-theme-try-ghost`, *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it an inject it in the right place:
 
-### Usage in HTML
+```text
+// in your base directory
+└── gatsby-config.js
+└── src/
+    └── gatsby-theme-try-ghost
+        └── styles
+            └── custom-styles.js
+```
+
+```javascript
+// custom-styles.js
+import 'prismjs/themes/prism-solarizedlight.css.css'
+````
+
+## Usage in HTML
 
 This is some beautiful code:
 
@@ -86,7 +99,7 @@ This is some beautiful code:
 </pre>
 ```
 
-### Inline code blocks
+## Inline code blocks
 
 In addition to fenced code blocks, inline code blocks will be passed through PrismJS as well. If you set the `inlineCodeMarker`, then you can also specify a format style.
 
@@ -96,10 +109,10 @@ I can highlight `css±.some-class { background-color: red }` with CSS syntax.
 
 This will be rendered in a `<code class=language-css>` with just the (syntax highlighted) text of `.some-class { background-color: red }`
 
-### Disabling syntax highlighting
+## Disable syntax highlighting
 
-If you need to prevent any escaping or highlighting, you can use the `none`
-language; the inner contents will not be changed at all.
+If you want to disable syntax highlighting in specific code blocks, use the `none` language.
+
 
 # Copyright & License
 
