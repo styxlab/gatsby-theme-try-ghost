@@ -49,7 +49,6 @@ module.exports = {
                 serviceConfig: {
                     url: `https://api.gotsby.org/v1/contact`,
                     contentType: `application/json`,
-                    encodeFormData: `json`,
                 },
                 pageContext: {
                     title: `Contact Us`,

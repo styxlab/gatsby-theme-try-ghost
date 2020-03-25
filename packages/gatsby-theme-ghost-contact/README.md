@@ -35,9 +35,6 @@ plugins: [
                 // Must match the content type your service endpoint is expecting
                 // optional, default: `application/x-www-form-urlencoded`
                 contentType: `application/json`,
-                // Encode data before sending (optional, default: `url`)
-                // Supported options: url, json, empty (no encoding)
-                encodeFormData: `json`,
             },
             // Customize your page content here
             pageContext: {
@@ -88,7 +85,6 @@ If you deploy your site to netlify, this may be the easiest approach for you. As
     serviceConfig: {
         url: `/`,
         contentType: `application/x-www-form-urlencoded`,
-        encodeFormData: `url`,
     }
 ```
 
@@ -100,9 +96,12 @@ Running your own server will give you most control of the data and how it is pro
     serviceConfig: {
         url: `https://api.your-server.com/contact`,
         contentType: `application/json`,
-        encodeFormData: `json`,
     }
 ```
+
+### Encoding
+
+By selecting a content type, the form data json object is automatically encoded before being sent to the backend. If you choose `application/x-www-form-urlencoded`, data is url encoded. For `application/json` we use `JSON.stringify(data)` to convert the json object into a string. For all other content types, no encoding is performed.
 
 
 # Copyright & License

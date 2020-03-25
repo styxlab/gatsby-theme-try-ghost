@@ -4,6 +4,4 @@ module.exports = {
 
     contentType: `application/x-www-form-urlencoded`,
 
-    encodeFormData: `url`,
-
 }

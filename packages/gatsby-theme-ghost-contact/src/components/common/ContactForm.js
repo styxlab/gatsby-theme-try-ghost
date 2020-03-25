@@ -151,10 +151,10 @@ const validate = (values) => {
 
 const ContactForm = ({ topics, serviceConfig }) => {
     const encodeFormData = (data) => {
-        if (serviceConfig.encodeFormData === `json`) {
+        if (serviceConfig.contentType === `application/json`) {
             return JSON.stringify(data)
         }
-        if (serviceConfig.encodeFormData === `url`) {
+        if (serviceConfig.contentType === `application/x-www-form-urlencoded`) {
             return Object.keys(data)
                 .map(key => encodeURIComponent(key) + `=` + encodeURIComponent(data[key]))
                 .join(`&`)
