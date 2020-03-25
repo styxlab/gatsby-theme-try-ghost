@@ -32,8 +32,8 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
 
- - Rewrite CMS links to relative with [gatsby-plugin-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
- - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact)
+ - Rewrite CMS links to relative with [gatsby-rehype-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
+ - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs)  :new:
  - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) :new:
  - Site tracking with [Ackee](https://github.com/burnsy/gatsby-plugin-ackee-tracker)
 
