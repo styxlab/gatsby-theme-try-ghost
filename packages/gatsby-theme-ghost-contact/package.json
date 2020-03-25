@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-contact",
     "description": "Gatsby theme to easily add a contact form page to gatsby-theme-try-ghost",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -15,8 +15,9 @@
     },
     "keywords": [
         "gatsby",
+        "gatsby-plugin",
         "gatsby-theme",
-        "gatsby-theme-ghost",
+        "gatsby-theme-try-ghost",
         "contact",
         "form",
         "ghost",

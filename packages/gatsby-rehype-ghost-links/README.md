@@ -1,4 +1,7 @@
 # gatsby-rehype-ghost-links
+[![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
+[![gatsby-rehype-ghost-links npm package version.](https://badgen.net/npm/v/gatsby-rehype-ghost-links)](https://www.npmjs.org/package/gatsby-rehype-ghost-links)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 Rewrites absolute links to relative links coming from a [Ghost CMS](https://ghost.org/changelog/jamstack/).
 

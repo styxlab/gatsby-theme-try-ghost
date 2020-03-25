@@ -1,4 +1,7 @@
 # gatsby-rehype-prismjs
+[![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
+[![gatsby-rehype-prismjs npm package version.](https://badgen.net/npm/v/gatsby-rehype-prismjs)](https://www.npmjs.org/package/gatsby-rehype-prismjs)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 Adds syntax highlighting to code tags in HTML fragments using [PrismJS](http://prismjs.com/). This package is inspired by [gatsby-remark-prismjs](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/), the difference being that the content source is [HTML](https://www.w3schools.com/html/) instead of remark.
 

@@ -1,9 +1,9 @@
 # gatsby-theme-ghost-contact
 [![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-ghost-contact/blob/master/LICENSE)
-[![gatsby-theme-try-ghost npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.org/package/gatsby-theme-ghost-contact)
+[![gatsby-theme-ghost-contact npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.org/package/gatsby-theme-ghost-contact)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
-Adds a contact form page to [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost). This theme makes use of latent-component-shadowing and showcases best practices for adding custom themes to `gatsby-theme-try-ghost`.
+Adds a contact form page to [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). This theme makes use of latent-component-shadowing and showcases best practices for adding custom themes to `gatsby-theme-try-ghost`.
 
 ## Install
 
@@ -12,7 +12,7 @@ Adds a contact form page to [gatsby-theme-try-ghost](https://github.com/styxlab/
 
 ## Dependencies
 
-This theme is an add-on theme designed to seamlessly integrate with [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost). The theme uses functions provided by `gatsby-theme-try-ghost`, so installing `gatsby-theme-try-ghost` is required.
+This theme is an add-on theme designed to seamlessly integrate with [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). The theme uses functions provided by `gatsby-theme-try-ghost`, so installing `gatsby-theme-try-ghost` is required.
 
 `yarn add gatsby-theme-try-ghost`
 

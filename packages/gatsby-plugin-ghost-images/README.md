@@ -1,4 +1,7 @@
 # gatsby-plugin-ghost-images
+[![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
+[![gatsby-plugin-ghost-images npm package version.](https://badgen.net/npm/v/gatsby-plugin-ghost-images)](https://www.npmjs.org/package/gatsby-plugin-ghost-images)
+[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 Downloads images from [Ghost CMS](https://ghost.org/changelog/jamstack/) so they can be processed with the [Gatsby image tool chain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seamlessly work with the headless Ghost CMS, but it should also work with other content management systems.
 

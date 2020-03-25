@@ -32,9 +32,9 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
 
- - Rewrite CMS links to relative with [gatsby-plugin-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/packages/gatsby-plugin-ghost-links)
- - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/packages/gatsby-theme-ghost-contact)
- - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-ghost-contact) :new:
+ - Rewrite CMS links to relative with [gatsby-plugin-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
+ - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact)
+ - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) :new:
  - Site tracking with [Ackee](https://github.com/burnsy/gatsby-plugin-ackee-tracker)
 
 ## Quick Start
@@ -44,7 +44,7 @@ Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-gh
 
 ## Installation
 
-This repository contains the example code **and** the Gatsby theme. If you are here to install the Gatsby theme plugin in your existing project, check out the [theme specific README](/gatsby-theme-try-ghost/README.md) for further details.
+This repository contains the demo code **and** the Gatsby theme. If you are here to install the Gatsby theme plugin in your existing project, check out the [theme specific README](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost/README.md) for further details.
 
 In case you want to work with this repository (for local development, pull requests, etc.):
 
@@ -56,7 +56,7 @@ cd gatsby-theme-try-ghost
 
 2. Run `yarn` to install dependencies.
 
-3. Run `yarn workspace demo develop` to start the example locally.
+3. Run `yarn develop` to start the example locally.
 
 
 # Copyright & License
