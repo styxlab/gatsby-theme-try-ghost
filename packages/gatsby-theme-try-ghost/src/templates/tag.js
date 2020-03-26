@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { HeaderTag, Layout, PostCard } from '../components/common'
-import { DarkThemeProvider } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -19,18 +18,16 @@ const Tag = ({ data, location }) => {
     return (
         <>
             <MetaData data={data} location={location} type="series"/>
-            <DarkThemeProvider render={ theme => (
-                <Layout theme={theme.state} tags={[tag]} header={<HeaderTag theme={theme.state} tag={tag} numberOfPosts={posts.length} />}>
-                    <div className="inner posts">
-                        <div className="post-feed">
-                            {posts.map(({ node } , i) => (
-                                // The tag below includes the markup for each post - components/common/PostCard.js
-                                <PostCard key={node.id} post={node} num={i} />
-                            ))}
-                        </div>
+            <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={posts.length} />}>
+                <div className="inner posts">
+                    <div className="post-feed">
+                        {posts.map(({ node } , i) => (
+                            // The tag below includes the markup for each post - components/common/PostCard.js
+                            <PostCard key={node.id} post={node} num={i} />
+                        ))}
                     </div>
-                </Layout>
-            )}/>
+                </div>
+            </Layout>
         </>
     )
 }

@@ -1,5 +1,6 @@
 const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
+const useDarkMode = require(`use-dark-mode`)
 
 /**
  * Here is the place where Gatsby creates schema customizations.

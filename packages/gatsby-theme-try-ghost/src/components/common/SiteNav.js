@@ -7,7 +7,7 @@ import RssIcon from './icons/rss-icon'
 import TwitterIcon from './icons/twitter-icon'
 import FacebookIcon from './icons/facebook-icon'
 
-const SiteNav = ({ data, className, postTitle, theme }) => {
+const SiteNav = ({ data, className, postTitle }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
@@ -47,7 +47,7 @@ const SiteNav = ({ data, className, postTitle, theme }) => {
                         { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
                         { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
                         <a className="rss-button" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss` } target="_blank" rel="noopener noreferrer" title="Rss"><RssIcon /></a>
-                        <DarkModeToggle theme={theme} />
+                        <DarkModeToggle />
                     </div>
                 }
             </div>
@@ -63,10 +63,6 @@ SiteNav.propTypes = {
     }).isRequired,
     className: PropTypes.string.isRequired,
     postTitle: PropTypes.string,
-    theme: PropTypes.shape({
-        flavor: PropTypes.string.isRequired,
-        toggle: PropTypes.func.isRequired,
-    }).isRequired,
 }
 
 const SiteNavQuery = props => (

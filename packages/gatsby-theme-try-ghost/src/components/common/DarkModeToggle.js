@@ -1,8 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import SunIcon from './icons/sun-icon'
 import MoonIcon from './icons/moon-icon'
 import styled from 'styled-components'
+import useDarkMode from 'use-dark-mode'
 
 const Button = styled.button`
     background-color: transparent;
@@ -19,21 +19,18 @@ const MoonIconWrapper = styled.div`
     }
 `
 
-const DarkModeToggle = ({ theme }) => (
-    <Button className="rss-button" onClick={theme.toggle}>
-        { theme.flavor === `dark` ? (
-            <SunIconWrapper><SunIcon /></SunIconWrapper>
-        ) : (
-            <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
-        )}
-    </Button>
-)
+const DarkModeToggle = () => {
+    const darkMode = useDarkMode(false, { classNameDark: `dark`, classNameLight: `light` })
 
-DarkModeToggle.propTypes = {
-    theme: PropTypes.shape({
-        flavor: PropTypes.string.isRequired,
-        toggle: PropTypes.func.isRequired,
-    }).isRequired,
+    return (
+        <Button className="rss-button" onClick={darkMode.toggle}>
+            { darkMode.value ? (
+                <SunIconWrapper><SunIcon /></SunIconWrapper>
+            ) : (
+                <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
+            )}
+        </Button>
+    )
 }
 
 export default DarkModeToggle
