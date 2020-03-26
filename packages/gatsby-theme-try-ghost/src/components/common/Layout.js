@@ -6,6 +6,8 @@ import { StaticQuery, graphql } from 'gatsby'
 import { StickyNav } from '.'
 import { BodyClass } from './helpers'
 
+import ThemeContext from '../../context/ThemeContext'
+
 // Styles
 import '../../styles/screen.css'
 
@@ -32,11 +34,14 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
     return (
         <>
-            <Helmet>
-                <html lang={site.lang} />
-                <style type="text/css">{`${site.codeinjection_styles}`}</style>
-                <body className={bodyClass} />
-            </Helmet>
+            <ThemeContext.Consumer>{theme => (
+                <Helmet>
+                    <html lang={site.lang} />
+                    <style type="text/css">{`${site.codeinjection_styles}`}</style>
+                    <body className={`${bodyClass} ${theme.dark ? `dark` : ``}`} />
+                </Helmet>
+            )}
+            </ThemeContext.Consumer>
 
             <div className="site-wrapper">
                 {/* The main header section on top of the screen */}
