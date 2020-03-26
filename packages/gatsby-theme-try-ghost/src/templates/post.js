@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
-import { StickyNavContainer } from '../components/common/effects'
+import { StickyNavContainer, DarkThemeProvider } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 import { PostClass } from '../components/common/helpers'
@@ -36,56 +36,58 @@ const Post = ({ data, location, pageContext }) => {
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
             </Helmet>
             <StickyNavContainer isPost={true} activeClass="nav-post-title-active" render={ sticky => (
-                <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
-                    <div className="inner">
-                        <article className={`post-full ${postClass}`}>
-                            <header className="post-full-header">
-                                { post.primary_tag &&
-                                    <section className="post-full-tags">
-                                        <Link to={`/tag/${post.primary_tag.slug}/`}>{post.primary_tag.name}</Link>
-                                    </section>
-                                }
-
-                                <h1 ref={sticky && sticky.anchorRef} className="post-full-title">{post.title}</h1>
-
-                                { post.custom_excerpt &&
-                                    <p className="post-full-custom-excerpt">{post.custom_excerpt}</p>
-                                }
-
-                                <div className="post-full-byline">
-                                    <section className="post-full-byline-content">
-                                        <AuthorList authors={post.authors} isPost={true} />
-
-                                        <section className="post-full-byline-meta">
-                                            <h4 className="author-name">
-                                                {post.authors.map((author, i) => (
-                                                    <Link key={i} to={`/author/${author.slug}/`} >{author.name}</Link>
-                                                ))}
-                                            </h4>
-                                            <div className="byline-meta-content">
-                                                <time className="byline-meta-date" dateTime={post.published_at}>
-                                                    {post.published_at_pretty}&nbsp;
-                                                </time>
-                                                <span className="byline-reading-time"><span className="bull">&bull;</span> {readingTime}</span>
-                                            </div>
+                <DarkThemeProvider render={ theme => (
+                    <Layout isPost={true} theme={theme.state} sticky={sticky}
+                        header={<HeaderPost theme={theme.state} sticky={sticky} title={post.title} />}
+                        previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
+                        <div className="inner">
+                            <article className={`post-full ${postClass}`}>
+                                <header className="post-full-header">
+                                    { post.primary_tag &&
+                                        <section className="post-full-tags">
+                                            <Link to={`/tag/${post.primary_tag.slug}/`}>{post.primary_tag.name}</Link>
                                         </section>
-                                    </section>
-                                </div>
-                            </header>
+                                    }
 
-                            <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
-                            </figure>
+                                    <h1 ref={sticky && sticky.anchorRef} className="post-full-title">{post.title}</h1>
 
-                            <section className="post-full-content">
-                                <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
-                            </section>
-                        </article>
-                    </div>
-                </Layout>
+                                    { post.custom_excerpt &&
+                                        <p className="post-full-custom-excerpt">{post.custom_excerpt}</p>
+                                    }
+
+                                    <div className="post-full-byline">
+                                        <section className="post-full-byline-content">
+                                            <AuthorList authors={post.authors} isPost={true} />
+
+                                            <section className="post-full-byline-meta">
+                                                <h4 className="author-name">
+                                                    {post.authors.map((author, i) => (
+                                                        <Link key={i} to={`/author/${author.slug}/`} >{author.name}</Link>
+                                                    ))}
+                                                </h4>
+                                                <div className="byline-meta-content">
+                                                    <time className="byline-meta-date" dateTime={post.published_at}>
+                                                        {post.published_at_pretty}&nbsp;
+                                                    </time>
+                                                    <span className="byline-reading-time"><span className="bull">&bull;</span> {readingTime}</span>
+                                                </div>
+                                            </section>
+                                        </section>
+                                    </div>
+                                </header>
+
+                                <figure className="post-full-image">
+                                    <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                                </figure>
+
+                                <section className="post-full-content">
+                                    <div className="post-content load-external-scripts"
+                                        dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
+                                </section>
+                            </article>
+                        </div>
+                    </Layout>
+                )}/>
             )}/>
         </>
     )

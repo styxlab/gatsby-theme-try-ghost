@@ -20,7 +20,7 @@ import '../../styles/custom-styles'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
+const DefaultLayout = ({ data, theme, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
@@ -49,7 +49,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 </main>
 
                 {/* For sticky nav bar */}
-                { isHome && <StickyNav className={`site-nav ${sticky && sticky.state.currentClass}`} />}
+                { isHome && <StickyNav theme={theme} className={`site-nav ${sticky && sticky.state.currentClass}`} />}
 
                 {/* Links to Previous/Next posts */}
                 {previewPosts}
@@ -97,6 +97,10 @@ DefaultLayout.propTypes = {
     ),
     page: PropTypes.object,
     errorClass: PropTypes.string,
+    theme: PropTypes.shape({
+        flavor: PropTypes.string.isRequired,
+        toggle: PropTypes.func.isRequired,
+    }).isRequired,
 }
 
 const DefaultLayoutSettingsQuery = props => (

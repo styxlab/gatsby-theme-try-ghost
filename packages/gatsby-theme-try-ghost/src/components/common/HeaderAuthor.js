@@ -5,7 +5,7 @@ import { SiteNav, HeaderBackground } from '.'
 
 import AvatarIcon from './icons/avatar-icon'
 
-const HeaderAuthor = ({ author, numberOfPosts }) => {
+const HeaderAuthor = ({ author, numberOfPosts, theme }) => {
     const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
 
@@ -13,7 +13,7 @@ const HeaderAuthor = ({ author, numberOfPosts }) => {
         <header className="site-archive-header">
             <div className="outer site-nav-main">
                 <div className="inner">
-                    <SiteNav className="site-nav" />
+                    <SiteNav theme={theme} className="site-nav" />
                 </div>
             </div>
             <HeaderBackground srcImg={author.cover_image}>
@@ -55,6 +55,10 @@ HeaderAuthor.propTypes = {
         twitter: PropTypes.string,
     }).isRequired,
     numberOfPosts: PropTypes.number,
+    theme: PropTypes.shape({
+        flavor: PropTypes.string.isRequired,
+        toggle: PropTypes.func.isRequired,
+    }).isRequired,
 }
 
 export default HeaderAuthor

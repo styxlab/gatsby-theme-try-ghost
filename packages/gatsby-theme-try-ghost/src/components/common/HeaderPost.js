@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { SiteNav } from '.'
 
-const HeaderPost = ({ title, sticky }) => (
+const HeaderPost = ({ title, sticky, theme }) => (
     <header className="site-header">
         <div className={`outer site-nav-main ${sticky && sticky.state.currentClass}`}>
             <div className="inner">
-                <SiteNav className="site-nav" postTitle={title} />
+                <SiteNav theme={theme} className="site-nav" postTitle={title} />
             </div>
         </div>
     </header>
@@ -19,6 +19,10 @@ HeaderPost.propTypes = {
         state: PropTypes.shape({
             currentClass: PropTypes.string,
         }).isRequired,
+    }).isRequired,
+    theme: PropTypes.shape({
+        flavor: PropTypes.string.isRequired,
+        toggle: PropTypes.func.isRequired,
     }).isRequired,
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { Layout, PostCard, HeaderIndex } from '../components/common'
-import { StickyNavContainer } from '../components/common/effects'
+import { StickyNavContainer, DarkThemeProvider } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -19,16 +19,18 @@ const Index = ({ data, location }) => {
         <>
             <MetaData location={location} />
             <StickyNavContainer activeClass="fixed-nav-active" render={ sticky => (
-                <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
-                    <div className="inner posts">
-                        <div className="post-feed">
-                            {posts.map(({ node } , i) => (
-                                // The tag below includes the markup for each post - components/common/PostCard.js
-                                <PostCard key={node.id} post={node} num={i} isHome={true} />
-                            ))}
+                <DarkThemeProvider render={ theme => (
+                    <Layout isHome={true} header={<HeaderIndex theme={theme.state} />} sticky={sticky} theme={theme.state}>
+                        <div className="inner posts">
+                            <div className="post-feed">
+                                {posts.map(({ node } , i) => (
+                                    // The tag below includes the markup for each post - components/common/PostCard.js
+                                    <PostCard key={node.id} post={node} num={i} isHome={true} />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                </Layout>
+                    </Layout>
+                )}/>
             )}/>
         </>
     )

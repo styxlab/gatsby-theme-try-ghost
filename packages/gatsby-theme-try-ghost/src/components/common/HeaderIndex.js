@@ -4,14 +4,14 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 
 import { SiteNav, HeaderBackground } from '.'
 
-const HeaderIndex = ({ data }) => {
+const HeaderIndex = ({ data, theme }) => {
     const site = data.allGhostSettings.edges[0].node
 
     return (
         <header className="site-home-header">
             <HeaderBackground fluidImg={site.coverImageSharp} srcImg={site.cover_image}>
                 <div className="inner">
-                    <SiteNav className="site-nav" />
+                    <SiteNav theme={theme} className="site-nav" />
                     <div className="site-header-content">
                         <h1 className="site-title">
                             {site.logo ?
@@ -33,6 +33,10 @@ HeaderIndex.propTypes = {
     data: PropTypes.shape({
         allGhostSettings: PropTypes.object.isRequired,
         file: PropTypes.object,
+    }).isRequired,
+    theme: PropTypes.shape({
+        flavor: PropTypes.string.isRequired,
+        toggle: PropTypes.func.isRequired,
     }).isRequired,
 }
 

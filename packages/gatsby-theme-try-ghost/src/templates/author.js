@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { Layout, PostCard, HeaderAuthor } from '../components/common'
+import { DarkThemeProvider } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -18,16 +19,18 @@ const Author = ({ data, location }) => {
     return (
         <>
             <MetaData location={location} data={data} type="profile"/>
-            <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={posts.length}/>}>
-                <div className="inner posts">
-                    <div className="post-feed">
-                        {posts.map(({ node } , i) => (
-                            // The tag below includes the markup for each post - components/common/PostCard.js
-                            <PostCard key={node.id} post={node} num={i} isAuthor={true}/>
-                        ))}
+            <DarkThemeProvider render={ theme => (
+                <Layout theme={theme.state} author={author} header={<HeaderAuthor theme={theme.state} author={author} numberOfPosts={posts.length}/>}>
+                    <div className="inner posts">
+                        <div className="post-feed">
+                            {posts.map(({ node } , i) => (
+                                // The tag below includes the markup for each post - components/common/PostCard.js
+                                <PostCard key={node.id} post={node} num={i} isAuthor={true}/>
+                            ))}
+                        </div>
                     </div>
-                </div>
-            </Layout>
+                </Layout>
+            )}/>
         </>
     )
 }
