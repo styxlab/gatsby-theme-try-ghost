@@ -24,31 +24,14 @@ plugins: [
     {
         resolve: `gatsby-theme-ghost-dark-mode`,
         options: {
-            siteMetadata: {
-                // This will be added to your navigation menu
-                navigation: [{ label: `Contact`, url: `/contact/` }],
-            },
-            //For netlify users only: remove serviceConfig or read section on netlify below.
-            serviceConfig: {
-                // This is the endpoint where your form data is sent to (optional, default: `/`)
-                url: `https://api.your-server.com/contact`,
-                // Must match the content type your service endpoint is expecting
-                // optional, default: `application/x-www-form-urlencoded`
-                contentType: `application/json`,
-            },
-            // Customize your page content here
-            pageContext: {
-                title: `Contact Us`,
-                slug: `contact`,
-                custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
-                feature_image: `https://static.gotsby.org/v1/assets/images/contact-bluish.png`,
-                // Can be disabled by providing an empty list []
-                form_topics: [`I want to give feedback`, `I want to ask a question`],
-                meta_title: `Contact Us`,
-                meta_description: `A contact form page.`,
-                // All content below the contact form
-                html: ``,
-            },
+            // Set to true if you want your theme to default to dark mode (default: false)
+            // Note that this setting has an effect only, if
+            //    1. The user has not changed the dark mode
+            //    2. Dark mode is not reported from OS
+            defaultModeDark: false,
+            // If you want the defaultModeDark setting to take precedence
+            // over the mode reported from OS, set this to true (default: false)
+            overrideOS: false,
         },
     },
 ]
@@ -56,11 +39,13 @@ plugins: [
 
 ## Details
 
-This plugin provides a simple contact page to your Gatsby-Ghost static website. The page style is inherited from the base theme and the form is styled using styled components. The plugin also does form validations. All configuration can be done in one place, namely in your `gatsby-config.js`. If you provide the navigation data shown above, a menu entry will be automatically added to your navigation bar.
+This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a dark mode toggle in the top right navigation bar. User's dark mode settings are persisted to `localStore`, so they should remain on page revisits. If the functionality is provided by the browser, dark mode setting is read from the OS and that setting is taken for first time use. The `defaultModeDark` setting is taken, if OS does not report dark mode of is the user has not chosen a theme preference in the OS. Finally, OS settings can be overruled with `verrideOS`.
 
-You will have to change the `serviceConfig.url` to connect to your backend. The backend receives the form data and initiates an action such as sending you an email. Some guidance about your backend options can be found below.
+This plugin also showcases how to best customize `gatsby-theme-try-ghost`. The latent-component-shadowing approach used here is very general and is an amazing concept. This might be useful, if you plan on customizing `gatsby-theme-try-ghost` yourself.
 
-If you want to integrate other pages or if you want to customize the base theme provided with `gatsby-theme-try-ghost`, please inspect the source code of `gatsby-theme-ghost-dark-mode` closely. The latent-component-shadowing approach used here is very general and is an amazing concept. All additions to `gatsby-theme-try-ghost` will be based on these principles.
+## Limitations
+
+If you use PrismJS your prism styles might be changed. Currently, the best option is to use a dark PrismJS style that looks great in both dark and light mode.
 
 # Copyright & License
 
