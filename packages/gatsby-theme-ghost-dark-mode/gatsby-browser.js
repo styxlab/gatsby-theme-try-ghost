@@ -3,9 +3,13 @@ import PropTypes from 'prop-types'
 import { ThemeProvider } from "./src/context/ThemeContext"
 
 export const wrapRootElement = ({ element }, themeOptions) => {
-    const { defaultModeDark } = themeOptions
+    const {
+        defaultModeDark = false,
+        overrideOS = false,
+    } = themeOptions
+
     return (
-        <ThemeProvider defaultMode={defaultModeDark}>{element}</ThemeProvider>
+        <ThemeProvider defaultMode={defaultModeDark} overrideOS={overrideOS}>{element}</ThemeProvider>
     )
 }
 
