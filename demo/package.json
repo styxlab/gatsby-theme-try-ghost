@@ -12,12 +12,13 @@
     "deploy": "gatsby build && gh-pages -d public -b master -r git@github.com:styxlab/styxlab.github.io"
   },
   "dependencies": {
-    "gatsby": "^2.20.4",
+    "gatsby": "^2.20.8",
     "gatsby-plugin-ackee-tracker": "^1.2.0",
     "gatsby-rehype-ghost-links": "*",
     "gatsby-rehype-prismjs": "*",
     "gatsby-theme-try-ghost": "*",
     "gatsby-theme-ghost-contact": "*",
+    "gatsby-theme-ghost-dark-mode": "*",
     "gatsby-transformer-rehype": "*",
     "prismjs": "^1.19.0",
     "react": "^16.13.1",
@@ -26,7 +27,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "^6.8.0",
-    "eslint-plugin-ghost": "^1.0.0",
+    "eslint-plugin-ghost": "^1.0.1",
     "eslint-plugin-react": "^7.19.0",
     "gatsby": "^2.19.39",
     "gh-pages": "^2.2.0",

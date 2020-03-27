@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from 'prop-types'
 
 /**
 *
@@ -17,6 +18,9 @@ const ThemeContext = React.createContext(defaultState)
 // You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
 const supportsDarkMode = () => {
     window.matchMedia(`(prefers-color-scheme: dark)`).matches === true
+}
+const supportsLightMode = () => {
+    window.matchMedia(`(prefers-color-scheme: light)`).matches === true
 }
 
 class ThemeProvider extends React.Component {
@@ -37,19 +41,26 @@ class ThemeProvider extends React.Component {
             this.setState({ dark: lsDark })
         } else if (supportsDarkMode()) {
             this.setState({ dark: true })
+        } else if (supportsLightMode()) {
+            this.setState({ dark: false })
+        } else {
+            this.setState({ dark: this.props.defaultMode })
         }
     }
 
     render() {
         const { children } = this.props
         const { dark } = this.state
-
         return (
             <ThemeContext.Provider value={{ dark, toggleDark: this.toggleDark }}>
                 {children}
             </ThemeContext.Provider>
         )
     }
+}
+
+ThemeProvider.propTypes = {
+    defaultMode: PropTypes.bool.isRequired,
 }
 
 export default ThemeContext

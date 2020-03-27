@@ -41,6 +41,16 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-theme-ghost-dark-mode`,
+            options: {
+                // Set to true if you want your theme to default to dark mode
+                // Not that this setting only has an effect, if
+                //    1. The user has not changed the dark mode
+                //    2. Dark mode is not reported from OS
+                defaultModeDark: false,
+            },
+        },
+        {
             resolve: `gatsby-transformer-rehype`,
             options: {
                 filter: node => (
