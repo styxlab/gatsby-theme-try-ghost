@@ -41,7 +41,7 @@ plugins: [
                 title: `Contact Us`,
                 slug: `contact`,
                 custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
-                feature_image: `https://static.gotsby.org/v1/assets/images/contact-bluish.png`,
+                feature_image: `https://static.gotsby.org/v1/assets/images/gatsby-ghost-contact.png`,
                 // Can be disabled by providing an empty list []
                 form_topics: [`I want to give feedback`, `I want to ask a question`],
                 meta_title: `Contact Us`,
@@ -79,7 +79,7 @@ All backend options described in the [Gatsby Docs](https://www.gatsbyjs.org/docs
 
 ### Netlify
 
-If you deploy your site to netlify, this may be the easiest approach for you. As all necessary [netlify fields](https://docs.netlify.com/forms/setup/) have been added to the form, you will automatically see form submissions in your netlify dashboards. The `serviceConfig` defaults have been set to match what netlify expects. Easiest is therefore to remove the `serviceConfig` object in the above configuration. If you want to explicitely see or control the values used, here are the default values for netlify:
+If you deploy your site to netlify, this may be the easiest approach for you. As all necessary [netlify fields](https://docs.netlify.com/forms/setup/) have been added to the form, you will automatically see form submissions in your netlify dashboards. The `serviceConfig` defaults have been set to match what netlify expects. Easiest is therefore to remove the `serviceConfig` object in the above configuration. If you want to explicitly see or control the values used, here are the default values for netlify:
 
 ```javascript
     serviceConfig: {
