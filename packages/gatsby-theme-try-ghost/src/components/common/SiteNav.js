@@ -2,18 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { Navigation } from '.'
-import RssIcon from './icons/rss-icon'
-import TwitterIcon from './icons/twitter-icon'
-import FacebookIcon from './icons/facebook-icon'
+import { Navigation, SocialLinks } from '.'
 
 const SiteNav = ({ data, className, postTitle }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
-
-    const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
-    const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
     // allow plugins to add menu items
     let navigation = site.navigation
@@ -26,11 +20,11 @@ const SiteNav = ({ data, className, postTitle }) => {
         <nav className={className}>
             <div className="site-nav-left-wrapper">
                 <div className="site-nav-left">
-                    {site.logo ?
+                    {site.logo ? (
                         <a className="site-nav-logo" href={config.siteUrl}><img src={site.logo} alt={site.title} /></a>
-                        :
+                    ) : (
                         <a className="site-nav-logo" href={config.siteUrl}>{site.title}</a>
-                    }
+                    )}
                     <div className="site-nav-content">
                         <Navigation data={navigation} />
                         { postTitle &&
@@ -40,15 +34,13 @@ const SiteNav = ({ data, className, postTitle }) => {
                 </div>
             </div>
             <div className="site-nav-right">
-                { secondaryNav ?
+                { secondaryNav ? (
                     <Navigation data={site.secondary_navigation} />
-                    :
+                ) : (
                     <div className="social-links">
-                        { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
-                        { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
-                        <a className="rss-button" href={ `https://feedly.com/i/subscription/feed/${config.siteUrl}/rss` } target="_blank" rel="noopener noreferrer" title="Rss"><RssIcon /></a>
+                        <SocialLinks site={site} siteUrl={config.siteUrl} />
                     </div>
-                }
+                )}
             </div>
         </nav>
     )

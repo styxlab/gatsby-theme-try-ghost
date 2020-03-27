@@ -19,10 +19,11 @@ const HeaderAuthor = ({ author, numberOfPosts }) => {
             <HeaderBackground srcImg={author.cover_image}>
                 <div className="inner">
                     <div className="site-header-content author-header">
-                        {author.profile_image ?
+                        {author.profile_image ? (
                             <img className="author-profile-image" src={author.profile_image} alt={author.name} />
-                            : <div className="author-profile-image"><AvatarIcon /></div>
-                        }
+                        ) : (
+                            <div className="author-profile-image"><AvatarIcon /></div>
+                        )}
                         <div className="author-header-content">
                             <h1 className="site-title">{author.name}</h1>
                             {author.bio && <h2 className="author-bio">{author.bio}</h2>}

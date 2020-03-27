@@ -14,12 +14,13 @@ const HeaderIndex = ({ data }) => {
                     <SiteNav className="site-nav" />
                     <div className="site-header-content">
                         <h1 className="site-title">
-                            {site.logo ?
+                            {site.logo ? (
                                 <Link to="/">
                                     <img className="site-logo" src={site.logo} alt={site.title} />
                                 </Link>
-                                : site.title
-                            }
+                            ) : (
+                                site.title
+                            )}
                         </h1>
                         <h2 className="site-description">{site.description}</h2>
                     </div>

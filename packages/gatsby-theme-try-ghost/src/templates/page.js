@@ -30,7 +30,6 @@ const Page = ({ data, location }) => {
             <Layout page={page} tags={page.tags} header={<HeaderPage />}>
                 <div className="inner">
                     <article className={`post-full ${postClass}`}>
-
                         <header className="post-full-header">
                             <h1 className="post-full-title">{page.title}</h1>
                         </header>

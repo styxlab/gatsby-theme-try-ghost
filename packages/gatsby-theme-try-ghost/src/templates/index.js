@@ -23,7 +23,8 @@ const Index = ({ data, location }) => {
                     <div className="inner posts">
                         <div className="post-feed">
                             {posts.map(({ node } , i) => (
-                                // The tag below includes the markup for each post - components/common/PostCard.js
+                                // The tag below includes the markup for each post:
+                                // components/common/PostCard.js
                                 <PostCard key={node.id} post={node} num={i} isHome={true} />
                             ))}
                         </div>

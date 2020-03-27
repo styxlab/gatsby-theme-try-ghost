@@ -12,21 +12,23 @@ const HeaderBackground = ({ fluidImg, srcImg, children }) => {
 
     return (
         <>
-            {fluidImgSharp ?
+            {fluidImgSharp ? (
                 <BackgroundSheet>
                     <BackgroundImage Tag="div" fluid={fluidImgSharp} preserveStackingContext={false} className="outer site-header-background responsive-header-img" backgroundColor={`#000`}>
                         {children}
                     </BackgroundImage>
                 </BackgroundSheet>
-                : srcImg &&
+            ) : (
+                srcImg ? (
                     <div className="outer site-header-background responsive-header-img" style={{ backgroundImage: `url(${srcImg})` }}>
                         {children}
                     </div>
-                ||
-                <div className="outer site-header-background no-image">
-                    {children}
-                </div>
-            }
+                ) : (
+                    <div className="outer site-header-background no-image">
+                        {children}
+                    </div>
+                )
+            )}
         </>
     )
 }

@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { StickyNav } from '.'
+import { DocumentHead, StickyNav } from '.'
 import { BodyClass } from './helpers'
 
 // Styles
@@ -32,11 +31,8 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
     return (
         <>
-            <Helmet>
-                <html lang={site.lang} />
-                <style type="text/css">{`${site.codeinjection_styles}`}</style>
-                <body className={bodyClass} />
-            </Helmet>
+            {/* Dark Mode shadows DocumentHead */}
+            <DocumentHead site={site} className={bodyClass} />
 
             <div className="site-wrapper">
                 {/* The main header section on top of the screen */}

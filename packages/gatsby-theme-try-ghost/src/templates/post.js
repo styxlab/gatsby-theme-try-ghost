@@ -43,9 +43,9 @@ const Post = ({ data, location, pageContext }) => {
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
                                 { post.primary_tag &&
-                                    <section className="post-full-tags">
-                                        <Link to={`/tag/${post.primary_tag.slug}/`}>{post.primary_tag.name}</Link>
-                                    </section>
+                                        <section className="post-full-tags">
+                                            <Link to={`/tag/${post.primary_tag.slug}/`}>{post.primary_tag.name}</Link>
+                                        </section>
                                 }
 
                                 <h1 ref={sticky && sticky.anchorRef} className="post-full-title">{post.title}</h1>
