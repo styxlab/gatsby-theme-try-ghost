@@ -18,31 +18,34 @@ const AuthorList = ({ authors, isPost }) => (
                     }
                     { isPost &&
                         <div className={`author-card ${hover.state.currentClass}`}>
-                            { author.profile_image ?
+                            { author.profile_image ? (
                                 <img className="author-profile-image" src={author.profile_image} alt={author.name} />
-                                : <div className="author-profile-image"><AvatarIcon /></div>
-                            }
+                            ) : (
+                                <div className="author-profile-image"><AvatarIcon /></div>
+                            )}
                             <div className="author-info">
-                                { author.bio ?
+                                { author.bio ? (
                                     <div className="bio">
                                         <h2>{author.name}</h2>
                                         <p>{author.bio}</p>
                                         <p><Link to={`/author/${author.slug}/`}>More posts</Link> by {author.name}.</p>
                                     </div>
-                                    : <>
+                                ) : (
+                                    <>
                                         <h2>{author.name}</h2>
                                         <p>Read <Link to={`/author/${author.slug}/`}>more posts</Link> by this author.</p>
                                     </>
-                                }
+                                )}
                             </div>
                         </div>
                     }
-                    { author.profile_image ?
+                    { author.profile_image ? (
                         <Link to={`/author/${author.slug}/`} className={`${isPost && `author` || `static`}-avatar`}>
                             <img className="author-profile-image" src={author.profile_image} alt={author.name} />
                         </Link>
-                        : <Link to={`/author/${author.slug}/`} className={`${isPost && `author` || `static`}-avatar author-profile-image`}><AvatarIcon /></Link>
-                    }
+                    ) : (
+                        <Link to={`/author/${author.slug}/`} className={`${isPost && `author` || `static`}-avatar author-profile-image`}><AvatarIcon /></Link>
+                    )}
                 </li>
             )}/>
         ))}

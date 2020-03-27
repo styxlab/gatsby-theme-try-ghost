@@ -4,11 +4,11 @@ import Img from "gatsby-image"
 
 const ImgSharp = ({ fluidClass, fluidImg, srcClass, srcImg, title }) => (
     <>
-        { fluidImg ?
+        { fluidImg ? (
             <Img className={fluidClass} fluid={fluidImg} alt={title} />
-            : srcImg &&
-                <img className={srcClass} src={srcImg} alt={title} />
-        }
+        ) : (
+            srcImg && <img className={srcClass} src={srcImg} alt={title} />
+        )}
     </>
 )
 

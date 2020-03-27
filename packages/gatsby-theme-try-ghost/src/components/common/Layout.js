@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { StickyNav } from '.'
+import { DocumentHead, StickyNav } from '.'
 import { BodyClass } from './helpers'
-
-import ThemeContext from '../../context/ThemeContext'
 
 // Styles
 import '../../styles/screen.css'
@@ -34,14 +31,8 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
     return (
         <>
-            <ThemeContext.Consumer>{theme => (
-                <Helmet>
-                    <html lang={site.lang} />
-                    <style type="text/css">{`${site.codeinjection_styles}`}</style>
-                    <body className={`${bodyClass} ${theme.dark ? `dark` : ``}`} />
-                </Helmet>
-            )}
-            </ThemeContext.Consumer>
+            {/* Dark Mode shadows DocumentHead */}
+            <DocumentHead site={site} className={bodyClass} />
 
             <div className="site-wrapper">
                 {/* The main header section on top of the screen */}
