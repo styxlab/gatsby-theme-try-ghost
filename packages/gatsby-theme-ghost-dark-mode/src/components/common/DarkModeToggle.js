@@ -22,7 +22,7 @@ const MoonIconWrapper = styled.div`
 
 const DarkModeToggle = () => (
     <ThemeContext.Consumer>{theme => (
-        <Button className="rss-button" onClick={theme.toggleDark}>
+        <Button className="rss-button" onClick={theme.toggleDark} title="DarkMode">
             { theme.dark ? (
                 <SunIconWrapper><SunIcon /></SunIconWrapper>
             ) : (
