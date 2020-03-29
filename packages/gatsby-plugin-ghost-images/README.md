@@ -125,6 +125,11 @@ const fluidImg = ghostPost.featureImageSharp.childImageSharp.fluid
 
 ```
 
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
