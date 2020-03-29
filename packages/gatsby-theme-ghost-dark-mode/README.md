@@ -47,6 +47,12 @@ This plugin also showcases how to best customize `gatsby-theme-try-ghost`. The l
 
 If you use PrismJS your prism styles might be changed. Currently, the best option is to use a dark PrismJS style that looks great in both dark and light mode.
 
+
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
