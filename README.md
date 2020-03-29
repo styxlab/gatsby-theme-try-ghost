@@ -60,9 +60,9 @@ cd gatsby-theme-try-ghost
 3. Run `yarn develop` to start the example locally.
 
 
-## Contributing
+## Contributions
 
-PRs are welcome! Consider contributing to this project if you are missing feature that is useful also for others.
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
 
 # Copyright & License
 
