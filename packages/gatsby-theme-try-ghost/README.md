@@ -116,6 +116,11 @@ gatsby develop
 For best SEO results it is strongly recommended to disable the default Ghost Handlebars theme front-end by selecting the *Make this site private* flag within your Ghost admin settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
 
 
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
