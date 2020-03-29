@@ -104,6 +104,11 @@ Running your own server will give you most control of the data and how it is pro
 By selecting a content type, the form data json object is automatically encoded before being sent to the backend. If you choose `application/x-www-form-urlencoded`, data is url encoded. For `application/json` we use `JSON.stringify(data)` to convert the json object into a string. For all other content types, no encoding is performed.
 
 
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
