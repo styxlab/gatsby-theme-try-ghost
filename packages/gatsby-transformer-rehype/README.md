@@ -115,6 +115,11 @@ This allows for minimal changes in your original GraphQL queries.
 in order to trigger the transformer again. Please always do a `yarn clean` before reporting a bug to this project.
 
 
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
