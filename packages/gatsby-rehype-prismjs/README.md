@@ -120,6 +120,11 @@ This will be rendered in a `<code class=language-css>` with just the (syntax hig
 If you want to disable syntax highlighting in specific code blocks, use the `none` language.
 
 
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
