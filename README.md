@@ -45,7 +45,7 @@ Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-gh
 
 ## Installation
 
-This repository contains the demo code **and** the Gatsby theme. If you are here to install the Gatsby theme plugin in your existing project, check out the [theme specific README](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost/README.md) for further details.
+This mono repository contains the demo code, the base theme and addons. If you are here to install the Gatsby base theme plugin in your existing project, check out the [theme specific README](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost/README.md) for further details. All addons can be found under the [packages/](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/) folder.
 
 In case you want to work with this repository (for local development, pull requests, etc.):
 
@@ -59,6 +59,10 @@ cd gatsby-theme-try-ghost
 
 3. Run `yarn develop` to start the example locally.
 
+
+## Contributing
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is useful also for others.
 
 # Copyright & License
 
