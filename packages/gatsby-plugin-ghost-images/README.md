@@ -3,18 +3,18 @@
 [![gatsby-plugin-ghost-images npm package version.](https://badgen.net/npm/v/gatsby-plugin-ghost-images)](https://www.npmjs.org/package/gatsby-plugin-ghost-images)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
-Downloads images from [Ghost CMS](https://ghost.org/changelog/jamstack/) so they can be processed with the [Gatsby image tool chain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seamlessly work with the headless Ghost CMS, but it should also work with other content management systems.
+Downloads images from [Ghost CMS](https://ghost.org/changelog/jamstack/) so they can be processed with the [Gatsby image tool chain](https://www.gatsbyjs.org/docs/working-with-images/). This plugin is designed to seamlessly work with a headless Ghost CMS, but it should also work with other content management systems.
 
 ## Install
 
 `yarn add gatsby-plugin-ghost-images`
 
-Note that `gatsby-source-filesystem` is installed as a dependency of this plugin. It is *not required* to include `gatsby-source-filesystem` in your `gatsby-config.js` as all images are fetched remotely from the CMS.
+Note that `gatsby-source-filesystem` is installed as a dependency of this plugin, because it provides needed functions. It is *not required* to include `gatsby-source-filesystem` in your `gatsby-config.js` as all images are fetched remotely from the CMS.
 
 
 ## Works best with...
 
-While you can use `gatsby-plugin-ghost-images` on its own, you most likely want to use it in conjunction with the Gatsby image and sharp plugins:
+While you can use `gatsby-plugin-ghost-images` on its own, you most likely want to use it with Gatsby image and sharp plugins:
 
 `yarn add gatsby-plugin-sharp gatsby-transformer-sharp gatsby-image`
 
@@ -62,7 +62,7 @@ plugins: [
 
 ## Image nodes
 
-Where can you find the downloaded images? For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. Here we have adapted a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camel Case. For example:
+For each image, this plugin creates a new file node and puts the image data into the cache. For convenience all images are also attached to the original node. We adopt a naming convention, so the reference names are automatically generated. First the image tag name is extended with `_sharp`, next it is transformed into camel Case. For example:
 
 ```
 feature_image -> feature_image_sharp -> featureImageSharp
