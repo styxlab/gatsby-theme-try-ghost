@@ -38,6 +38,12 @@ Those links won't work on your Gatsby site as you host them on a different `site
 
 Currently the detection mechanism for the CMS site URL is limited to content coming from a headless Ghost CMS, but it should be easy to add some options, so this can be also used in other contexts.
 
+
+## Contributions
+
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+
+
 # Copyright & License
 
 Copyright (c) 2020 styxlab - Released under the [MIT license](LICENSE).
