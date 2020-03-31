@@ -3,7 +3,7 @@
 [![gatsby-theme-ghost-commento npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.org/package/gatsby-theme-ghost-commento)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
-Integrates dark mode into [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). This theme makes use of latent-component-shadowing and showcases best practices for adding custom themes to `gatsby-theme-try-ghost`.
+Integrates the commenting system [Commento](https://commento.io/) into blog posts of [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). This theme makes use of latent-component-shadowing and showcases best practices for adding custom themes to `gatsby-theme-try-ghost`.
 
 ## Install
 
@@ -33,9 +33,16 @@ plugins: [
 
 ## Details
 
-This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. To configure, just add your commento url to the plugin options as shown above.
+This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. Please play with the [Commento Demo](https://demo.commento.io/) in order to find out if this is the right commenting system for you. To configure, just add your commento URL to the plugin options as shown above. The commento URL will be created for you from the back-end.
 
-This plugin also showcases how to best customize `gatsby-theme-try-ghost`. The latent-component-shadowing approach used here is very general and is an amazing concept. This is useful if you plan on customizing `gatsby-theme-try-ghost` yourself.
+## Back-end
+
+In order to be able to use comments with Commento, you need a back-end. You have two options here:
+
+1. Register with [Commento](https://commento.io/signup) (convenient, subscription fees) 
+
+2. Spin-up a self-hosted Commento server [Commento server](https://docs.commento.io/installation/self-hosting/) (full control, own server costs)
+
 
 ## Wishlist
 
