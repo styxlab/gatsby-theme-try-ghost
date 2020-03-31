@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Commento } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -38,8 +38,7 @@ const Post = ({ data, location, pageContext }) => {
             <StickyNavContainer isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
                     header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}
-                    commentSection={<Commento id={post.id} url="http://localhost:8080" />}>
+                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
@@ -84,6 +83,9 @@ const Post = ({ data, location, pageContext }) => {
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
+
+                            <Comments id={post.id} />
+
                         </article>
                     </div>
                 </Layout>

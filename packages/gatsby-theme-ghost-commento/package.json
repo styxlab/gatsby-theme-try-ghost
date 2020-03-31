@@ -1,0 +1,37 @@
+{
+    "name": "gatsby-theme-ghost-commento",
+    "description": "Gatsby theme to integrate the commenting system commento",
+    "version": "1.0.4",
+    "license": "MIT",
+    "author": "styxlab",
+    "homepage": "https://github.com/styxlab/",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-theme",
+        "gatsby-theme-try-ghost",
+        "comments",
+        "comment-system",
+        "commento",
+        "ghost",
+        "ghost-cms"
+    ],
+    "dependencies": {
+        "@babel/runtime": "^7.8.7"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.8.7",
+        "babel-preset-gatsby-package": "^0.2.18",
+        "cross-env": "^7.0.2",
+        "gatsby": "^2.19.45"
+    }
+}

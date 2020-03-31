@@ -91,6 +91,12 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-theme-ghost-commento`,
+            options: {
+                url: `http://localhost:8080`,
+            },
+        },
+        {
             resolve: `gatsby-plugin-ackee-tracker`,
             options: {
                 domainId: `8af98f2e-a3a0-44dd-85fe-91c6dd3d2f62`,
