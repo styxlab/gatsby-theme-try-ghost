@@ -66,16 +66,16 @@ If you want to add this blog theme to an existing site, follow these instruction
         resolve: `gatsby-theme-try-ghost`,
         options: {
             siteConfig: {
-            siteUrl: `https://your-bog.com`,
-            postsPerPage: 12,
-            siteTitleMeta: `Gatsby Frontend powered by headless Ghost CMS`,
-            siteDescriptionMeta: `Turn your Ghost blog into a lightning fast static website with Gatsby`, 
-            shareImageWidth: 1000,
-            shareImageHeight: 523,
-            shortTitle: `Ghost`,
-            siteIcon: `favicon.png`,
-            backgroundColor: `#e9e9e9`,
-            themeColor: `#15171A`,
+                siteUrl: `https://your-bog.com`,
+                postsPerPage: 12,
+                siteTitleMeta: `Gatsby Frontend powered by headless Ghost CMS`,
+                siteDescriptionMeta: `Turn your Ghost blog into a lightning fast static website with Gatsby`, 
+                shareImageWidth: 1000,
+                shareImageHeight: 523,
+                shortTitle: `Ghost`,
+                siteIcon: `favicon.png`,
+                backgroundColor: `#e9e9e9`,
+                themeColor: `#15171A`,
             },
             ghostConfig: {
                 "development": {

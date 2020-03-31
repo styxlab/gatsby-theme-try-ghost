@@ -35,9 +35,6 @@ module.exports = {
             options: {
                 ghostConfig: ghostConfig,
                 siteConfig: siteConfig,
-                // Downloads and caches images from Ghost CMS to the local filesystem.
-                // Use for awesome performance and usability (default: true)
-                downloadLocal: true,
             },
         },
         {
