@@ -19,7 +19,7 @@ import '../../styles/custom-styles'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
+const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, commentSection, author, tags, page, errorClass }) => {
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
@@ -50,6 +50,9 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 {/* Links to Previous/Next posts */}
                 {previewPosts}
 
+                {/* Placeholder for commentSection */}
+                {commentSection}
+
                 {/* The footer at the very bottom of the screen */}
                 <footer className="site-footer outer" >
                     <div className="site-footer-content inner">
@@ -74,6 +77,7 @@ DefaultLayout.propTypes = {
     header: PropTypes.node.isRequired,
     children: PropTypes.node.isRequired,
     previewPosts: PropTypes.node,
+    commentSection: PropTypes.node,
     isHome: PropTypes.bool,
     isPost: PropTypes.bool,
     data: PropTypes.shape({

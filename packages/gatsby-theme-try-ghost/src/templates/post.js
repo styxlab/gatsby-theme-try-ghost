@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Commento } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -38,7 +38,8 @@ const Post = ({ data, location, pageContext }) => {
             <StickyNavContainer isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
                     header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
+                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}
+                    commentSection={<Commento id={post.id} url="http://localhost:8080" />}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
@@ -95,6 +96,7 @@ Post.propTypes = {
     data: PropTypes.shape({
         post: PropTypes.shape({
             codeinjection_styles: PropTypes.string,
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             custom_excerpt: PropTypes.string,
