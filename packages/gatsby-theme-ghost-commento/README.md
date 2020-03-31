@@ -33,15 +33,17 @@ plugins: [
 
 ## Details
 
-This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. Please play with the [Commento Demo](https://demo.commento.io/) in order to find out if this is the right commenting system for you. To configure, just add your commento URL to the plugin options as shown above. The commento URL will be created for you from the back-end.
+This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. Please play with the [Commento Demo](https://demo.commento.io/) in order to find out if this is the right commenting system for you. To configure, just add your commento URL to the plugin options as shown above. The commento URL will be created for you from the backend.
 
-## Back-end
+## Backend
 
-In order to be able to use comments with Commento, you need a back-end. You have two options here:
+In order to be able to use comments with Commento, you need a backend. You have two options here:
 
-1. Register with [Commento](https://commento.io/signup) (convenient, subscription fees) 
+1. Register with [Commento](https://commento.io/signup) (convenient, subscription fees).
 
-2. Spin-up a self-hosted Commento server [Commento server](https://docs.commento.io/installation/self-hosting/) (full control, own server costs)
+2. Spin-up a self-hosted Commento server [Commento server](https://docs.commento.io/installation/self-hosting/) (full control, own server costs).
+
+The Commento backend allows you to set spam filters, add moderators, authentication options and much more. It also provides a dashboard for anonymous analytics.
 
 
 ## Wishlist
