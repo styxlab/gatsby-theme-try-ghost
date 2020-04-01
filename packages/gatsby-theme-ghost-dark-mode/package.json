@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-dark-mode",
     "description": "Gatsby theme to integrate dark mode into gatsby-theme-try-ghost.",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
