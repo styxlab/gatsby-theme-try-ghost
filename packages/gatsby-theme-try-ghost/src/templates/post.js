@@ -17,7 +17,7 @@ import { PostClass } from '../components/common/helpers'
 *
 */
 const Post = ({ data, location, pageContext }) => {
-    const post = data.post
+    const post = data.ghostPost
     const prevPost = data.prev
     const nextPost = data.next
     const previewPosts = data.allGhostPost.edges
@@ -96,7 +96,7 @@ const Post = ({ data, location, pageContext }) => {
 
 Post.propTypes = {
     data: PropTypes.shape({
-        post: PropTypes.shape({
+        ghostPost: PropTypes.shape({
             codeinjection_styles: PropTypes.string,
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
@@ -133,7 +133,7 @@ export default Post
 
 export const postQuery = graphql`
     query($slug: String!, $prev: String!, $next: String!, $tag: String!, $limit: Int!, $skip: Int!) {
-        post: ghostPost(slug: { eq: $slug }) {
+        ghostPost: ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
         }
         prev: ghostPost(slug: { eq: $prev }) {
