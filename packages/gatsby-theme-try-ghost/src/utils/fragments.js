@@ -35,6 +35,7 @@ export const siteMetadataFields = graphql`
 export const ghostTagFields = graphql`
     fragment GhostTagFields on GhostTag {
         slug
+        url
         name
         visibility
         feature_image
@@ -48,6 +49,7 @@ export const ghostTagFields = graphql`
 export const ghostAuthorFields = graphql`
     fragment GhostAuthorFields on GhostAuthor {
         slug
+        url
         name
         bio
         cover_image
@@ -96,6 +98,7 @@ export const ghostPostFields = graphql`
         authors {
             name
             slug
+            url
             bio
             # email
             profile_image
@@ -106,6 +109,7 @@ export const ghostPostFields = graphql`
         primary_author {
             name
             slug
+            url
             bio
             # email
             profile_image
@@ -118,6 +122,7 @@ export const ghostPostFields = graphql`
         primary_tag {
             name
             slug
+            url
             description
             feature_image
             meta_description
@@ -127,6 +132,7 @@ export const ghostPostFields = graphql`
         tags {
             name
             slug
+            url
             description
             feature_image
             meta_description
@@ -205,6 +211,7 @@ export const ghostPageFields = graphql`
         authors {
             name
             slug
+            url
             bio
             # email
             profile_image
@@ -215,6 +222,7 @@ export const ghostPageFields = graphql`
         primary_author {
             name
             slug
+            url
             bio
             # email
             profile_image
@@ -227,6 +235,7 @@ export const ghostPageFields = graphql`
         primary_tag {
             name
             slug
+            url
             description
             feature_image
             meta_description
@@ -236,6 +245,7 @@ export const ghostPageFields = graphql`
         tags {
             name
             slug
+            url
             description
             feature_image
             meta_description

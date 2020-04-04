@@ -1,7 +1,7 @@
 const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 
-module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
+module.exports = ({ htmlAst, htmlNode, reporter }) => {
     const url = htmlNode && htmlNode.context && htmlNode.context.url
     const slug = htmlNode && htmlNode.context && htmlNode.context.slug
 
@@ -15,7 +15,11 @@ module.exports = ({ htmlAst, htmlNode, reporter }, pluginOptions) => {
         return regexp.test(s)
     }
 
-    const cmsUrl = _.head(_.split(url, slug, 1))
+    // Regexp to extract the absolute part of the CMS url
+    // const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^\/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
+    const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
+    const cmsUrl = _.head(url.match(regexp))
+
     if (!isUrl(cmsUrl)) {
         return htmlAst
     }

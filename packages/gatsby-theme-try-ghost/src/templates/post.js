@@ -4,6 +4,8 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
+import routing from '../utils/routing'
+
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
@@ -44,7 +46,7 @@ const Post = ({ data, location, pageContext }) => {
                             <header className="post-full-header">
                                 { post.primary_tag &&
                                         <section className="post-full-tags">
-                                            <Link to={`/tag/${post.primary_tag.slug}/`}>{post.primary_tag.name}</Link>
+                                            <Link to={routing(post.primary_tag.url, post.primary_tag.slug)}>{post.primary_tag.name}</Link>
                                         </section>
                                 }
 
@@ -61,7 +63,7 @@ const Post = ({ data, location, pageContext }) => {
                                         <section className="post-full-byline-meta">
                                             <h4 className="author-name">
                                                 {post.authors.map((author, i) => (
-                                                    <Link key={i} to={`/author/${author.slug}/`} >{author.name}</Link>
+                                                    <Link key={i} to={routing(author.url, author.slug)}>{author.name}</Link>
                                                 ))}
                                             </h4>
                                             <div className="byline-meta-content">
@@ -112,7 +114,8 @@ Post.propTypes = {
             ).isRequired,
             primary_tag: PropTypes.shape({
                 name: PropTypes.string,
-                slug: PropTypes.string,
+                slug: PropTypes.string.isRequired,
+                url: PropTypes.string.isRequired,
             }),
             published_at: PropTypes.string.isRequired,
             published_at_pretty: PropTypes.string.isRequired,
