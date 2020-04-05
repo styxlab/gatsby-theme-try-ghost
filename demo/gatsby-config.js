@@ -72,7 +72,7 @@ module.exports = {
             resolve: `gatsby-theme-ghost-contact`,
             options: {
                 siteMetadata: {
-                    navigation: [{ label: `Contact`, url: `/contact/` }],
+                    navigation: [{ label: `Contact` }],
                 },
                 serviceConfig: {
                     url: `https://api.gotsby.org/v1/contact`,
@@ -80,7 +80,7 @@ module.exports = {
                 },
                 pageContext: {
                     title: `Contact Us`,
-                    slug: `contact`,
+                    path: `/contact/`,
                     feature_image: `https://static.gotsby.org/v1/assets/images/gatsby-ghost-contact.png`,
                     custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
                     form_topics: [`I want to give feedback`, `I want to ask a question`],

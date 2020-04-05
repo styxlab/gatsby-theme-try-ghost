@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-contact",
     "description": "Gatsby theme to easily add a contact form page to gatsby-theme-try-ghost",
-    "version": "1.1.3",
+    "version": "1.2.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -20,6 +20,7 @@
         "gatsby-theme-try-ghost",
         "contact",
         "form",
+        "jamify",
         "ghost",
         "ghost-cms"
     ],
@@ -27,7 +28,7 @@
         "@babel/runtime": "^7.9.2",
         "formik": "^2.1.4",
         "gatsby-node-helpers": "^0.3.0",
-        "gatsby-plugin-ghost-images": "^1.0.11",
+        "gatsby-plugin-ghost-images": "^1.0.12",
         "lodash": "^4.17.15"
     },
     "devDependencies": {
@@ -35,6 +36,6 @@
         "@babel/core": "^7.9.0",
         "babel-preset-gatsby-package": "^0.3.1",
         "cross-env": "^7.0.2",
-        "gatsby": "^2.20.8"
+        "gatsby": "^2.20.12"
     }
 }

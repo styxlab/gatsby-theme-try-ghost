@@ -4,7 +4,7 @@ module.exports = {
 
     title: `Contact Us`,
 
-    slug: `contact`,
+    path: `/contact/`,
 
     // For future use
     featured: false,

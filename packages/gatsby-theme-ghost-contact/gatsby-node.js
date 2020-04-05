@@ -29,7 +29,7 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
     const serviceConfig = _.merge({}, serviceConfigDefaults, themeOptions.serviceConfig)
     const pageContext = _.merge({}, contactConfigDefaults, themeOptions.pageContext, { serviceConfig: serviceConfig })
 
-    if (!pageContext && pageContext.slug !== null) {
+    if (!pageContext && pageContext.path && pageContext.path.length > 0) {
         return
     }
 
@@ -37,7 +37,10 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
 
     //Create GhostPage nodes
     pages.forEach((node) => {
-        node.url = `/${node.slug}/`
+        const url = _.trim(node.path,`/`)
+        node.slug = _.last(_.split(url,`/`))
+        node.url = `/${url}/`
+        console.log(node)
         createNode(PageNode(node))
     })
 
@@ -57,6 +60,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
+                        path
                     }
                 }
             }
@@ -76,9 +80,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
     //Create pages
     pages.forEach(({ node }) => {
-        node.url = `/${node.slug}/`
+        console.log(node)
         createPage({
-            path: node.url,
+            path: node.path,
             component: pageTemplate,
             context: {
                 // Data passed to context is available
