@@ -21,7 +21,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - Styled 404 page
 - SEO optimized
 - Fully responsive
-- Advanced routing **NEW**
+- Advanced routing :new:
 - Composable and extensible
 
 ## Performance
