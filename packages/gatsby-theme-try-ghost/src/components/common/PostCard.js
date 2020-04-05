@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
+import routing from '../../utils/routing'
 
 import { AuthorList, ImgSharp } from '.'
 import { PostClass } from './helpers'
 
 const PostCard = ({ post, num, isHome }) => {
-    const url = `/${post.slug}/`
+    const url = routing(post.url, post.slug)
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
@@ -41,7 +42,7 @@ const PostCard = ({ post, num, isHome }) => {
                     <AuthorList authors={post.authors} />
                     <div className="post-card-byline-content">
                         <span>
-                            <Link to={`/author/${post.primary_author.slug}/`}>{post.primary_author.name}</Link>
+                            <Link to={routing(post.primary_author.url, post.primary_author.slug)}>{post.primary_author.name}</Link>
                         </span>
                         <span className="post-card-byline-date">
                             <time dateTime={post.published_at}>
@@ -58,6 +59,7 @@ const PostCard = ({ post, num, isHome }) => {
 
 PostCard.propTypes = {
     post: PropTypes.shape({
+        url: PropTypes.string.isRequired,
         slug: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         feature_image: PropTypes.string,
@@ -68,7 +70,8 @@ PostCard.propTypes = {
         excerpt: PropTypes.string.isRequired,
         primary_author: PropTypes.shape({
             name: PropTypes.string.isRequired,
-            slug: PropTypes.string,
+            slug: PropTypes.string.isRequired,
+            url: PropTypes.string.isRequired,
         }).isRequired,
         authors: PropTypes.arrayOf(
             PropTypes.object.isRequired,

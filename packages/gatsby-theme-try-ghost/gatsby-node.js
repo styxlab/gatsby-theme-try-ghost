@@ -1,5 +1,6 @@
 const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
+const routing = require(`./src/utils/routing`)
 
 /**
  * Here is the place where Gatsby creates schema customizations.
@@ -45,8 +46,10 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
+                        url
                         primary_tag {
                             slug
+                            url
                         }
                     }
                 }
@@ -109,9 +112,9 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-        // This part here defines, that our tag pages will use
-        // a `/tag/:slug/` permalink.
-        node.url = `/tag/${node.slug}/`
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
+        node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -152,9 +155,9 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-        // This part here defines, that our author pages will use
-        // a `/author/:slug/` permalink.
-        node.url = `/author/${node.slug}/`
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
+        node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -192,9 +195,9 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Create pages
     pages.forEach(({ node }) => {
-        // This part here defines, that our pages will use
-        // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
+        node.url = routing(node.url, node.slug)
 
         createPage({
             path: node.url,
@@ -212,9 +215,9 @@ exports.createPages = async ({ graphql, actions }) => {
     const nextNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
 
     posts.forEach(({ node }, i) => {
-        // This part here defines, that our posts will use
-        // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
+        node.url = routing(node.url, node.slug)
 
         //total number of posts for primary tag
         let primaryTagCount = _.find(tags, function (t) {
