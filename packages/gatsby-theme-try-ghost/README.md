@@ -5,7 +5,7 @@
  
 A Gatsby theme plugin for creating blogs from headless [Ghost CMS](https://ghost.org/changelog/jamstack/).
 
-Turn your Ghost blog into a lightning fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
+Turn your Ghost blog into a flaring fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
 
 
 ## Demo
@@ -19,10 +19,10 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 - Sticky navigation headers
 - [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) **NEW**
 - Hover on author avatar
-- Secondary navigation
 - Styled 404 page
 - SEO optimized
 - Fully responsive
+- Advanced routing **NEW**
 - Composable and extensible
 
 ## Performance
@@ -68,9 +68,9 @@ If you want to add this blog theme to an existing site, follow these instruction
         options: {
             siteConfig: {
                 siteUrl: `https://your-bog.com`,
-                postsPerPage: 12,
-                siteTitleMeta: `Gatsby Frontend powered by headless Ghost CMS`,
-                siteDescriptionMeta: `Turn your Ghost blog into a lightning fast static website with Gatsby`, 
+                postsPerPage: 25,
+                siteTitleMeta: `Gatsby frontend powered by headless Ghost CMS`,
+                siteDescriptionMeta: `Turn your Ghost blog into a flaring fast static website with Gatsby`, 
                 shareImageWidth: 1000,
                 shareImageHeight: 523,
                 shortTitle: `Ghost`,

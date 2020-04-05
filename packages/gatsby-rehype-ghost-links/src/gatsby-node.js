@@ -16,7 +16,6 @@ module.exports = ({ htmlAst, htmlNode, reporter }) => {
     }
 
     // Regexp to extract the absolute part of the CMS url
-    // const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^\/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
     const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
     const cmsUrl = _.head(url.match(regexp))
 

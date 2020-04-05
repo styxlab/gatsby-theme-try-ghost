@@ -112,6 +112,8 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -153,6 +155,8 @@ exports.createPages = async ({ graphql, actions }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -191,6 +195,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
     // Create pages
     pages.forEach(({ node }) => {
+        // Determine the routing structure from
+        // Ghost CMS by analzing the url field
         node.url = routing(node.url, node.slug)
 
         createPage({

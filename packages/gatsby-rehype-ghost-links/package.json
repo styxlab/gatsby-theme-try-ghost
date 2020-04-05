@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-ghost-links",
     "description": "Gatsby rehype plugin that rewrites absolute links to relative links coming from a Ghost CMS.",
-    "version": "1.1.2",
+    "version": "1.2.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -23,6 +23,7 @@
         "gatsby-plugin",
         "rehype",
         "html",
+        "jamify",
         "ghost",
         "ghost-cms"
     ],
