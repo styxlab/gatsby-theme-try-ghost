@@ -38,8 +38,8 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
     //Create GhostPage nodes
     pages.forEach((node) => {
         const url = _.trim(node.path,`/`)
-        node.slug = _.last(_.split(url,`/`))
         node.url = `/${url}/`
+        node.slug = _.last(_.split(url,`/`))
         createNode(PageNode(node))
     })
 
