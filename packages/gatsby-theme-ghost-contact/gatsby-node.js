@@ -40,7 +40,6 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
         const url = _.trim(node.path,`/`)
         node.slug = _.last(_.split(url,`/`))
         node.url = `/${url}/`
-        console.log(node)
         createNode(PageNode(node))
     })
 
@@ -60,7 +59,7 @@ exports.createPages = async ({ graphql, actions }) => {
                 edges {
                     node {
                         slug
-                        path
+                        url
                     }
                 }
             }
@@ -80,9 +79,8 @@ exports.createPages = async ({ graphql, actions }) => {
 
     //Create pages
     pages.forEach(({ node }) => {
-        console.log(node)
         createPage({
-            path: node.path,
+            path: node.url,
             component: pageTemplate,
             context: {
                 // Data passed to context is available

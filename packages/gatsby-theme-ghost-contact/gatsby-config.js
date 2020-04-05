@@ -17,7 +17,6 @@ module.exports = (themeOptions) => {
         nav.map(node => node.url = `/${url}/`)
         siteMeta.navigation = nav
     }
-    console.log(siteMeta)
 
     return {
         siteMetadata: siteMeta,
