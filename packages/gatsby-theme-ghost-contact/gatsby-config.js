@@ -1,3 +1,5 @@
+const _ = require(`lodash`)
+
 /**
 * This is the place where you can tell Gatsby which plugins to use
 * and set them up the way you want.
@@ -6,8 +8,18 @@
 *
 */
 module.exports = (themeOptions) => {
+    const url = _.trim(themeOptions.pageContext.path, `/`)
+
+    const siteMeta = themeOptions.siteMetadata
+    const nav = siteMeta && siteMeta.navigation
+
+    if (nav && nav.length > 0) {
+        nav.map(node => node.url = `/${url}/`)
+        siteMeta.navigation = nav
+    }
+
     return {
-        siteMetadata: themeOptions.siteMetadata,
+        siteMetadata: siteMeta,
         plugins: [
             {
                 resolve: `gatsby-plugin-ghost-images`,

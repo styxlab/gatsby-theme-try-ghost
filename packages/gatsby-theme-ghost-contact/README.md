@@ -26,7 +26,7 @@ plugins: [
         options: {
             siteMetadata: {
                 // This will be added to your navigation menu
-                navigation: [{ label: `Contact`, url: `/contact/` }],
+                navigation: [{ label: `Contact` }],
             },
             //For netlify users only: remove serviceConfig or read section on netlify below.
             serviceConfig: {
@@ -39,11 +39,11 @@ plugins: [
             // Customize your page content here
             pageContext: {
                 title: `Contact Us`,
-                slug: `contact`,
-                custom_excerpt: `Want to get in touch with the team? Just drop us a line!`,
+                path: `/contact/`,
+                custom_excerpt: `Just drop us a line!`,
                 feature_image: `https://static.gotsby.org/v1/assets/images/gatsby-ghost-contact.png`,
                 // Can be disabled by providing an empty list []
-                form_topics: [`I want to give feedback`, `I want to ask a question`],
+                form_topics: [`Feedback`, `Question`],
                 meta_title: `Contact Us`,
                 meta_description: `A contact form page.`,
                 // All content below the contact form

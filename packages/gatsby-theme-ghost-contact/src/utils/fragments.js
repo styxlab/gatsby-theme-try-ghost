@@ -18,6 +18,7 @@ export const contactPageFields = graphql`
         id
         title
         slug
+        url
         featured
         feature_image
         excerpt

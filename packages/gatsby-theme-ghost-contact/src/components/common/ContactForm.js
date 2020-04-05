@@ -1,105 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styled from 'styled-components'
-import { css } from 'styled-components'
 import { useFormik } from 'formik'
 
-const themeStyle = css`
-    font-family: avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
-    display: block;
-    margin: 0 0 2rem 0;
-    padding: 1rem 0;
-    width: 100% !important;
-    align-items: flex-start;
-    box-sizing: border-box;
-`
-const elementStyle = css`
-    color: darkslategray;
-    background-color: white;
-    background-clip: padding-box;
-    line-height: 1.5;
-    border-radius: .5rem;
-    padding: 1rem 4rem;
-    border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-`
-const focusStyle = css`
-    border-color: #3eb0ef;
-    box-shadow: none;
-    -webkit-box-shadow: none;
-`
+import { Form, Input, Robot, Select, Textarea, Button, Span, Response } from './ContactFormStyles'
+import { validate } from './ContactFormValidation'
 
-const Form = styled.form`
-    ${themeStyle}
-`
-const Input = styled.input`
-    ${themeStyle}
-    ${elementStyle}
-    &:focus {
-        ${focusStyle}
-    }
-    &:placeholder {
-        color: silver;
-    }
-}
-`
-const Robot = styled(Input)`
-    display:none !important;
-`
-const Select = styled.select`
-    ${themeStyle}
-    ${elementStyle}
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    &:required:invalid {
-        color: silver;
-    }
-    &:focus {
-        ${focusStyle}
-    }
-`
-const Textarea = styled.textarea`
-    ${themeStyle}
-    ${elementStyle}
-    &:focus {
-        ${focusStyle}
-    }
-`
-const Button = styled.button`
-    ${themeStyle}
-    margin-bottom: 1rem;
-    color: white;
-    background-color: #3eb0ef;
-    border-color: #3eb0ef;
-    user-select: none;
-    line-height: 1.5;
-    border-radius: .5rem;
-    border: 1px solid transparent;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    &:hover {
-        filter: brightness(80%);
-    }
-`
-
-const Span = styled.span`
-    ${themeStyle}
-    margin-bottom: 0;
-    padding-bottom: 0;
-    color: #ed3c3c;
-    font-size: smaller;
-    font-style: oblique;
-    height: 4rem;
-`
-const Response = styled.span`
-    ${themeStyle}
-    margin-bottom: 0;
-    padding-bottom: 0;
-    color: silver;
-    font-size: smaller;
-    font-style: oblique;
-    height: 4rem;
-`
 const printError = (touched, errors) => {
     if (touched.name && errors.name) {
         return errors.name
@@ -114,39 +19,6 @@ const printError = (touched, errors) => {
         return errors.message
     }
     return null
-}
-
-// A custom validation function. This must return an object
-// which keys are symmetrical to our values/initialValues
-const validate = (values) => {
-    const errors = {}
-    if (!values.name) {
-        errors.name = `Full Name is required.`
-    } else if (values.name.length < 3) {
-        errors.name = `Full Name must be at least 3 characters long.`
-    } else if (values.name.length > 20) {
-        errors.name = `Full Name Must be 20 characters or less.`
-    }
-
-    if (!values.email) {
-        errors.email = `Email is required.`
-    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = `Invalid email address.`
-    }
-
-    if (values.subject === `topic`) {
-        errors.subject = `Please select one subject.`
-    }
-
-    if (!values.message) {
-        errors.message = `A message text is required.`
-    } else if (values.message.length < 10) {
-        errors.message = `Your message must be at least 10 characters long.`
-    } else if (values.message.length > 4000) {
-        errors.message = `Your message must be 4000 characters or less.`
-    }
-
-    return errors
 }
 
 const ContactForm = ({ topics, serviceConfig }) => {
