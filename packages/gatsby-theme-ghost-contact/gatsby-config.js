@@ -1,4 +1,7 @@
 const _ = require(`lodash`)
+const siteMetaConfigDefaults = require(`./src/utils/siteMetaConfigDefaults`)
+const contactConfigDefaults = require(`./src/utils/contactConfigDefaults`)
+const serviceConfigDefaults = require(`./src/utils/serviceConfigDefaults`)
 
 /**
 * This is the place where you can tell Gatsby which plugins to use
@@ -8,10 +11,12 @@ const _ = require(`lodash`)
 *
 */
 module.exports = (themeOptions) => {
-    const url = _.trim(themeOptions.pageContext.path, `/`)
+    const siteMeta = _.merge({}, siteMetaConfigDefaults, themeOptions.siteMetadata)
+    const serviceConfig = _.merge({}, serviceConfigDefaults, themeOptions.serviceConfig)
+    const pageContext = _.merge({}, contactConfigDefaults, themeOptions.pageContext, { serviceConfig: serviceConfig })
 
-    const siteMeta = themeOptions.siteMetadata
-    const nav = siteMeta && siteMeta.navigation
+    const url = _.trim(pageContext.path, `/`)
+    const nav = siteMeta.navigation
 
     if (nav && nav.length > 0) {
         nav.map(node => node.url = `/${url}/`)
