@@ -73,7 +73,7 @@ With this naming convention there is no need to provide a target name.
 
 ## Details
 
-This plugin will dramatically improve user experience and site performance! Gatsby provides amazing image processing tools that natively ship with lazy loading, adaptive image resolutions and much more. Get *all these image features* into your Ghost site with this plugin.
+This plugin will dramatically improve user experience and site performance! Gatsby provides amazing image processing tools that natively ships with lazy loading, adaptive image resolutions and much more. Get *all these image features* into your Ghost site with this plugin.
 
 
 ## How to query

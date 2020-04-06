@@ -33,7 +33,7 @@ exports.onCreateNode = async function ({
         return {}
     }
 
-    const allImgTags = imgNode[0].imgTags.filter(item => node[item] !== null)
+    const allImgTags = imgNode[0].imgTags.filter(item => node[item] !== null && node[item] !== undefined)
 
     // leave if image field is empty
     if (allImgTags.length === 0) {

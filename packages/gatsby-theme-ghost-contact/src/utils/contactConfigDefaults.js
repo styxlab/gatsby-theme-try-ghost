@@ -9,7 +9,7 @@ module.exports = {
     // For future use
     featured: false,
 
-    feature_image: ``,
+    feature_image: `https://static.gotsby.org/v1/assets/images/gatsby-ghost-contact.png`,
 
     // For future use
     excerpt: `To change this message, provide an excerpt field in your configuration.`,
