@@ -15,11 +15,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     const typeDefs = `
         type allContactPage implements Node {
             form_topics: [String!]
-            featureImageSharp: File @link
         }
         type ContactPage implements Node {
             form_topics: [String!]
-            featureImageSharp: File @link
         }
     `
     createTypes(typeDefs)
