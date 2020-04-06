@@ -20,7 +20,7 @@ module.exports = {
     // For future use
     visibility: true,
 
-    form_topics: [],
+    form_topics: [`Feedback`, `Question`],
 
     meta_title: `Contact Us`,
 
