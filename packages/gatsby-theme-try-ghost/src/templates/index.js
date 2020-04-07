@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, HeaderIndex } from '../components/common'
+import { Layout, PostCard, HeaderIndex, Pagination } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -12,11 +12,11 @@ import { MetaData } from '../components/common/meta'
 * Loads all posts from Ghost
 *
 */
-const Index = ({ data, location }) => {
+const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
 
     return (
-        <>
+        <React.Fragment>
             <MetaData location={location} />
             <StickyNavContainer activeClass="fixed-nav-active" render={ sticky => (
                 <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
@@ -29,9 +29,10 @@ const Index = ({ data, location }) => {
                             ))}
                         </div>
                     </div>
+                    <Pagination pageContext={pageContext} />
                 </Layout>
             )}/>
-        </>
+        </React.Fragment>
     )
 }
 
@@ -40,6 +41,7 @@ Index.propTypes = {
         allGhostPost: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
+    pageContext: PropTypes.object.isRequired,
 }
 
 export default Index
