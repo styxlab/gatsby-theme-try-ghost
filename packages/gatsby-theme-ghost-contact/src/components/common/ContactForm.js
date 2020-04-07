@@ -56,6 +56,11 @@ const ContactForm = ({ topics, serviceConfig }) => {
             }
 
             const postURL = (serviceConfig.url || `/`)
+
+            //reset and show message as post can be slow!
+            actions.resetForm()
+            actions.setStatus({ success: `One second please...` })
+
             fetch(postURL, {
                 method: `POST`,
                 headers: { 'Content-Type': serviceConfig.contentType },
