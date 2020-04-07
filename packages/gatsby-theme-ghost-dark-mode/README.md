@@ -41,7 +41,7 @@ plugins: [
 
 This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a dark mode toggle in the top right navigation bar. User's dark mode settings are persisted to `localStore`, so they should remain on page revisits. If the functionality is provided by the browser, dark mode setting is read from the OS and that setting is taken for first time use. The `defaultModeDark` setting is taken, if OS does not report dark mode or if the user has not chosen a theme preference in the OS. Finally, OS settings can be overruled with `overrideOS`.
 
-This plugin also showcases how to best customize `gatsby-theme-try-ghost`. The latent-component-shadowing approach used here is very general and is an amazing concept. This is useful if you plan on customizing `gatsby-theme-try-ghost` yourself.
+This plugin also shows how to best customize `gatsby-theme-try-ghost`. The latent-component-shadowing approach used here is very general and is an amazing concept. This is useful if you plan on customizing `gatsby-theme-try-ghost` yourself.
 
 ## Limitations
 

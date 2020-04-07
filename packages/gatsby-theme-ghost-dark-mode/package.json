@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-dark-mode",
     "description": "Gatsby theme to integrate dark mode into gatsby-theme-try-ghost.",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -20,17 +20,18 @@
         "gatsby-theme-try-ghost",
         "dark-mode",
         "dark-theme",
+        "jamify",
         "ghost",
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.8.7"
+        "@babel/runtime": "^7.9.2"
     },
     "devDependencies": {
         "@babel/cli": "^7.8.4",
-        "@babel/core": "^7.8.7",
-        "babel-preset-gatsby-package": "^0.2.18",
+        "@babel/core": "^7.9.0",
+        "babel-preset-gatsby-package": "^0.3.1",
         "cross-env": "^7.0.2",
-        "gatsby": "^2.19.45"
+        "gatsby": "^2.20.13"
     }
 }
