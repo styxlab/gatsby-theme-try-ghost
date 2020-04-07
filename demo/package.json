@@ -8,7 +8,7 @@
     "develop": "gatsby develop",
     "build": "gatsby build",
     "clean": "gatsby clean",
-    "serve": "gatsby serve",
+    "serve": "gatsby serve"
   },
   "dependencies": {
     "gatsby": "^2.20.13",
