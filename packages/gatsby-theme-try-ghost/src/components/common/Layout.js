@@ -7,6 +7,7 @@ import { BodyClass } from './helpers'
 
 // Styles
 import '../../styles/screen.css'
+import '../../styles/pagination.css'
 
 // Styles from other plugins
 import '../../styles/custom-styles'

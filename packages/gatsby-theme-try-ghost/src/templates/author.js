@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, HeaderAuthor } from '../components/common'
+import { Layout, PostCard, HeaderAuthor, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -11,12 +11,12 @@ import { MetaData } from '../components/common/meta'
 * Loads all posts for the requested author incl. pagination.
 *
 */
-const Author = ({ data, location }) => {
+const Author = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
     const author = data.ghostAuthor
 
     return (
-        <>
+        <React.Fragment>
             <MetaData location={location} data={data} type="profile"/>
             <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={posts.length}/>}>
                 <div className="inner posts">
@@ -28,8 +28,9 @@ const Author = ({ data, location }) => {
                         ))}
                     </div>
                 </div>
+                <Pagination pageContext={pageContext} />
             </Layout>
-        </>
+        </React.Fragment>
     )
 }
 
@@ -39,6 +40,7 @@ Author.propTypes = {
         allGhostPost: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
+    pageContext: PropTypes.object.isRequired,
 }
 
 export const pageQuery = graphql`

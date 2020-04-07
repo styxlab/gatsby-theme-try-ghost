@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { HeaderTag, Layout, PostCard } from '../components/common'
+import { HeaderTag, Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -11,12 +11,12 @@ import { MetaData } from '../components/common/meta'
 * Loads all posts for the requested tag incl. pagination.
 *
 */
-const Tag = ({ data, location }) => {
+const Tag = ({ data, location, pageContext }) => {
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges
 
     return (
-        <>
+        <React.Fragment>
             <MetaData data={data} location={location} type="series"/>
             <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={posts.length} />}>
                 <div className="inner posts">
@@ -28,8 +28,9 @@ const Tag = ({ data, location }) => {
                         ))}
                     </div>
                 </div>
+                <Pagination pageContext={pageContext} />
             </Layout>
-        </>
+        </React.Fragment>
     )
 }
 
@@ -39,6 +40,7 @@ Tag.propTypes = {
         allGhostPost: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
+    pageContext: PropTypes.object.isRequired,
 }
 
 export default Tag
