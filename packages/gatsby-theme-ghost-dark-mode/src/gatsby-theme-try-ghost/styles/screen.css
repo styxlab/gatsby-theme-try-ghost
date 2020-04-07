@@ -2936,10 +2936,10 @@ body.dark .no-image .author-social-link a {
     color: rgba(255, 255, 255, 0.75);
 }
 body.dark .post-full-content h1,
-.post-full-content h2,
-.post-full-content h3,
-.post-full-content h4,
-.post-full-content h6 {
+body.dark .post-full-content h2,
+body.dark .post-full-content h3,
+body.dark .post-full-content h4,
+body.dark .post-full-content h6 {
     color: rgba(255, 255, 255, 0.9);
 }
 body.dark .post-full-content a {

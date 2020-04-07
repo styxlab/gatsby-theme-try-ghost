@@ -100,7 +100,7 @@ If you want to add this blog theme to an existing site, follow these instruction
 
 4. Ghost Content API Keys
 
-    Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+    Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to *Integrations* and click *Add new integration*. Give the integration a name and click create.
 
 
 

@@ -21,6 +21,10 @@ const routing = (url, slug) => {
     // Normalize by stripping slug and removing bounding slashes
     const exSlug = _.trim(_.head(_.split(dirUrl, slug, 1)),`/`)
 
+    if (exSlug.length <= 0) {
+        return `/${slug}/`
+    }
+
     // Now it's safe to add slashes again
     return `/${exSlug}/${slug}/`
 }
