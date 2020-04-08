@@ -208,6 +208,7 @@ module.exports = (themeOptions) => {
                 },
             },
             `gatsby-plugin-styled-components`,
+            `gatsby-plugin-typescript`,
         ],
     }
 }

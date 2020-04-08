@@ -6,6 +6,10 @@ const routing = (url, slug) => {
         return `/${slug}/`
     }
 
+    if (_.trim(url,`/`) === slug) {
+        return `/${slug}/`
+    }
+
     // Regexp to extract the absolute part of the CMS url
     const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
     const cmsUrl = _.head(url.match(regexp))

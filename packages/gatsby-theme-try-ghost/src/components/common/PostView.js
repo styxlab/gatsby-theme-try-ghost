@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { PostCard, Pagination, InfiniteScroll } from '../components/common'
+import { PostItems, Pagination } from '.'
+import { InfiniteScroll } from './InfiniteScroll'
 
 class PostView extends React.Component {
     constructor(props) {
         super(props)
         if (props.globalState.isInitializing() || !props.globalState.useInfiniteScroll) {
             props.globalState.updateState({
-                items: props.pageContext.initialPosts,
-                cursor: props.pageContext.currentPage + 1,
+                items: props.posts,
+                cursor: props.pageContext.humanPageNumber + 1,
             })
         }
     }
@@ -23,20 +24,15 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
-        const items = (!g.isInitializing() ? g.items : posts)
+        //const items = (!g.isInitializing() ? g.items : posts)
+        const items = posts
 
         return (
             <React.Fragment>
                 <div className="inner posts">
                     <div className="post-feed">
                         <InfiniteScroll throttle={300} threshold={600} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore}>
-
-                            {items.map(({ node } , i) => (
-                                // The tag below includes the markup for each post:
-                                // components/common/PostCard.js
-                                <PostCard key={node.id} post={node} num={i} isHome={isHome} isAuthor={isAuthor}/>
-                            ))}
-
+                            <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
                         </InfiniteScroll>
                     </div>
                 </div>
@@ -49,7 +45,7 @@ class PostView extends React.Component {
 PostView.propTypes = {
     globalState: PropTypes.object.isRequired,
     pageContext: PropTypes.object.isRequired,
-    posts: PropTypes.object.isRequired,
+    posts: PropTypes.array.isRequired,
     isHome: PropTypes.bool,
     isAuthor: PropTypes.bool,
 }

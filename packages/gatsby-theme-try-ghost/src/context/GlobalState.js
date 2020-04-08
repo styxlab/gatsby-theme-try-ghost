@@ -70,8 +70,7 @@ export class GlobalStateProvider extends React.Component {
 
     loadMore = () => {
         this.setState({ isLoading: true, error: undefined })
-        console.log(`${__PATH_PREFIX__}`)
-        fetch(`${__PATH_PREFIX__}/paginationJson/index${this.state.cursor}.json`)
+        fetch(`${__PATH_PREFIX__}/paginationJson/index${this.state.cursor}.json`) // eslint-disable-line no-undef
             .then(res => res.json())
             .then((res) => {
                 this.setState((state) => {
@@ -90,7 +89,7 @@ export class GlobalStateProvider extends React.Component {
             })
     }
 
-    hasMore = pageContext => (this.state.cursor <= pageContext.numPages && this.state.useInfiniteScroll)
+    hasMore = pageContext => this.state.cursor <= pageContext.numberOfPages && this.state.useInfiniteScroll
 
     render() {
         return (

@@ -97,7 +97,6 @@ export class InfiniteScroll extends React.Component<InfiniteScrollProps, {}> {
         children: this.props.children
       });
     }
-
     if(this.props.component) {
       const Container = this.props.component;
       return (
