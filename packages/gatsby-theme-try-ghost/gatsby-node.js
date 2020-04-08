@@ -53,6 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
                         id
                         title
                         slug
+                        url
                         featured
                         feature_image
                         excerpt
