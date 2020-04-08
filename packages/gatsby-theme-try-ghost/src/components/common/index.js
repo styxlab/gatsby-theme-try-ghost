@@ -1,6 +1,7 @@
 export { default as DocumentHead } from './DocumentHead'
 export { default as Layout } from './Layout'
 export { default as Pagination } from './Pagination'
+export { default as PostView } from './PostView'
 export { default as HeaderBackground } from './HeaderBackground'
 export { default as Navigation } from './Navigation'
 export { default as SiteNav } from './SiteNav'

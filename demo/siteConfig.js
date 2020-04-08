@@ -1,7 +1,7 @@
 module.exports = {
     siteUrl: `https://styxlab.github.io`, // Site domain. Do not include a trailing slash!
 
-    postsPerPage: 12, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
+    postsPerPage: 3, // Number of posts shown on paginated pages (changes this requires sometimes to delete the cache)
 
     siteTitleMeta: `Gatsby Ghost Casper`, // This allows an alternative site title for meta data for pages.
     siteDescriptionMeta: `Gastby with Ghost CMS and Casper Theme`, // This allows an alternative site description for meta data for pages.

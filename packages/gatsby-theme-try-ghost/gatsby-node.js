@@ -1,6 +1,7 @@
 const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 const routing = require(`./src/utils/routing`)
+const fs = require(`fs`)
 
 /**
  * Here is the place where Gatsby creates schema customizations.
@@ -113,7 +114,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -156,7 +157,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -196,7 +197,7 @@ exports.createPages = async ({ graphql, actions }) => {
     // Create pages
     pages.forEach(({ node }) => {
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         createPage({
@@ -216,7 +217,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     posts.forEach(({ node }, i) => {
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         //total number of posts for primary tag
@@ -242,6 +243,32 @@ exports.createPages = async ({ graphql, actions }) => {
                 primaryTagCount: primaryTagCount,
             },
         })
+    })
+
+    // For infinate scroll
+    function createPaginationJSON(pathSuffix, pagePosts) {
+        const dir = `public/paginationJson/`
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir)
+        }
+        const filePath = `${dir}index${pathSuffix}.json`
+        const dataToSave = JSON.stringify(pagePosts)
+        fs.writeFile(filePath, dataToSave, err => err && console.log(err))
+    }
+
+    const numberOfPages = Math.ceil(posts.length / postsPerPage)
+    console.log(posts.length)
+    console.log(numberOfPages)
+
+    _.times(numberOfPages, (i) => {
+        const pathSuffix = (i > 0 ? i + 1 : ``)
+
+        // Get posts for this page
+        const startInclusive = i * postsPerPage
+        const endExclusive = startInclusive + postsPerPage
+        const pagePosts = posts.slice(startInclusive, endExclusive)
+
+        createPaginationJSON(pathSuffix, pagePosts)
     })
 
     // Create pagination

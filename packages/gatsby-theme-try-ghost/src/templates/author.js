@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, HeaderAuthor, Pagination } from '../components/common'
+import { Layout, PostView, HeaderAuthor } from '../components/common'
 import { MetaData } from '../components/common/meta'
+
+import { GlobalStateContext } from "../context/GlobalState"
 
 /**
 * Author page (/author/:slug)
@@ -16,21 +18,15 @@ const Author = ({ data, location, pageContext }) => {
     const author = data.ghostAuthor
 
     return (
-        <React.Fragment>
-            <MetaData location={location} data={data} type="profile"/>
-            <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={posts.length}/>}>
-                <div className="inner posts">
-                    <div className="post-feed">
-                        {posts.map(({ node } , i) => (
-                            // The tag below includes the markup for each post:
-                            // components/common/PostCard.js
-                            <PostCard key={node.id} post={node} num={i} isAuthor={true}/>
-                        ))}
-                    </div>
-                </div>
-                <Pagination pageContext={pageContext} />
-            </Layout>
-        </React.Fragment>
+        <GlobalStateContext.Consumer>{ g => (
+            <React.Fragment>
+                <MetaData location={location} data={data} type="profile"/>
+                <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={posts.length}/>}>
+                    <PostView globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
+                </Layout>
+            </React.Fragment>
+        )}
+        </GlobalStateContext.Consumer>
     )
 }
 

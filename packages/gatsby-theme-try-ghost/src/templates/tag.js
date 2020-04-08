@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { HeaderTag, Layout, PostCard, Pagination } from '../components/common'
+import { HeaderTag, Layout, PostView } from '../components/common'
 import { MetaData } from '../components/common/meta'
+
+import { GlobalStateContext } from "../context/GlobalState"
 
 /**
 * Tag page (/tag/:slug)
@@ -16,21 +18,15 @@ const Tag = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
 
     return (
-        <React.Fragment>
-            <MetaData data={data} location={location} type="series"/>
-            <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={posts.length} />}>
-                <div className="inner posts">
-                    <div className="post-feed">
-                        {posts.map(({ node } , i) => (
-                            // The tag below includes the markup for each post:
-                            // components/common/PostCard.js
-                            <PostCard key={node.id} post={node} num={i} />
-                        ))}
-                    </div>
-                </div>
-                <Pagination pageContext={pageContext} />
-            </Layout>
-        </React.Fragment>
+        <GlobalStateContext.Consumer>{ g => (
+            <React.Fragment>
+                <MetaData data={data} location={location} type="series"/>
+                <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={posts.length} />}>
+                    <PostView globalState={g} pageContext={pageContext} posts={posts} />
+                </Layout>
+            </React.Fragment>
+        )}
+        </GlobalStateContext.Consumer>
     )
 }
 
