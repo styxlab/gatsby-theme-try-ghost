@@ -19,9 +19,7 @@ const PostCard = ({ post, num, isHome }) => {
         <article className={`post-card ${postClass} ${featImg && isHome && 0 === num % 6 && `post-card-large` || `` }`}>
 
             <Link className="post-card-image-link" to={url}>
-                <figure className="post-full-image">
-                    <ImgSharp fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
-                </figure>
+                <ImgSharp fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
             </Link>
 
             <div className="post-card-content">
