@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import styled, { keyframes } from "styled-components"
 import { FaSpinner } from 'react-icons/fa/'
 
-import { PostItems, Pagination, InfiniteScroll } from '.'
+import { PostItems, Pagination } from '.'
+import { InfiniteScroll } from './effects'
 
 const rotate = keyframes`
     to {

@@ -1,9 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+const throttle = require(`lodash.throttle`)
+
 export default class StickyNavContainer extends React.Component {
     constructor(props) {
         super(props)
+        this.scrollHandler = this.scrollHandler.bind(this)
+        this.resizeHandler = this.resizeHandler.bind(this)
         this.anchorRef = React.createRef()
         this.activeClass = this.props.activeClass,
         this.isPost = this.props.isPost || false,
@@ -12,12 +16,21 @@ export default class StickyNavContainer extends React.Component {
         }
     }
 
+    scrollHandler = () => {}
+
+    resizeHandler = () => {}
+
     componentDidMount() {
-        window.addEventListener(`scroll`, this.onScroll, { passive: true })
+        this.scrollHandler = throttle(this.onScroll, this.props.throttle)
+        this.resizeHandler = throttle(this.onScroll, this.props.throttle)
+
+        window.addEventListener(`scroll`, this.scrollHandler, { passive: true })
+        window.addEventListener(`resize`, this.resizeHandler, { passive: true })
     }
 
     componentWillUnmount() {
-        window.removeEventListener(`scroll`, this.onScroll, { passive: true })
+        window.removeEventListener(`scroll`, this.scrollHandler)
+        window.removeEventListener(`resize`, this.resizeHandler)
     }
 
     onScroll = () => {
@@ -33,12 +46,14 @@ export default class StickyNavContainer extends React.Component {
     }
 
     update = () => {
-        var top = this.anchorRef.current.getBoundingClientRect().top
+        const current = this.anchorRef && this.anchorRef.current
+
+        var top = current && current.getBoundingClientRect().top
         var trigger = top + window.scrollY
         var triggerOffset = -20
 
         if (this.isPost){
-            triggerOffset = this.anchorRef.current.offsetHeight + 35
+            triggerOffset = current && current.offsetHeight + 35
         }
 
         if (this.state.lastScrollY >= trigger + triggerOffset) {
@@ -58,5 +73,6 @@ export default class StickyNavContainer extends React.Component {
 StickyNavContainer.propTypes = {
     render: PropTypes.func.isRequired,
     activeClass: PropTypes.string.isRequired,
+    throttle: PropTypes.number.isRequired,
     isPost: PropTypes.bool,
 }

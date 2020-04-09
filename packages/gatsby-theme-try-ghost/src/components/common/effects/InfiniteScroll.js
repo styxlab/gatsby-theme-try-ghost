@@ -18,8 +18,8 @@ class InfiniteScroll extends React.Component {
         this.scrollHandler = throttle(this.checkWindowScroll, this.props.throttle)
         this.resizeHandler = throttle(this.checkWindowScroll, this.props.throttle)
 
-        window.addEventListener(`scroll`, this.scrollHandler)
-        window.addEventListener(`resize`, this.resizeHandler)
+        window.addEventListener(`scroll`, this.scrollHandler, { passive: true })
+        window.addEventListener(`resize`, this.resizeHandler, { passive: true })
     }
 
     componentWillUnmount() {
@@ -36,7 +36,7 @@ class InfiniteScroll extends React.Component {
         if (this.props.isLoading) {
             return
         }
-        if (this.props.hasMore &&
+        if (this.props.hasMore && this.props.threshold && this.sentinel &&
             this.sentinel.getBoundingClientRect().top - window.innerHeight < this.props.threshold
         ) {
             this.props.onLoadMore()
