@@ -63,9 +63,14 @@ class PostView extends React.Component {
                 }
 
                 {/* Fallback to Pagination for non JS users. */}
-                <noscript>
-                    <Pagination pageContext={pageContext} />
-                </noscript>
+                {g.useInfiniteScroll &&
+                    <noscript>
+                        <style>
+                            {`.spinner { display: none !important; }`}
+                        </style>
+                        <Pagination pageContext={pageContext} />
+                    </noscript>
+                }
 
                 {/* Fallback to Pagination on error. */}
                 {!g.useInfiniteScroll &&
