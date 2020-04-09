@@ -21,7 +21,7 @@ const Index = ({ data, location, pageContext }) => {
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData location={location} />
-                <StickyNavContainer throttel={300} activeClass="fixed-nav-active" render={ sticky => (
+                <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
                     <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
                         <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
                     </Layout>
