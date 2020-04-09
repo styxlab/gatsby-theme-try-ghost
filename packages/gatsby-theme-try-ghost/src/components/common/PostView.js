@@ -1,7 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled, { keyframes } from "styled-components"
+import { FaSpinner } from 'react-icons/fa/'
 
 import { PostItems, Pagination, InfiniteScroll } from '.'
+
+const rotate = keyframes`
+    to {
+        transform: rotate(360deg);
+    }
+`
+
+const Spinner = styled.div`
+    margin: -4vw 0vw 6vw;
+    font-size: 30px;
+    text-align: center;
+    display: ${props => (props.infiniteScroll ? `block` : `none`)};
+
+    & > svg {
+        fill: #738a94;
+        animation: ${rotate} 3s linear infinite;
+    }
+`
 
 class PostView extends React.Component {
     constructor(props) {
@@ -34,6 +54,13 @@ class PostView extends React.Component {
                         </InfiniteScroll>
                     </div>
                 </div>
+
+                {/* Loading spinner. */}
+                {g.isLoading &&
+                    <Spinner infiniteScroll={g.useInfiniteScroll} >
+                        <FaSpinner/>
+                    </Spinner>
+                }
 
                 {/* Fallback to Pagination for non JS users. */}
                 <noscript>

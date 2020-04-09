@@ -69,7 +69,10 @@ export class GlobalStateProvider extends React.Component {
     }
 
     loadMore = () => {
-        console.log(`loadMore`)
+        console.log(`loadMore: ${this.state.isLoading}`)
+        if (this.state.isLoading) {
+            return
+        }
         this.setState({ isLoading: true, error: undefined })
         fetch(`${__PATH_PREFIX__}/paginationJson/index${this.state.cursor}.json`) // eslint-disable-line no-undef
             .then(res => res.json())
