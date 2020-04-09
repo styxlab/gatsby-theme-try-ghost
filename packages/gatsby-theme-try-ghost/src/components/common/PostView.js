@@ -24,7 +24,6 @@ class PostView extends React.Component {
         } = this.props
 
         const items = (!g.isInitializing() ? g.items : posts)
-        //const items = posts
 
         return (
             <React.Fragment>
@@ -35,7 +34,17 @@ class PostView extends React.Component {
                         </InfiniteScroll>
                     </div>
                 </div>
-                <Pagination pageContext={pageContext} />
+
+                {/* Fallback to Pagination for non JS users. */}
+                <noscript>
+                    <Pagination pageContext={pageContext} />
+                </noscript>
+
+                {/* Fallback to Pagination on error. */}
+                {!g.useInfiniteScroll &&
+                    <Pagination pageContext={pageContext} />
+                }
+
             </React.Fragment>
         )
     }

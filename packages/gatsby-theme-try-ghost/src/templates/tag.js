@@ -21,7 +21,7 @@ const Tag = ({ data, location, pageContext }) => {
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData data={data} location={location} type="series"/>
-                <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={posts.length} />}>
+                <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={pageContext.totalPosts} />}>
                     <PostView globalState={g} pageContext={pageContext} posts={posts} />
                 </Layout>
             </React.Fragment>
