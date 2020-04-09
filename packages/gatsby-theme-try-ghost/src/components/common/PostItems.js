@@ -15,6 +15,7 @@ PostItems.propTypes = {
     posts: PropTypes.array.isRequired,
     isHome: PropTypes.bool,
     isAuthor: PropTypes.bool,
+    children: PropTypes.object,
 }
 
 export default PostItems

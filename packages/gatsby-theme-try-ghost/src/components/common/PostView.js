@@ -1,8 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { PostItems, Pagination } from '.'
-import { InfiniteScroll } from './InfiniteScroll'
+import { PostItems, Pagination, InfiniteScroll } from '.'
 
 class PostView extends React.Component {
     constructor(props) {
@@ -24,8 +23,8 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
-        //const items = (!g.isInitializing() ? g.items : posts)
-        const items = posts
+        const items = (!g.isInitializing() ? g.items : posts)
+        //const items = posts
 
         return (
             <React.Fragment>
