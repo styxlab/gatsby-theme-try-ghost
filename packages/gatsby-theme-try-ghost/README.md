@@ -16,8 +16,9 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 ## Features
 
 - Ghost Casper look and feel
-- Sticky navigation headers
+- Infinite Scroll **NEW**
 - [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) **NEW**
+- Sticky navigation headers
 - Hover on author avatar
 - Styled 404 page
 - SEO optimized
@@ -68,7 +69,7 @@ If you want to add this blog theme to an existing site, follow these instruction
         options: {
             siteConfig: {
                 siteUrl: `https://your-bog.com`,
-                postsPerPage: 25,
+                postsPerPage: 3,
                 siteTitleMeta: `Gatsby frontend powered by headless Ghost CMS`,
                 siteDescriptionMeta: `Turn your Ghost blog into a flaring fast static site with Gatsby`, 
                 shareImageWidth: 1000,
