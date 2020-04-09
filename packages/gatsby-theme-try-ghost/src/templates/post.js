@@ -37,7 +37,7 @@ const Post = ({ data, location, pageContext }) => {
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
             </Helmet>
-            <StickyNavContainer isPost={true} activeClass="nav-post-title-active" render={ sticky => (
+            <StickyNavContainer throttel={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
                     header={<HeaderPost sticky={sticky} title={post.title} />}
                     previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
