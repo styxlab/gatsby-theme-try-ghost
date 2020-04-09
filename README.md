@@ -15,8 +15,9 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 ## Features
 
 - Ghost Casper look and feel
-- Sticky navigation headers
+- Infinite Scroll :sparkles: :new:
 - [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) :rocket: :new:
+- Sticky navigation headers
 - Hover on author avatar
 - Styled 404 page
 - SEO optimized

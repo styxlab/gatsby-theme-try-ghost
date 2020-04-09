@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard, HeaderIndex, Pagination } from '../components/common'
+import { Layout, PostView, HeaderIndex } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
+
+import { GlobalStateContext } from "../context/GlobalState"
 
 /**
 * Main index page (home page)
@@ -16,23 +18,17 @@ const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
 
     return (
-        <React.Fragment>
-            <MetaData location={location} />
-            <StickyNavContainer activeClass="fixed-nav-active" render={ sticky => (
-                <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
-                    <div className="inner posts">
-                        <div className="post-feed">
-                            {posts.map(({ node } , i) => (
-                                // The tag below includes the markup for each post:
-                                // components/common/PostCard.js
-                                <PostCard key={node.id} post={node} num={i} isHome={true} />
-                            ))}
-                        </div>
-                    </div>
-                    <Pagination pageContext={pageContext} />
-                </Layout>
-            )}/>
-        </React.Fragment>
+        <GlobalStateContext.Consumer>{ g => (
+            <React.Fragment>
+                <MetaData location={location} />
+                <StickyNavContainer activeClass="fixed-nav-active" render={ sticky => (
+                    <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
+                        <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
+                    </Layout>
+                )}/>
+            </React.Fragment>
+        )}
+        </GlobalStateContext.Consumer>
     )
 }
 

@@ -2,7 +2,11 @@ const _ = require(`lodash`)
 
 const routing = (url, slug) => {
     // Early exit if url is empty
-    if (!url && url.length > 0) {
+    if (!(url !== null && url !== undefined && url.length > 0)) {
+        return `/${slug}/`
+    }
+
+    if (_.trim(url,`/`) === slug) {
         return `/${slug}/`
     }
 
@@ -11,7 +15,7 @@ const routing = (url, slug) => {
     const cmsUrl = _.head(url.match(regexp))
 
     // Early exit if absolute part cannot be found
-    if (!cmsUrl && cmsUrl.length > 0) {
+    if (!(cmsUrl !== null && cmsUrl !== undefined && cmsUrl.length > 0)) {
         return `/${slug}/`
     }
 

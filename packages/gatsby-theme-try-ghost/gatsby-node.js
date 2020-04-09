@@ -1,6 +1,9 @@
 const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 const routing = require(`./src/utils/routing`)
+const fs = require(`fs`)
+
+const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
 
 /**
  * Here is the place where Gatsby creates schema customizations.
@@ -40,53 +43,10 @@ exports.createSchemaCustomization = ({ actions }) => {
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions
 
-    const result = await graphql(`
-        {
-            allGhostPost(sort: { order: ASC, fields: published_at }) {
-                edges {
-                    node {
-                        slug
-                        url
-                        primary_tag {
-                            slug
-                            url
-                        }
-                    }
-                }
-            }
-            allGhostTag(sort: { order: ASC, fields: name }) {
-                edges {
-                    node {
-                        slug
-                        url
-                        postCount
-                    }
-                }
-            }
-            allGhostAuthor(sort: { order: ASC, fields: name }) {
-                edges {
-                    node {
-                        slug
-                        url
-                        postCount
-                    }
-                }
-            }
-            allGhostPage(sort: { order: ASC, fields: published_at }) {
-                edges {
-                    node {
-                        slug
-                        url
-                    }
-                }
-            }
-            site {
-                siteMetadata {
-                    postsPerPage
-                }
-            }
-        }
-    `)
+    /* Fragment are not yet possible here */
+    /* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/issues/12155 */
+
+    const result = await graphql(`${gatsbyNodeQuery}`)
 
     // Check for any errors
     if (result.errors) {
@@ -113,7 +73,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -139,6 +99,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     slug: node.slug,
                     limit: postsPerPage,
                     skip: i * postsPerPage,
+                    totalPosts: totalPosts,
                     numberOfPages: numberOfPages,
                     humanPageNumber: currentPage,
                     prevPageNumber: prevPageNumber,
@@ -156,7 +117,7 @@ exports.createPages = async ({ graphql, actions }) => {
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -182,6 +143,7 @@ exports.createPages = async ({ graphql, actions }) => {
                     slug: node.slug,
                     limit: postsPerPage,
                     skip: i * postsPerPage,
+                    totalPosts: totalPosts,
                     numberOfPages: numberOfPages,
                     humanPageNumber: currentPage,
                     prevPageNumber: prevPageNumber,
@@ -196,7 +158,7 @@ exports.createPages = async ({ graphql, actions }) => {
     // Create pages
     pages.forEach(({ node }) => {
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         createPage({
@@ -216,7 +178,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
     posts.forEach(({ node }, i) => {
         // Determine the routing structure from
-        // Ghost CMS by analzing the url field
+        // Ghost CMS by analyzing the url field
         node.url = routing(node.url, node.slug)
 
         //total number of posts for primary tag
@@ -242,6 +204,30 @@ exports.createPages = async ({ graphql, actions }) => {
                 primaryTagCount: primaryTagCount,
             },
         })
+    })
+
+    // For infinate scroll
+    function createPaginationJSON(pathSuffix, pagePosts) {
+        const dir = `public/paginationJson/`
+        if (!fs.existsSync(dir)){
+            fs.mkdirSync(dir)
+        }
+        const filePath = `${dir}index${pathSuffix}.json`
+        const dataToSave = JSON.stringify(pagePosts)
+        fs.writeFile(filePath, dataToSave, err => err && console.log(err))
+    }
+
+    const numberOfPages = Math.ceil(posts.length / postsPerPage)
+
+    _.times(numberOfPages, (i) => {
+        const pathSuffix = (i > 0 ? i + 1 : ``)
+
+        // Get posts for this page
+        const startInclusive = i * postsPerPage
+        const endExclusive = startInclusive + postsPerPage
+        const pagePosts = posts.slice(startInclusive, endExclusive)
+
+        createPaginationJSON(pathSuffix, pagePosts)
     })
 
     // Create pagination
