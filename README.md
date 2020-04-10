@@ -27,7 +27,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 ## Performance
 
-![Lighthouse Score](https://cms.gotsby.org/content/images/gotsby-lighthouse.png)
+![Lighthouse Score](https://static.gotsby.org/v1/assets/images/jamify-lighthouse.png)
 
 ## Addons
 

@@ -13,7 +13,7 @@ const rotate = keyframes`
 `
 
 const Spinner = styled.div`
-    margin: -4vw 0vw 6vw;
+    margin: -4vw 0vw 4.5vw;
     font-size: 30px;
     text-align: center;
     display: ${props => (props.infiniteScroll ? `block` : `none`)};
