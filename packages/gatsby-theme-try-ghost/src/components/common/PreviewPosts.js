@@ -9,7 +9,7 @@ import routing from '../../utils/routing'
 
 const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
     const primaryTag = posts && posts[0] && posts[0].node && posts[0].node.primary_tag
-    const url = routing(primaryTag.url, primaryTag.slug)
+    const url = primaryTag && routing(primaryTag.url, primaryTag.slug)
 
     return (
         <aside className="read-next outer">
