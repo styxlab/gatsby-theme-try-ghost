@@ -6,12 +6,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: -3vw 2vw 2vw;
+    margin: -2vw 0vw 3vw;
 }
 
 .pagination a {
     display: inline-block;
-    padding: 10px 15px;
+    padding: 10px 0px;
     border: var(--color-border) 1px solid;
     color: var(--color-secondary);
     text-decoration: none;
