@@ -3,12 +3,14 @@ const Promise = require(`bluebird`)
 const Rehype = require(`rehype`)
 const stripPosition = require(`unist-util-remove-position`)
 const hastReparseRaw = require(`hast-util-raw`)
+const visit = require(`unist-util-visit`)
 
 let pluginsCacheStr = ``
 let pathPrefixCacheStr = ``
 const astCacheKey = node => `transformer-rehype-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+const tableOfContentsCacheKey = node => `transformer-rehype-html-toc-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 
 // TODO: remove this check with next major release
 const safeGetCache = ({ getCache, cache }) => (id) => {
@@ -156,6 +158,31 @@ module.exports = ({
             }
         }
 
+        async function getTableOfContents(htmlNode) {
+            const cachedToc = await cache.get(tableOfContentsCacheKey(htmlNode))
+
+            if (cachedToc) {
+                return cachedToc
+            } else {
+                const htmlAst = await getAst(htmlNode)
+                const tags = [`h2`,`h3`,`h4`,`h5`,`h6`]
+                const headings = node => tags.includes(node.tagName)
+
+                let toc = []
+                visit(htmlAst, headings, (node) => {
+                    const [child] = node.children
+                    const id = node.properties && node.properties.id
+                    const level = node.tagName.substr(1,1)
+                    if (child.type === `text`){
+                        toc.push({ level: level, id: id, heading: child.value })
+                    }
+                })
+
+                cache.set(tableOfContentsCacheKey(htmlNode), toc)
+                return toc
+            }
+        }
+
         return resolve({
             html: {
                 type: `String`,
@@ -170,6 +197,12 @@ module.exports = ({
                         const strippedAst = stripPosition(_.clone(ast), true)
                         return hastReparseRaw(strippedAst)
                     })
+                },
+            },
+            tableOfContents: {
+                type: `JSON`,
+                resolve(htmlNode) {
+                    return getTableOfContents(htmlNode)
                 },
             },
         })
