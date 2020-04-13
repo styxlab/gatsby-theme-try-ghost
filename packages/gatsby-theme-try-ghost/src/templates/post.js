@@ -6,7 +6,7 @@ import Helmet from 'react-helmet'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import routing from '../utils/routing'
 
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments, TableOfContents } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -29,7 +29,10 @@ const Post = ({ data, location, pageContext }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
-    const transformedHtml = post.children && post.children[0] && post.children[0].html
+    const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+    const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
+
+    console.log(toc)
 
     return (
         <>
@@ -82,6 +85,8 @@ const Post = ({ data, location, pageContext }) => {
                             </figure>
 
                             <section className="post-full-content">
+                                <TableOfContents toc={toc} url={routing(post.url, post.slug)} />
+
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
@@ -100,6 +105,8 @@ Post.propTypes = {
     data: PropTypes.shape({
         ghostPost: PropTypes.shape({
             codeinjection_styles: PropTypes.string,
+            url: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
@@ -119,10 +126,13 @@ Post.propTypes = {
             }),
             published_at: PropTypes.string.isRequired,
             published_at_pretty: PropTypes.string.isRequired,
-            children: PropTypes.arrayOf(
-                PropTypes.object,
-            ),
             featureImageSharp: PropTypes.object,
+            childHtmlRehype: PropTypes.shape({
+                html: PropTypes.string,
+                tableOfContents: PropTypes.arrayOf(
+                    PropTypes.object,
+                ),
+            }),
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,

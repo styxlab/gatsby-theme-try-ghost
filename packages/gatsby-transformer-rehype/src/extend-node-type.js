@@ -165,21 +165,48 @@ module.exports = ({
                 return cachedToc
             } else {
                 const htmlAst = await getAst(htmlNode)
-                const tags = [`h2`,`h3`,`h4`,`h5`,`h6`]
+
+                const tags = [`h1`,`h2`,`h3`,`h4`,`h5`,`h6`]
                 const headings = node => tags.includes(node.tagName)
 
                 let toc = []
                 visit(htmlAst, headings, (node) => {
                     const [child] = node.children
-                    const id = node.properties && node.properties.id
-                    const level = node.tagName.substr(1,1)
                     if (child.type === `text`){
-                        toc.push({ level: level, id: id, heading: child.value })
+                        const id = node.properties && node.properties.id || `error-missing-id`
+                        const level = node.tagName.substr(1,1)
+                        toc.push({ level: level, id: id, heading: child.value, parentIndex: -1, items: [] })
                     }
                 })
 
-                cache.set(tableOfContentsCacheKey(htmlNode), toc)
-                return toc
+                // Walk up the list to find matching parent
+                const findParent = (toc, parentIndex, level) => {
+                    while (parentIndex >= 0 && level < toc[parentIndex].level) {
+                        parentIndex = toc[parentIndex].parentIndex
+                    }
+                    return parentIndex >= 0 ? toc[parentIndex].parentIndex : -1
+                }
+
+                // determine parents
+                toc.forEach((node, index) => {
+                    const prev = toc[index > 0 ? index - 1 : 0]
+                    node.parentIndex = node.level > prev.level ? node.parentIndex = index - 1 : prev.parentIndex
+                    node.parentIndex = node.level < prev.level ? findParent(toc, node.parentIndex, node.level) : node.parentIndex
+                })
+
+                // add children to their parent
+                toc.forEach(node => node.parentIndex >= 0 && toc[node.parentIndex].items.push(node))
+
+                // make final tree
+                let tocTree = toc.filter(({ parentIndex }) => parentIndex === -1)
+
+                // remove unneeded properties
+                const removeProps = ({ id, heading, items }) => ((items && items.length) > 0 ?
+                    { id, heading, items: items.map(item => removeProps(item)) } : { id, heading })
+                tocTree = tocTree.map(node => removeProps(node))
+
+                cache.set(tableOfContentsCacheKey(htmlNode), tocTree)
+                return tocTree
             }
         }
 
