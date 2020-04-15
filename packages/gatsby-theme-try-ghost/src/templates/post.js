@@ -88,7 +88,7 @@ const Post = ({ data, location, pageContext }) => {
                                 <TableOfContents toc={toc} url={routing(post.url, post.slug)} />
 
                                 <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
+                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }} />
                             </section>
 
                             <Comments id={post.id} />

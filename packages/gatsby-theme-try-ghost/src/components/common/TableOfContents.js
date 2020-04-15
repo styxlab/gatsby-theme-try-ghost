@@ -2,37 +2,42 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import styled from "styled-components"
+import { useEffect, useState } from "react"
 import { useActiveHash } from "./effects/use-active-hash"
 
 /*
  * styles passed into styled(Component) don't overwrite base styles #1816
  * https://github.com/styled-components/styled-components/issues/1816
 */
-const TocContainer = styled.aside`
+const TocAside = styled.aside`
     order: 1;
-`
-const TocDiv = styled.div`
-    && {
+    font-family: -apple-system, Liberation Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+    line-height: 1.5em;
+    font-size: 1.6rem;
+
+    @media (min-width: 1170px) {
         position: sticky;
         top: 120px;
         min-width: 260px;
-        font-family: -apple-system, Liberation Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-            Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
         font-size: 1.4rem;
-        line-height: 1.5em;
         padding: 0 0.8em;
     }
 `
+
 const TocTitle = styled.h2`
     && {
         color: #78757a;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         letter-spacing: 0.075em;
         margin-top: 0rem;
         margin-bottom: 2rem;
         text-transform: uppercase;
         font-weight: 700;
-    }
+
+        @media (min-width: 1170px) {
+            font-size: 1.2rem;
+        }
 `
 const TocList = styled.ul`
     && {
@@ -42,6 +47,7 @@ const TocList = styled.ul`
         margin:0;
         padding:0;
         margin-top: -1.6rem;
+        margin-bottom: 2.0rem;
         padding-top: 0.6rem;
         padding-left: 0.9rem;
     }
@@ -50,6 +56,7 @@ const TocListSub = styled.ul`
     && {
         margin-top: 0.5rem;
         padding-left: 1.6rem;
+        margin-bottom: 0.1rem;
     }
 `
 const TocItem = styled.li`
@@ -58,12 +65,25 @@ const TocItem = styled.li`
         margin-bottom: calc(1.5rem / 2);
     }
 `
+
+/*
+ * Unsolved issue with dark mode: Global dark mode overwrites the color attribute.
+ * Need to inject the DarkMode Provider to handle this?
+*/
 const TocLink = styled(Link)`
     && {
         height: 100%;
         box-shadow: none;
-        color: #78757a;
+        color: ${props => (props.state.isActive ? `#54BC4B` : `#78757A`)};
+        border-bottom: ${props => (props.state.isActive ? `1px solid #54BC4B` : `none`)};
         text-decoration: none;
+
+        &:hover {
+            color: #54BC4B;
+            border-bottom: 1px solid #54BC4B;
+            text-decoration: none;
+            box-shadow: none;
+        }
 
         &::before {
             background-color: #EEE;
@@ -75,24 +95,19 @@ const TocLink = styled(Link)`
             width: 2px;
             margin-left: 1px;
         }
-        &:focus{
-            &::before {
-                background-color:#54BC4B;
-            }
+
+        &::before {
+            background-color: ${props => (props.state.isActive ? `#54BC4B` : `#EEE`)};
         }
     }
 `
 const getHeadingIds = (toc, traverseFullDepth = true, maxDepth, recursionDepth = 1) => {
     const idList = []
-    const hashToId = str => str.slice(1)
 
     if (toc) {
         for (const item of toc) {
-            item.url && idList.push(hashToId(item.url))
+            item.id && idList.push(item.id)
 
-            // Only traverse sub-items if specified (they are not displayed in ToC)
-            // recursion depth should only go up to 6 headings deep and may come in as
-            // undefined if not set in the tableOfContentsDepth frontmatter field
             if (item.items && traverseFullDepth && recursionDepth < (maxDepth || 6)) {
                 idList.push(
                     ...getHeadingIds(item.items, true, maxDepth, recursionDepth + 1)
@@ -105,23 +120,20 @@ const getHeadingIds = (toc, traverseFullDepth = true, maxDepth, recursionDepth =
 
 const isUnderDepthLimit = (depth, maxDepth) => (maxDepth === null ? true : depth < maxDepth)
 
-const createItems = (toc, url, depth, maxDepth, activeHash) => (
+const createItems = (toc, url, depth, maxDepth, activeHash, isDesktop) => (
     toc.map((head, index) => {
-        const isActive = head.id === `${activeHash}`
+        const isActive = isDesktop && head.id === `${activeHash}`
 
         return (
             <TocItem key={location.pathname + (head.id || depth + `-` + index)}>
                 {head.id &&
-                    <TocLink
-                        getProps={({ href, location }) => (location && location.href && location.href.includes(href) ? {
-                            style: { color: `#3eb0ef`,
-                                borderBottom: `1px solid #3eb0ef`},
-                        } : null)}
-                        to={`${url}#${head.id}`}>{head.heading}</TocLink>
+                    <TocLink state = {{ isActive }} to={`${url}#${head.id}`}>
+                        {head.heading}
+                    </TocLink>
                 }
                 {head.items && isUnderDepthLimit(depth, maxDepth) &&
                     <TocListSub>
-                        {createItems(head.items, url, depth + 1, maxDepth)}
+                        {createItems(head.items, url, depth + 1, maxDepth, activeHash, isDesktop)}
                     </TocListSub>
                 }
             </TocItem>
@@ -130,21 +142,29 @@ const createItems = (toc, url, depth, maxDepth, activeHash) => (
 )
 
 const TableOfContents = ({ toc, url, maxDepth = 3 }) => {
+    const [isDesktop, setIsDesktop] = useState(false)
     const activeHash = useActiveHash(getHeadingIds(toc, true, maxDepth))
 
+    useEffect(() => {
+        const isDesktopQuery = window.matchMedia(`(min-width: 1170px)`)
+        setIsDesktop(isDesktopQuery.matches)
+
+        const updateIsDesktop = e => setIsDesktop(e.matches)
+        isDesktopQuery.addListener(updateIsDesktop)
+        return () => isDesktopQuery.removeListener(updateIsDesktop)
+    }, [])
+
     return (
-        <TocContainer>
-            <TocDiv>
-                <nav>
-                    <TocTitle>
-                        Table of Contents
-                    </TocTitle>
-                    <TocList>
-                        {createItems(toc, url, 1, maxDepth, activeHash)}
-                    </TocList>
-                </nav>
-            </TocDiv>
-        </TocContainer>
+        <TocAside>
+            <nav>
+                <TocTitle>
+                    Table of Contents
+                </TocTitle>
+                <TocList>
+                    {createItems(toc, url, 1, maxDepth, activeHash, isDesktop)}
+                </TocList>
+            </nav>
+        </TocAside>
     )
 }
 
@@ -153,7 +173,7 @@ TableOfContents.propTypes = {
         PropTypes.object,
     ).isRequired,
     url: PropTypes.string.isRequired,
-    depth: PropTypes.number,
+    maxDepth: PropTypes.number,
 }
 
 export default TableOfContents
