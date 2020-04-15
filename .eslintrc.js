@@ -28,6 +28,7 @@ module.exports = {
         "ghost/ember/no-observers": "off",
         "no-console": "off",
         "no-inner-declarations": "off",
+        "valid-jsdoc": "off",
         "require-jsdoc": "off",
         "quotes": ["error", "backtick"],
         "consistent-return": ["error"],
