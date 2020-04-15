@@ -32,8 +32,6 @@ const Post = ({ data, location, pageContext }) => {
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
 
-    console.log(toc)
-
     return (
         <>
             <MetaData data={data} location={location} type="article"/>
@@ -42,8 +40,8 @@ const Post = ({ data, location, pageContext }) => {
             </Helmet>
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
+                    header={<HeaderPost sticky={sticky} title={post.title}/>}
+                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
@@ -61,7 +59,7 @@ const Post = ({ data, location, pageContext }) => {
 
                                 <div className="post-full-byline">
                                     <section className="post-full-byline-content">
-                                        <AuthorList authors={post.authors} isPost={true} />
+                                        <AuthorList authors={post.authors} isPost={true}/>
 
                                         <section className="post-full-byline-meta">
                                             <h4 className="author-name">
@@ -81,17 +79,17 @@ const Post = ({ data, location, pageContext }) => {
                             </header>
 
                             <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
                             </figure>
 
                             <section className="post-full-content">
-                                <TableOfContents toc={toc} url={routing(post.url, post.slug)} />
+                                <TableOfContents toc={toc} url={routing(post.url, post.slug)}/>
 
                                 <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }} />
+                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
 
-                            <Comments id={post.id} />
+                            <Comments id={post.id}/>
 
                         </article>
                     </div>

@@ -1,3 +1,9 @@
+/**
+*
+* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/blob/master/www/src/hooks/use-active-hash.js
+*
+*/
+
 import { useEffect, useState } from "react"
 
 export const useActiveHash = (itemIds, rootMargin = undefined) => {

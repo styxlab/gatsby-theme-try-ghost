@@ -7,6 +7,8 @@ This is an HTML to HTML transformer. It parses HTML files and GraphQL HTML nodes
 
 The general idea of this package is to convert an input HTML fragment into an [HAST syntax tree](https://github.com/syntax-tree/hast), that is put into the `HtmlAst` object. `HtmlAst` is passed down to all plugins provided in the options. Plugins are allowed to mutate `HtmlAst` and thereby provide requested transformations on the original `HTML`. Finally `gatsby-transformer-rehype` parses the `HtmlAst` back to regular HTML.
 
+In addition to the transformed HTML, this plugin also creates a Table of Contents tree by analyzing all headlines withing the given HTML blob.
+
 ## Install
 
 `yarn add gatsby-transformer-rehype`
@@ -68,6 +70,10 @@ Each HTML file or HTML GraphQL node is parsed into a node of type `HtmlRehype`.
 
 This plugin adds additional fields to the `HtmlRehype` GraphQL node including `html`, `htmlAst` and `internal.content`. The latter contains the source HTML. The transformed HTML can be found in `html`. All transformations should be made on `htmlAst` which is passed to all sub-plugins. Other Gatsby plugins can also add additional fields.
 
+## Table of Contents
+
+A Table of Contents tree is added ...
+
 ## How to query
 
 A sample GraphQL query to get HtmlRehype nodes:
@@ -78,6 +84,7 @@ A sample GraphQL query to get HtmlRehype nodes:
     edges {
       node {
         html
+        tableOfContents
       }
     }
   }
@@ -93,10 +100,9 @@ Your source HTML comes either from a file or from some other HTML GraphQL node. 
   allGhostPost {
     edges {
       node {
-        children {
-          ... on HtmlRehype {
+        childHtmlRehype {
             html
-          }
+            tableOfContents
         }
       }
     }

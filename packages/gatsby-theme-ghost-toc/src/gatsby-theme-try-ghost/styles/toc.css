@@ -1,0 +1,47 @@
+
+/* Table of Content Box
+/* ---------------------------------------------------------- */
+
+/* Need for sticky to work */
+body {
+    overflow: visible;
+}
+
+/* Adjust outer wrapper */
+.post-full-content {
+    display: block;
+}
+
+@media (min-width: 1170px) {
+    .post-full-content {
+        display: flex;
+        align-items: flex-start;
+    }
+}
+
+/* Adjust content wrapper */
+.post-content {
+    display: block;
+    min-width: 100%;
+}
+
+/* Offset headings from fixed header */
+.post-content h2::before,
+.post-content h3::before,
+.post-content h4::before,
+.post-content h5::before,
+.post-content h6::before {
+    display: block;
+    content: " ";
+    height: 80px;
+    margin-top: -80px;
+    visibility: hidden;
+}
+
+/* Dark mode */
+body.dark .post-full-content aside {
+    color: #BBB;
+}
+body.dark .post-full-content aside a {
+    box-shadow: none;
+}
