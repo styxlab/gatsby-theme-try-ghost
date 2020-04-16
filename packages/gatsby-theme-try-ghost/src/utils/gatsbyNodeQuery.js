@@ -1,6 +1,13 @@
 /* Fragment are not yet possible in gatsby-node.js */
 /* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/issues/12155 */
 
+const htmlRehype = `
+# Transformed html
+childHtmlRehype {
+    html
+    tableOfContents
+}`
+
 const gatsbyNodeQuery = `{
     allGhostPost(sort: { order: DESC, fields: [published_at] }) {
         edges {
@@ -99,11 +106,7 @@ const gatsbyNodeQuery = `{
                 comment_id
                 reading_time
 
-                # Transformed html
-                childHtmlRehype {
-                    html
-                    tableOfContents
-                }
+                ${htmlRehype}
 
                 # ImgSharp
                 featureImageSharp {
