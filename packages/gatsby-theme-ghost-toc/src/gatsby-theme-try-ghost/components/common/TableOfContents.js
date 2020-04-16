@@ -37,7 +37,7 @@ const createItems = (toc, url, depth, maxDepth, activeHash, isDesktop) => (
     toc.map((head, index) => {
         const isActive = isDesktop && head.id === `${activeHash}`
         return (
-            <TocItem key={location.pathname + (head.id || depth + `-` + index)}>
+            <TocItem key={`${url}#${head.id}-${depth}-${index}`}>
                 {head.id &&
                     <TocLink state = {{ isActive }} to={`${url}#${head.id}`}>
                         {head.heading}
