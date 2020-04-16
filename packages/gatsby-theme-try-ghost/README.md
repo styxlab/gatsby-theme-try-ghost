@@ -35,11 +35,12 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
 
- - Dark mode toggle with [gatsby-theme-ghost-dark-mode](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode) 🌗 🆕
+ - Dark mode toggle with [gatsby-theme-ghost-dark-mode](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode) 🌗
  - Rewrite CMS links to relative with [gatsby-rehype-ghost-links](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)
  - Syntax highlighting with [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs)
  - Contact page with [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) 🆕
  - Commenting system with [gatsby-theme-ghost-commento](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento) 🆕
+ - Table of Contents with [gatsby-theme-ghost-toc](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕
  - Site tracking with [Ackee](https://github.com/burnsy/gatsby-plugin-ackee-tracker)
 
 
