@@ -12,13 +12,15 @@ export const TocAside = styled.aside`
     line-height: 1.5em;
     font-size: 1.6rem;
     color: #78757A;
+    background-color: rgba(255, 255, 255, 0.8);
 
     @media (min-width: 1170px) {
         position: sticky;
         top: 120px;
         min-width: 260px;
         font-size: 1.4rem;
-        padding: 0 0.8em;
+        padding: 0 0.8rem;
+        margin-left: 0.2rem;
     }
 `
 export const TocTitle = styled.h2`

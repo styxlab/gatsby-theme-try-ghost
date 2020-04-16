@@ -41,6 +41,7 @@ body {
 /* Dark mode */
 body.dark .post-full-content aside {
     color: #BBB;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 body.dark .post-full-content aside a {
     box-shadow: none;

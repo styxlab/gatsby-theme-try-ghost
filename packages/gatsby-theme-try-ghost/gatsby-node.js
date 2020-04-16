@@ -32,6 +32,22 @@ exports.createSchemaCustomization = ({ actions }) => {
         type SiteSiteMetadata {
             navigation: [Navigation!]
         }
+        type HtmlRehype implements Node {
+            html: String
+            tableOfContents: JSON
+        }
+        type allGhostPost implements Node {
+            childHtmlRehype: HtmlRehype @link
+        }
+        type GhostPost implements Node {
+            childHtmlRehype: HtmlRehype @link
+        }
+        type allGhostPage implements Node {
+            childHtmlRehype: HtmlRehype @link
+        }
+        type GhostPage implements Node {
+            childHtmlRehype: HtmlRehype @link
+        }
     `
     createTypes(typeDefs)
 }
