@@ -1,0 +1,173 @@
+@import "gatsby-theme-try-ghost/src/styles/global.css";
+
+/* 12. Dark Mode
+/* ---------------------------------------------------------- */
+
+body.dark {
+    color: rgba(255, 255, 255, 0.75);
+    background: var(--darkmode);
+}
+body.dark img {
+    opacity: 0.9;
+}
+body.dark .site-header-background:before {
+    background: rgba(0,0,0,0.6);
+}
+body.dark .post-feed {
+    background: var(--darkmode);
+}
+body.dark .post-card,
+body.dark .post-card:hover {
+    border-bottom-color: color(var(--darkmode) l(+8%));
+}
+body.dark .author-profile-image {
+    background: var(--darkmode);
+}
+body.dark .post-card-byline-content a {
+    color: rgba(255, 255, 255, 0.75);
+}
+body.dark .post-card-byline-content a:hover {
+    color: #fff;
+}
+body.dark .post-card-image {
+    background: var(--darkmode);
+}
+body.dark .post-card-title {
+    color: rgba(255, 255, 255, 0.85);
+}
+body.dark .post-card-excerpt {
+    color: color(var(--midgrey) l(+10%));
+}
+body.dark .author-avatar,
+body.dark .static-avatar {
+    border-color: color(var(--darkgrey) l(+2%));
+}
+body.dark .site-main,
+body.dark .post-template .site-main,
+body.dark .page-template .site-main {
+    background: var(--darkmode);
+}
+body.dark .post-full-content {
+    background: var(--darkmode);
+}
+body.dark .post-full-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+body.dark .post-full-custom-excerpt {
+    color: color(var(--midgrey) l(+10%));
+}
+body.dark .post-full-image {
+    background-color: color(var(--darkmode) l(+8%));
+}
+body.dark .post-full-byline {
+    border-top-color: color(var(--darkmode) l(+15%));
+}
+body.dark .post-full-byline-meta h4 a {
+    color: rgba(255, 255, 255, 0.75);
+}
+body.dark .post-full-byline-meta h4 a:hover {
+    color: #fff;
+}
+body.dark .author-list-item .author-card {
+    background: color(var(--darkmode) l(+4%));
+    box-shadow: 0 12px 26px rgba(0,0,0,0.4);
+}
+body.dark .author-list-item .author-card:before {
+    border-top-color: color(var(--darkmode) l(+4%));
+}
+body.dark .no-image .author-social-link a {
+    color: rgba(255, 255, 255, 0.75);
+}
+body.dark .post-full-content h1,
+body.dark .post-full-content h2,
+body.dark .post-full-content h3,
+body.dark .post-full-content h4,
+body.dark .post-full-content h6 {
+    color: rgba(255, 255, 255, 0.9);
+}
+body.dark .post-full-content a {
+    color: #fff;
+    box-shadow: inset 0 -1px 0 #fff;
+}
+body.dark .post-full-content strong {
+    color: #fff;
+}
+body.dark .post-full-content em {
+    color: #fff;
+}
+body.dark .post-full-content code {
+    color: #fff;
+    background: #000;
+}
+body.dark hr {
+    border-top-color: color(var(--darkmode) l(+8%));
+}
+body.dark .post-full-content figcaption {
+    color: rgba(255, 255, 255, 0.6);
+}
+body.dark .post-full-content table td:first-child {
+    background-image: linear-gradient(to right, var(--darkmode) 50%, color(var(--darkmode) a(0%)) 100%);
+}
+body.dark .post-full-content table td:last-child {
+    background-image: linear-gradient(to left, var(--darkmode) 50%, color(var(--darkmode) a(0%)) 100%);
+}
+body.dark .post-full-content table th {
+    color: rgba(255, 255, 255, 0.85);
+    background-color: color(var(--darkmode) l(+8%));
+}
+body.dark .post-full-content table th,
+body.dark .post-full-content table td {
+    border: color(var(--darkmode) l(+8%)) 1px solid;
+}
+body.dark .post-full-content .kg-bookmark-container,
+body.dark .post-full-content .kg-bookmark-container:hover {
+    color: rgba(255, 255, 255, 0.75);
+    box-shadow: 0 0 1px rgba(255,255,255,0.9);
+}
+body.dark .kg-bookmark-title {
+    color: #fff;
+}
+body.dark .kg-bookmark-description {
+    color: rgba(255, 255, 255, 0.75);
+}
+body.dark .kg-bookmark-metadata {
+    color: rgba(255, 255, 255, 0.75);
+}
+body.dark .site-archive-header .no-image {
+    color: rgba(255, 255, 255, 0.9);
+    background: var(--darkmode);
+}
+body.dark .site-archive-header .no-image .site-header-content {
+    border-bottom-color: color(var(--darkmode) l(+15%));
+}
+body.dark .site-header-content .author-profile-image {
+    box-shadow: 0 0 0 6px hsla(0,0%,100%,0.04);
+}
+body.dark .subscribe-form {
+    border: none;
+    background: linear-gradient(color(var(--darkmode) l(-6%)), color(var(--darkmode) l(-3%)));
+}
+body.dark .subscribe-form-title {
+    color: rgba(255, 255, 255, 0.9);
+}
+body.dark .subscribe-form p {
+    color: rgba(255, 255, 255, 0.7);
+}
+body.dark .subscribe-email {
+    border-color: color(var(--darkmode) l(+6%));
+    color: rgba(255, 255, 255, 0.9);
+    background: color(var(--darkmode) l(+3%));
+}
+body.dark .subscribe-email:focus {
+    border-color: color(var(--darkmode) l(+25%));
+}
+body.dark .subscribe-form button {
+    opacity: 0.9;
+}
+body.dark .subscribe-form .invalid .message-error,
+body.dark .subscribe-form .error .message-error {
+    color: color(var(--red) l(+5%) s(-5%));
+}
+body.dark .subscribe-form .success .message-success {
+    color: color(var(--green) l(+5%) s(-5%));
+}

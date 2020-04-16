@@ -1,6 +1,7 @@
 const typeDefs = `
     type HtmlRehype implements Node {
         html: String
+        tableOfContents: JSON
     }
 `
 

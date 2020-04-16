@@ -6,7 +6,7 @@ import Helmet from 'react-helmet'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import routing from '../utils/routing'
 
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments, TableOfContents } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -29,7 +29,8 @@ const Post = ({ data, location, pageContext }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
 
     const primaryTagCount = pageContext.primaryTagCount
-    const transformedHtml = post.children && post.children[0] && post.children[0].html
+    const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+    const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
 
     return (
         <>
@@ -39,8 +40,8 @@ const Post = ({ data, location, pageContext }) => {
             </Helmet>
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost} />}>
+                    header={<HeaderPost sticky={sticky} title={post.title}/>}
+                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
@@ -58,7 +59,7 @@ const Post = ({ data, location, pageContext }) => {
 
                                 <div className="post-full-byline">
                                     <section className="post-full-byline-content">
-                                        <AuthorList authors={post.authors} isPost={true} />
+                                        <AuthorList authors={post.authors} isPost={true}/>
 
                                         <section className="post-full-byline-meta">
                                             <h4 className="author-name">
@@ -78,15 +79,17 @@ const Post = ({ data, location, pageContext }) => {
                             </header>
 
                             <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
                             </figure>
 
                             <section className="post-full-content">
+                                <TableOfContents toc={toc} url={routing(post.url, post.slug)}/>
+
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
 
-                            <Comments id={post.id} />
+                            <Comments id={post.id}/>
 
                         </article>
                     </div>
@@ -100,6 +103,8 @@ Post.propTypes = {
     data: PropTypes.shape({
         ghostPost: PropTypes.shape({
             codeinjection_styles: PropTypes.string,
+            url: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
             id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
@@ -119,10 +124,13 @@ Post.propTypes = {
             }),
             published_at: PropTypes.string.isRequired,
             published_at_pretty: PropTypes.string.isRequired,
-            children: PropTypes.arrayOf(
-                PropTypes.object,
-            ),
             featureImageSharp: PropTypes.object,
+            childHtmlRehype: PropTypes.shape({
+                html: PropTypes.string,
+                tableOfContents: PropTypes.arrayOf(
+                    PropTypes.object,
+                ),
+            }),
         }).isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,

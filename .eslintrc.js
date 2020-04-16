@@ -25,6 +25,7 @@ module.exports = {
     "rules": {
         "ghost/sort-imports-es6-autofix/sort-imports-es6": "off",
         "ghost/ember/use-ember-get-and-set": "off",
+        "ghost/ember/no-observers": "off",
         "no-console": "off",
         "no-inner-declarations": "off",
         "valid-jsdoc": "off",

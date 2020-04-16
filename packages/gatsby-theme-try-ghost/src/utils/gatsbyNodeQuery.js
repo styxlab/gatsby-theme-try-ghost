@@ -100,10 +100,9 @@ const gatsbyNodeQuery = `{
                 reading_time
 
                 # Transformed html
-                children {
-                    ... on HtmlRehype {
-                        html
-                    }
+                childHtmlRehype {
+                    html
+                    tableOfContents
                 }
 
                 # ImgSharp

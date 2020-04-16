@@ -7,7 +7,9 @@ import { BodyClass } from './helpers'
 
 // Styles
 import '../../styles/screen.css'
+import '../../styles/dark-mode.css'
 import '../../styles/pagination.css'
+import '../../styles/toc.css'
 
 // Styles from other plugins
 import '../../styles/custom-styles'

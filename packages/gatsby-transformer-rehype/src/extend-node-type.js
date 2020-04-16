@@ -3,12 +3,14 @@ const Promise = require(`bluebird`)
 const Rehype = require(`rehype`)
 const stripPosition = require(`unist-util-remove-position`)
 const hastReparseRaw = require(`hast-util-raw`)
+const visit = require(`unist-util-visit`)
 
 let pluginsCacheStr = ``
 let pathPrefixCacheStr = ``
 const astCacheKey = node => `transformer-rehype-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+const tableOfContentsCacheKey = node => `transformer-rehype-html-toc-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 
 // TODO: remove this check with next major release
 const safeGetCache = ({ getCache, cache }) => (id) => {
@@ -156,6 +158,58 @@ module.exports = ({
             }
         }
 
+        async function getTableOfContents(htmlNode) {
+            const cachedToc = await cache.get(tableOfContentsCacheKey(htmlNode))
+
+            if (cachedToc) {
+                return cachedToc
+            } else {
+                const htmlAst = await getAst(htmlNode)
+
+                const tags = [`h1`,`h2`,`h3`,`h4`,`h5`,`h6`]
+                const headings = node => tags.includes(node.tagName)
+
+                let toc = []
+                visit(htmlAst, headings, (node) => {
+                    const [child] = node.children
+                    if (child.type === `text`){
+                        const id = node.properties && node.properties.id || `error-missing-id`
+                        const level = node.tagName.substr(1,1)
+                        toc.push({ level: level, id: id, heading: child.value, parentIndex: -1, items: [] })
+                    }
+                })
+
+                // Walk up the list to find matching parent
+                const findParent = (toc, parentIndex, level) => {
+                    while (parentIndex >= 0 && level < toc[parentIndex].level) {
+                        parentIndex = toc[parentIndex].parentIndex
+                    }
+                    return parentIndex >= 0 ? toc[parentIndex].parentIndex : -1
+                }
+
+                // determine parents
+                toc.forEach((node, index) => {
+                    const prev = toc[index > 0 ? index - 1 : 0]
+                    node.parentIndex = node.level > prev.level ? node.parentIndex = index - 1 : prev.parentIndex
+                    node.parentIndex = node.level < prev.level ? findParent(toc, node.parentIndex, node.level) : node.parentIndex
+                })
+
+                // add children to their parent
+                toc.forEach(node => node.parentIndex >= 0 && toc[node.parentIndex].items.push(node))
+
+                // make final tree
+                let tocTree = toc.filter(({ parentIndex }) => parentIndex === -1)
+
+                // remove unneeded properties
+                const removeProps = ({ id, heading, items }) => ((items && items.length) > 0 ?
+                    { id, heading, items: items.map(item => removeProps(item)) } : { id, heading })
+                tocTree = tocTree.map(node => removeProps(node))
+
+                cache.set(tableOfContentsCacheKey(htmlNode), tocTree)
+                return tocTree
+            }
+        }
+
         return resolve({
             html: {
                 type: `String`,
@@ -170,6 +224,12 @@ module.exports = ({
                         const strippedAst = stripPosition(_.clone(ast), true)
                         return hastReparseRaw(strippedAst)
                     })
+                },
+            },
+            tableOfContents: {
+                type: `JSON`,
+                resolve(htmlNode) {
+                    return getTableOfContents(htmlNode)
                 },
             },
         })

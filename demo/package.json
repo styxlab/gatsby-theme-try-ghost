@@ -11,8 +11,8 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.20.13",
-    "gatsby-plugin-ackee-tracker": "^1.2.0",
+    "gatsby": "^2.20.22",
+    "gatsby-plugin-ackee-tracker": "^1.4.0",
     "gatsby-rehype-ghost-links": "*",
     "gatsby-rehype-prismjs": "*",
     "gatsby-theme-try-ghost": "*",

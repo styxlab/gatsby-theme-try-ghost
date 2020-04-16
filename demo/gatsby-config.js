@@ -69,6 +69,12 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-theme-ghost-toc`,
+            options: {
+                maxDepth: 3,
+            },
+        },
+        {
             resolve: `gatsby-theme-ghost-contact`,
             options: {
                 siteMetadata: {

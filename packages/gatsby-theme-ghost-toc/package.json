@@ -1,14 +1,14 @@
 {
-    "name": "gatsby-theme-ghost-dark-mode",
-    "description": "Gatsby theme to integrate dark mode into gatsby-theme-try-ghost.",
-    "version": "1.1.0",
+    "name": "gatsby-theme-ghost-toc",
+    "description": "Gatsby theme to add a ToC (Table of Contents) to gatsby-theme-try-ghost.",
+    "version": "1.0.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode"
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc"
     },
     "bugs": {
         "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
@@ -18,8 +18,8 @@
         "gatsby-plugin",
         "gatsby-theme",
         "gatsby-theme-try-ghost",
-        "dark-mode",
-        "dark-theme",
+        "toc",
+        "table-of-contents",
         "jamify",
         "ghost",
         "ghost-cms"
