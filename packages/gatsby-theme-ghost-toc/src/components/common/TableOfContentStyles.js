@@ -13,6 +13,7 @@ export const TocAside = styled.aside`
     font-size: 1.6rem;
     color: #78757A;
     background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
 
     @media (min-width: 1170px) {
         position: sticky;
@@ -27,7 +28,7 @@ export const TocTitle = styled.h2`
     && {
         font-size: 1.4rem;
         letter-spacing: 0.075em;
-        margin-top: 0rem;
+        margin-top: 1.2rem;
         margin-bottom: 2rem;
         text-transform: uppercase;
         font-weight: 700;
