@@ -33,7 +33,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 ## Addons
 
-Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with this repository:
+Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with [`gatsby-theme-try-ghost`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost):
 
 | Name | Version | Description |   
 | ---- | ------- | ----------- |
