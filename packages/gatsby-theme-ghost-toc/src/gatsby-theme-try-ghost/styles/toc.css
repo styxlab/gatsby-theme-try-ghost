@@ -39,6 +39,27 @@ body {
     visibility: hidden;
 }
 
+/* Adjustments to wide and full width cards */
+.post-full-content .kg-image {
+    margin: 0;
+}
+
+.kg-gallery-card,
+.kg-width-wide,
+.kg-width-full {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kg-gallery-card > *,
+.kg-width-wide > *,
+.kg-width-full > *,
+figure.kg-width-full img {
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
 /* Dark mode */
 body.dark .post-full-content aside {
     color: #BBB;
