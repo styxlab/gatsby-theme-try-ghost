@@ -16,7 +16,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 - Ghost Casper look and feel
 - Infinite Scroll ✨ 🆕
-- [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) 🚀 🆕
+- [Gatsby images](https://using-gatsby-image.gatsbyjs.org/) 🚀
 - Sticky navigation headers
 - Hover on author avatar
 - Styled 404 page
@@ -38,9 +38,9 @@ Additional features can be integrated by installing Gatsby themes or plugins. Th
 | [`gatsby-theme-ghost-dark-mode`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode) | [![gatsby-theme-ghost-dark-mode npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-dark-mode)](https://www.npmjs.com/package/gatsby-theme-ghost-dark-mode) | Dark mode toggle 🌗 |
 | [`gatsby-rehype-ghost-links`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links) | [![gatsby-rehype-ghost-links npm package version.](https://badgen.net/npm/v/gatsby-rehype-ghost-links)](https://www.npmjs.com/package/gatsby-rehype-ghost-links) | Rewrite CMS links from absolute to relative |
 | [`gatsby-rehype-prismjs`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs) | [![gatsby-rehype-prismjs npm package version.](https://badgen.net/npm/v/gatsby-rehype-prismjs)](https://www.npmjs.com/package/gatsby-rehype-prismjs) | Syntax highlighting |
-| [`gatsby-theme-ghost-contact`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) 🆕 | [![gatsby-theme-ghost-contact npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.com/package/gatsby-theme-ghost-contact) | Contact page |
+| [`gatsby-theme-ghost-contact`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) | [![gatsby-theme-ghost-contact npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.com/package/gatsby-theme-ghost-contact) | Contact page |
 | [`gatsby-theme-ghost-commento`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento) 🆕 | [![gatsby-theme-ghost-commento npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.com/package/gatsby-theme-ghost-commento) | Commenting system |
-| [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) | [![gatsby-theme-ghost-toc npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc) | Table of Contents |
+| [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕 | [![gatsby-theme-ghost-toc npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc) | Table of Contents |
 | [`Ackee`](https://github.com/burnsy/gatsby-plugin-ackee-tracker) | [![gatsby-plugin-ackee-tracker npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-plugin-ackee-tracker) | Site tracking |
 
 
