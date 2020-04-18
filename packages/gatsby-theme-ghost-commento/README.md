@@ -24,7 +24,8 @@ plugins: [
     {
         resolve: `gatsby-theme-ghost-commento`,
         options: {
-            // The url pointing to your commento installation (required)
+            // The url pointing to your self-hosted commento installation
+            // You can remove the option, if you use the commento.io managed service
             url: `https://commento.your-blog.com`,
         },
     },
@@ -33,7 +34,7 @@ plugins: [
 
 ## Details
 
-This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. Please play with the [Commento Demo](https://demo.commento.io/) in order to find out if this is the right commenting system for you. To configure, just add your commento URL to the plugin options as shown above. The commento URL will be created for you from the backend.
+This Gatsby theme plugin hooks into the `gatsby-theme-try-ghost` theme and adds a comment section to every post. Please play with the [Commento Demo](https://demo.commento.io/) in order to find out if this is the right commenting system for you. If you are self-hosting commento, then add your endpoint in the `url` field above. Users of the commento.io managed service, can remove the options as the `url` defaults to `https://cdn.commento.io`.
 
 ## Backend
 
@@ -53,7 +54,7 @@ All comments are sourced in via a javascript plugin on runtime. To improve SEO i
 
 ## Contributions
 
-PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others. Explore [this guide](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/CONTRIBUTING.md), to get some more ideas.
 
 
 # Copyright & License

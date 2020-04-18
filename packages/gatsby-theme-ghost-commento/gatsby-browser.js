@@ -4,7 +4,7 @@ import { ThemeProvider } from "./src/context/ThemeContext"
 
 export const wrapPageElement = ({ element }, themeOptions) => {
     const {
-        url = ``,
+        url = `https://cdn.commento.io`,
     } = themeOptions
 
     return (

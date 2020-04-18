@@ -45,7 +45,7 @@ The `maxDepth` option allows you to specify the number of headline levels shown.
 
 ## Contributions
 
-PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others.
+PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others. Explore [this guide](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/CONTRIBUTING.md), to get some more ideas.
 
 
 # Copyright & License
