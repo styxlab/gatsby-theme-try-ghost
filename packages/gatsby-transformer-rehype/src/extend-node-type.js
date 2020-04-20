@@ -172,7 +172,7 @@ module.exports = ({
                 let toc = []
                 visit(htmlAst, headings, (node) => {
                     const [child] = node.children
-                    if (child.type === `text`){
+                    if (child && child.type === `text`){
                         const id = node.properties && node.properties.id || `error-missing-id`
                         const level = node.tagName.substr(1,1)
                         toc.push({ level: level, id: id, heading: child.value, parentIndex: -1, items: [] })
@@ -230,6 +230,7 @@ module.exports = ({
                 type: `JSON`,
                 resolve(htmlNode) {
                     return getTableOfContents(htmlNode)
+                        .then(toc => toc)
                 },
             },
         })
