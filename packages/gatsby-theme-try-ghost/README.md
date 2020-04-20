@@ -31,7 +31,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 ![Lighthouse Score](https://static.gotsby.org/v1/assets/images/jamify-lighthouse.png)
 
 
-## Addons
+## Plugins
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with [`gatsby-theme-try-ghost`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost):
 
@@ -44,7 +44,7 @@ Additional features can be integrated by installing Gatsby themes or plugins. Th
 | [`gatsby-theme-ghost-commento`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.com/package/gatsby-theme-ghost-commento) | Commenting system with [Commento](https://commento.io/) |
 | [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc) | Table of Contents |
 | [`gatsby-plugin-ackee-tracker`](https://github.com/burnsy/gatsby-plugin-ackee-tracker) | [![version](https://badgen.net/npm/v/gatsby-plugin-ackee-tracker)](https://www.npmjs.com/package/gatsby-plugin-ackee-tracker) | Site tracking with [Ackee](https://github.com/electerious/Ackee) |
-| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics) | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | [Google Analytics](https://developers.google.com/analytics) |
+| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics) | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | Site tracking with [Google Analytics](https://developers.google.com/analytics) |
 
 
 ## Installation

@@ -19,9 +19,13 @@ export const useActiveHash = (itemIds, rootMargin = undefined) => {
         },
         { rootMargin: rootMargin || `0% 0% -90% 0%` })
 
-        itemIds.forEach(id => observer.observe(document.getElementById(id)))
+        itemIds
+            .filter(id => id !== `error-missing-id`)
+            .forEach(id => observer.observe(document.getElementById(id)))
 
-        return () => itemIds.forEach(id => observer.unobserve(document.getElementById(id)))
+        return () => itemIds
+            .filter(id => id !== `error-missing-id`)
+            .forEach(id => observer.unobserve(document.getElementById(id)))
     }, [])
 
     return activeHash

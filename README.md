@@ -29,7 +29,7 @@ Play with the [Demo](https://styxlab.github.io) to get a first impression.
 
 ![Lighthouse Score](https://static.gotsby.org/v1/assets/images/jamify-lighthouse.png)
 
-## Addons
+## Plugins
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with [`gatsby-theme-try-ghost`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost):
 
@@ -42,7 +42,7 @@ Additional features can be integrated by installing Gatsby themes or plugins. Th
 | [`gatsby-theme-ghost-commento`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.com/package/gatsby-theme-ghost-commento) | Commenting system with [Commento](https://commento.io/) |
 | [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc) | Table of Contents |
 | [`gatsby-plugin-ackee-tracker`](https://github.com/burnsy/gatsby-plugin-ackee-tracker) | [![version](https://badgen.net/npm/v/gatsby-plugin-ackee-tracker)](https://www.npmjs.com/package/gatsby-plugin-ackee-tracker) | Site tracking with [Ackee](https://github.com/electerious/Ackee) |
-| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics) | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | [Google Analytics](https://developers.google.com/analytics) |
+| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics) | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | Site tracking with [Google Analytics](https://developers.google.com/analytics) |
 
 
 ## Quick Start
@@ -52,7 +52,7 @@ Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-gh
 
 ## Installation
 
-This mono repository contains the demo code, the base theme and addons. If you are here to install the Gatsby base theme plugin in your existing project, check out the [theme specific README](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost/README.md) for further details. All addons can be found under the [packages/](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/) folder.
+This mono repository contains the demo code, the base theme and add-ons. If you are here to install the Gatsby base theme plugin in your existing project, check out the [theme specific README](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost/README.md) for further details. All add-ons can be found under the [packages/](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/) folder.
 
 In case you want to work with this repository (for local development, pull requests, etc.):
 
