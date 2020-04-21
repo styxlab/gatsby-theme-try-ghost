@@ -6,7 +6,9 @@ import Helmet from 'react-helmet'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import routing from '../utils/routing'
 
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, Comments, TableOfContents } from '../components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
+import { Comments, TableOfContents, Newsletter } from '../components/common'
+
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
@@ -88,6 +90,8 @@ const Post = ({ data, location, pageContext }) => {
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
+
+                            <Newsletter />
 
                             <Comments id={post.id}/>
 
