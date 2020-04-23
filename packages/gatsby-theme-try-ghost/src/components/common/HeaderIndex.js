@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { Link, StaticQuery, graphql } from 'gatsby'
 
 import { SiteNav, HeaderBackground } from '.'
+import useOptions from '../../utils/use-options'
 
 const HeaderIndex = ({ data }) => {
+    const { basePath } = useOptions()
     const site = data.allGhostSettings.edges[0].node
 
     return (
@@ -15,7 +17,7 @@ const HeaderIndex = ({ data }) => {
                     <div className="site-header-content">
                         <h1 className="site-title">
                             {site.logo ? (
-                                <Link to="/">
+                                <Link to={basePath}>
                                     <img className="site-logo" src={site.logo} alt={site.title} />
                                 </Link>
                             ) : (

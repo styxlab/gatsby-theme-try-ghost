@@ -1,7 +1,10 @@
 const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 
-module.exports = ({ htmlAst, htmlNode, reporter }) => {
+module.exports = ({ htmlAst, htmlNode, getNode, reporter }) => {
+    const config = getNode(`gatsby-theme-try-ghost-config`)
+    const basePath = config && config.basePath || `/`
+
     const url = htmlNode && htmlNode.context && htmlNode.context.url
     const slug = htmlNode && htmlNode.context && htmlNode.context.slug
 
@@ -26,7 +29,7 @@ module.exports = ({ htmlAst, htmlNode, reporter }) => {
     visit(htmlAst, { tagName: `a` }, (node) => {
         const href = node.properties && node.properties.href
         if (href && _.startsWith(href, cmsUrl)) {
-            node.properties.href = _.replace(href, cmsUrl ,`/`)
+            node.properties.href = _.replace(href, cmsUrl , basePath)
         }
     })
 

@@ -3,27 +3,37 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import { Navigation, SocialLinks } from '.'
+import { appendBasePath, routing } from '../../utils/routing'
+import useOptions from '../../utils/use-options'
 
 const SiteNav = ({ data, className, postTitle }) => {
+    const { basePath } = useOptions()
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
 
+    // add basePath only to navigation items coming from Ghost CMS
+    const navigation = site.navigation.map((item) => {
+        const url = item.url.match(/^\s?http(s?)/gi) ? item.url : `${basePath}${item.url}`.replace(`//`,`/`)
+        return ({ ...item, url: url })
+    })
+    const urls = navigation.map(item => item.url)
+
     // allow plugins to add menu items
-    let navigation = site.navigation
-    let urls = navigation.map(item => item.url)
     if (config.navigation && config.navigation.length >= 0) {
         config.navigation.map(item => urls.indexOf(item.url) === -1 && navigation.push(item))
     }
+
+    const siteUrl = appendBasePath(config.siteUrl, basePath)
 
     return (
         <nav className={className}>
             <div className="site-nav-left-wrapper">
                 <div className="site-nav-left">
                     {site.logo ? (
-                        <a className="site-nav-logo" href={config.siteUrl}><img src={site.logo} alt={site.title} /></a>
+                        <a className="site-nav-logo" href={siteUrl}><img src={site.logo} alt={site.title} /></a>
                     ) : (
-                        <a className="site-nav-logo" href={config.siteUrl}>{site.title}</a>
+                        <a className="site-nav-logo" href={siteUrl}>{site.title}</a>
                     )}
                     <div className="site-nav-content">
                         <Navigation data={navigation} />
