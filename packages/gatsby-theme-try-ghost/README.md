@@ -93,6 +93,8 @@ If you want to add this blog theme to an existing site, follow these instruction
                     "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
                 },
             },
+            // Root url for Ghost posts and pages (optional, defaults to `/`)
+            // basePath: `/blog`,
           },
        },
     ],  
@@ -101,7 +103,7 @@ If you want to add this blog theme to an existing site, follow these instruction
 
 3. Update siteConfig
 
-    In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and      `siteDescriptionMeta`. Update at least those to fit your needs. Also make sure your `favicon.png` can be found in folder `static` of your working directory.
+    In the configuration shown above, the most important fields to be changed are `siteUrl`, `siteTitleMeta` and `siteDescriptionMeta`. Update at least those to fit your needs. Also make sure your `favicon.png` can be found in folder `static` of your working directory.
 
 4. Ghost Content API Keys
 

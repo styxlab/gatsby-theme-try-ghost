@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import routing from '../../utils/routing'
+import { resolveUrl } from '../../utils/routing'
+import useOptions from '../../utils/use-options'
 
 import { AuthorList, ImgSharp } from '.'
 import { PostClass } from './helpers'
 
 const PostCard = ({ post, num, isHome }) => {
-    const url = routing(post.url, post.slug)
+    const { basePath } = useOptions()
+    const url = resolveUrl(basePath, post.slug, post.url)
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
@@ -40,7 +42,7 @@ const PostCard = ({ post, num, isHome }) => {
                     <AuthorList authors={post.authors} />
                     <div className="post-card-byline-content">
                         <span>
-                            <Link to={routing(post.primary_author.url, post.primary_author.slug)}>{post.primary_author.name}</Link>
+                            <Link to={resolveUrl(basePath, post.primary_author.slug, post.primary_author.url)}>{post.primary_author.name}</Link>
                         </span>
                         <span className="post-card-byline-date">
                             <time dateTime={post.published_at}>

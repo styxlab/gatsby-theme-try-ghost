@@ -5,6 +5,9 @@ import { StaticQuery, graphql } from 'gatsby'
 import { DocumentHead, StickyNav } from '.'
 import { BodyClass } from './helpers'
 
+import { appendBasePath } from '../../utils/routing'
+import useOptions from '../../utils/use-options'
+
 // Styles
 import '../../styles/screen.css'
 import '../../styles/dark-mode.css'
@@ -23,10 +26,12 @@ import '../../styles/custom-styles'
 *
 */
 const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
+    const { basePath } = useOptions()
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
 
+    const siteUrl = appendBasePath(config.siteUrl, basePath)
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
@@ -61,7 +66,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                         </section>
 
                         <nav className="site-footer-nav">
-                            <a href={config.siteUrl}>Latest Posts</a>
+                            <a href={siteUrl}>Latest Posts</a>
                             { site.facebook && <a href={facebookUrl}>Facebook</a> }
                             { site.twitter && <a href={twitterUrl}>Twitter</a> }
                             <a href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>

@@ -1,7 +1,8 @@
 const _ = require(`lodash`)
 const { paginate } = require(`gatsby-awesome-pagination`)
-const routing = require(`./src/utils/routing`)
+const { resolveUrl } = require(`./src/utils/routing`)
 const fs = require(`fs`)
+const { createContentDigest } = require(`gatsby-core-utils`)
 
 const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
 
@@ -56,8 +57,9 @@ exports.createSchemaCustomization = ({ actions }) => {
  * Here is the place where Gatsby creates the URLs for all the
  * posts, tags, pages and authors that we fetched from the Ghost site.
  */
-exports.createPages = async ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions }, themeOptions) => {
     const { createPage } = actions
+    const { basePath } = themeOptions
 
     /* Fragment are not yet possible here */
     /* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/issues/12155 */
@@ -90,7 +92,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         // Determine the routing structure from
         // Ghost CMS by analyzing the url field
-        node.url = routing(node.url, node.slug)
+        const url = resolveUrl(basePath, node.slug, node.url)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -99,15 +101,14 @@ exports.createPages = async ({ graphql, actions }) => {
                 currentPage + 1 > numberOfPages ? null : currentPage + 1
             const previousPagePath = prevPageNumber
                 ? prevPageNumber === 1
-                    ? node.url
-                    : `${node.url}page/${prevPageNumber}/`
-                : null
+                    ? url
+                    : `${url}page/${prevPageNumber}/` : null
             const nextPagePath = nextPageNumber
-                ? `${node.url}page/${nextPageNumber}/`
+                ? `${url}page/${nextPageNumber}/`
                 : null
 
             createPage({
-                path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
+                path: i === 0 ? url : `${url}page/${i + 1}/`,
                 component: tagsTemplate,
                 context: {
                     // Data passed to context is available
@@ -134,7 +135,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         // Determine the routing structure from
         // Ghost CMS by analyzing the url field
-        node.url = routing(node.url, node.slug)
+        const url = resolveUrl(basePath, node.slug, node.url)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
             const currentPage = i + 1
@@ -143,15 +144,15 @@ exports.createPages = async ({ graphql, actions }) => {
                 currentPage + 1 > numberOfPages ? null : currentPage + 1
             const previousPagePath = prevPageNumber
                 ? prevPageNumber === 1
-                    ? node.url
-                    : `${node.url}page/${prevPageNumber}/`
+                    ? url
+                    : `${url}page/${prevPageNumber}/`
                 : null
             const nextPagePath = nextPageNumber
-                ? `${node.url}page/${nextPageNumber}/`
+                ? `${url}page/${nextPageNumber}/`
                 : null
 
             createPage({
-                path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
+                path: i === 0 ? url : `${url}page/${i + 1}/`,
                 component: authorTemplate,
                 context: {
                     // Data passed to context is available
@@ -175,10 +176,10 @@ exports.createPages = async ({ graphql, actions }) => {
     pages.forEach(({ node }) => {
         // Determine the routing structure from
         // Ghost CMS by analyzing the url field
-        node.url = routing(node.url, node.slug)
+        const url = resolveUrl(basePath, node.slug, node.url)
 
         createPage({
-            path: node.url,
+            path: url,
             component: pageTemplate,
             context: {
                 // Data passed to context is available
@@ -195,7 +196,7 @@ exports.createPages = async ({ graphql, actions }) => {
     posts.forEach(({ node }, i) => {
         // Determine the routing structure from
         // Ghost CMS by analyzing the url field
-        node.url = routing(node.url, node.slug)
+        const url = resolveUrl(basePath, node.slug, node.url)
 
         //total number of posts for primary tag
         let primaryTagCount = _.find(tags, function (t) {
@@ -206,7 +207,7 @@ exports.createPages = async ({ graphql, actions }) => {
             && primaryTagCount.node.postCount !== null ? primaryTagCount.node.postCount : 0
 
         createPage({
-            path: node.url,
+            path: url,
             component: postTemplate,
             context: {
                 // Data passed to context is available
@@ -254,10 +255,35 @@ exports.createPages = async ({ graphql, actions }) => {
         component: indexTemplate,
         pathPrefix: ({ pageNumber }) => {
             if (pageNumber === 0) {
-                return `/`
+                return resolveUrl(basePath)
             } else {
-                return `/page`
+                return `${resolveUrl(basePath)}page`
             }
+        },
+    })
+}
+
+exports.sourceNodes = ({ actions: { createTypes, createNode } }, { basePath = `/` }) => {
+    createTypes(`
+        type GhostConfig implements Node {
+            basePath: String!
+        }
+    `)
+
+    const ghostConfig = {
+        basePath: resolveUrl(basePath),
+    }
+
+    createNode({
+        ...ghostConfig,
+        id: `gatsby-theme-try-ghost-config`,
+        parent: null,
+        children: [],
+        internal: {
+            type: `ghostConfig`,
+            contentDigest: createContentDigest(ghostConfig),
+            content: JSON.stringify(ghostConfig),
+            description: `Ghost Config`,
         },
     })
 }
