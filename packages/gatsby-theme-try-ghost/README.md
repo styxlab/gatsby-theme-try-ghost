@@ -94,7 +94,7 @@ If you want to add this blog theme to an existing site, follow these instruction
                 },
             },
             // Root url for Ghost posts and pages (optional, defaults to `/`)
-            basePath: `/`,
+            // basePath: `/blog`,
           },
        },
     ],  

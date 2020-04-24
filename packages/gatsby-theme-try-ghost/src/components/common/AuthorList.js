@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
-import { routing } from '../../utils/routing'
+import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 
 import { HoverOnAvatar } from './effects'
@@ -15,7 +15,7 @@ const AuthorList = ({ authors, isPost }) => {
     return (
         <ul className="author-list">
             {authors.map((author, i) => {
-                const url = routing(basePath, author.url, author.slug)
+                const url = resolveUrl(basePath, author.slug, author.url)
 
                 return (
                     <HoverOnAvatar key={i} activeClass="hovered" render={ hover => (

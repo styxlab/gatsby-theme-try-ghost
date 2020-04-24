@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { routing } from '../utils/routing'
+import { resolveUrl } from '../utils/routing'
 import useOptions from '../utils/use-options'
 
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
@@ -51,7 +51,7 @@ const Post = ({ data, location, pageContext }) => {
                             <header className="post-full-header">
                                 { post.primary_tag &&
                                         <section className="post-full-tags">
-                                            <Link to={routing(basePath, post.primary_tag.url, post.primary_tag.slug)}>{post.primary_tag.name}</Link>
+                                            <Link to={resolveUrl(basePath, post.primary_tag.slug, post.primary_tag.url)}>{post.primary_tag.name}</Link>
                                         </section>
                                 }
 
@@ -68,7 +68,7 @@ const Post = ({ data, location, pageContext }) => {
                                         <section className="post-full-byline-meta">
                                             <h4 className="author-name">
                                                 {post.authors.map((author, i) => (
-                                                    <Link key={i} to={routing(basePath, author.url, author.slug)}>{author.name}</Link>
+                                                    <Link key={i} to={resolveUrl(basePath, author.slug, author.url)}>{author.name}</Link>
                                                 ))}
                                             </h4>
                                             <div className="byline-meta-content">
@@ -87,7 +87,7 @@ const Post = ({ data, location, pageContext }) => {
                             </figure>
 
                             <section className="post-full-content">
-                                <TableOfContents toc={toc} url={routing(basePath, post.url, post.slug)}/>
+                                <TableOfContents toc={toc} url={resolveUrl(basePath, post.slug, post.url)}/>
 
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>

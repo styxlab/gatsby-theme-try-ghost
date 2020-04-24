@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
 import { Navigation, SocialLinks } from '.'
-import { appendBasePath, routing } from '../../utils/routing'
+import { resolveUrl, appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 
 const SiteNav = ({ data, className, postTitle }) => {
@@ -14,7 +14,7 @@ const SiteNav = ({ data, className, postTitle }) => {
 
     // add basePath only to navigation items coming from Ghost CMS
     const navigation = site.navigation.map((item) => {
-        const url = item.url.match(/^\s?http(s?)/gi) ? item.url : `${basePath}${item.url}`.replace(`//`,`/`)
+        const url = item.url.match(/^\s?http(s?)/gi) ? item.url : resolveUrl(basePath, item.url)
         return ({ ...item, url: url })
     })
     const urls = navigation.map(item => item.url)
