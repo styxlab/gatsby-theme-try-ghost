@@ -1,4 +1,4 @@
-# gatsby-rehype-remote-images
+# gatsby-rehype-inline-images
 
 Experimental. Not yet working.
 

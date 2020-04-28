@@ -1,14 +1,14 @@
 {
-    "name": "gatsby-rehype-remote-images",
+    "name": "gatsby-rehype-inline-images",
     "description": "Gatsby plugin to download external images",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
     "main": "gatsby-node.js",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-remote-images"
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-inline-images"
     },
     "bugs": {
         "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
@@ -23,6 +23,10 @@
         "gatsby-plugin",
         "rehype",
         "html",
+        "images",
+        "images-inline",
+        "images-download",
+        "jamify",
         "ghost",
         "ghost-cms"
     ],
