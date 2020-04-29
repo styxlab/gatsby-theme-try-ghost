@@ -20,7 +20,7 @@ const SiteNav = ({ data, className, postTitle }) => {
 
     // overwrite navigation if specified in options
     const labels = navigation.map(item => item.label)
-    if (labels.length > 0 && config.overwriteGhostNavigation && config.overwriteGhostNavigation.length >= 0) {
+    if (labels.length > 0 && config.overwriteGhostNavigation && config.overwriteGhostNavigation.length > 0) {
         config.overwriteGhostNavigation.map((item) => {
             const index = item.label && labels.indexOf(item.label)
             if (index > -1 && navigation[index]) {
@@ -31,7 +31,7 @@ const SiteNav = ({ data, className, postTitle }) => {
 
     // allow plugins to add menu items
     const urls = navigation.map(item => item.url)
-    if (config.navigation && config.navigation.length >= 0) {
+    if (config.navigation && config.navigation.length > 0) {
         config.navigation.map(item => urls.indexOf(item.url) === -1 && navigation.push(item))
     }
 
