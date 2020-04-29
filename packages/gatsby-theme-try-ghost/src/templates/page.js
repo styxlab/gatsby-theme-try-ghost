@@ -19,7 +19,7 @@ const Page = ({ data, location }) => {
     const featImg = page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
-    const transformedHtml = page.children && page.children[0] && page.children[0].html
+    const transformedHtml = page.childHtmlRehype && page.childHtmlRehype.html
 
     return (
         <>
@@ -60,9 +60,12 @@ Page.propTypes = {
             tags: PropTypes.arrayOf(
                 PropTypes.object
             ),
-            children: PropTypes.arrayOf(
-                PropTypes.object,
-            ),
+            childHtmlRehype: PropTypes.shape({
+                html: PropTypes.string,
+                tableOfContents: PropTypes.arrayOf(
+                    PropTypes.object,
+                ),
+            }),
             featureImageSharp: PropTypes.object,
         }).isRequired,
     }).isRequired,
