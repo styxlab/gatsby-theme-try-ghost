@@ -1,3 +1,4 @@
+const _ = require(`lodash`)
 const path = require(`path`)
 
 const siteConfigDefaults = require(`./src/utils/siteConfigDefaults`)
@@ -13,8 +14,8 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 *
 */
 module.exports = (themeOptions) => {
-    const siteConfig = themeOptions.siteConfig || siteConfigDefaults
-    const ghostConfig = themeOptions.ghostConfig || ghostConfigDefaults
+    const siteConfig = _.merge({}, siteConfigDefaults, themeOptions.siteConfig)
+    const ghostConfig = _.merge({}, ghostConfigDefaults, themeOptions.ghostConfig)
 
     return {
         siteMetadata: siteConfig,

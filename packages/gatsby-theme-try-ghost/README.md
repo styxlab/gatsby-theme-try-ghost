@@ -82,6 +82,8 @@ If you want to add this blog theme to an existing site, follow these instruction
                 siteIcon: `favicon.png`,
                 backgroundColor: `#e9e9e9`,
                 themeColor: `#15171A`,
+                // Overwrite navigation menu (default: []), label is case sensitive
+                // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
             },
             ghostConfig: {
                 "development": {

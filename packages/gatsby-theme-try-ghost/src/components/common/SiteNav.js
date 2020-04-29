@@ -17,9 +17,20 @@ const SiteNav = ({ data, className, postTitle }) => {
         const url = item.url.match(/^\s?http(s?)/gi) ? item.url : resolveUrl(basePath, item.url)
         return ({ ...item, url: url })
     })
-    const urls = navigation.map(item => item.url)
+
+    // overwrite navigation if specified in options
+    const labels = navigation.map(item => item.label)
+    if (labels.length > 0 && config.overwriteGhostNavigation && config.overwriteGhostNavigation.length >= 0) {
+        config.overwriteGhostNavigation.map((item) => {
+            const index = item.label && labels.indexOf(item.label)
+            if (index > -1 && navigation[index]) {
+                navigation[index].url = item.url
+            }
+        })
+    }
 
     // allow plugins to add menu items
+    const urls = navigation.map(item => item.url)
     if (config.navigation && config.navigation.length >= 0) {
         config.navigation.map(item => urls.indexOf(item.url) === -1 && navigation.push(item))
     }
