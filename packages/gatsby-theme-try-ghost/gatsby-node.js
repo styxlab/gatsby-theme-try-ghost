@@ -28,9 +28,11 @@ exports.createSchemaCustomization = ({ actions }) => {
             coverImageSharp: File @link
         }
         type allSiteSiteMetadata {
+            overwriteGhostNavigation: [Navigation!]
             navigation: [Navigation!]
         }
         type SiteSiteMetadata {
+            overwriteGhostNavigation: [Navigation!]
             navigation: [Navigation!]
         }
         type HtmlRehype implements Node {
