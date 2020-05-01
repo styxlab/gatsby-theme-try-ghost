@@ -56,7 +56,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        count: allGhostPost(
+        postCount: allGhostPost(
             filter: {authors: {elemMatch: {slug: {eq: $slug}}}}
         ) {
             edges {
