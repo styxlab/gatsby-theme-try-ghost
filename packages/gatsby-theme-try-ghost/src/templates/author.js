@@ -19,12 +19,12 @@ const Author = ({ data, location, pageContext }) => {
 
     return (
         <GlobalStateContext.Consumer>{ g => (
-            <React.Fragment>
+            <>
                 <MetaData location={location} data={data} type="profile"/>
-                <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={data.postCount.edges.length}/>}>
+                <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={pageContext.totalPosts}/>}>
                     <PostView globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
                 </Layout>
-            </React.Fragment>
+            </>
         )}
         </GlobalStateContext.Consumer>
     )
@@ -53,15 +53,6 @@ export const pageQuery = graphql`
             edges {
                 node {
                 ...GhostPostFields
-                }
-            }
-        }
-        postCount: allGhostPost(
-            filter: {authors: {elemMatch: {slug: {eq: $slug}}}}
-        ) {
-            edges {
-                node {
-                    id
                 }
             }
         }
