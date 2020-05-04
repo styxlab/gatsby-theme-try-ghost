@@ -27,12 +27,7 @@ const Spinner = styled.div`
 class PostView extends React.Component {
     constructor(props) {
         super(props)
-        if (props.globalState.isInitializing() || !props.globalState.useInfiniteScroll) {
-            props.globalState.updateState({
-                items: props.posts,
-                cursor: props.pageContext.humanPageNumber + 1,
-            })
-        }
+        props.globalState.initItems(props.pageContext, props.posts)
     }
 
     render() {
@@ -44,13 +39,13 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
-        const items = (!g.isInitializing() ? g.items : posts)
+        const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
 
         return (
             <React.Fragment>
                 <div className="inner posts">
                     <div className="post-feed">
-                        <InfiniteScroll throttle={300} threshold={600} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore}>
+                        <InfiniteScroll throttle={300} threshold={800} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
                             <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
                         </InfiniteScroll>
                     </div>
