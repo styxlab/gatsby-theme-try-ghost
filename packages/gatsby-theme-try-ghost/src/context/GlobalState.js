@@ -79,8 +79,8 @@ export class GlobalStateProvider extends React.Component {
                 })
             })
         } else {
-            const nodes = posts.filter(({ node }) => !this.exists(node.id))
             this.setState((state) => {
+                const nodes = posts.filter(({ node }) => !state.ids.indexOf(node.id))
                 const ids = [...state.ids, ...nodes.map(({ node }) => node.id)]
                 pageContext.cursor = this.findCursor(pageContext, ids)
                 return ({
@@ -101,6 +101,8 @@ export class GlobalStateProvider extends React.Component {
             return
         }
         const id = pageContext.postIds[pageContext.cursor]
+
+        // id may exist due to previous loads from different pageContext
         if (this.exists(id)) {
             if (pageContext.cursor < pageContext.postIds.length) {
                 pageContext.cursor = pageContext.cursor + 1

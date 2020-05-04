@@ -45,7 +45,7 @@ class PostView extends React.Component {
             <React.Fragment>
                 <div className="inner posts">
                     <div className="post-feed">
-                        <InfiniteScroll throttle={300} threshold={800} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
+                        <InfiniteScroll throttle={300} threshold={900} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
                             <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
                         </InfiniteScroll>
                     </div>
