@@ -172,7 +172,7 @@ module.exports = ({
             }
         }
 
-        function generateTableOfContents(htmlNode, htmlAst) {
+        function generateTableOfContents(htmlAst) {
             const tags = [`h1`,`h2`,`h3`,`h4`,`h5`,`h6`]
             const headings = node => tags.includes(node.tagName)
 
@@ -221,7 +221,7 @@ module.exports = ({
             if (cachedToc) {
                 return cachedToc
             } else {
-                const tocTree = generateTableOfContents(htmlNode, htmlAst)
+                const tocTree = generateTableOfContents(htmlAst)
                 cache.set(tableOfContentsCacheKey(htmlNode), tocTree)
                 return tocTree
             }
