@@ -35,6 +35,13 @@ module.exports = {
             options: {
                 ghostConfig: ghostConfig,
                 siteConfig: siteConfig,
+                routes: {
+                    basePath: `/`,
+                    collections: [{
+                        path: `speeches`,
+                        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
+                    }],
+                },
             },
         },
         {

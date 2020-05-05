@@ -8,10 +8,10 @@ import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 
-const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
+const PreviewPosts = ({ posts, collectionPath, primaryTagCount, prev, next }) => {
     const { basePath } = useOptions()
     const primaryTag = posts && posts[0] && posts[0].node && posts[0].node.primary_tag
-    const url = primaryTag && resolveUrl(basePath, primaryTag.slug, primaryTag.url)
+    const url = primaryTag && resolveUrl(basePath, `/`, primaryTag.slug, primaryTag.url)
 
     return (
         <aside className="read-next outer">
@@ -26,7 +26,7 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
                                 <ul>
                                     {posts.map(({ node }, i) => (
                                         <li key={i}>
-                                            <h4><Link to={resolveUrl(basePath, node.slug, node.url)}>{node.title}</Link></h4>
+                                            <h4><Link to={resolveUrl(basePath, collectionPath, node.slug, node.url)}>{node.title}</Link></h4>
                                             <div className="read-next-card-meta">
                                                 <p><time dateTime={node.published_at}>{node.published_at_pretty}</time> – {readingTimeHelper(node)}</p>
                                             </div>
@@ -42,9 +42,9 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
                         </article>
                     }
 
-                    { prev && prev.slug && <PostCard post={prev} />}
+                    { prev && prev.slug && <PostCard post={prev} collectionPath={collectionPath} />}
 
-                    { next && next.slug && <PostCard post={next} />}
+                    { next && next.slug && <PostCard post={next} collectionPath={collectionPath} />}
 
                 </div>
             </div>
@@ -69,6 +69,7 @@ PreviewPosts.propTypes = {
             }),
         }),
     ),
+    collectionPath: PropTypes.string,
     primaryTagCount: PropTypes.number.isRequired,
     prev: PropTypes.object,
     next: PropTypes.object,

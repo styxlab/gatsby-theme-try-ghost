@@ -23,6 +23,7 @@ import { PostClass } from '../components/common/helpers'
 */
 const Post = ({ data, location, pageContext }) => {
     const { basePath } = useOptions()
+    const collectionPath = pageContext.collectionPath
     const post = data.ghostPost
     const prevPost = data.prev
     const nextPost = data.next
@@ -44,14 +45,14 @@ const Post = ({ data, location, pageContext }) => {
             </Helmet>
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title}/>}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
+                    header={<HeaderPost sticky={sticky} title={post.title} />}
+                    previewPosts={<PreviewPosts posts={previewPosts} collectionPath={collectionPath} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
                                 { post.primary_tag &&
                                         <section className="post-full-tags">
-                                            <Link to={resolveUrl(basePath, post.primary_tag.slug, post.primary_tag.url)}>{post.primary_tag.name}</Link>
+                                            <Link to={resolveUrl(basePath, `/`, post.primary_tag.slug, post.primary_tag.url)}>{post.primary_tag.name}</Link>
                                         </section>
                                 }
 
@@ -68,7 +69,7 @@ const Post = ({ data, location, pageContext }) => {
                                         <section className="post-full-byline-meta">
                                             <h4 className="author-name">
                                                 {post.authors.map((author, i) => (
-                                                    <Link key={i} to={resolveUrl(basePath, author.slug, author.url)}>{author.name}</Link>
+                                                    <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
                                                 ))}
                                             </h4>
                                             <div className="byline-meta-content">
@@ -87,7 +88,7 @@ const Post = ({ data, location, pageContext }) => {
                             </figure>
 
                             <section className="post-full-content">
-                                <TableOfContents toc={toc} url={resolveUrl(basePath, post.slug, post.url)}/>
+                                <TableOfContents toc={toc} url={resolveUrl(basePath, collectionPath, post.slug, post.url)}/>
 
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>

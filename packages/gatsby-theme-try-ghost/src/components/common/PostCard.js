@@ -9,9 +9,9 @@ import useOptions from '../../utils/use-options'
 import { AuthorList, ImgSharp } from '.'
 import { PostClass } from './helpers'
 
-const PostCard = ({ post, num, isHome }) => {
+const PostCard = ({ post, num, isHome, collectionPath }) => {
     const { basePath } = useOptions()
-    const url = resolveUrl(basePath, post.slug, post.url)
+    const url = resolveUrl(basePath, collectionPath, post.slug, post.url)
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
@@ -42,7 +42,7 @@ const PostCard = ({ post, num, isHome }) => {
                     <AuthorList authors={post.authors} />
                     <div className="post-card-byline-content">
                         <span>
-                            <Link to={resolveUrl(basePath, post.primary_author.slug, post.primary_author.url)}>{post.primary_author.name}</Link>
+                            <Link to={resolveUrl(basePath, `/`, post.primary_author.slug, post.primary_author.url)}>{post.primary_author.name}</Link>
                         </span>
                         <span className="post-card-byline-date">
                             <time dateTime={post.published_at}>
@@ -84,6 +84,7 @@ PostCard.propTypes = {
         featureImageSharp: PropTypes.object,
     }).isRequired,
     num: PropTypes.number,
+    collectionPath: PropTypes.string,
     isHome: PropTypes.bool,
 }
 

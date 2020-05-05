@@ -39,6 +39,7 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
+        const collectionPath = pageContext.collectionPath
         const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
 
         return (
@@ -46,7 +47,7 @@ class PostView extends React.Component {
                 <div className="inner posts">
                     <div className="post-feed">
                         <InfiniteScroll throttle={300} threshold={900} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
-                            <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
+                            <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} collectionPath={collectionPath} />
                         </InfiniteScroll>
                     </div>
                 </div>

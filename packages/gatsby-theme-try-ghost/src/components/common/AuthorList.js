@@ -15,7 +15,7 @@ const AuthorList = ({ authors, isPost }) => {
     return (
         <ul className="author-list">
             {authors.map((author, i) => {
-                const url = resolveUrl(basePath, author.slug, author.url)
+                const url = resolveUrl(basePath, `/`, author.slug, author.url)
 
                 return (
                     <HoverOnAvatar key={i} activeClass="hovered" render={ hover => (
