@@ -31,8 +31,10 @@ const createPostPages = (createPage, posts, basePath, template, tags) => {
     const prevNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
     const nextNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
 
+    const collectionPaths = getCollectionPaths(posts.map(({ node }) => node.id), posts)
+
     posts.forEach(({ node }, i) => {
-        const collectionPath = node.collectionPath
+        const collectionPath = collectionPaths[node.id]
         const url = resolveUrl(basePath, collectionPath, node.slug, node.url)
 
         //total number of posts for primary tag
@@ -54,9 +56,7 @@ const createPostPages = (createPage, posts, basePath, template, tags) => {
                 limit: 3,
                 skip: 0,
                 primaryTagCount: primaryTagCount,
-                collectionPath: collectionPath,
-                prevCollectionPath: prevNodes[i].node.collectionPath,
-                nextCollectionPath: nextNodes[i].node.collectionPath,
+                collectionPaths: collectionPaths,
             },
         })
     })
@@ -149,11 +149,11 @@ const createCollection = (createPage, basePath, data, templates, allTags, postsP
 const getCollection = (data, collectionPath, selector = () => false) => {
     const collection = data.posts.filter(({ node }) => selector(node))
     collection.forEach(({ node }) => node.collectionPath = collectionPath)
-    collection.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = collectionPath)
+    //collection.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = collectionPath)
 
     const residualPosts = data.posts.filter(({ node }) => !selector(node))
     residualPosts.forEach(({ node }) => node.collectionPath = `/`)
-    residualPosts.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = `/`)
+    //residualPosts.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = `/`)
 
     return ({
         primary: {

@@ -36,13 +36,13 @@ const Post = ({ data, location, pageContext }) => {
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
 
-    // passed in from context
-    previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPath)
+    // Collection paths must be retreived from pageContext
+    previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])
     if (prevPost) {
-        prevPost.collectionPath = pageContext.prevCollectionPath
+        prevPost.collectionPath = pageContext.collectionPaths[prevPost.id]
     }
     if (nextPost) {
-        nextPost.collectionPath = pageContext.nextCollectionPath
+        nextPost.collectionPath = pageContext.collectionPaths[nextPost.id]
     }
 
     return (
@@ -96,7 +96,7 @@ const Post = ({ data, location, pageContext }) => {
                             </figure>
 
                             <section className="post-full-content">
-                                <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPath, post.slug, post.url)}/>
+                                <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
 
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
