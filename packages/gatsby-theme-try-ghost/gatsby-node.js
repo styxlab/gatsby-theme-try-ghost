@@ -33,7 +33,6 @@ const createPostPages = (createPage, posts, basePath, template, tags) => {
 
     posts.forEach(({ node }, i) => {
         const collectionPath = node.collectionPath
-        console.log(collectionPath)
         const url = resolveUrl(basePath, collectionPath, node.slug, node.url)
 
         //total number of posts for primary tag
