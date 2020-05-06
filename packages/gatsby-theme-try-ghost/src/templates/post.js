@@ -53,7 +53,7 @@ const Post = ({ data, location, pageContext }) => {
             </Helmet>
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title} />}
+                    header={<HeaderPost sticky={sticky} title={post.title}/>}
                     previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
