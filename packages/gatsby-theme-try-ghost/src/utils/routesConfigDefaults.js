@@ -1,7 +1,0 @@
-module.exports = {
-
-    basePath: `/`,
-
-    collections: [],
-
-}
