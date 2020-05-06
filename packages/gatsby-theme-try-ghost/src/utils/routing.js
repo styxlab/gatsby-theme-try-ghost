@@ -1,7 +1,7 @@
 const _ = require(`lodash`)
 
 // higher order function
-const withBasePath = basePath => path => normalizePath(`/${basePath}/${path}/`)
+const withPrefixPath = prefixPath => path => normalizePath(`/${prefixPath}/${path}/`)
 
 const normalizePath = (path) => {
     const normalize = `/${_.trim(path,`/`)}/`
@@ -20,12 +20,13 @@ const splitUrl = (url) => {
     })
 }
 
-const resolveUrl = (basePath = `/`, slug, url) => {
-    // resolvePath is a function!
-    const resolvePath = withBasePath(basePath)
+const resolveUrl = (basePath = `/`, collectionPath = `/`, slug, url) => {
+    // resolveBase and resolvePath are a functions!
+    const resolveBase = withPrefixPath(basePath)
+    const resolvePath = withPrefixPath(resolveBase(collectionPath))
 
     if (!(slug !== null && slug !== undefined && slug.length > 0)) {
-        return normalizePath(basePath)
+        return normalizePath(resolvePath(`/`))
     }
 
     if (!(url !== null && url !== undefined && url.length > 0)) {

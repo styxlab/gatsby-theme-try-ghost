@@ -95,8 +95,16 @@ If you want to add this blog theme to an existing site, follow these instruction
                     "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
                 },
             },
-            // Root url for Ghost posts and pages (optional, defaults to `/`)
-            // basePath: `/blog`,
+            //routes: {
+            //    // Root url for Ghost posts and pages (optional, defaults to `/`)
+            //    basePath: `/blog`,
+            //
+            //    // Collections (optional , default: [])
+            //    collections: [{
+            //        path: `speeches`,
+            //        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
+            //    }],
+            //},
           },
        },
     ],  
@@ -111,7 +119,9 @@ If you want to add this blog theme to an existing site, follow these instruction
 
     Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to *Integrations* and click *Add new integration*. Give the integration a name and click create.
 
+5. Advanced Routing
 
+    You can define a `basePath` that is added to all routes, effectively moving all routes one level down. Collections are distinct groups of posts that get an entry point at `collections.path`. Permalinks are best configured in`routes.yaml` of the Ghost CMS.
 
 ## Running
 

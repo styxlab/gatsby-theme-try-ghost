@@ -40,6 +40,9 @@ class PostView extends React.Component {
         } = this.props
 
         const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
+        items.forEach(({ node }) => {
+            node.collectionPath = pageContext.collectionPath || (pageContext.collectionPaths && pageContext.collectionPaths[node.id])
+        })
 
         return (
             <React.Fragment>

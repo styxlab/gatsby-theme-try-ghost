@@ -39,14 +39,14 @@ Author.propTypes = {
     pageContext: PropTypes.object.isRequired,
 }
 
+// sort: { order: DESC, fields: [published_at] },
 export const pageQuery = graphql`
-    query GhostAuthorQuery($slug: String!, $limit: Int!, $skip: Int!) {
+    query GhostAuthorQuery($postIds: [String!]!, $slug: String!, $limit: Int!, $skip: Int!) {
         ghostAuthor(slug: { eq: $slug }) {
             ...GhostAuthorFields
         }
         allGhostPost(
-            sort: { order: DESC, fields: [published_at] },
-            filter: {authors: {elemMatch: {slug: {eq: $slug}}}},
+            filter: {id: { in: $postIds }, authors: {elemMatch: {slug: {eq: $slug}}}},
             limit: $limit,
             skip: $skip
         ) {

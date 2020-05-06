@@ -14,7 +14,7 @@ const SiteNav = ({ data, className, postTitle }) => {
 
     // add basePath only to navigation items coming from Ghost CMS
     const navigation = site.navigation.map((item) => {
-        const url = item.url.match(/^\s?http(s?)/gi) ? item.url : resolveUrl(basePath, item.url)
+        const url = item.url.match(/^\s?http(s?)/gi) ? item.url : resolveUrl(basePath, `/`, item.url)
         return ({ ...item, url: url })
     })
 
