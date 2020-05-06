@@ -39,15 +39,15 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
-        const collectionPath = pageContext.collectionPath
         const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
+        items.forEach(({ node }) => node.collectionPath = pageContext.collectionPath)
 
         return (
             <React.Fragment>
                 <div className="inner posts">
                     <div className="post-feed">
                         <InfiniteScroll throttle={300} threshold={900} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
-                            <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} collectionPath={collectionPath} />
+                            <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
                         </InfiniteScroll>
                     </div>
                 </div>

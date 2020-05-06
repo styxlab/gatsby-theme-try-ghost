@@ -11,8 +11,7 @@ exports.createSchemaCustomization = require(`./src/utils/create-schema-customiza
 // Create pages
 const createOrdinaryPages = (createPage, pages, basePath, template) => {
     pages.forEach(({ node }) => {
-        // Determine the routing structure from
-        // Ghost CMS by analyzing the url field
+        // Use url to analyze routing structure coming from Ghost CMS
         const url = resolveUrl(basePath, `/`, node.slug, node.url)
 
         createPage({
@@ -28,13 +27,13 @@ const createOrdinaryPages = (createPage, pages, basePath, template) => {
 }
 
 // Create post pages
-const createPostPages = (createPage, posts, basePath, template, tags, collectionPath) => {
+const createPostPages = (createPage, posts, basePath, template, tags) => {
     const prevNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
     const nextNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
 
     posts.forEach(({ node }, i) => {
-        // Determine the routing structure from
-        // Ghost CMS by analyzing the url field
+        const collectionPath = node.collectionPath
+        console.log(collectionPath)
         const url = resolveUrl(basePath, collectionPath, node.slug, node.url)
 
         //total number of posts for primary tag
@@ -49,8 +48,6 @@ const createPostPages = (createPage, posts, basePath, template, tags, collection
             path: url,
             component: template,
             context: {
-                // Data passed to context is available
-                // in page queries as GraphQL variables.
                 slug: node.slug,
                 prev: prevNodes[i].node.slug,
                 next: nextNodes[i].node.slug,
@@ -59,13 +56,15 @@ const createPostPages = (createPage, posts, basePath, template, tags, collection
                 skip: 0,
                 primaryTagCount: primaryTagCount,
                 collectionPath: collectionPath,
+                prevCollectionPath: prevNodes[i].node.collectionPath,
+                nextCollectionPath: nextNodes[i].node.collectionPath,
             },
         })
     })
 }
 
 // Create index page with pagination
-const createIndexPage = (createPage, posts, postIds, basePath, template, postsPerPage, collectionPath) => {
+const createIndexPage = (createPage, posts, postIds, basePath, template, postsPerPage, collectionPath = `/`) => {
     const path = resolveUrl(basePath, collectionPath)
 
     paginate({
@@ -90,13 +89,12 @@ const createIndexPage = (createPage, posts, postIds, basePath, template, postsPe
 }
 
 // Create taxonomy pages (tags, authors)
-const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, postsPerPage, collectionPath) => {
+const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, postsPerPage) => {
     taxonomy.forEach(({ node }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-        // Determine the routing structure from
-        // Ghost CMS by analyzing the url field
+        // Use url to analyze routing structure coming from Ghost CMS
         const url = resolveUrl(basePath, `/`, node.slug, node.url)
 
         Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -116,8 +114,6 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
                 path: i === 0 ? url : `${url}page/${i + 1}/`,
                 component: template,
                 context: {
-                    // Data passed to context is available
-                    // in page queries as GraphQL variables.
                     slug: node.slug,
                     limit: postsPerPage,
                     skip: i * postsPerPage,
@@ -128,7 +124,6 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
                     nextPageNumber: nextPageNumber,
                     previousPagePath: previousPagePath,
                     nextPagePath: nextPagePath,
-                    collectionPath: collectionPath,
                     // Infinite Scroll
                     postIds: postIds[node.slug],
                     cursor: 0,
@@ -145,41 +140,24 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
 
 const createCollection = (createPage, basePath, data, templates, allTags, postsPerPage, collectionPath) => {
     // per collectionPath
-    createPostPages(createPage, data.posts, basePath, templates.post, allTags, collectionPath)
-    const { indexIds, tagIds, authorIds } = infiniteScroll(data.posts)
+    createPostPages(createPage, data.posts, basePath, templates.post, allTags)
+    const { indexIds } = infiniteScroll(data.posts)
     createIndexPage(createPage, data.posts, indexIds, basePath, templates.index, postsPerPage, collectionPath)
-
-    // ToDo: combine collectionPath array!
-    createTaxonomyPages(createPage, data.tags, tagIds, basePath, templates.tag, postsPerPage, collectionPath)
-    createTaxonomyPages(createPage, data.authors, authorIds, basePath, templates.author, postsPerPage, collectionPath)
 }
 
-const getCollection = (data, selector = () => false) => {
+const getCollection = (data, collectionPath, selector = () => false) => {
     const collection = data.posts.filter(({ node }) => selector(node))
-    const postTags = collection.map(({ node }) => node.tags).flat().map(node => node.slug)
-    const postAuthors = collection.map(({ node }) => node.authors).flat().map(node => node.slug)
-
-    const collectionTags = data.tags.filter(({ node }) => -1 < postTags.indexOf(node.slug))
-    const collectionAuthors = data.authors.filter(({ node }) => -1 < postAuthors.indexOf(node.slug))
-
-    // recalculate postCount (only differs in edge cases)
-    collectionTags.forEach(({ node }) => node.postCount = postTags.filter(slug => slug === node.slug).length)
-    collectionAuthors.forEach(({ node }) => node.postCount = postAuthors.filter(slug => slug === node.slug).length)
+    collection.forEach(({ node }) => node.collectionPath = collectionPath)
 
     const residualPosts = data.posts.filter(({ node }) => !selector(node))
-    const residualTags = data.tags.filter(({ node }) => -1 === postTags.indexOf(node.slug))
-    const residualAuthors = data.authors.filter(({ node }) => -1 === postAuthors.indexOf(node.slug))
+    residualPosts.forEach(({ node }) => node.collectionPath = `/`)
 
     return ({
         primary: {
             posts: collection,
-            tags: collectionTags,
-            authors: collectionAuthors,
         },
         residual: {
             posts: residualPosts,
-            tags: residualTags,
-            authors: residualAuthors,
         },
     })
 }
@@ -224,14 +202,19 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
 
     createOrdinaryPages(createPage, data.pages, basePath, templates.page)
 
-    //create pages per collection
+    // Split index pages by collections
     let collectionData = data
     collections.forEach((collection) => {
-        collectionData = getCollection(collectionData, collection.selector)
+        collectionData = getCollection(collectionData, collection.path, collection.selector)
         createCollection(createPage, basePath, collectionData.primary, templates, data.tags, postsPerPage, collection.path)
         collectionData = collectionData.residual
     })
-    createCollection(createPage, basePath, collectionData , templates, data.tags, postsPerPage)
+    createCollection(createPage, basePath, collectionData, templates, data.tags, postsPerPage)
+
+    // Taxonomies are not split by collections
+    const { tagIds, authorIds } = infiniteScroll(data.posts)
+    createTaxonomyPages(createPage, data.tags, tagIds, basePath, templates.tag, postsPerPage)
+    createTaxonomyPages(createPage, data.authors, authorIds, basePath, templates.author, postsPerPage)
 }
 
 // Plugins can access basePath with GraphQL query

@@ -23,7 +23,6 @@ import { PostClass } from '../components/common/helpers'
 */
 const Post = ({ data, location, pageContext }) => {
     const { basePath } = useOptions()
-    const collectionPath = pageContext.collectionPath
     const post = data.ghostPost
     const prevPost = data.prev
     const nextPost = data.next
@@ -37,6 +36,15 @@ const Post = ({ data, location, pageContext }) => {
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
 
+    // passed in from context
+    previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPath)
+    if (prevPost) {
+        prevPost.collectionPath = pageContext.prevCollectionPath
+    }
+    if (nextPost) {
+        nextPost.collectionPath = pageContext.nextCollectionPath
+    }
+
     return (
         <>
             <MetaData data={data} location={location} type="article"/>
@@ -46,7 +54,7 @@ const Post = ({ data, location, pageContext }) => {
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
                 <Layout isPost={true} sticky={sticky}
                     header={<HeaderPost sticky={sticky} title={post.title} />}
-                    previewPosts={<PreviewPosts posts={previewPosts} collectionPath={collectionPath} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
+                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
                     <div className="inner">
                         <article className={`post-full ${postClass}`}>
                             <header className="post-full-header">
@@ -88,7 +96,7 @@ const Post = ({ data, location, pageContext }) => {
                             </figure>
 
                             <section className="post-full-content">
-                                <TableOfContents toc={toc} url={resolveUrl(basePath, collectionPath, post.slug, post.url)}/>
+                                <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPath, post.slug, post.url)}/>
 
                                 <div className="post-content load-external-scripts"
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>

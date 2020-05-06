@@ -9,9 +9,9 @@ import useOptions from '../../utils/use-options'
 import { AuthorList, ImgSharp } from '.'
 import { PostClass } from './helpers'
 
-const PostCard = ({ post, num, isHome, collectionPath }) => {
+const PostCard = ({ post, num, isHome }) => {
     const { basePath } = useOptions()
-    const url = resolveUrl(basePath, collectionPath, post.slug, post.url)
+    const url = resolveUrl(basePath, post.collectionPath, post.slug, post.url)
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
@@ -82,9 +82,9 @@ PostCard.propTypes = {
         published_at: PropTypes.string.isRequired,
         published_at_pretty: PropTypes.string.isRequired,
         featureImageSharp: PropTypes.object,
+        collectionPath: PropTypes.string.isRequired,
     }).isRequired,
     num: PropTypes.number,
-    collectionPath: PropTypes.string,
     isHome: PropTypes.bool,
 }
 
