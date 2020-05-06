@@ -3,6 +3,7 @@ const path = require(`path`)
 
 const siteConfigDefaults = require(`./src/utils/siteConfigDefaults`)
 const ghostConfigDefaults = require(`./src/utils/.ghost.json`)
+const routesConfigDefaults = require(`./src/utils/routesConfigDefaults`)
 
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 
@@ -16,9 +17,11 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 module.exports = (themeOptions) => {
     const siteConfig = _.merge({}, siteConfigDefaults, themeOptions.siteConfig)
     const ghostConfig = _.merge({}, ghostConfigDefaults, themeOptions.ghostConfig)
+    const routesConfig = _.merge({}, routesConfigDefaults, themeOptions.routesConfig)
 
     return {
         siteMetadata: siteConfig,
+        routesConfig: routesConfig,
         plugins: [
             /**
              *  Content Plugins

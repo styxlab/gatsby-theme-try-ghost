@@ -95,8 +95,15 @@ If you want to add this blog theme to an existing site, follow these instruction
                     "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
                 },
             },
-            // Root url for Ghost posts and pages (optional, defaults to `/`)
-            // basePath: `/blog`,
+            // Configure routes (optional)
+            //routes: {
+            //    // Root url for Ghost posts and pages (optional, defaults to `/`)
+            //    basePath: `/blog`,
+            //    collections: [{
+            //        path: `speeches`,
+            //        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
+            //    }],
+            //},
           },
        },
     ],  

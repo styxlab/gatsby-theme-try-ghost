@@ -1,10 +1,17 @@
 let siteConfig
 let ghostConfig
+let routesConfig
 
 try {
     siteConfig = require(`./siteConfig`)
 } catch (e) {
     siteConfig = null
+}
+
+try {
+    routesConfig = require(`./routesConfig`)
+} catch (e) {
+    routesConfig = null
 }
 
 try {
@@ -35,13 +42,7 @@ module.exports = {
             options: {
                 ghostConfig: ghostConfig,
                 siteConfig: siteConfig,
-                routes: {
-                    basePath: `/`,
-                    collections: [{
-                        path: `speeches`,
-                        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
-                    }],
-                },
+                routes: routesConfig,
             },
         },
         {
