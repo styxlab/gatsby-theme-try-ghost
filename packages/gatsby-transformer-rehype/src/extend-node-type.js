@@ -176,13 +176,26 @@ module.exports = ({
             const tags = [`h1`,`h2`,`h3`,`h4`,`h5`,`h6`]
             const headings = node => tags.includes(node.tagName)
 
+            // recursive walk to visit all children
+            const walk = (children, text = ``, depth = 0) => {
+                children.forEach((child) => {
+                    if (child.type === `text`) {
+                        text = text + child.value
+                    } else if (child.children && depth < 3) {
+                        depth = depth + 1
+                        text = walk(child.children, text, depth)
+                    }
+                })
+                return text
+            }
+
             let toc = []
             visit(htmlAst, headings, (node) => {
-                const [child] = node.children
-                if (child && child.type === `text`){
+                const text = walk(node.children)
+                if (text.length > 0) {
                     const id = node.properties && node.properties.id || `error-missing-id`
                     const level = node.tagName.substr(1,1)
-                    toc.push({ level: level, id: id, heading: child.value, parentIndex: -1, items: [] })
+                    toc.push({ level: level, id: id, heading: text, parentIndex: -1, items: [] })
                 }
             })
 

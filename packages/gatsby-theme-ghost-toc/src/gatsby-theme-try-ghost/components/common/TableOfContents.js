@@ -67,19 +67,25 @@ const TableOfContents = ({ toc, url, maxDepth = 2 }) => {
     }, [])
 
     return (
-        <ThemeContext.Consumer>{theme => (
-            <TocAside>
-                <nav>
-                    <TocTitle>
-                        Table of Contents
-                    </TocTitle>
-                    <TocList>
-                        {createItems(toc, url, 1, theme.maxDepth || maxDepth, activeHash, isDesktop)}
-                    </TocList>
-                </nav>
-            </TocAside>
-        )}
-        </ThemeContext.Consumer>
+        <React.Fragment>
+            { toc.length > 0 ? (
+                <ThemeContext.Consumer>{theme => (
+                    <TocAside>
+                        <nav>
+                            <TocTitle>
+                                Table of Contents
+                            </TocTitle>
+                            <TocList>
+                                {createItems(toc, url, 1, theme.maxDepth || maxDepth, activeHash, isDesktop)}
+                            </TocList>
+                        </nav>
+                    </TocAside>
+                )}
+                </ThemeContext.Consumer>
+            ) : (
+                null
+            )}
+        </React.Fragment>
     )
 }
 
