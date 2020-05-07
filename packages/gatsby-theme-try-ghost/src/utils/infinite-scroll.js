@@ -31,14 +31,14 @@ const infiniteScroll = (posts) => {
         saveInfiniteScrollPost(node)
         indexIds.push(node.id)
 
-        node.tags.map((tag) => {
+        node.tags.forEach((tag) => {
             if (tagIds[tag.slug] === undefined) {
                 tagIds[tag.slug] = []
             }
             tagIds[tag.slug].push(node.id)
         })
 
-        node.authors.map((author) => {
+        node.authors.forEach((author) => {
             if (authorIds[author.slug] === undefined) {
                 authorIds[author.slug] = []
             }

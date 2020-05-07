@@ -149,11 +149,9 @@ const createCollection = (createPage, basePath, data, templates, allTags, postsP
 const getCollection = (data, collectionPath, selector = () => false) => {
     const collection = data.posts.filter(({ node }) => selector(node))
     collection.forEach(({ node }) => node.collectionPath = collectionPath)
-    //collection.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = collectionPath)
 
     const residualPosts = data.posts.filter(({ node }) => !selector(node))
     residualPosts.forEach(({ node }) => node.collectionPath = `/`)
-    //residualPosts.forEach(({ node }) => data.posts.filter(({ node: n }) => node.id === n.id)[0].node.collectionPath = `/`)
 
     return ({
         primary: {
@@ -168,7 +166,7 @@ const getCollection = (data, collectionPath, selector = () => false) => {
 const getCollectionPaths = (ids, posts) => {
     const paths = {}
     ids.forEach((id) => {
-        paths[id] = posts.filter(({ node }) => node.id === id)[0].node.collectionPath
+        paths[id] = posts.find(({ node }) => node.id === id).node.collectionPath
     })
     return paths
 }
