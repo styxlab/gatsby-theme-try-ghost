@@ -69,7 +69,13 @@ cd gatsby-theme-try-ghost
 
 ## Contributions
 
+Special thanks go to the following contributors: [jem](https://github.com/jempurich), [tobimori](https://github.com/tobimori) and [Torqu3Wr3nch](https://github.com/Torqu3Wr3nch).
+
 PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others. Explore [this guide](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/CONTRIBUTING.md), to get some more ideas.
+
+## Credits
+
+This project would not be possible without the great [Gatsby](https://www.gatsbyjs.org/), [Ghost](https://ghost.org/), [React](https://reactjs.org/), [GraphQL](https://graphql.org/), [Node](https://nodejs.org) and the [JavaScript](https://developer.mozilla.org/de/docs/Web/JavaScript) eco-system in general. This project started from a fork of [`gatsby-starter-ghost`](https://github.com/TryGhost/gatsby-starter-ghost), but has evolved to a different, independent project with its own goals.
 
 # Copyright & License
 
