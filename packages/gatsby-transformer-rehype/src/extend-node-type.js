@@ -10,7 +10,7 @@ let pathPrefixCacheStr = ``
 const astCacheKey = node => `transformer-rehype-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
-const tableOfContentsCacheKey = node => `transformer-rehype-html-toc-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+const tableOfContentsCacheKey = contentDigest => `transformer-rehype-html-toc-${contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 
 // TODO: remove this check with next major release
 const safeGetCache = ({ getCache, cache }) => (id) => {
@@ -38,6 +38,7 @@ module.exports = ({
     cache,
     getCache: possibleGetCache,
     reporter,
+    createContentDigest,
     ...rest
 }, pluginOptions) => {
     const { type: nodeType } = _.merge({}, pluginDefaults, pluginOptions)
@@ -90,7 +91,7 @@ module.exports = ({
             })
 
             const htmlAst = rehype.parse(htmlNode.internal.content)
-            const tableOfContents = await getTableOfContents(htmlNode, htmlAst)
+            const tableOfContents = await getTableOfContents(htmlAst)
 
             await Promise.each(pluginOptions.plugins, (plugin) => {
                 const requiredPlugin = require(plugin.resolve)
@@ -228,14 +229,15 @@ module.exports = ({
             return tocTree
         }
 
-        async function getTableOfContents(htmlNode, htmlAst) {
-            const cachedToc = await cache.get(tableOfContentsCacheKey(htmlNode))
+        async function getTableOfContents(htmlAst) {
+            const contentDigest = createContentDigest(htmlAst)
+            const cachedToc = await cache.get(tableOfContentsCacheKey(contentDigest))
 
             if (cachedToc) {
                 return cachedToc
             } else {
                 const tocTree = generateTableOfContents(htmlAst)
-                cache.set(tableOfContentsCacheKey(htmlNode), tocTree)
+                cache.set(tableOfContentsCacheKey(contentDigest), tocTree)
                 return tocTree
             }
         }
@@ -260,7 +262,7 @@ module.exports = ({
                 type: `JSON`,
                 resolve(htmlNode) {
                     return getHtmlAst(htmlNode)
-                        .then(ast => getTableOfContents(htmlNode, ast).then(toc => toc))
+                        .then(ast => getTableOfContents(ast))
                 },
             },
         })
