@@ -10,7 +10,7 @@ let pathPrefixCacheStr = ``
 const astCacheKey = node => `transformer-rehype-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlCacheKey = node => `transformer-rehype-html-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 const htmlAstCacheKey = node => `transformer-rehype-html-ast-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
-const tableOfContentsCacheKey = contentDigest => `transformer-rehype-html-toc-${contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
+const tableOfContentsCacheKey = node => `transformer-rehype-html-toc-${node.internal.contentDigest}-${pluginsCacheStr}-${pathPrefixCacheStr}`
 
 // TODO: remove this check with next major release
 const safeGetCache = ({ getCache, cache }) => (id) => {
