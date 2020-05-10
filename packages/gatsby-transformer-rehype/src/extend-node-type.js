@@ -38,7 +38,6 @@ module.exports = ({
     cache,
     getCache: possibleGetCache,
     reporter,
-    createContentDigest,
     ...rest
 }, pluginOptions) => {
     const { type: nodeType } = _.merge({}, pluginDefaults, pluginOptions)
@@ -91,7 +90,6 @@ module.exports = ({
             })
 
             const htmlAst = rehype.parse(htmlNode.internal.content)
-            const tableOfContents = await getTableOfContents(htmlAst)
 
             await Promise.each(pluginOptions.plugins, (plugin) => {
                 const requiredPlugin = require(plugin.resolve)
@@ -103,7 +101,7 @@ module.exports = ({
                     return defaultFunction(
                         {
                             htmlAst,
-                            tableOfContents,
+                            generateTableOfContents,
                             htmlNode,
                             getNode,
                             basePath,
@@ -229,15 +227,14 @@ module.exports = ({
             return tocTree
         }
 
-        async function getTableOfContents(htmlAst) {
-            const contentDigest = createContentDigest(htmlAst)
-            const cachedToc = await cache.get(tableOfContentsCacheKey(contentDigest))
+        async function getTableOfContents(htmlNode, htmlAst) {
+            const cachedToc = await cache.get(tableOfContentsCacheKey(htmlNode))
 
             if (cachedToc) {
                 return cachedToc
             } else {
                 const tocTree = generateTableOfContents(htmlAst)
-                cache.set(tableOfContentsCacheKey(contentDigest), tocTree)
+                cache.set(tableOfContentsCacheKey(htmlNode), tocTree)
                 return tocTree
             }
         }
@@ -262,7 +259,7 @@ module.exports = ({
                 type: `JSON`,
                 resolve(htmlNode) {
                     return getHtmlAst(htmlNode)
-                        .then(ast => getTableOfContents(ast))
+                        .then(ast => getTableOfContents(htmlNode, ast))
                 },
             },
         })

@@ -87,7 +87,7 @@ The `id` field contains the heading `id` as given in the `h1`, `h2`, ..., `h6` e
 
 The array represents a nested tree, where first level headings are in the root array. If a heading has subheadings they will be placed in `items`. The elements of items replicate the same structure. The maximum level of nesting is 6.
 
-The `tableOfContents` variable is passed to all sub-plugins. Note that the passed `tableOfContents` is based on the initial `htmlAst` and does not include mutations done by sub-plugins. This is different from the `tableOfContents` field of the HtmlRehype node which is based on all previous mutations. Therefore it is recommended to query the HtmlRehype node whenever possible.
+The `generateTableOfContents` function is passed to all sub-plugins for on-demand creation. This function takes `htmlAst` as an argument and returns the `tableOfContents` tree structure.
 
 ## How to query
 
