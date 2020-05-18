@@ -30,7 +30,7 @@ const removeScript = (id, parentElement) => {
 const Commento = ({ id, url }) => {
     useEffect(() => {
         // If there's no window there's nothing to do for us
-        if (!window) {
+        if (!window || !url) {
             return
         }
         const document = window.document
@@ -43,7 +43,7 @@ const Commento = ({ id, url }) => {
         // Cleanup remove the script from the page
         /* eslint-disable consistent-return */
         return () => removeScript(`commento-script`, document.body)
-    }, [id])
+    }, [id, url])
 
     return <div id={`commento`} />
 }
