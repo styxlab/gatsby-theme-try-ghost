@@ -82,7 +82,7 @@ PostCard.propTypes = {
         published_at: PropTypes.string.isRequired,
         published_at_pretty: PropTypes.string.isRequired,
         featureImageSharp: PropTypes.object,
-        collectionPath: PropTypes.string.isRequired,
+        collectionPath: PropTypes.string,
     }).isRequired,
     num: PropTypes.number,
     isHome: PropTypes.bool,
