@@ -37,7 +37,7 @@ class ThemeProvider extends React.Component {
     componentDidMount() {
         // Getting dark mode value from localStorage!
         const lsDark = JSON.parse(localStorage.getItem(`dark`))
-        if (lsDark) {
+        if (lsDark !== null) {
             this.setState({ dark: lsDark })
         } else if (this.props.overrideOS) {
             this.setState({ dark: this.props.defaultMode })

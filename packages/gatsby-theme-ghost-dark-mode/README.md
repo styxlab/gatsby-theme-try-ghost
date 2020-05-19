@@ -31,6 +31,7 @@ plugins: [
             defaultModeDark: false,
             // If you want the defaultModeDark setting to take precedence
             // over the mode reported from OS, set this to true (default: false)
+            // Note that user choice still takes precedence over this setting
             overrideOS: false,
         },
     },
