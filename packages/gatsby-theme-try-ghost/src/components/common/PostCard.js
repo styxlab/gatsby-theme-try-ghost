@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../../utils/routing'
+import useMediaQuery from './effects/useMediaQuery'
 import useOptions from '../../utils/use-options'
 
 import { AuthorList, ImgSharp } from '.'
@@ -17,7 +18,10 @@ const PostCard = ({ post, num, isHome }) => {
     const readingTime = readingTimeHelper(post)
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
-    const position = large === `post-card-large` && `absolute` || `relative`
+
+    // Hack to fix position in gatsby-image-wrapper div component
+    const isPositionAbsolute = large === `post-card-large` && useMediaQuery(`(min-width: 795px)`)
+    const position = isPositionAbsolute ? `absolute` : `relative`
 
     return (
         <article className={`post-card ${postClass} ${large}`}>
