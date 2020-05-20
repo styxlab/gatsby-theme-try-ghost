@@ -16,12 +16,14 @@ const PostCard = ({ post, num, isHome }) => {
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post)
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
+    const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
+    const position = large === `post-card-large` && `absolute` || `relative`
 
     return (
-        <article className={`post-card ${postClass} ${featImg && isHome && 0 === num % 6 && `post-card-large` || `` }`}>
+        <article className={`post-card ${postClass} ${large}`}>
 
             <Link className="post-card-image-link" to={url}>
-                <ImgSharp fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                <ImgSharp position={position} fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
             </Link>
 
             <div className="post-card-content">
