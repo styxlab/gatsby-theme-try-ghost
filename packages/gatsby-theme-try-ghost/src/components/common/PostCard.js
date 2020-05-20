@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../../utils/routing'
-import useMediaQuery from './effects/useMediaQuery'
 import useOptions from '../../utils/use-options'
 
 import { AuthorList, ImgSharp } from '.'
@@ -20,7 +19,16 @@ const PostCard = ({ post, num, isHome }) => {
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
 
     // Hack to fix position in gatsby-image-wrapper div component
-    const isPositionAbsolute = large === `post-card-large` && useMediaQuery(`(min-width: 795px)`)
+    const [matches, setMatches] = useState(false)
+    useEffect(() => {
+        const mediaMatch = window.matchMedia(`(min-width: 795px)`)
+        setMatches(mediaMatch.matches)
+
+        const handler = e => setMatches(e.matches)
+        mediaMatch.addListener(handler)
+        return () => mediaMatch.removeListener(handler)
+    }, [])
+    const isPositionAbsolute = large === `post-card-large` && matches
     const position = isPositionAbsolute ? `absolute` : `relative`
 
     return (
