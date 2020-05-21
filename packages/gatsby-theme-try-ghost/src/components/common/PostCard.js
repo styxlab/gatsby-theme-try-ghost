@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
@@ -18,24 +18,11 @@ const PostCard = ({ post, num, isHome }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
 
-    // Hack to fix position in gatsby-image-wrapper div component
-    const [matches, setMatches] = useState(false)
-    useEffect(() => {
-        const mediaMatch = window.matchMedia(`(min-width: 795px)`)
-        setMatches(mediaMatch.matches)
-
-        const handler = e => setMatches(e.matches)
-        mediaMatch.addListener(handler)
-        return () => mediaMatch.removeListener(handler)
-    }, [])
-    const isPositionAbsolute = large === `post-card-large` && matches
-    const position = isPositionAbsolute ? `absolute` : `relative`
-
     return (
         <article className={`post-card ${postClass} ${large}`}>
 
             <Link className="post-card-image-link" to={url}>
-                <ImgSharp position={position} fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                <ImgSharp fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
             </Link>
 
             <div className="post-card-content">
