@@ -497,7 +497,7 @@ var Image = /*#__PURE__*/function (_React$Component) {
         className: (className ? className : "") + " gatsby-image-wrapper",
         style: (0, _extends2.default)({
           //position: "relative",
-          //overflow: "hidden",
+          overflow: "hidden",
           maxWidth: image.maxWidth ? image.maxWidth + "px" : null,
           maxHeight: image.maxHeight ? image.maxHeight + "px" : null
         }, style),

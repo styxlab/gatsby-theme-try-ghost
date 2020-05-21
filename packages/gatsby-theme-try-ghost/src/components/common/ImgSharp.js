@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Img from '../../../plugins/gatsby-image'
 
-const ImgSharp = ({ fluidClass, fluidImg, srcClass, srcImg, title }) => (
+const ImgSharp = ({ wrapperStyle, fluidClass, fluidImg, srcClass, srcImg, title }) => (
     <React.Fragment>
         { fluidImg ? (
-            <Img className={fluidClass} fluid={fluidImg} alt={title} />
+            <Img style={wrapperStyle} className={fluidClass} fluid={fluidImg} alt={title} />
         ) : (
             srcImg && <img className={srcClass} src={srcImg} alt={title} />
         )}
@@ -18,6 +18,7 @@ ImgSharp.propTypes = {
     srcClass: PropTypes.string,
     srcImg: PropTypes.string,
     title: PropTypes.string.isRequired,
+    wrapperStyle: PropTypes.object,
 }
 
 export default ImgSharp

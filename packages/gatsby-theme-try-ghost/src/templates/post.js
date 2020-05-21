@@ -92,7 +92,7 @@ const Post = ({ data, location, pageContext }) => {
                             </header>
 
                             <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
+                                <ImgSharp wrapperStyle={{ position: `relative` }} fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
                             </figure>
 
                             <section className="post-full-content">

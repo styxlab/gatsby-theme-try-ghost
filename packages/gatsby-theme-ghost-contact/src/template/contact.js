@@ -35,7 +35,7 @@ const ContactPage = ({ data, location }) => {
 
                         { featImg &&
                             <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card"
+                                <ImgSharp wrapperStyle={{ position: `relative` }} fluidClass="kg-card kg-code-card"
                                     fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
                             </figure>
                         }
