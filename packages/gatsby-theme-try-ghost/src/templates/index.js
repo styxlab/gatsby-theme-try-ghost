@@ -16,7 +16,7 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
-    posts.map(({ node }) => console.log(node.slug))
+
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
