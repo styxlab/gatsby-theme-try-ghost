@@ -37,7 +37,7 @@ export default NotFoundPage
 export const pageQuery = graphql`
   query GhostNotFoundQuery {
     allGhostPost(
-        sort: { order: DESC, fields: [published_at] },
+        sort: { fields: [featured, published_at], order: [DESC, DESC] },
         limit: 3,
         skip: 0
     ) {

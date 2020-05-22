@@ -48,7 +48,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     }
 
     return (
-        <>
+        <React.Fragment>
             <Helmet>
                 <title>{title}</title>
                 <meta name="description" content={description} />
@@ -66,7 +66,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
-        </>
+        </React.Fragment>
     )
 }
 

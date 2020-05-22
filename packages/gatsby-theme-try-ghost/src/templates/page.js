@@ -22,7 +22,7 @@ const Page = ({ data, location }) => {
     const transformedHtml = page.childHtmlRehype && page.childHtmlRehype.html
 
     return (
-        <>
+        <React.Fragment>
             <MetaData data={data} location={location} type="website"/>
             <Helmet>
                 <style type="text/css">{`${page.codeinjection_styles}`}</style>
@@ -46,7 +46,7 @@ const Page = ({ data, location }) => {
                     </article>
                 </div>
             </Layout>
-        </>
+        </React.Fragment>
     )
 }
 

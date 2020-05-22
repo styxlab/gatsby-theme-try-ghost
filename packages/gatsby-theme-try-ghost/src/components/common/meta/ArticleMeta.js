@@ -59,7 +59,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <Helmet>
                 <title>{ghostPost.meta_title || ghostPost.title}</title>
                 <meta name="description" content={ghostPost.meta_description || ghostPost.excerpt} />
@@ -112,7 +112,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
                 <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
-        </>
+        </React.Fragment>
     )
 }
 

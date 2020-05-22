@@ -2,7 +2,7 @@
 /* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/issues/12155 */
 
 const gatsbyNodeQuery = `{
-    allGhostPost(sort: { order: DESC, fields: [published_at] }) {
+    allGhostPost(sort: { fields: [featured, published_at], order: [DESC, DESC] }) {
         edges {
             node {
                 # Main fields
