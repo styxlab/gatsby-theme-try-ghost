@@ -43,7 +43,7 @@ Index.propTypes = {
 export default Index
 
 // This page query loads all posts
-// Not that sorting within $postIds is irrelevant!
+// Note that sorting within $postIds is irrelevant!
 export const pageQuery = graphql`
   query GhostPostQuery($postIds: [String!]!, $limit: Int!, $skip: Int!) {
     allGhostPost(
