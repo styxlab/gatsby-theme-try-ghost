@@ -200,6 +200,10 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
         authors: result.data.allGhostAuthor.edges,
     }
 
+    // Pin featured posts on top by reordering
+    const featuredPosts = data.posts.filter(({ node }) => node.featured === true)
+    data.posts = featuredPosts.concat(data.posts.filter(({ node }) => node.featured !== true))
+
     // Load templates
     const templates = {
         page: require.resolve(`./src/templates/page.js`),
