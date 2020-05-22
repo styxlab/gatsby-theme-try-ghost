@@ -11,7 +11,7 @@ const HeaderBackground = ({ fluidImg, srcImg, children }) => {
     const fluidImgSharp = fluidImg && fluidImg.childImageSharp && fluidImg.childImageSharp.fluid
 
     return (
-        <>
+        <React.Fragment>
             {fluidImgSharp ? (
                 <BackgroundSheet>
                     <BackgroundImage Tag="div" fluid={fluidImgSharp} preserveStackingContext={false} className="outer site-header-background responsive-header-img" backgroundColor={`#000`}>
@@ -29,7 +29,7 @@ const HeaderBackground = ({ fluidImg, srcImg, children }) => {
                     </div>
                 )
             )}
-        </>
+        </React.Fragment>
     )
 }
 

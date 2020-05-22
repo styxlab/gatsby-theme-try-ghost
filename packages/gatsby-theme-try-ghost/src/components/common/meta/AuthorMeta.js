@@ -36,7 +36,7 @@ const AuthorMeta = ({ data, settings, canonical }) => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <Helmet>
                 <title>{title}</title>
                 <meta name="description" content={description} />
@@ -54,7 +54,7 @@ const AuthorMeta = ({ data, settings, canonical }) => {
                 <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
-        </>
+        </React.Fragment>
     )
 }
 

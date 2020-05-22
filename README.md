@@ -80,7 +80,7 @@ PRs are welcome! Consider contributing to this project if you are missing featur
 
 ## Credits
 
-This project would not be possible without the great [Gatsby](https://www.gatsbyjs.org/), [Ghost](https://ghost.org/), [React](https://reactjs.org/), [GraphQL](https://graphql.org/), [Node](https://nodejs.org) and the [JavaScript](https://developer.mozilla.org/de/docs/Web/JavaScript) eco-system in general. This project started from a fork of [`gatsby-starter-ghost`](https://github.com/TryGhost/gatsby-starter-ghost), but has evolved to a different, independent project with its own goals.
+This project would not be possible without the great [Gatsby](https://www.gatsbyjs.org/), [Ghost](https://ghost.org/), [React](https://reactjs.org/), [GraphQL](https://graphql.org/), [Node](https://nodejs.org) and the [JavaScript](https://developer.mozilla.org/de/docs/Web/JavaScript) eco-system in general. This project started from a fork of [`gatsby-starter-ghost`](https://github.com/TryGhost/gatsby-starter-ghost), but has evolved to a different, independent project.
 
 # Copyright & License
 

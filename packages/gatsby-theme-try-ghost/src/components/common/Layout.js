@@ -38,7 +38,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
     errorClass = errorClass || ``
 
     return (
-        <>
+        <React.Fragment>
             {/* Dark Mode shadows DocumentHead */}
             <DocumentHead site={site} className={bodyClass} />
 
@@ -74,7 +74,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                     </div>
                 </footer>
             </div>
-        </>
+        </React.Fragment>
     )
 }
 

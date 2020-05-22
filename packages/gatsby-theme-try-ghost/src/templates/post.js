@@ -46,7 +46,7 @@ const Post = ({ data, location, pageContext }) => {
     }
 
     return (
-        <>
+        <React.Fragment>
             <MetaData data={data} location={location} type="article"/>
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
@@ -110,7 +110,7 @@ const Post = ({ data, location, pageContext }) => {
                     </div>
                 </Layout>
             )}/>
-        </>
+        </React.Fragment>
     )
 }
 
@@ -169,10 +169,10 @@ export const postQuery = graphql`
             ...GhostPostFields
         }
         allGhostPost(
-            sort: { order: DESC, fields: [published_at] },
             filter: {slug: { ne: $slug },tags: {elemMatch: {slug: {eq: $tag}}}},
             limit: $limit,
-            skip: $skip
+            skip: $skip,
+            sort: { fields: [featured, published_at], order: [DESC, DESC] }
         ) {
             edges {
                 node {
