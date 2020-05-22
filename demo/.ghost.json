@@ -1,0 +1,10 @@
+{
+  "development": {
+    "apiUrl": "https://cms.jamify.org",
+    "contentApiKey": "c1c9fc45b991267521e8b0c0c0"
+  },
+  "production": {
+    "apiUrl": "https://cms.jamify.org",
+    "contentApiKey": "c1c9fc45b991267521e8b0c0c0"
+  }
+}

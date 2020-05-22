@@ -16,7 +16,7 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
-
+    posts.map(({ node }) => console.log(node.slug))
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
@@ -42,15 +42,16 @@ Index.propTypes = {
 
 export default Index
 
-// This page query loads all posts sorted descending by published date
-// The `limit` and `skip` values are used for pagination
-// sort: { order: DESC, fields: [published_at] },
+// This page query loads all posts
+// Note that the initial sorting is based on the source plugin
+// Therefore the sorting within $postIds is irrelevant!
 export const pageQuery = graphql`
   query GhostPostQuery($postIds: [String!]!, $limit: Int!, $skip: Int!) {
     allGhostPost(
         filter: {id: { in: $postIds }},
         limit: $limit,
-        skip: $skip
+        skip: $skip,
+        sort: { order: DESC, fields: [featured] },
     ) {
       edges {
         node {
