@@ -35,7 +35,7 @@ const Page = ({ data, location }) => {
                         </header>
 
                         <figure className="post-full-image">
-                            <ImgSharp wrapperStyle={{ position: `relative` }} fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
+                            <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
                         </figure>
 
                         {/* The main page content */}

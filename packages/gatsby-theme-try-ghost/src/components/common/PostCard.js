@@ -22,7 +22,7 @@ const PostCard = ({ post, num, isHome }) => {
         <article className={`post-card ${postClass} ${large}`}>
 
             <Link className="post-card-image-link" to={url}>
-                <ImgSharp fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
+                <ImgSharp clearPosition={true} fluidClass="post-card-image" srcClass="post-card-image" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title} />
             </Link>
 
             <div className="post-card-content">
