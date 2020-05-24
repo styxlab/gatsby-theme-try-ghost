@@ -50,10 +50,10 @@ It is strongly recommended to make a small configuration change to your reverse 
 
 server {
 
-    server*name cms.your-backend.com;
+    server_name cms.your-backend.com;
 
     if ($args ~* "^action=subscribe&success=") {
-        return 301 $scheme://www.gatsby-frontend.com$request*uri;
+        return 301 \$scheme://www.gatsby-frontend.com\$request_uri;
     }
 }
 
