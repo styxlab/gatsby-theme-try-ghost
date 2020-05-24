@@ -25,7 +25,7 @@ import '../../styles/custom-styles'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass }) => {
+const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, action }) => {
     const { basePath } = useOptions()
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
@@ -40,7 +40,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
     return (
         <React.Fragment>
             {/* Dark Mode shadows DocumentHead */}
-            <DocumentHead site={site} className={bodyClass} />
+            <DocumentHead site={site} className={bodyClass} action={action} />
 
             <div className="site-wrapper">
                 {/* The main header section on top of the screen */}
@@ -74,6 +74,11 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                     </div>
                 </footer>
             </div>
+
+            <div className="subscribe-success-message">
+                <a className="subscribe-close"></a>
+                You&apos;ve successfully subscribed to {site.title}!
+            </div>
         </React.Fragment>
     )
 }
@@ -101,6 +106,7 @@ DefaultLayout.propTypes = {
     ),
     page: PropTypes.object,
     errorClass: PropTypes.string,
+    action: PropTypes.string,
 }
 
 const DefaultLayoutSettingsQuery = props => (

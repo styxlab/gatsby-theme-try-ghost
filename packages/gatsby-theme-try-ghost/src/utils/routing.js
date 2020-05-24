@@ -57,4 +57,4 @@ const appendBasePath = (siteUrl, basePath = `/`) => {
     return `${url}${path}`
 }
 
-module.exports = { resolveUrl, appendBasePath }
+module.exports = { resolveUrl, appendBasePath, splitUrl }

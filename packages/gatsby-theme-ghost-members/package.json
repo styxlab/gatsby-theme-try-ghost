@@ -1,0 +1,43 @@
+{
+    "name": "gatsby-theme-ghost-members",
+    "description": "Gatsby theme to easily add a members form to gatsby-theme-try-ghost",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "styxlab",
+    "homepage": "https://github.com/styxlab/",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-members"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-theme",
+        "gatsby-theme-try-ghost",
+        "members",
+        "subscription",
+        "newsletter",
+        "form",
+        "jamify",
+        "ghost",
+        "ghost-cms"
+    ],
+    "dependencies": {
+        "@babel/runtime": "^7.9.2",
+        "formik": "^2.1.4",
+        "gatsby-node-helpers": "^0.3.0",
+        "gatsby-plugin-ghost-images": "^1.1.1",
+        "lodash": "^4.17.15"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.8.4",
+        "@babel/core": "^7.9.0",
+        "babel-preset-gatsby-package": "^0.3.1",
+        "cross-env": "^7.0.2",
+        "gatsby": "2.21.1"
+    }
+}

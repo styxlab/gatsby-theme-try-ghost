@@ -4,11 +4,11 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { resolveUrl } from '../utils/routing'
+import { resolveUrl, splitUrl } from '../utils/routing'
 import useOptions from '../utils/use-options'
 
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
-import { Comments, TableOfContents, Newsletter } from '../components/common'
+import { Comments, TableOfContents, Subscribe } from '../components/common'
 
 import { StickyNavContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
@@ -31,6 +31,7 @@ const Post = ({ data, location, pageContext }) => {
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
+    const { absolute: cmsUrl } = splitUrl(post.url)
 
     const primaryTagCount = pageContext.primaryTagCount
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
@@ -102,7 +103,7 @@ const Post = ({ data, location, pageContext }) => {
                                     dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
                             </section>
 
-                            <Newsletter />
+                            <Subscribe url={cmsUrl}/>
 
                             <Comments id={post.id}/>
 
