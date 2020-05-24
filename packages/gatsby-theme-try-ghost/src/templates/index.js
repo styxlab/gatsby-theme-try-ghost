@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import queryString from "query-string"
 
 import { Layout, PostView, HeaderIndex } from '../components/common'
 import { StickyNavContainer } from '../components/common/effects'
@@ -16,13 +17,14 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
+    const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || {}
 
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData location={location} />
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
-                    <Layout isHome={true} header={<HeaderIndex />} sticky={sticky}>
+                    <Layout action={action} isHome={true} header={<HeaderIndex />} sticky={sticky}>
                         <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
                     </Layout>
                 )}/>

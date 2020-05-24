@@ -19,6 +19,7 @@
     "gatsby-theme-ghost-commento": "*",
     "gatsby-theme-ghost-contact": "*",
     "gatsby-theme-ghost-dark-mode": "*",
+    "gatsby-theme-ghost-members": "*",
     "gatsby-transformer-rehype": "*",
     "prismjs": "^1.20.0",
     "react": "^16.13.1",
