@@ -29,16 +29,17 @@ plugins: [
 
 ## Details
 
-This is the first plugin that brings Ghost Membership functionality to your Gatsby site! With this plugin, you can utilize your headless Ghost CMS for managing your members, thus no additional back-end is needed.
+This is the first plugin that brings Ghost Membership functionality to your Gatsby site!✨ It utilizes your headless Ghost CMS for managing your members, so there is no need to install another back-end.
 
 A subscription form is shown at the end of every post with an email input field and a submit button. Once a user submits an email, a `POST` request is issued to your headless Ghost CMS containing the email as payload. This triggers your CMS to send out an email to that address containing a magic link for membership subscription. Once a user clicks on that link, the user's email address is added to your Ghost membership dashboard.
 
-A final request from Ghost CMS is fired which opens your Ghost site and displays a success message. As this request also points to your CMS, you should use your reverse proxy to forward it to your static site. That way, the user will see the success message where it belongs: On the same site membership subscription had been previously initiated.
+A final request from Ghost CMS is fired which opens your Ghost site and displays a success message. As this request also points to your CMS, you should use your reverse proxy to forward it to your static site. That way, the user will see the success message where it belongs: On the same website where membership subscription was initiated.
 
 
 ## Ghost CMS configuration
 
 You must active the members dashboard in Ghost Admin. Go to _Labs_ and activate the _Enable members_ section. In addition, ensure that the email configuration is set up correctly. You can test that by clicking on the _Send_ button under _Labs -> Test email configuration_.
+
 
 ## Nginx Configuration (optional)
 
@@ -58,7 +59,7 @@ server {
 
 ```
 
-You have to substitute `www.gatsby-frontend.com` with the address of your static site. Otherwise your users may get confused: After clicking the magic link, they will see the private login screen of your CMS.
+Substitute `www.gatsby-frontend.com` with the address of your static site. Without this change users may get confused: After clicking the magic link, they will see the private login screen of your CMS.
 
 ## Contributions
 
