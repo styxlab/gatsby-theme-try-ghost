@@ -31,7 +31,7 @@ plugins: [
 
 This is the first plugin that brings Ghost Membership functionality to your Gatsby site! With this plugin, you can utilize your headless Ghost CMS for managing your members, thus no additional back-end is needed.
 
-With this plugin a subscription form is shown at the end of every post with an email input field and a submit button. Once a user submits an email, a `POST` request is issued to your headless Ghost CMS containing the email as payload. This triggers your CMS to send out an email to that address containing a magic link for membership subscription. That link contains a unique sign up token. Once clicked a `GET` request to your CMS is made, and that email address is added to your Ghost membership dashboard.
+A subscription form is shown at the end of every post with an email input field and a submit button. Once a user submits an email, a `POST` request is issued to your headless Ghost CMS containing the email as payload. This triggers your CMS to send out an email to that address containing a magic link for membership subscription. That link contains a unique sign up token. Once clicked a `GET` request to your CMS is made, and that email address is added to your Ghost membership dashboard.
 
 A final `GET` request from Ghost CMS is fired which opens your Ghost site and displays a success message. As this request. also points to your CMS, you should use your reverse proxy to forward this request to your static site. That ways, the user will see the success message where it belongs: On the very same site membership subscription had been initiated.
 
