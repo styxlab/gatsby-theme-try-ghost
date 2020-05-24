@@ -38,12 +38,12 @@ A final request from Ghost CMS is fired which opens your Ghost site and displays
 
 ## Ghost CMS configuration
 
-You must active the members dashboard in Ghost Admin. Go to *Labs* and activate the *Enable members* section. In addition, ensure that the email configuration is set up correctly. You can test that by clicking on the *Send* button under *Labs -> Test email configuration*.
+You must activate the members dashboard in Ghost Admin. Go to *Labs* and activate the *Enable members* section. In addition, ensure that the email configuration is set up correctly. You can test that by clicking on the *Send* button under *Labs -> Test email configuration*.
 
 
 ## Nginx Configuration (optional)
 
-If you host your headless Ghost CMS yourself, it is strongly recommended to make a small configuration change to your reverse proxy. With this, the user will be redirected to your Gatsby site after clicking on the magic link:
+It is strongly recommended to make a small configuration change to your reverse proxy. With this, the user will be redirected to your Gatsby site after clicking on the magic link:
 
 ```text
 // /etc/nginx/conf.d/cms-ghost.conf
