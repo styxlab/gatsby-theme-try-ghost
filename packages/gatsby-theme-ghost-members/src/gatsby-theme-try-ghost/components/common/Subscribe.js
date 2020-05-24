@@ -4,14 +4,14 @@ import PropTypes from 'prop-types'
 import { Subscribe } from '../../../components/common'
 
 // The actual component
-const SubscribeWrapper = ({ url }) => (
+const SubscribeSection = ({ url }) => (
     <section className="subscribe-form">
         <Subscribe url={url} />
     </section>
 )
 
-SubscribeWrapper.propTypes = {
+SubscribeSection.propTypes = {
     url: PropTypes.string.isRequired,
 }
 
-export default SubscribeWrapper
+export default SubscribeSection
