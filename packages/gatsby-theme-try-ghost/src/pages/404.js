@@ -2,27 +2,30 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import { Layout, HeaderPage, PostCard } from '../components/common'
+import { OverlayContainer } from '../components/common/effects'
 
 const NotFoundPage = ({ data }) => {
     const posts = data.allGhostPost.edges
 
     return (
-        <Layout header={<HeaderPage />} errorClass="error-content">
-            <div className="inner">
-                <section className="error-message">
-                    <h1 className="error-code">404</h1>
-                    <p className="error-description">Page not found</p>
-                    <Link to="/" className="error-link">Go to the front page →</Link>
-                </section>
+        <OverlayContainer render={ overlay => (
+            <Layout overlay={overlay} header={<HeaderPage overlay={overlay}/>} errorClass="error-content">
+                <div className="inner">
+                    <section className="error-message">
+                        <h1 className="error-code">404</h1>
+                        <p className="error-description">Page not found</p>
+                        <Link to="/" className="error-link">Go to the front page →</Link>
+                    </section>
 
-                <div className="post-feed">
-                    {posts.map(({ node } , i) => (
-                        <PostCard key={node.id} post={node} num={i} />
-                    ))}
+                    <div className="post-feed">
+                        {posts.map(({ node } , i) => (
+                            <PostCard key={node.id} post={node} num={i} />
+                        ))}
+                    </div>
+
                 </div>
-
-            </div>
-        </Layout>
+            </Layout>
+        )}/>
     )
 }
 

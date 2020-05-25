@@ -5,7 +5,7 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 import { SiteNav, HeaderBackground } from '.'
 import useOptions from '../../utils/use-options'
 
-const HeaderIndex = ({ data }) => {
+const HeaderIndex = ({ data, overlay }) => {
     const { basePath } = useOptions()
     const site = data.allGhostSettings.edges[0].node
 
@@ -13,7 +13,7 @@ const HeaderIndex = ({ data }) => {
         <header className="site-home-header">
             <HeaderBackground fluidImg={site.coverImageSharp} srcImg={site.cover_image}>
                 <div className="inner">
-                    <SiteNav className="site-nav" />
+                    <SiteNav className="site-nav" overlay={overlay}/>
                     <div className="site-header-content">
                         <h1 className="site-title">
                             {site.logo ? (
@@ -37,6 +37,7 @@ HeaderIndex.propTypes = {
         allGhostSettings: PropTypes.object.isRequired,
         file: PropTypes.object,
     }).isRequired,
+    overlay: PropTypes.object.isRequired,
 }
 
 const HeaderIndexQuery = props => (

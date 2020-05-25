@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { DocumentHead, StickyNav } from '.'
+import { DocumentHead, StickyNav, SubscribeOverlay } from '.'
 import { BodyClass } from './helpers'
 
 import { appendBasePath } from '../../utils/routing'
@@ -25,7 +25,7 @@ import '../../styles/custom-styles'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, action }) => {
+const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, action, overlay }) => {
     const { basePath } = useOptions()
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
@@ -53,7 +53,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 </main>
 
                 {/* For sticky nav bar */}
-                { isHome && <StickyNav className={`site-nav ${sticky && sticky.state.currentClass}`} />}
+                { isHome && <StickyNav className={`site-nav ${sticky && sticky.state.currentClass}`} overlay={overlay}/>}
 
                 {/* Links to Previous/Next posts */}
                 {previewPosts}
@@ -69,7 +69,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                             <a href={siteUrl}>Latest Posts</a>
                             { site.facebook && <a href={facebookUrl}>Facebook</a> }
                             { site.twitter && <a href={twitterUrl}>Twitter</a> }
-                            <a href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
+                            <a href="https://www.jamify.org" target="_blank" rel="noopener noreferrer">Jamify</a>
                         </nav>
                     </div>
                 </footer>
@@ -79,6 +79,10 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 <a className="subscribe-close"></a>
                 You&apos;ve successfully subscribed to {site.title}!
             </div>
+
+            {/* The big email subscribe modal content */}
+            <SubscribeOverlay overlay={overlay} />
+
         </React.Fragment>
     )
 }
@@ -107,6 +111,7 @@ DefaultLayout.propTypes = {
     page: PropTypes.object,
     errorClass: PropTypes.string,
     action: PropTypes.string,
+    overlay: PropTypes.object,
 }
 
 const DefaultLayoutSettingsQuery = props => (

@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { SiteNav } from '.'
 
-const HeaderPost = ({ title, sticky }) => (
+const HeaderPost = ({ title, sticky, overlay }) => (
     <header className="site-header">
         <div className={`outer site-nav-main ${sticky && sticky.state.currentClass}`}>
             <div className="inner">
-                <SiteNav className="site-nav" postTitle={title} />
+                <SiteNav className="site-nav" postTitle={title} overlay={overlay}/>
             </div>
         </div>
     </header>
@@ -20,6 +20,7 @@ HeaderPost.propTypes = {
             currentClass: PropTypes.string,
         }).isRequired,
     }).isRequired,
+    overlay: PropTypes.object.isRequired,
 }
 
 export default HeaderPost

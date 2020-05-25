@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { HeaderPage, Layout, ImgSharp } from '../components/common'
+import { OverlayContainer } from '../components/common/effects'
 
 import { PostClass } from '../components/common/helpers'
 import { MetaData } from '../components/common/meta'
@@ -27,25 +28,27 @@ const Page = ({ data, location }) => {
             <Helmet>
                 <style type="text/css">{`${page.codeinjection_styles}`}</style>
             </Helmet>
-            <Layout page={page} tags={page.tags} header={<HeaderPage />}>
-                <div className="inner">
-                    <article className={`post-full ${postClass}`}>
-                        <header className="post-full-header">
-                            <h1 className="post-full-title">{page.title}</h1>
-                        </header>
+            <OverlayContainer render={ overlay => (
+                <Layout page={page} tags={page.tags} header={<HeaderPage overlay={overlay}/>} overlay={overlay}>
+                    <div className="inner">
+                        <article className={`post-full ${postClass}`}>
+                            <header className="post-full-header">
+                                <h1 className="post-full-title">{page.title}</h1>
+                            </header>
 
-                        <figure className="post-full-image">
-                            <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
-                        </figure>
+                            <figure className="post-full-image">
+                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
+                            </figure>
 
-                        {/* The main page content */}
-                        <section className="post-full-content">
-                            <div className="post-content load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
-                        </section>
-                    </article>
-                </div>
-            </Layout>
+                            {/* The main page content */}
+                            <section className="post-full-content">
+                                <div className="post-content load-external-scripts"
+                                    dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
+                            </section>
+                        </article>
+                    </div>
+                </Layout>
+            )}/>
         </React.Fragment>
     )
 }

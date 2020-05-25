@@ -94,7 +94,7 @@ If you want to add this blog theme to an existing site, follow these instruction
             },
             ghostConfig: {
                 "development": {
-                    "apiUrl": "http://localhost:2368",
+                    "apiUrl": "https://your-ghost-cms.com",
                     "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
                 },
                 "production": {

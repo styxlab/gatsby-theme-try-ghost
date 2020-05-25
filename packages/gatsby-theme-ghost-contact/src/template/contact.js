@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Layout, HeaderPage, PostCard, ImgSharp } from 'gatsby-theme-try-ghost/src/components/common'
+import { OverlayContainer } from 'gatsby-theme-try-ghost/src/components/common/effects'
 import { ContactForm } from '../components/common'
 
 import { PostClass } from 'gatsby-theme-try-ghost/src/components/common/helpers'
@@ -19,48 +20,50 @@ const ContactPage = ({ data, location }) => {
     const metadata = { ghostPage: page }
 
     return (
-        <>
+        <React.Fragment>
             <MetaData data={metadata} location={location} type="website"/>
-            <Layout page={page} tags={page.tags} header={<HeaderPage />}>
-                <div className="inner">
-                    <article className={`post-full ${postClass}`}>
+            <OverlayContainer render={ overlay => (
+                <Layout overlay={overlay} page={page} tags={page.tags} header={<HeaderPage overlay={overlay}/>}>
+                    <div className="inner">
+                        <article className={`post-full ${postClass}`}>
 
-                        <header className="post-full-header">
-                            <h1 className="post-full-title">{page.title}</h1>
+                            <header className="post-full-header">
+                                <h1 className="post-full-title">{page.title}</h1>
 
-                            { page.custom_excerpt &&
-                                <p className="post-full-custom-excerpt">{page.custom_excerpt}</p>
+                                { page.custom_excerpt &&
+                                    <p className="post-full-custom-excerpt">{page.custom_excerpt}</p>
+                                }
+                            </header>
+
+                            { featImg &&
+                                <figure className="post-full-image">
+                                    <ImgSharp fluidClass="kg-card kg-code-card"
+                                        fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
+                                </figure>
                             }
-                        </header>
 
-                        { featImg &&
-                            <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card"
-                                    fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
-                            </figure>
-                        }
+                            <section className="post-full-content">
 
-                        <section className="post-full-content">
+                                <div className="post-content">
+                                    <ContactForm topics={page.form_topics} serviceConfig={page.serviceConfig} />
+                                </div>
 
-                            <div className="post-content">
-                                <ContactForm topics={page.form_topics} serviceConfig={page.serviceConfig} />
-                            </div>
+                                <div className="post-content"
+                                    dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
 
-                            <div className="post-content"
-                                dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
+                            </section>
+                        </article>
 
-                        </section>
-                    </article>
+                        <div className="post-feed">
+                            {posts.map(({ node }, i) => (
+                                <PostCard key={node.id} post={node} num={i} />
+                            ))}
+                        </div>
 
-                    <div className="post-feed">
-                        {posts.map(({ node }, i) => (
-                            <PostCard key={node.id} post={node} num={i} />
-                        ))}
                     </div>
-
-                </div>
-            </Layout>
-        </>
+                </Layout>
+            )}/>
+        </React.Fragment>
     )
 }
 

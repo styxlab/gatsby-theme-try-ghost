@@ -6,7 +6,7 @@ import { Navigation, SocialLinks } from '.'
 import { resolveUrl, appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 
-const SiteNav = ({ data, className, postTitle }) => {
+const SiteNav = ({ data, className, postTitle, overlay }) => {
     const { basePath } = useOptions()
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
@@ -59,7 +59,7 @@ const SiteNav = ({ data, className, postTitle }) => {
                     <Navigation data={site.secondary_navigation} />
                 ) : (
                     <div className="social-links">
-                        <SocialLinks site={site} siteUrl={config.siteUrl} />
+                        <SocialLinks site={site} siteUrl={config.siteUrl} overlay={overlay}/>
                     </div>
                 )}
             </div>
@@ -75,6 +75,7 @@ SiteNav.propTypes = {
     }).isRequired,
     className: PropTypes.string.isRequired,
     postTitle: PropTypes.string,
+    overlay: PropTypes.object,
 }
 
 const SiteNavQuery = props => (

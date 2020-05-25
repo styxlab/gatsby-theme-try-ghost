@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 import queryString from "query-string"
 
 import { Layout, PostView, HeaderIndex } from '../components/common'
-import { StickyNavContainer } from '../components/common/effects'
+import { StickyNavContainer, OverlayContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 import { GlobalStateContext } from "../context/GlobalState"
@@ -24,9 +24,11 @@ const Index = ({ data, location, pageContext }) => {
             <React.Fragment>
                 <MetaData location={location} />
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
-                    <Layout action={action} isHome={true} header={<HeaderIndex />} sticky={sticky}>
-                        <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
-                    </Layout>
+                    <OverlayContainer render={ overlay => (
+                        <Layout action={action} isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
+                            <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
+                        </Layout>
+                    )}/>
                 )}/>
             </React.Fragment>
         )}

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { Layout, PostView, HeaderAuthor } from '../components/common'
+import { OverlayContainer } from '../components/common/effects'
+
 import { MetaData } from '../components/common/meta'
 
 import { GlobalStateContext } from "../context/GlobalState"
@@ -21,9 +23,12 @@ const Author = ({ data, location, pageContext }) => {
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData location={location} data={data} type="profile"/>
-                <Layout author={author} header={<HeaderAuthor author={author} numberOfPosts={pageContext.totalPosts}/>}>
-                    <PostView globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
-                </Layout>
+                <OverlayContainer render={ overlay => (
+                    <Layout author={author} overlay={overlay}
+                        header={<HeaderAuthor overlay={overlay} author={author} numberOfPosts={pageContext.totalPosts}/>}>
+                        <PostView globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
+                    </Layout>
+                )}/>
             </React.Fragment>
         )}
         </GlobalStateContext.Consumer>
