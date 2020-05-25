@@ -226,29 +226,32 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
     createTaxonomyPages(createPage, data.authors, authorIds, basePath, templates.author, postsPerPage, data.posts)
 }
 
-// Plugins can access basePath with GraphQL query
-exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {} }) => {
+// Plugins can access basePath and cmsUrl with GraphQL query
+exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, ghostConfig }) => {
     const { basePath = `/` } = routes
+    const cmsUrl = ghostConfig && ghostConfig.production && ghostConfig.production.apiUrl || null
 
     createTypes(`
         type GhostConfig implements Node {
             basePath: String!
+            cmsUrl: String!
         }
     `)
 
-    const ghostConfig = {
+    const config = {
         basePath: resolveUrl(basePath),
+        cmsUrl: cmsUrl.replace(/\/$/, ``),
     }
 
     createNode({
-        ...ghostConfig,
+        ...config,
         id: `gatsby-theme-try-ghost-config`,
         parent: null,
         children: [],
         internal: {
             type: `ghostConfig`,
-            contentDigest: createContentDigest(ghostConfig),
-            content: JSON.stringify(ghostConfig),
+            contentDigest: createContentDigest(config),
+            content: JSON.stringify(config),
             description: `Ghost Config`,
         },
     })

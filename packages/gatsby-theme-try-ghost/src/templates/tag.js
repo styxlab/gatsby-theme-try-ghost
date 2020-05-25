@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
 import { HeaderTag, Layout, PostView } from '../components/common'
+import { OverlayContainer } from '../components/common/effects'
+
 import { MetaData } from '../components/common/meta'
 
 import { GlobalStateContext } from "../context/GlobalState"
@@ -21,9 +23,12 @@ const Tag = ({ data, location, pageContext }) => {
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData data={data} location={location} type="series"/>
-                <Layout tags={[tag]} header={<HeaderTag tag={tag} numberOfPosts={pageContext.totalPosts} />}>
-                    <PostView globalState={g} pageContext={pageContext} posts={posts} />
-                </Layout>
+                <OverlayContainer render={ overlay => (
+                    <Layout tags={[tag]} overlay={overlay}
+                        header={<HeaderTag overlay={overlay} tag={tag} numberOfPosts={pageContext.totalPosts} />}>
+                        <PostView globalState={g} pageContext={pageContext} posts={posts} />
+                    </Layout>
+                )}/>
             </React.Fragment>
         )}
         </GlobalStateContext.Consumer>

@@ -4,13 +4,13 @@ import { Link, graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
-import { resolveUrl, splitUrl } from '../utils/routing'
+import { resolveUrl } from '../utils/routing'
 import useOptions from '../utils/use-options'
 
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
 import { Comments, TableOfContents, Subscribe } from '../components/common'
 
-import { StickyNavContainer } from '../components/common/effects'
+import { StickyNavContainer, OverlayContainer } from '../components/common/effects'
 import { MetaData } from '../components/common/meta'
 
 import { PostClass } from '../components/common/helpers'
@@ -31,7 +31,6 @@ const Post = ({ data, location, pageContext }) => {
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
-    const { absolute: cmsUrl } = splitUrl(post.url)
 
     const primaryTagCount = pageContext.primaryTagCount
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
@@ -53,63 +52,65 @@ const Post = ({ data, location, pageContext }) => {
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
             </Helmet>
             <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={ sticky => (
-                <Layout isPost={true} sticky={sticky}
-                    header={<HeaderPost sticky={sticky} title={post.title}/>}
-                    previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
-                    <div className="inner">
-                        <article className={`post-full ${postClass}`}>
-                            <header className="post-full-header">
-                                { post.primary_tag &&
-                                        <section className="post-full-tags">
-                                            <Link to={resolveUrl(basePath, `/`, post.primary_tag.slug, post.primary_tag.url)}>{post.primary_tag.name}</Link>
+                <OverlayContainer render={ overlay => (
+                    <Layout isPost={true} sticky={sticky} overlay={overlay}
+                        header={<HeaderPost sticky={sticky} title={post.title} overlay={overlay}/>}
+                        previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
+                        <div className="inner">
+                            <article className={`post-full ${postClass}`}>
+                                <header className="post-full-header">
+                                    { post.primary_tag &&
+                                            <section className="post-full-tags">
+                                                <Link to={resolveUrl(basePath, `/`, post.primary_tag.slug, post.primary_tag.url)}>{post.primary_tag.name}</Link>
+                                            </section>
+                                    }
+
+                                    <h1 ref={sticky && sticky.anchorRef} className="post-full-title">{post.title}</h1>
+
+                                    { post.custom_excerpt &&
+                                        <p className="post-full-custom-excerpt">{post.custom_excerpt}</p>
+                                    }
+
+                                    <div className="post-full-byline">
+                                        <section className="post-full-byline-content">
+                                            <AuthorList authors={post.authors} isPost={true}/>
+
+                                            <section className="post-full-byline-meta">
+                                                <h4 className="author-name">
+                                                    {post.authors.map((author, i) => (
+                                                        <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
+                                                    ))}
+                                                </h4>
+                                                <div className="byline-meta-content">
+                                                    <time className="byline-meta-date" dateTime={post.published_at}>
+                                                        {post.published_at_pretty}&nbsp;
+                                                    </time>
+                                                    <span className="byline-reading-time"><span className="bull">&bull;</span> {readingTime}</span>
+                                                </div>
+                                            </section>
                                         </section>
-                                }
+                                    </div>
+                                </header>
 
-                                <h1 ref={sticky && sticky.anchorRef} className="post-full-title">{post.title}</h1>
+                                <figure className="post-full-image">
+                                    <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
+                                </figure>
 
-                                { post.custom_excerpt &&
-                                    <p className="post-full-custom-excerpt">{post.custom_excerpt}</p>
-                                }
+                                <section className="post-full-content">
+                                    <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
 
-                                <div className="post-full-byline">
-                                    <section className="post-full-byline-content">
-                                        <AuthorList authors={post.authors} isPost={true}/>
+                                    <div className="post-content load-external-scripts"
+                                        dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
+                                </section>
 
-                                        <section className="post-full-byline-meta">
-                                            <h4 className="author-name">
-                                                {post.authors.map((author, i) => (
-                                                    <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
-                                                ))}
-                                            </h4>
-                                            <div className="byline-meta-content">
-                                                <time className="byline-meta-date" dateTime={post.published_at}>
-                                                    {post.published_at_pretty}&nbsp;
-                                                </time>
-                                                <span className="byline-reading-time"><span className="bull">&bull;</span> {readingTime}</span>
-                                            </div>
-                                        </section>
-                                    </section>
-                                </div>
-                            </header>
+                                <Subscribe />
 
-                            <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
-                            </figure>
+                                <Comments id={post.id}/>
 
-                            <section className="post-full-content">
-                                <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
-
-                                <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
-                            </section>
-
-                            <Subscribe url={cmsUrl}/>
-
-                            <Comments id={post.id}/>
-
-                        </article>
-                    </div>
-                </Layout>
+                            </article>
+                        </div>
+                    </Layout>
+                )}/>
             )}/>
         </React.Fragment>
     )

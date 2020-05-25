@@ -1,13 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import RssIcon from './icons/rss-icon'
 import TwitterIcon from './icons/twitter-icon'
 import FacebookIcon from './icons/facebook-icon'
 
-import { DarkMode } from '.'
+import { DarkMode, SocialRss, SubscribeButton } from '.'
 
-const SocialLinks = ({ site, siteUrl }) => {
+const SocialLinks = ({ site, siteUrl, overlay }) => {
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
@@ -15,8 +14,9 @@ const SocialLinks = ({ site, siteUrl }) => {
         <React.Fragment>
             { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
             { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
-            <a className="rss-button" href={ `https://feedly.com/i/subscription/feed/${siteUrl}/rss` } target="_blank" rel="noopener noreferrer" title="Rss"><RssIcon /></a>
+            <SocialRss url={siteUrl} />
             <DarkMode />
+            <SubscribeButton overlay={overlay}/>
         </React.Fragment>
     )
 }
@@ -24,6 +24,7 @@ const SocialLinks = ({ site, siteUrl }) => {
 SocialLinks.propTypes = {
     site: PropTypes.object.isRequired,
     siteUrl: PropTypes.string.isRequired,
+    overlay: PropTypes.object,
 }
 
 export default SocialLinks

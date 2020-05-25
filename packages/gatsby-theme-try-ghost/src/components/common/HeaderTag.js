@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { SiteNav, HeaderBackground } from '.'
 
-const HeaderTag = ({ tag, numberOfPosts }) => (
+const HeaderTag = ({ tag, numberOfPosts, overlay }) => (
     <header className="site-archive-header">
         <div className="outer site-nav-main">
             <div className="inner">
-                <SiteNav className="site-nav" />
+                <SiteNav className="site-nav" overlay={overlay}/>
             </div>
         </div>
         <HeaderBackground srcImg={tag.feature_image}>
@@ -30,6 +30,7 @@ HeaderTag.propTypes = {
         description: PropTypes.string,
     }).isRequired,
     numberOfPosts: PropTypes.number.isRequired,
+    overlay: PropTypes.object.isRequired,
 }
 
 export default HeaderTag

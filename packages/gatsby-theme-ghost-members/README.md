@@ -3,7 +3,7 @@
 [![gatsby-theme-ghost-members npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-members)](https://www.npmjs.org/package/gatsby-theme-ghost-members)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
-Adds a membership subscription form to [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). This plugin interacts directly with your headless Ghost CMS. After a user submits an email address via the subscription form, the user receives a magic link for membership activation in the inbox. If that link is clicked, the user is registered as a member in your Ghost CMS dashboard.
+Adds a membership subscription button and form to [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost). This plugin interacts directly with your headless Ghost CMS. After a user submits an email address via the subscription form, the user receives a magic link for membership activation in the inbox. If that link is clicked, the user is registered as a member in your Ghost CMS dashboard.
 
 ## Install
 
@@ -31,7 +31,7 @@ plugins: [
 
 This plugin brings Ghost Membership functionality to your Gatsby site!✨ It utilizes your headless Ghost CMS for managing your members, so there is no need to install another back-end.
 
-A subscription form is shown at the end of every post with an email input field and a submit button. Once a user submits an email, a `POST` request is issued to your headless Ghost CMS containing the email as payload. This triggers your CMS to send out an email to that address containing a magic link for membership subscription. Once a user clicks on that link, the user's email address is added to your Ghost membership dashboard.
+A subscription button is added to every page which opens a modal page with a subscription form. In addition, a subscription section is shown at the end of every post with an email input field and a submit button. Once a user submits an email, a `POST` request is issued to your headless Ghost CMS containing the email as payload. This triggers your CMS to send out an email to that address containing a magic link for membership subscription. Once a user clicks on that link, the user's email address is added to your Ghost membership dashboard.
 
 A final request from Ghost CMS is fired which opens your Ghost site and displays a success message. As this request also points to your CMS, you should use your reverse proxy to forward it to your static site. That way, the user will see the success message where it belongs: on the same website where membership subscription was initiated.
 
