@@ -151,7 +151,7 @@ module.exports = ({ htmlAst }, pluginOptions) => {
 
         /* eslint-disable no-multi-spaces */
         const codeHtml = ``
-        + `<div class="${divClassNames} ${highlightClassName}" class=" data-language="${languageName}">`
+        + `<div class="${divClassNames} ${highlightClassName}" data-language="${languageName}">`
         +   `<pre${numLinesStyle} class="${className}${numLinesClass}">`
         +     `<code class="${className}">`
         +       `${useCommandLine ? commandLine(value, outputLines, promptUser, promptHost) : ``}`
