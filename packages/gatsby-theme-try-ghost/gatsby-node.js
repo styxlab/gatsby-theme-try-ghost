@@ -5,6 +5,7 @@ const { createContentDigest } = require(`gatsby-core-utils`)
 
 const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
 const infiniteScroll = require(`./src/utils/infinite-scroll`)
+const ghostConfigDefaults = require(`./src/utils/.ghost.json`)
 
 exports.createSchemaCustomization = require(`./src/utils/create-schema-customization`)
 
@@ -229,7 +230,8 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
 // Plugins can access basePath and cmsUrl with GraphQL query
 exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, ghostConfig }) => {
     const { basePath = `/` } = routes
-    const cmsUrl = ghostConfig && ghostConfig.production && ghostConfig.production.apiUrl || null
+    const ghostConf = _.merge({}, ghostConfigDefaults, ghostConfig)
+    const cmsUrl = ghostConf && ghostConf.production && ghostConf.production.apiUrl || null
 
     createTypes(`
         type GhostConfig implements Node {
