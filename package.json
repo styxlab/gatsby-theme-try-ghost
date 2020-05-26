@@ -17,6 +17,7 @@
     "demo"
   ],
   "devDependencies": {
+    "eslint-plugin-ghost": "^1.5.0",
     "lerna": "^3.22.0"
   }
 }
