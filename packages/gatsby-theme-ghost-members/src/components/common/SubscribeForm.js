@@ -1,7 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import LoaderIcon from './icons/loader-icon'
+
+const HiddenLabel = styled.label`
+    position: absolute;
+    height: 1px;
+    width: 1px;
+    clip: rect(1px,1px,1px,1px);
+    border: 0;
+    overflow: hidden;
+`
 
 class SubscribeForm extends React.Component {
     constructor(props) {
@@ -49,7 +59,7 @@ class SubscribeForm extends React.Component {
         return (
             <form className={this.state.message} data-members-form="subscribe" onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <label for="email" style="label-hidden">Email</label>
+                    <HiddenLabel for="email">Email</HiddenLabel>
                     <input id="email" name="email" type="email" value={this.state.value} onChange={this.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
                     <button className="button primary" type="submit" value="Submit">
                         <span className="button-content">Subscribe</span>
