@@ -12,6 +12,8 @@ const SubscribeOverlay = ({ data, overlay }) => {
     const site = data.allGhostSettings.edges[0].node
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
+    const labelHidden = { position: `absolute`, height: `1px`, width: `1px`,
+        clip: `rect(1px,1px,1px,1px)`, border: 0, overflow: `hidden` }
 
     return (
         <div className="subscribe-overlay" style={ isOpen ? openingStyle : null } >
@@ -26,7 +28,8 @@ const SubscribeOverlay = ({ data, overlay }) => {
                     <p className="subscribe-overlay-description">Stay up to date! Get all the latest & greatest posts delivered straight to your inbox</p>
                     <form className={message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
                         <div className="form-group">
-                            <input type="email" value={value} onChange={overlay.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
+                            <label for="email" style="label-hidden">Email</label>
+                            <input id="email" name="email" type="email" value={value} onChange={overlay.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
                             <button className="button primary" type="submit" value="Submit">
                                 <span className="button-content">Subscribe</span>
                                 <span className="button-loader"><LoaderIcon /></span>
