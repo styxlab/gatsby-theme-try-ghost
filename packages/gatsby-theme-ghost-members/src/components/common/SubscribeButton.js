@@ -25,9 +25,6 @@ const SubscribeButton = ({ overlay }) => {
 }
 
 SubscribeButton.propTypes = {
-    data: PropTypes.shape({
-        ghostConfig: PropTypes.object.isRequired,
-    }).isRequired,
     overlay: PropTypes.object,
 }
 

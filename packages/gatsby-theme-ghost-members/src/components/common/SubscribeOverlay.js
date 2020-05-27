@@ -46,10 +46,10 @@ const SubscribeOverlay = ({ data, overlay }) => {
                             </button>
                         </div>
                         <div className="message-success">
-                            <strong>{text(`SUBSCRIBE_ALERT`)}</strong> {text(`SUBSCRIBE_SUCCESS`)}.
+                            <strong>{`${text(`GREAT`)}!`}</strong> {text(`CHECK_YOUR_INBOX`)}.
                         </div>
                         <div className="message-error">
-                            {text(`SUBSCRIBE_ERROR`)}
+                            {text(`ENTER_VALID_EMAIL`)}
                         </div>
                     </form>
                 </div>
