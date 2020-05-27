@@ -12,10 +12,8 @@ import useOptions from '../../utils/use-options'
 import '../../styles/screen.css'
 import '../../styles/dark-mode.css'
 import '../../styles/pagination.css'
+import '../../styles/prism.css'
 import '../../styles/toc.css'
-
-// Styles from other plugins
-import '../../styles/custom-styles'
 
 /**
 * Main layout component
