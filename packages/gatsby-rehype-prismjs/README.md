@@ -65,23 +65,18 @@ plugins: [
 ]
 ```
 
-## Pick a PrismJS theme (required)
+## Customize PrismJS theme
 
-PrismJS ships with a number of themes that you can easily include in your Gatsby site. To load a theme, just require its CSS file in your `gatsby-browser.js` file, e.g.
+> If you are using this plugin together with [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), a default prism theme is already installed for you. Installing a CSS theme is only required, if used with other projects or if you want to change or customize the theme.
+
+PrismJS ships with a number of themes that you can easily include in your Gatsby site. You can find these themes in `node_modules/prismjs/themes/`. To load a theme, you can require its CSS file in `gatsby-browser.js`, e.g.
 
 ```javascript
 // gatsby-browser.js
 require("prismjs/themes/prism-solarizedlight.css")
 ```
 
-If your base theme is [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `custom-styles.js` where you import your PrismJS style:
-
-```javascript
-// custom-styles.js
-import 'prismjs/themes/prism-solarizedlight.css'
-````
-
-and put it into the following location:
+If your base theme is [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost), *do not* put the CSS file into `gatsby-browser.js` as it has unwanted side effects. Rather provide the CSS file in a specific location, so `gatsby-theme-try-ghost` can easily find it. Create a file with name `prism.css` and put it in the following location, so the default file is shadowed:
 
 ```text
 // in your base directory
@@ -89,8 +84,12 @@ and put it into the following location:
 └── src/
     └── gatsby-theme-try-ghost
         └── styles
-            └── custom-styles.js
+            └── prism.css
 ```
+
+## Dark mode
+
+The standard theme that ships with [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost) is already dark mode enabled. If you are using the standard themes, you should add some additional CSS for dark mode support.
 
 ## Usage in HTML
 

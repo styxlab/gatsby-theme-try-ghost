@@ -29,20 +29,22 @@ pre[class*='language-'] {
 }
 pre[class*='language-']::-moz-selection {
   /* Firefox */
-  background: hsl(207, 4%, 16%);
+  /* background: hsl(207, 4%, 16%); */
+  background: #cbeafb;
 }
 pre[class*='language-']::selection {
   /* Safari */
-  background: hsl(207, 4%, 16%);
+  /* background: hsl(207, 4%, 16%); */
+  background: #cbeafb;
 }
 /* Text Selection colour */
 pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
+pre[class*='language-']::-moz-selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
 pre[class*='language-']::selection,
-pre[class*='language-'] ::selection {
+pre[class*='language-']::selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
@@ -128,4 +130,8 @@ pre[data-line] {
 .gatsby-highlight pre[class*='language-'] {
   float: left;
   min-width: 100%;
+}
+body.dark code[class*='language-'],
+body.dark pre[class*='language-'] {
+  background: none;
 }

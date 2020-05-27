@@ -219,4 +219,10 @@
     .subscribe-form .success .message-success {
         color: color(var(--green) l(+5%) s(-5%));
     }
+    @media (prefers-color-scheme: dark) {
+        code[class*='language-'],
+        pre[class*='language-'] {
+            background: none;
+        }
+    }
 }
