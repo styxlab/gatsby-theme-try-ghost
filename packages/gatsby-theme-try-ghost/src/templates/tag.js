@@ -4,7 +4,6 @@ import { graphql } from 'gatsby'
 
 import { HeaderTag, Layout, PostView } from '../components/common'
 import { OverlayContainer } from '../components/common/effects'
-
 import { MetaData } from '../components/common/meta'
 
 import { GlobalStateContext } from "../context/GlobalState"

@@ -5,16 +5,18 @@ import { Link } from 'gatsby'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 import { AuthorList, ImgSharp } from '.'
 import { PostClass } from './helpers'
 
 const PostCard = ({ post, num, isHome }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const url = resolveUrl(basePath, post.collectionPath, post.slug, post.url)
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
-    const readingTime = readingTimeHelper(post)
+    const readingTime = readingTimeHelper(post).replace(`min read`,text(`MIN_READ`))
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
 

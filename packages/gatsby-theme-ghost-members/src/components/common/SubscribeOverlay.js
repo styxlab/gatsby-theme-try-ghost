@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import LoaderIcon from './icons/loader-icon'
+import { useLang, get } from '../../utils/use-lang'
 
 const HiddenLabel = styled.label`
     position: absolute;
@@ -19,10 +20,10 @@ const SubscribeOverlay = ({ data, overlay }) => {
         return null
     }
 
+    const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
-
 
     return (
         <div className="subscribe-overlay" style={ isOpen ? openingStyle : null } >
@@ -33,22 +34,22 @@ const SubscribeOverlay = ({ data, overlay }) => {
                     <img className="subscribe-overlay-logo" src={site.logo} alt={site.title} />
                 }
                 <div className="subscribe-form">
-                    <h1 className="subscribe-overlay-title">Subscribe to {site.title}</h1>
-                    <p className="subscribe-overlay-description">Stay up to date! Get all the latest & greatest posts delivered straight to your inbox</p>
+                    <h1 className="subscribe-overlay-title">{text(`SUBSCRIBE_TO`)} {site.title}</h1>
+                    <p className="subscribe-overlay-description">{text(`SUBSCRIBE_OVERLAY`)}</p>
                     <form className={message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
                         <div className="form-group">
                             <HiddenLabel for="email">Email</HiddenLabel>
                             <input id="email" name="email" type="email" value={value} onChange={overlay.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
                             <button className="button primary" type="submit" value="Submit">
-                                <span className="button-content">Subscribe</span>
+                                <span className="button-content">{text(`SUBSCRIBE`)}</span>
                                 <span className="button-loader"><LoaderIcon /></span>
                             </button>
                         </div>
                         <div className="message-success">
-                            <strong>Great!</strong> Check your inbox and click the link to confirm your subscription.
+                            <strong>{text(`SUBSCRIBE_ALERT`)}</strong> {text(`SUBSCRIBE_SUCCESS`)}.
                         </div>
                         <div className="message-error">
-                            Please enter a valid email address!
+                            {text(`SUBSCRIBE_ERROR`)}
                         </div>
                     </form>
                 </div>

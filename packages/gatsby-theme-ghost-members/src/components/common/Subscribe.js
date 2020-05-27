@@ -2,18 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
+import { useLang, get } from '../../utils/use-lang'
+
 import { SubscribeForm } from '.'
 
 // The actual component
 const Subscribe = ({ data }) => {
+    const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
     const cmsUrl = data.ghostConfig.cmsUrl
 
     return (
         <React.Fragment>
-            <h3 className="subscribe-form-title">Subscribe to {site.title}</h3>
-            <p className="subscribe-form-description">Get the latest posts delivered right to your inbox</p>
-            <SubscribeForm url={cmsUrl} />
+            <h3 className="subscribe-form-title">{text(`SUBSCRIBE_TO`)} {site.title}</h3>
+            <p className="subscribe-form-description">{text(`SUBSCRIBE_SECTION`)}</p>
+            <SubscribeForm url={cmsUrl} text={text}/>
         </React.Fragment>
     )
 }

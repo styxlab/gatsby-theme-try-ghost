@@ -5,6 +5,8 @@ import { useEffect, useState } from "react"
 import ThemeContext from '../../../context/ThemeContext'
 import { useActiveHash } from '../../../components/common/effects/use-active-hash'
 
+import { useLang, get } from '../../../utils/use-lang'
+
 import {
     TocAside,
     TocTitle,
@@ -54,6 +56,8 @@ const createItems = (toc, url, depth, maxDepth, activeHash, isDesktop) => (
 )
 
 const TableOfContents = ({ toc, url, maxDepth = 2 }) => {
+    const text = get(useLang())
+
     const [isDesktop, setIsDesktop] = useState(false)
     const activeHash = useActiveHash(getHeadingIds(toc, true, maxDepth))
 
@@ -73,7 +77,7 @@ const TableOfContents = ({ toc, url, maxDepth = 2 }) => {
                     <TocAside>
                         <nav>
                             <TocTitle>
-                                Table of Contents
+                                {text(`TABLE_OF_CONTENTS`)}
                             </TocTitle>
                             <TocList>
                                 {createItems(toc, url, 1, theme.maxDepth || maxDepth, activeHash, isDesktop)}

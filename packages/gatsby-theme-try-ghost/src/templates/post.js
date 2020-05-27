@@ -6,6 +6,7 @@ import Helmet from 'react-helmet'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../utils/routing'
 import useOptions from '../utils/use-options'
+import { useLang, get } from '../utils/use-lang'
 
 import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from '../components/common'
 import { Comments, TableOfContents, Subscribe } from '../components/common'
@@ -23,11 +24,12 @@ import { PostClass } from '../components/common/helpers'
 */
 const Post = ({ data, location, pageContext }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const post = data.ghostPost
     const prevPost = data.prev
     const nextPost = data.next
     const previewPosts = data.allGhostPost.edges
-    const readingTime = readingTimeHelper(post)
+    const readingTime = readingTimeHelper(post).replace(`min read`,text(`MIN_READ`))
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
