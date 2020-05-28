@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useFormik } from 'formik'
 
 import { Form, Input, Robot, Select, Textarea, Button, Span, Response } from './ContactFormStyles'
-import { validateHOF } from './ContactFormValidation'
+import { useValidate } from './ContactFormValidation'
 
 import { useLang, get } from '../../utils/use-lang'
 
@@ -25,7 +25,7 @@ const printError = (touched, errors) => {
 
 const ContactForm = ({ topics, serviceConfig }) => {
     const text = get(useLang())
-    const validate = validateHOF(text)
+    const validate = useValidate(text)
 
     const encodeFormData = (data) => {
         if (serviceConfig.contentType === `application/json`) {

@@ -1,9 +1,9 @@
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
-export const validateHOF = text => (values) => {
+export const useValidate = text => (values) => {
     const errors = {}
     if (!values.name) {
-        errors.name = text(`FULL_NAME_REQUIRED`)
+        errors.name = `${text(`FULL_NAME_REQUIRED`)}.`
     } else if (values.name.length < 3) {
         errors.name = `${text(`FULL_NAME_MUST_BE`)} ${text(`AT_LEAST`)} 3 ${text(`CHARACTERS_LONG`)}.`
     } else if (values.name.length > 20) {

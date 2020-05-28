@@ -6,7 +6,7 @@ const lang = {
         EMAIL_ADDRESS: `Email Address`,
         EMAIL_IS_REQUIRED: `Email is required`,
         FULL_NAME: `Full Name`,
-        FULL_NAME_REQUIRED: `Full Name is required.`,
+        FULL_NAME_REQUIRED: `Full Name is required`,
         FULL_NAME_MUST_BE: `Full Name must be`,
         INVALID_EMAIL_ADDRESS: `Invalid email address`,
         MESSAGE_MUST_BE: `Your message must be`,

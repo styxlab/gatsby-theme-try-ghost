@@ -17,7 +17,7 @@ const lang = {
         PREVIOUS: `Previous`,
         READ: `Read`,
         SEE_ALL: `See all`,
-        SUBSCRIBED_TO: `You&apos;ve successfully subscribed to`,
+        SUBSCRIBED_TO: `You've successfully subscribed to`,
     },
 }
 

@@ -49,7 +49,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
                             <strong>{`${text(`GREAT`)}!`}</strong> {text(`CHECK_YOUR_INBOX`)}.
                         </div>
                         <div className="message-error">
-                            {text(`ENTER_VALID_EMAIL`)}
+                            {text(`ENTER_VALID_EMAIL`)}!
                         </div>
                     </form>
                 </div>
