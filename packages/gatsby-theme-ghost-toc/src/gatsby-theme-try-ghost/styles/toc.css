@@ -4,34 +4,34 @@
 /* ---------------------------------------------------------- */
 
 /* Need for sticky to work */
-body {
+html.casper body {
     overflow: visible;
 }
 
 /* Adjust outer wrapper */
-.post-full-content {
+html.casper .post-full-content {
     display: block;
 }
 
 @media (min-width: 1170px) {
-    .post-full-content {
+    html.casper .post-full-content {
         display: flex;
         align-items: flex-start;
     }
 }
 
 /* Adjust content wrapper */
-.post-content {
+html.casper .post-content {
     display: block;
     min-width: 100%;
 }
 
 /* Offset headings from fixed header */
-.post-content h2::before,
-.post-content h3::before,
-.post-content h4::before,
-.post-content h5::before,
-.post-content h6::before {
+html.casper .post-content h2::before,
+html.casper .post-content h3::before,
+html.casper .post-content h4::before,
+html.casper .post-content h5::before,
+html.casper .post-content h6::before {
     display: block;
     content: " ";
     height: 80px;
@@ -40,31 +40,31 @@ body {
 }
 
 /* Adjustments to wide and full width cards */
-.post-full-content .kg-image {
+html.casper .post-full-content .kg-image {
     margin: 0;
 }
 
-.kg-gallery-card,
-.kg-width-wide,
-.kg-width-full {
+html.casper .kg-gallery-card,
+html.casper .kg-width-wide,
+html.casper .kg-width-full {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.kg-gallery-card > *,
-.kg-width-wide > *,
-.kg-width-full > *,
-figure.kg-width-full img {
+html.casper .kg-gallery-card > *,
+html.casper .kg-width-wide > *,
+html.casper .kg-width-full > *,
+html.casper figure.kg-width-full img {
     margin-left: -50vw;
     margin-right: -50vw;
 }
 
 /* Dark mode */
-body.dark .post-full-content aside {
+html.casper body.dark .post-full-content aside {
     color: #BBB;
     background: color(var(--darkgrey) alpha(0.6));
 }
-body.dark .post-full-content aside a {
+html.casper body.dark .post-full-content aside a {
     box-shadow: none;
 }

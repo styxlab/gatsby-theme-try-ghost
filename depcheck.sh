@@ -18,7 +18,7 @@ branch="master"
 wget -q -P compare -N ${github}/${repo}/${branch}/assets/css/global.css
 wget -q -P compare -N ${github}/${repo}/${branch}/assets/css/screen.css
 
-diff -q -s compare/global.css packages/gatsby-theme-try-ghost/src/styles/global.css
-diff -q -s compare/screen.css packages/gatsby-theme-try-ghost/src/styles/screen-casper.css
+diff -q -s compare/global.css packages/gatsby-theme-try-ghost/src/styles/global-original.css
+diff -q -s compare/screen.css packages/gatsby-theme-try-ghost/src/styles/screen-original.css
 
 #rm -rf compare out

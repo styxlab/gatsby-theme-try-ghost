@@ -10,14 +10,18 @@ const Button = styled.button`
     background-color: transparent;
 `
 const SunIconWrapper = styled.div`
-    & > svg {
-        height: 1.9rem;
+    &&& {
+        && > svg {
+            height: 1.9rem;
+        }
     }
 `
 const MoonIconWrapper = styled.div`
-    & > svg {
-        height: 1.7rem;
-        margin-left: 0.2rem;
+    &&& {
+        & > svg {
+            height: 1.7rem;
+            margin-left: 0.2rem;
+        }
     }
 `
 

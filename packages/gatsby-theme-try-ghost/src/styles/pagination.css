@@ -3,7 +3,7 @@
 /* Pagination
 /* ---------------------------------------------------------- */
 
-.pagination {
+html.casper .pagination {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,7 @@
     margin: -2vw 0vw 3vw;
 }
 
-.pagination a {
+html.casper .pagination a {
     display: inline-block;
     padding: 10px 0px;
     border: var(--color-border) 1px solid;
@@ -22,7 +22,7 @@
     border-radius: var(--radius);
 }
 
-.pagination-location {
+html.casper .pagination-location {
     position: absolute;
     left: 50%;
     width: 100px;

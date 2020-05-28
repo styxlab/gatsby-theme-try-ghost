@@ -272,14 +272,14 @@ th {
    Base styles: opinionated defaults
    ========================================================================== */
 
-html.casper {
+html {
     overflow-x: hidden;
     overflow-y: scroll;
     font-size: 62.5%;
 
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-html.casper body {
+body {
     overflow-x: hidden;
     color: color(var(--midgrey) l(-30%));
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -296,12 +296,12 @@ html.casper body {
     -moz-font-feature-settings: "liga" on;
 }
 
-html.casper ::selection {
+::selection {
     text-shadow: none;
     background: color(var(--blue) lightness(+30%));
 }
 
-html.casper hr {
+hr {
     position: relative;
     display: block;
     width: 100%;
@@ -312,66 +312,66 @@ html.casper hr {
     border-top: 1px solid color(var(--lightgrey) l(+10%));
 }
 
-html.casper audio,
-html.casper canvas,
-html.casper iframe,
-html.casper img,
-html.casper svg,
-html.casper video {
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
     vertical-align: middle;
 }
 
-html.casper fieldset {
+fieldset {
     margin: 0;
     padding: 0;
     border: 0;
 }
 
-html.casper textarea {
+textarea {
     resize: vertical;
 }
 
-html.casper p,
-html.casper ul,
-html.casper ol,
-html.casper dl,
-html.casper blockquote {
+p,
+ul,
+ol,
+dl,
+blockquote {
     margin: 0 0 1.5em 0;
 }
 
-html.casper ol,
-html.casper ul {
+ol,
+ul {
     padding-left: 1.3em;
     padding-right: 1.5em;
 }
 
-html.casper ol ol,
-html.casper ul ul,
-html.casper ul ol,
-html.casper ol ul {
+ol ol,
+ul ul,
+ul ol,
+ol ul {
     margin: 0.5em 0 1em;
 }
 
-html.casper ul {
+ul {
     list-style: disc;
 }
 
-html.casper ol {
+ol {
     list-style: decimal;
 }
 
-html.casper ul,
-html.casper ol {
+ul,
+ol {
     max-width: 100%;
 }
 
-html.casper li {
+li {
     margin: 0.5em 0;
     padding-left: 0.3em;
     line-height: 1.6em;
 }
 
-html.casper dt {
+dt {
     float: left;
     margin: 0 20px 0 0;
     width: 120px;
@@ -380,107 +380,107 @@ html.casper dt {
     text-align: right;
 }
 
-html.casper dd {
+dd {
     margin: 0 0 5px 0;
     text-align: left;
 }
 
-html.casper blockquote {
+blockquote {
     margin: 1.5em 0;
     padding: 0 1.6em 0 1.6em;
     border-left: var(--whitegrey) 0.5em solid;
 }
 
-html.casper blockquote p {
+blockquote p {
     margin: 0.8em 0;
     font-size: 1.2em;
     font-weight: 300;
 }
 
-html.casper blockquote small {
+blockquote small {
     display: inline-block;
     margin: 0.8em 0 0.8em 1.5em;
     font-size: 0.9em;
     opacity: 0.8;
 }
 /* Quotation marks */
-html.casper blockquote small:before {
+blockquote small:before {
     content: "\2014 \00A0";
 }
 
-html.casper blockquote cite {
+blockquote cite {
     font-weight: bold;
 }
-html.casper blockquote cite a {
+blockquote cite a {
     font-weight: normal;
 }
 
-html.casper a {
+a {
     color: color(var(--blue) l(-5%));
     text-decoration: none;
 }
 
-html.casper a:hover {
+a:hover {
     text-decoration: underline;
 }
 
-html.casper h1,
-html.casper h2,
-html.casper h3,
-html.casper h4,
-html.casper h5,
-html.casper h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 0;
     line-height: 1.15;
     font-weight: 600;
     text-rendering: optimizeLegibility;
 }
 
-html.casper h1 {
+h1 {
     margin: 0 0 0.5em 0;
     font-size: 5.5rem;
     font-weight: 600;
 }
 @media (max-width: 500px) {
-    html.casper h1 {
+    h1 {
         font-size: 2.2rem;
     }
 }
 
-html.casper h2 {
+h2 {
     margin: 1.5em 0 0.5em 0;
     font-size: 2.2rem;
 }
 @media (max-width: 500px) {
-    html.casper h2 {
+    h2 {
         font-size: 1.8rem;
     }
 }
 
-html.casper h3 {
+h3 {
     margin: 1.5em 0 0.5em 0;
     font-size: 1.8rem;
     font-weight: 500;
 }
 @media (max-width: 500px) {
-    html.casper h3 {
+    h3 {
         font-size: 1.7rem;
     }
 }
 
-html.casper h4 {
+h4 {
     margin: 1.5em 0 0.5em 0;
     font-size: 1.6rem;
     font-weight: 500;
 }
 
-html.casper h5 {
+h5 {
     margin: 1.5em 0 0.5em 0;
     font-size: 1.4rem;
     font-weight: 500;
 }
 
-html.casper h6 {
+h6 {
     margin: 1.5em 0 0.5em 0;
     font-size: 1.4rem;
     font-weight: 500;

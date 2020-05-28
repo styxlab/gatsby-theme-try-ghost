@@ -7,7 +7,7 @@ import ThemeContext from '../../../context/ThemeContext'
 const DocumentHead = ({ site, className, action }) => (
     <ThemeContext.Consumer>{theme => (
         <Helmet>
-            <html lang={site.lang} />
+            <html lang={site.lang} class="casper"/>
             <style type="text/css">{`${site.codeinjection_styles}`}</style>
             <body className={`${className} ${theme.dark && `dark`}  ${action === `subscribe` && `subscribe-success`}`} />
         </Helmet>
