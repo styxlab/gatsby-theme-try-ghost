@@ -109,6 +109,9 @@ module.exports = {
         },
         {
             resolve: `gatsby-theme-ghost-commento`,
+            options: {
+                url: `http://localhost:8080`,
+            },
         },
         {
             resolve: `gatsby-plugin-ackee-tracker`,

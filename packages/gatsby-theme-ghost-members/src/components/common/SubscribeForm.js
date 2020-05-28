@@ -58,7 +58,7 @@ class SubscribeForm extends React.Component {
         return (
             <form className={this.state.message} data-members-form="subscribe" onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                    <HiddenLabel for="email">Email</HiddenLabel>
+                    <HiddenLabel htmlFor="email">Email</HiddenLabel>
                     <input id="email" name="email" type="email" value={this.state.value} onChange={this.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
                     <button className="button primary" type="submit" value="Submit">
                         <span className="button-content">{text(`SUBSCRIBE`)}</span>
