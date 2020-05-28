@@ -11,7 +11,7 @@ const Button = styled.button`
 `
 const SunIconWrapper = styled.div`
     &&& {
-        && > svg {
+        & > svg {
             height: 1.9rem;
         }
     }
