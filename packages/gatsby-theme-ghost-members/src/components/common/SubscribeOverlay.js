@@ -38,7 +38,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
                     <p className="subscribe-overlay-description">{text(`SUBSCRIBE_OVERLAY`)}</p>
                     <form className={message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
                         <div className="form-group">
-                            <HiddenLabel for="email">Email</HiddenLabel>
+                            <HiddenLabel htmlFor="email">Email</HiddenLabel>
                             <input id="email" name="email" type="email" value={value} onChange={overlay.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
                             <button className="button primary" type="submit" value="Submit">
                                 <span className="button-content">{text(`SUBSCRIBE`)}</span>

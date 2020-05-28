@@ -7,7 +7,7 @@ import ThemeContext from '../../../context/ThemeContext'
 // The actual component
 const Comments = ({ id }) => (
     <ThemeContext.Consumer>{theme => (
-        <section className="post-full-content">
+        <section>
             <Commento id={id} url={theme.url} />
         </section>
     )}
