@@ -1,7 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby"
 import lang from './lang'
 
-const useLang = () => {
+const useLang = (locale) => {
     const data = useStaticQuery(graphql`
     {
         site {
@@ -11,7 +11,7 @@ const useLang = () => {
         }
     }`)
 
-    return lang[data.site.siteMetadata.locale]
+    return lang[locale || data.site.siteMetadata.locale]
 }
 
 const get = text => (name) => {
