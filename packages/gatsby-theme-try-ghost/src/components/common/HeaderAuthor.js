@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { SiteNav, HeaderBackground } from '.'
+import { useLang, get } from '../../utils/use-lang'
 
 import AvatarIcon from './icons/avatar-icon'
 
 const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
+    const text = get(useLang())
     const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
 
@@ -30,7 +32,7 @@ const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
                             <div className="author-meta">
                                 {author.location && <div className="author-location">{author.location}</div>}
                                 <div className="author-stats">
-                                    {numberOfPosts && ` ${numberOfPosts} post${1 < numberOfPosts && `s`}` || `No posts`}
+                                    {numberOfPosts && ` ${numberOfPosts} ${1 < numberOfPosts ? text(`POSTS`) : text(`POST`)}` || `${text(`NO_POSTS`)}`}
                                 </div>
                                 {author.website && <span className="author-social-link"><a href={author.website} target="_blank" rel="noopener noreferrer">Website</a></span>}
                                 {twitterUrl && <span className="author-social-link"><a href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a></span>}

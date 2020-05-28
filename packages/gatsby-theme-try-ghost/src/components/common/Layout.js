@@ -7,6 +7,7 @@ import { BodyClass } from './helpers'
 
 import { appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 // Styles
 import '../../styles/screen.css'
@@ -25,6 +26,7 @@ import '../../styles/toc.css'
 */
 const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, action, overlay }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
@@ -64,7 +66,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                         </section>
 
                         <nav className="site-footer-nav">
-                            <a href={siteUrl}>Latest Posts</a>
+                            <a href={siteUrl}>{text(`LATEST_POSTS`)}</a>
                             { site.facebook && <a href={facebookUrl}>Facebook</a> }
                             { site.twitter && <a href={twitterUrl}>Twitter</a> }
                             <a href="https://www.jamify.org" target="_blank" rel="noopener noreferrer">Jamify</a>
@@ -75,7 +77,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
             <div className="subscribe-success-message">
                 <a className="subscribe-close"></a>
-                You&apos;ve successfully subscribed to {site.title}!
+                {text(`SUBSCRIBED_TO`)} {site.title}!
             </div>
 
             {/* The big email subscribe modal content */}

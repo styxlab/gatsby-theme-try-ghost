@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 
 import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 import { HoverOnAvatar } from './effects'
 
@@ -11,6 +12,7 @@ import AvatarIcon from './icons/avatar-icon'
 
 const AuthorList = ({ authors, isPost }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
 
     return (
         <ul className="author-list">
@@ -37,12 +39,12 @@ const AuthorList = ({ authors, isPost }) => {
                                             <div className="bio">
                                                 <h2>{author.name}</h2>
                                                 <p>{author.bio}</p>
-                                                <p><Link to={url}>More posts</Link> by {author.name}.</p>
+                                                <p><Link to={url}>{text(`MORE_POSTS`)}</Link> by {author.name}.</p>
                                             </div>
                                         ) : (
                                             <React.Fragment>
                                                 <h2>{author.name}</h2>
-                                                <p>Read <Link to={url}>more posts</Link> by this author.</p>
+                                                <p>{text(`READ`)} <Link to={url}>{text(`MORE_POSTS_SM`)}</Link> {text(`BY_THIS_AUTHOR`)}.</p>
                                             </React.Fragment>
                                         )}
                                     </div>

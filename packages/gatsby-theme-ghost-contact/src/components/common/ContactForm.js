@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import { useFormik } from 'formik'
 
 import { Form, Input, Robot, Select, Textarea, Button, Span, Response } from './ContactFormStyles'
-import { validate } from './ContactFormValidation'
+import { useValidate } from './ContactFormValidation'
+
+import { useLang, get } from '../../utils/use-lang'
 
 const printError = (touched, errors) => {
     if (touched.name && errors.name) {
@@ -22,6 +24,9 @@ const printError = (touched, errors) => {
 }
 
 const ContactForm = ({ topics, serviceConfig }) => {
+    const text = get(useLang())
+    const validate = useValidate(text)
+
     const encodeFormData = (data) => {
         if (serviceConfig.contentType === `application/json`) {
             return JSON.stringify(data)
@@ -51,15 +56,15 @@ const ContactForm = ({ topics, serviceConfig }) => {
                 values[`form-name`] = `gatsby-theme-ghost-contact`
             } else { //early return if robot
                 actions.resetForm()
-                actions.setStatus({ success: `Thank you, your message has been sent!` })
+                actions.setStatus({ success: text(`MESSAGE_SENT`) })
                 return
             }
 
             const postURL = (serviceConfig.url || `/`)
 
-            //reset and show message as post can be slow!
+            // reset and show message as post can be slow!
             actions.resetForm()
-            actions.setStatus({ success: `One second please...` })
+            actions.setStatus({ success: text(`ONE_SECOND`) })
 
             fetch(postURL, {
                 method: `POST`,
@@ -67,12 +72,12 @@ const ContactForm = ({ topics, serviceConfig }) => {
                 body: encodeFormData(values),
             }).then(() => {
                 actions.resetForm()
-                actions.setStatus({ success: `Thank you, your message has been sent!` })
+                actions.setStatus({ success: text(`MESSAGE_SENT`) })
                 //remove message after 10 seconds
                 window.setTimeout(() => actions.setStatus({ success: `` }), 10000)
             }).catch((error) => {
                 actions.resetForm()
-                actions.setStatus({ success: `Oops :-( sending failed. Error: ${error}.` })
+                actions.setStatus({ success: `${text(`SENDING_FAILED`)}: ${error}.` })
                 //remove message after 10 seconds
                 window.setTimeout(() => actions.setStatus({ success: `` }), 10000)
             })
@@ -98,7 +103,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
-                    placeholder="Full Name"
+                    placeholder={text(`FULL_NAME`)}
                 />
                 <Input
                     id="email"
@@ -107,7 +112,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.email}
-                    placeholder="Email Address"
+                    placeholder={text(`EMAIL_ADDRESS`)}
                 />
                 { topics.length > 0 &&
                     <Select
@@ -116,7 +121,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.subject}>
-                        <option value="topic" hidden>Please select...</option>
+                        <option value="topic" hidden>{text(`PLEASE_SELECT`)}</option>
                         { topics.map((topic, i) => (
                             <option num={i} value={i} key={`option-${i}`} >{topic}</option>
                         ))}
@@ -128,7 +133,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.message}
-                    placeholder="Your message"
+                    placeholder={text(`YOUR_MESSAGE`)}
                     rows="5"
                 />
                 <Robot
@@ -137,7 +142,7 @@ const ContactForm = ({ topics, serviceConfig }) => {
                     onChange={formik.handleChange}
                     value={formik.values[`form-name`]}
                 />
-                <Button id="submit" type="submit" value="Submit">Submit</Button>
+                <Button id="submit" type="submit" value="Submit">{text(`SUBMIT`)}</Button>
                 <Response id="responsemsg">{formik.status && formik.status.success}</Response>
             </Form>
         </>

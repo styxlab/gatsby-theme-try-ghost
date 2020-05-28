@@ -1,31 +1,31 @@
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
-export const validate = (values) => {
+export const useValidate = text => (values) => {
     const errors = {}
     if (!values.name) {
-        errors.name = `Full Name is required.`
+        errors.name = `${text(`FULL_NAME_REQUIRED`)}.`
     } else if (values.name.length < 3) {
-        errors.name = `Full Name must be at least 3 characters long.`
+        errors.name = `${text(`FULL_NAME_MUST_BE`)} ${text(`AT_LEAST`)} 3 ${text(`CHARACTERS_LONG`)}.`
     } else if (values.name.length > 20) {
-        errors.name = `Full Name Must be 20 characters or less.`
+        errors.name = `${text(`FULL_NAME_MUST_BE`)} 20 ${text(`CHARACTERS_OR_LESS`)}.`
     }
 
     if (!values.email) {
-        errors.email = `Email is required.`
+        errors.email = `${text(`EMAIL_IS_REQUIRED`)}.`
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = `Invalid email address.`
+        errors.email = `${text(`INVALID_EMAIL_ADDRESS`)}.`
     }
 
     if (values.subject === `topic`) {
-        errors.subject = `Please select one subject.`
+        errors.subject = `${text(`PLEASE_SELECT_SUBJECT`)}.`
     }
 
     if (!values.message) {
-        errors.message = `A message text is required.`
+        errors.message = `${text(`MESSAGE_TEXT_IS_REQUIRED`)}.`
     } else if (values.message.length < 10) {
-        errors.message = `Your message must be at least 10 characters long.`
+        errors.message = `${text(`MESSAGE_MUST_BE`)} ${text(`AT_LEAST`)} 10 ${text(`CHARACTERS_LONG`)}.`
     } else if (values.message.length > 4000) {
-        errors.message = `Your message must be 4000 characters or less.`
+        errors.message = `${text(`MESSAGE_MUST_BE`)} 4000 ${text(`CHARACTERS_OR_LESS`)}.`
     }
 
     return errors

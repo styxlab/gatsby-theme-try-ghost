@@ -4,6 +4,7 @@ import MoonIcon from './icons/moon-icon'
 import styled from 'styled-components'
 
 import ThemeContext from '../../context/ThemeContext'
+import { useLang, get } from '../../utils/use-lang'
 
 const Button = styled.button`
     background-color: transparent;
@@ -20,17 +21,21 @@ const MoonIconWrapper = styled.div`
     }
 `
 
-const DarkModeToggle = () => (
-    <ThemeContext.Consumer>{theme => (
-        <Button className="rss-button" onClick={theme.toggleDark} title="DarkMode">
-            { theme.dark ? (
-                <SunIconWrapper><SunIcon /></SunIconWrapper>
-            ) : (
-                <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
-            )}
-        </Button>
-    )}
-    </ThemeContext.Consumer>
-)
+const DarkModeToggle = () => {
+    const text = get(useLang())
+
+    return (
+        <ThemeContext.Consumer>{theme => (
+            <Button className="rss-button" onClick={theme.toggleDark} title={text(`DARK_MODE`)}>
+                { theme.dark ? (
+                    <SunIconWrapper><SunIcon /></SunIconWrapper>
+                ) : (
+                    <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
+                )}
+            </Button>
+        )}
+        </ThemeContext.Consumer>
+    )
+}
 
 export default DarkModeToggle

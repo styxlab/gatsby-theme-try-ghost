@@ -7,9 +7,11 @@ import { PostCard } from '.'
 import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const primaryTag = posts && posts[0] && posts[0].node && posts[0].node.primary_tag
     const url = primaryTag && resolveUrl(basePath, `/`, primaryTag.slug, primaryTag.url)
 
@@ -20,7 +22,7 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
                     { 0 < posts.length &&
                         <article className="read-next-card">
                             <header className="read-next-card-header">
-                                <h3><span>More in</span> <Link to={url}>{primaryTag.name}</Link></h3>
+                                <h3><span>{text(`MORE_IN`)}</span> <Link to={url}>{primaryTag.name}</Link></h3>
                             </header>
                             <div className="read-next-card-content">
                                 <ul>
@@ -28,7 +30,7 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
                                         <li key={i}>
                                             <h4><Link to={resolveUrl(basePath, node.collectionPath, node.slug, node.url)}>{node.title}</Link></h4>
                                             <div className="read-next-card-meta">
-                                                <p><time dateTime={node.published_at}>{node.published_at_pretty}</time> – {readingTimeHelper(node)}</p>
+                                                <p><time dateTime={node.published_at}>{node.published_at_pretty}</time> – {readingTimeHelper(node).replace(`min read`,text(`MIN_READ`))}</p>
                                             </div>
                                         </li>
                                     ))}
@@ -36,7 +38,7 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
                             </div>
                             <footer className="read-next-card-footer">
                                 <Link to={url}>
-                                    {primaryTagCount > 0 && (primaryTagCount === 1 ? `1 post` : `See all ${primaryTagCount} posts`) || `No posts`} →
+                                    {primaryTagCount > 0 && (primaryTagCount === 1 ? `1 ${text(`POST`)}` : `${text(`SEE_ALL`)} ${primaryTagCount} ${text(`POSTS`)}`) || text(`NO_POSTS`)} →
                                 </Link>
                             </footer>
                         </article>
