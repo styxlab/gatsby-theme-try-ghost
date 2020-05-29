@@ -2,30 +2,32 @@ import { Link } from 'gatsby'
 import styled from "styled-components"
 
 /*
- * styles passed into styled(Component) don't always overwrite base styles
- * https://github.com/styled-components/styled-components/issues/1816
+ * Due to global scoping with html.casper, global style have high specificity
+ * https://styled-components.com/docs/faqs#how-can-i-override-styles-with-higher-specificity
 */
 export const TocAside = styled.aside`
-    order: 1;
-    font-family: -apple-system, Liberation Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
-    line-height: 1.5em;
-    font-size: 1.6rem;
-    color: #78757A;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
+    && {
+        order: 1;
+        font-family: -apple-system, Liberation Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+            Ubuntu, Cantarell, Open Sans, Helvetica Neue, sans-serif;
+        line-height: 1.5em;
+        font-size: 1.6rem;
+        color: #78757A;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 5px;
 
-    @media (min-width: 1170px) {
-        position: sticky;
-        top: 120px;
-        min-width: 260px;
-        font-size: 1.4rem;
-        padding: 0 0.8rem;
-        margin-left: 0.2rem;
+        @media (min-width: 1170px) {
+            position: sticky;
+            top: 120px;
+            min-width: 260px;
+            font-size: 1.4rem;
+            padding: 0 0.8rem;
+            margin-left: 0.2rem;
+        }
     }
 `
 export const TocTitle = styled.h2`
-    && {
+    &&& {
         font-size: 1.4rem;
         letter-spacing: 0.075em;
         margin-top: 1.2rem;
@@ -36,9 +38,10 @@ export const TocTitle = styled.h2`
         @media (min-width: 1170px) {
             font-size: 1.2rem;
         }
+    }
 `
 export const TocList = styled.ul`
-    && {
+    &&& {
         overflow:hidden;
         position:relative;
         list-style: none;
@@ -51,20 +54,20 @@ export const TocList = styled.ul`
     }
 `
 export const TocListSub = styled.ul`
-    && {
+    &&& {
         margin-top: 0.5rem;
         padding-left: 1.6rem;
         margin-bottom: 0.1rem;
     }
 `
 export const TocItem = styled.li`
-    && {
+    &&& {
         list-style: none;
         margin-bottom: calc(1.5rem / 2);
     }
 `
 export const TocLink = styled(Link)`
-    && {
+    &&& {
         height: 100%;
         box-shadow: none;
         color: ${props => (props.state.isActive ? `#54BC4B` : `inherit`)} !important;

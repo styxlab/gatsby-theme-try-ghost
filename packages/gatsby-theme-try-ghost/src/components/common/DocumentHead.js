@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 
 const DocumentHead = ({ site, className, action }) => (
     <Helmet>
-        <html lang={site.lang} />
+        <html lang={site.lang} class="casper" />
         <style type="text/css">{`${site.codeinjection_styles}`}</style>
         <body className={`${className} ${action === `subscribe` && `subscribe-success`}`} />
     </Helmet>
