@@ -4,14 +4,16 @@ import lang from './lang'
 const useLang = (locale) => {
     const data = useStaticQuery(graphql`
     {
-        site {
-            siteMetadata {
-                locale
+        allGhostSettings {
+            edges {
+                node {
+                    lang
+                }
             }
         }
     }`)
 
-    return lang[locale || data.site.siteMetadata.locale]
+    return lang[locale || data.allGhostSettings.edges[0].node.lang || `en`]
 }
 
 const get = text => (name) => {
