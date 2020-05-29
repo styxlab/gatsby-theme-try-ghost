@@ -28,7 +28,7 @@ const createOrdinaryPages = (createPage, pages, basePath, template) => {
 }
 
 // Create post pages
-const createPostPages = (createPage, posts, basePath, template, tags, ampPath = ``) => {
+const createPostPages = (createPage, posts, basePath, tags, template, ampPath = ``) => {
     const prevNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
     const nextNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
 
@@ -142,12 +142,10 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
 
 const createCollection = (createPage, basePath, data, templates, allTags, postsPerPage, collectionPath) => {
     // per collectionPath
-    createPostPages(createPage, data.posts, basePath, templates.post, allTags)
+    createPostPages(createPage, data.posts, basePath, allTags, templates.post)
+
     const { indexIds } = infiniteScroll(data.posts)
     createIndexPage(createPage, data.posts, indexIds, basePath, templates.index, postsPerPage, collectionPath)
-
-    // AMP pages
-    // createPostPages(createPage, data.posts, basePath, templates.postAmp, allTags, `amp`)
 }
 
 const getCollection = (data, collectionPath, selector = () => false) => {
@@ -211,7 +209,6 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
         index: require.resolve(`./src/templates/index.js`),
         tag: require.resolve(`./src/templates/tag.js`),
         author: require.resolve(`./src/templates/author.js`),
-        //postAmp: require.resolve(`./src/templates/post.js`),
     }
 
     createOrdinaryPages(createPage, data.pages, basePath, templates.page)
