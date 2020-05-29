@@ -120,5 +120,13 @@ module.exports = {
                 detailed: true,
             },
         },
+        //{
+        //    resolve: `gatsby-theme-ghost-amp`,
+        //    options: {
+        //        ghostConfig: ghostConfig,
+        //        siteConfig: siteConfig,
+        //        routes: routesConfig,
+        //    },
+        //},
     ],
 }

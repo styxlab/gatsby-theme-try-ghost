@@ -1,0 +1,42 @@
+{
+    "name": "gatsby-theme-ghost-amp",
+    "description": "Gatsby theme to add Google AMP pages to gatsby-theme-try-ghost",
+    "version": "0.0.1",
+    "license": "MIT",
+    "author": "styxlab",
+    "homepage": "https://github.com/styxlab/",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-amp"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-theme",
+        "gatsby-theme-try-ghost",
+        "amp",
+        "amp-pages",
+        "google-amp",
+        "jamify",
+        "ghost",
+        "ghost-cms"
+    ],
+    "dependencies": {
+        "@tryghost/helpers": "^1.1.27",
+        "gatsby-plugin-react-helmet": "^3.3.2",
+        "react-helmet": "^5.2.1"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^7.1.0",
+        "eslint-plugin-ghost": "^1.5.0",
+        "eslint-plugin-react": "^7.20.0",
+        "gatsby": "2.21.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
+    }
+}

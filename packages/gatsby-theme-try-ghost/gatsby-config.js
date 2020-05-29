@@ -209,17 +209,6 @@ module.exports = (themeOptions) => {
                 },
             },
             `gatsby-plugin-styled-components`,
-            //{
-            //    resolve: `gatsby-plugin-amp`,
-            //    options: {
-            //        canonicalBaseUrl: siteConfig.siteUrl,
-            //        components: [`amp-form`],
-            //        excludedPaths: [`/404*`, `/`],
-            //        pathIdentifier: `amp/`,
-            //        relAmpHtmlPattern: `{{canonicalBaseUrl}}{{pathname}}{{pathIdentifier}}`,
-            //        useAmpClientIdApi: true,
-            //    },
-            //},
         ],
     }
 }
