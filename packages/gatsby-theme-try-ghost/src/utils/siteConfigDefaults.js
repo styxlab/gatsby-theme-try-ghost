@@ -1,7 +1,7 @@
 module.exports = {
 
     // Site domain. Do not include a trailing slash!
-    siteUrl: `https://www.jamify.org`,
+    siteUrl: `https://demo.jamify.org`,
 
     // Not used - will be removed in next release
     postsPerPage: 12,
