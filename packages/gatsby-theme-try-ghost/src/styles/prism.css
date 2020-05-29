@@ -126,7 +126,7 @@ html.casper .gatsby-highlight-code-line {
 }
 html.casper .gatsby-highlight {
   margin-bottom: 1.75rem;
-  border-radius: 10px;
+  border-radius: 5px;
   background: #011627;
   -webkit-overflow-scrolling: touch;
   overflow: auto;
