@@ -24,9 +24,6 @@ module.exports = {
     backgroundColor: `#e9e9e9`,
     themeColor: `#15171A`,
 
-    // Select inline texts based on your locale (see ./lang.js and ./use-lang.js)
-    locale: `en`,
-
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 
