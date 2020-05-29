@@ -29,8 +29,8 @@ const createOrdinaryPages = (createPage, pages, basePath, template) => {
 
 // Create post pages
 const createPostPages = (createPage, posts, basePath, template, tags, ampPath = ``) => {
-    const prevNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
-    const nextNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
+    const prevNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
+    const nextNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
 
     const collectionPaths = getCollectionPaths(posts.map(({ node }) => node.id), posts)
 
