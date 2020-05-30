@@ -62,11 +62,11 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
                     <Navigation data={site.secondary_navigation} />
                 ) : (
                     <div className="social-links">
-                        <SocialLinks site={site} siteUrl={config.siteUrl} overlay={overlay}/>
+                        <SocialLinks site={site} siteUrl={config.siteUrl} />
                     </div>
                 )}
                 <DarkMode />
-                <SubscribeButton overlay={overlay}/>
+                <SubscribeButton overlay={overlay} />
             </div>
         </nav>
     )

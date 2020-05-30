@@ -6,7 +6,7 @@ import FacebookIcon from './icons/facebook-icon'
 
 import { SocialRss } from '.'
 
-const SocialLinks = ({ site, siteUrl, overlay }) => {
+const SocialLinks = ({ site, siteUrl }) => {
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
@@ -22,7 +22,6 @@ const SocialLinks = ({ site, siteUrl, overlay }) => {
 SocialLinks.propTypes = {
     site: PropTypes.object.isRequired,
     siteUrl: PropTypes.string.isRequired,
-    overlay: PropTypes.object,
 }
 
 export default SocialLinks
