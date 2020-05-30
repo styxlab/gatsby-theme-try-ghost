@@ -14,7 +14,6 @@ html.casper pre[class*='language-'] {
   word-break: normal;
   word-wrap: normal;
   line-height: 1.5;
-  margin-bottom: 0;
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
@@ -124,16 +123,13 @@ html.casper .gatsby-highlight-code-line {
   padding-left: 1.25em;
   border-left: 0.25em solid #ffa7c4;
 }
-html.casper .gatsby-highlight {
-  margin-bottom: 1.75rem;
-  border-radius: 5px;
-  background: #011627;
-  -webkit-overflow-scrolling: touch;
-  overflow: auto;
+html.casper .post-full-content pre {
+    background: #011627;
+
 }
 html.casper .gatsby-highlight pre[class*='language-'] {
-  float: left;
   min-width: 100%;
+  margin-bottom: 3em;
 }
 html.casper body.dark code[class*='language-'],
 html.casper body.dark pre[class*='language-'] {

@@ -58,6 +58,7 @@ html.casper .kg-width-full > *,
 html.casper figure.kg-width-full img {
     margin-left: -50vw;
     margin-right: -50vw;
+    z-index: 1;
 }
 
 /* Dark mode */
