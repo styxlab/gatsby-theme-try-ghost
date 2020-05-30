@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import TwitterIcon from './icons/twitter-icon'
 import FacebookIcon from './icons/facebook-icon'
 
-import { DarkMode, SocialRss, SubscribeButton } from '.'
+import { SocialRss } from '.'
 
 const SocialLinks = ({ site, siteUrl, overlay }) => {
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
@@ -15,8 +15,6 @@ const SocialLinks = ({ site, siteUrl, overlay }) => {
             { site.facebook && <a href={ facebookUrl } className="social-link social-link-fb" target="_blank" rel="noopener noreferrer" title="Facebook"><FacebookIcon /></a>}
             { site.twitter && <a href={ twitterUrl } className="social-link social-link-tw" target="_blank" rel="noopener noreferrer" title="Twitter"><TwitterIcon /></a>}
             <SocialRss url={siteUrl} />
-            <DarkMode />
-            <SubscribeButton overlay={overlay}/>
         </React.Fragment>
     )
 }
