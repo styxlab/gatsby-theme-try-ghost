@@ -5,7 +5,6 @@ import { StaticQuery, graphql } from 'gatsby'
 import { DocumentHead, StickyNav, SubscribeOverlay } from '.'
 import { BodyClass } from './helpers'
 
-import { appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
 
@@ -29,9 +28,9 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
     const text = get(useLang())
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
+    const title = text(`SITE_TITLE`, site.title)
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
 
-    const siteUrl = appendBasePath(config.siteUrl, basePath)
     const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
     const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
@@ -62,13 +61,13 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 <footer className="site-footer outer" >
                     <div className="site-footer-content inner">
                         <section className="copyright">
-                            <a href={config.siteUrl}>{site.title}</a> &copy; {new Date().getFullYear()}
+                            <a href={config.siteUrl}>{title}</a> &copy; {new Date().getFullYear()}
                         </section>
 
                         <nav className="site-footer-nav">
-                            <a href={siteUrl}>{text(`LATEST_POSTS`)}</a>
-                            { site.facebook && <a href={facebookUrl}>Facebook</a> }
-                            { site.twitter && <a href={twitterUrl}>Twitter</a> }
+                            <Link to={basePath}>{text(`LATEST_POSTS`)}</Link>
+                            { site.facebook && <a href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a> }
+                            { site.twitter && <a href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a> }
                             <a href="https://www.jamify.org" target="_blank" rel="noopener noreferrer">Jamify</a>
                         </nav>
                     </div>
@@ -77,7 +76,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
             <div className="subscribe-success-message">
                 <a className="subscribe-close"></a>
-                {text(`SUBSCRIBED_TO`)} {site.title}!
+                {text(`SUBSCRIBED_TO`)} {title}!
             </div>
 
             {/* The big email subscribe modal content */}

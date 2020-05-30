@@ -34,7 +34,7 @@ const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
                                 <div className="author-stats">
                                     {numberOfPosts && ` ${numberOfPosts} ${1 < numberOfPosts ? text(`POSTS`) : text(`POST`)}` || `${text(`NO_POSTS`)}`}
                                 </div>
-                                {author.website && <span className="author-social-link"><a href={author.website} target="_blank" rel="noopener noreferrer">Website</a></span>}
+                                {author.website && <span className="author-social-link"><a href={author.website} target="_blank" rel="noopener noreferrer">{text(`WEBSITE`)}</a></span>}
                                 {twitterUrl && <span className="author-social-link"><a href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a></span>}
                                 {facebookUrl && <span className="author-social-link"><a href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a></span>}
                             </div>

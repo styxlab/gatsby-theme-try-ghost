@@ -4,10 +4,13 @@ import { Link, StaticQuery, graphql } from 'gatsby'
 
 import { SiteNav, HeaderBackground } from '.'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 const HeaderIndex = ({ data, overlay }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
+    const title = text(`SITE_TITLE`, site.title)
 
     return (
         <header className="site-home-header">
@@ -18,10 +21,10 @@ const HeaderIndex = ({ data, overlay }) => {
                         <h1 className="site-title">
                             {site.logo ? (
                                 <Link to={basePath}>
-                                    <img className="site-logo" src={site.logo} alt={site.title} />
+                                    <img className="site-logo" src={site.logo} alt={title} />
                                 </Link>
                             ) : (
-                                site.title
+                                title
                             )}
                         </h1>
                         <h2 className="site-description">{site.description}</h2>
