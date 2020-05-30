@@ -4,7 +4,7 @@ import { Link, graphql } from 'gatsby'
 import { Layout, HeaderPage, PostCard } from '../components/common'
 import { OverlayContainer } from '../components/common/effects'
 
-import useOptions from '../../utils/use-options'
+import useOptions from '../utils/use-options'
 import { useLang, get } from '../utils/use-lang'
 
 const NotFoundPage = ({ data }) => {
