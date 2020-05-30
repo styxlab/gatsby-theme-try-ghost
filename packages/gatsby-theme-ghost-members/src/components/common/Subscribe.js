@@ -10,11 +10,12 @@ import { SubscribeForm } from '.'
 const Subscribe = ({ data }) => {
     const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
+    const title = text(`SITE_TITLE`, site.title)
     const cmsUrl = data.ghostConfig.cmsUrl
 
     return (
         <React.Fragment>
-            <h3 className="subscribe-form-title">{text(`SUBSCRIBE_TO`)} {site.title}</h3>
+            <h3 className="subscribe-form-title">{text(`SUBSCRIBE_TO`)} {title}</h3>
             <p className="subscribe-form-description">{text(`SUBSCRIBE_SECTION`)}</p>
             <SubscribeForm url={cmsUrl} text={text}/>
         </React.Fragment>

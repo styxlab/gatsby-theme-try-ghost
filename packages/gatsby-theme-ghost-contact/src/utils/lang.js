@@ -19,6 +19,26 @@ const lang = {
         SUBMIT: `Submit`,
         YOUR_MESSAGE: `Your message`,
     },
+    de: {
+        AT_LEAST: `wenigstens`,
+        CHARACTERS_LONG: `Zeichen lang`,
+        CHARACTERS_OR_LESS: `Zeichen oder weniger`,
+        EMAIL_ADDRESS: `Email Adresse`,
+        EMAIL_IS_REQUIRED: `Email ist erforderlich`,
+        FULL_NAME: `Vollständiger Name`,
+        FULL_NAME_REQUIRED: `Name ist nicht vollständig`,
+        FULL_NAME_MUST_BE: `Vollständiger Name muss`,
+        INVALID_EMAIL_ADDRESS: `Fehlerhafte Email Adresse`,
+        MESSAGE_MUST_BE: `Deine Nachricht muss`,
+        MESSAGE_SENT: `Danke, deine Nachricht wurde versendet!`,
+        MESSAGE_TEXT_IS_REQUIRED: `Eine Nachricht ist erforderlich`,
+        ONE_SECOND: `Einen Moment bitte...`,
+        SENDING_FAILED: `Senden abgebrochen. Fehler`,
+        PLEASE_SELECT: `Bitte auswählen...`,
+        PLEASE_SELECT_SUBJECT: `Bitte ein Thema wählen`,
+        SUBMIT: `Abschicken`,
+        YOUR_MESSAGE: `Deine Nachricht`,
+    },
 }
 
 module.exports = lang

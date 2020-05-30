@@ -22,6 +22,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
 
     const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
+    const title = text(`SITE_TITLE`, site.title)
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
 
@@ -31,15 +32,17 @@ const SubscribeOverlay = ({ data, overlay }) => {
             <a className="subscribe-close-button" onClick={overlay.handleClose}></a>
             <div className="subscribe-overlay-content">
                 {site.logo &&
-                    <img className="subscribe-overlay-logo" src={site.logo} alt={site.title} />
+                    <img className="subscribe-overlay-logo" src={site.logo} alt={title} />
                 }
                 <div className="subscribe-form">
-                    <h1 className="subscribe-overlay-title">{text(`SUBSCRIBE_TO`)} {site.title}</h1>
+                    <h1 className="subscribe-overlay-title">{text(`SUBSCRIBE_TO`)} {title}</h1>
                     <p className="subscribe-overlay-description">{text(`SUBSCRIBE_OVERLAY`)}</p>
                     <form className={message} data-members-form="subscribe" onSubmit={overlay.handleSubmit}>
                         <div className="form-group">
-                            <HiddenLabel htmlFor="email">Email</HiddenLabel>
-                            <input id="email" name="email" type="email" value={value} onChange={overlay.handleChange} className="subscribe-email" data-members-email placeholder="youremail@example.com" autoComplete="false" />
+                            <HiddenLabel htmlFor="email">{text(`EMAIL`)}</HiddenLabel>
+                            <input id="email" name="email" type="email" value={value}
+                                onChange={overlay.handleChange} className="subscribe-email"
+                                data-members-email placeholder={text(`YOUR_EMAIL`)} autoComplete="false" />
                             <button className="button primary" type="submit" value="Submit">
                                 <span className="button-content">{text(`SUBSCRIBE`)}</span>
                                 <span className="button-loader"><LoaderIcon /></span>

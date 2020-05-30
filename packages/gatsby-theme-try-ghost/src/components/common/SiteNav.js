@@ -5,11 +5,14 @@ import { StaticQuery, graphql } from 'gatsby'
 import { Navigation, SocialLinks } from '.'
 import { resolveUrl, appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
+import { useLang, get } from '../../utils/use-lang'
 
 const SiteNav = ({ data, className, postTitle, overlay }) => {
     const { basePath } = useOptions()
+    const text = get(useLang())
     const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
+    const title = text(`SITE_TITLE`, site.title)
     const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
 
     // add basePath only to navigation items coming from Ghost CMS
@@ -42,9 +45,9 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
             <div className="site-nav-left-wrapper">
                 <div className="site-nav-left">
                     {site.logo ? (
-                        <a className="site-nav-logo" href={siteUrl}><img src={site.logo} alt={site.title} /></a>
+                        <a className="site-nav-logo" href={siteUrl}><img src={site.logo} alt={title} /></a>
                     ) : (
-                        <a className="site-nav-logo" href={siteUrl}>{site.title}</a>
+                        <a className="site-nav-logo" href={siteUrl}>{title}</a>
                     )}
                     <div className="site-nav-content">
                         <Navigation data={navigation} />

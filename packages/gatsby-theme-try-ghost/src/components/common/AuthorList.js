@@ -39,7 +39,7 @@ const AuthorList = ({ authors, isPost }) => {
                                             <div className="bio">
                                                 <h2>{author.name}</h2>
                                                 <p>{author.bio}</p>
-                                                <p><Link to={url}>{text(`MORE_POSTS`)}</Link> by {author.name}.</p>
+                                                <p><Link to={url}>{text(`MORE_POSTS`)}</Link> {text(`BY`)} {author.name}.</p>
                                             </div>
                                         ) : (
                                             <React.Fragment>
