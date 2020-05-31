@@ -16,6 +16,7 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 module.exports = (themeOptions) => {
     const siteConfig = _.merge({}, siteConfigDefaults, themeOptions.siteConfig)
     const ghostConfig = _.merge({}, ghostConfigDefaults, themeOptions.ghostConfig)
+    console.log(siteConfig.gatsbyImages)
 
     return {
         siteMetadata: siteConfig,
@@ -70,7 +71,7 @@ module.exports = (themeOptions) => {
                     ),
                     verbose: true,
                     // Option to disable this module (default: false)
-                    disable: false,
+                    disable: !siteConfig.gatsbyImages,
                 },
             },
             /**
