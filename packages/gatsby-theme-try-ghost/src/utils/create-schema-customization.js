@@ -32,19 +32,19 @@ const typeDefs = `
     }
     type allGhostPost implements Node {
         childHtmlRehype: HtmlRehype @link
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "featureImageSharp___NODE")
     }
     type GhostPost implements Node {
         childHtmlRehype: HtmlRehype @link
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "featureImageSharp___NODE")
     }
     type allGhostPage implements Node {
         childHtmlRehype: HtmlRehype @link
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "featureImageSharp___NODE")
     }
     type GhostPage implements Node {
         childHtmlRehype: HtmlRehype @link
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "featureImageSharp___NODE")
     }
 `
 
