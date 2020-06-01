@@ -70,7 +70,7 @@ module.exports = (themeOptions) => {
                     ),
                     verbose: true,
                     // Option to disable this module (default: false)
-                    disable: false,
+                    disable: !siteConfig.gatsbyImages,
                 },
             },
             /**

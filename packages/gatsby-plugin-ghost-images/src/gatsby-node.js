@@ -43,6 +43,7 @@ exports.onCreateNode = async function ({
     // remaining image fields
     const promises = allImgTags.map(async (tag) => {
         const imgUrl = node[tag]
+
         if (verbose) {
             reporter.info(`${node.internal.type}/${tag}/${node.slug}/${imgUrl}`)
         }
