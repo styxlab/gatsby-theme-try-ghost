@@ -32,7 +32,7 @@ module.exports = (
 
             const lang = language.toLowerCase()
             if (!unsupportedLanguages.has(lang)) {
-                console.warn(message, `applying generic code block`)
+                //console.warn(message, `applying generic code block`)
                 unsupportedLanguages.add(lang)
             }
             return escapeHTML(code, additionalEscapeCharacters)

@@ -34,7 +34,7 @@
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": "2.21.1"
+        "gatsby": "^2.22.15"
     },
     "dependencies": {
         "@babel/runtime": "7.8.7",

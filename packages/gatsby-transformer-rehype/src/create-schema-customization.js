@@ -5,10 +5,22 @@ const typeDefs = `
     }
 `
 
+// Is there a better way to check for existing types?
+const useTypeExists = (store, name) => (type) => {
+    const types = store.getState().schemaCustomization.types
+    const plugin = types.find(node => node.plugin.name === name)
+    const defs = plugin.typeOrTypeDef.definitions
+    const exists = defs.find(node => node.name.value === type)
+    return exists !== undefined
+}
+
 module.exports = (nodeApiArgs, pluginOptions = {}) => {
     const { plugins = [] } = pluginOptions
+    const typeExists = useTypeExists(nodeApiArgs.store, `jamify-source-ghost`)
 
-    nodeApiArgs.actions.createTypes(typeDefs)
+    if (!typeExists(`HtmlRehype`)) {
+        nodeApiArgs.actions.createTypes(typeDefs)
+    }
 
     // This allows subplugins to use Node APIs bound to `gatsby-transformer-remark`
     // to customize the GraphQL schema. This makes it possible for subplugins to
@@ -21,4 +33,3 @@ module.exports = (nodeApiArgs, pluginOptions = {}) => {
     })
 }
 
-module.exports.typeDefs = typeDefs

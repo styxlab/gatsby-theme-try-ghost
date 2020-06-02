@@ -11,7 +11,7 @@ const Subscribe = ({ data }) => {
     const text = get(useLang())
     const site = data.allGhostSettings.edges[0].node
     const title = text(`SITE_TITLE`, site.title)
-    const cmsUrl = data.ghostConfig.cmsUrl
+    const cmsUrl = site.url
 
     return (
         <React.Fragment>
@@ -25,7 +25,6 @@ const Subscribe = ({ data }) => {
 Subscribe.propTypes = {
     data: PropTypes.shape({
         allGhostSettings: PropTypes.object.isRequired,
-        ghostConfig: PropTypes.object.isRequired,
     }).isRequired,
 }
 
@@ -39,9 +38,6 @@ const SubscribeQuery = props => (
                             ...GhostSettingsFields
                         }
                     }
-                }
-                ghostConfig(id: { eq: "gatsby-theme-try-ghost-config" }) {
-                    cmsUrl
                 }
             }
         `}

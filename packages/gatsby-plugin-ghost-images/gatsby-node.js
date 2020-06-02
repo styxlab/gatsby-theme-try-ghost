@@ -74,13 +74,11 @@ exports.onCreateNode = async function ({
   } catch (err) {
     reporter.panicOnBuild(`Error processing images ${node.absolutePath ? `file ${node.absolutePath}` : `in node ${node.id}`}:\n ${err}`);
     return {};
-  }
+  } // foreign-key linking
+
 
   fileNodes.map((fileNode, i) => {
-    const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`; //if (verbose) {
-    //    reporter.info(`${node.slug}/${allImgTags[i]}/${id}/${fileNode.id}`)
-    //}
-
+    const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`;
     node[id] = fileNode.id;
   });
   return {};

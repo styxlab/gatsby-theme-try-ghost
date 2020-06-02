@@ -5,7 +5,6 @@ const { createContentDigest } = require(`gatsby-core-utils`)
 
 const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
 const infiniteScroll = require(`./src/utils/infinite-scroll`)
-const ghostConfigDefaults = require(`./src/utils/.ghost.json`)
 
 exports.createSchemaCustomization = require(`./src/utils/create-schema-customization`)
 
@@ -228,22 +227,18 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
     createTaxonomyPages(createPage, data.authors, authorIds, basePath, templates.author, postsPerPage, data.posts)
 }
 
-// Plugins can access basePath and cmsUrl with GraphQL query
-exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, ghostConfig }) => {
+// Plugins can access basePath with GraphQL query
+exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {} }) => {
     const { basePath = `/` } = routes
-    const ghostConf = _.merge({}, ghostConfigDefaults, ghostConfig)
-    const cmsUrl = ghostConf && ghostConf.production && ghostConf.production.apiUrl || null
 
     createTypes(`
         type GhostConfig implements Node {
             basePath: String!
-            cmsUrl: String!
         }
     `)
 
     const config = {
         basePath: resolveUrl(basePath),
-        cmsUrl: cmsUrl.replace(/\/$/, ``),
     }
 
     createNode({
@@ -259,3 +254,19 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, 
         },
     })
 }
+
+//exports.createResolvers = ({ createResolvers }) => {
+//    const featureImageSharp = {
+//        type: `File`,
+//    }
+//
+//    const resolvers = {
+//        GhostPost: {
+//            featureImageSharp,
+//        },
+//        GhostPage: {
+//            featureImageSharp,
+//        },
+//    }
+//    createResolvers(resolvers)
+//}
