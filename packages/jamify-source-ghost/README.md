@@ -1,6 +1,6 @@
 # Jamify Source Ghost
 
-Source plugin for pulling data into [Gatsby.js](https://www.gatsbyjs.org/) from [Ghost](https://ghost.org), using the Ghost [Content API](https://docs.ghost.org/api/content/).
+Gatsby source plugin for pulling data from headless [Ghost](https://ghost.org) CMS, using the Ghost [Content API](https://docs.ghost.org/api/content/). This plugin uses the Gatsby schmema customization API to provide a strictly typed content schema. This has many benefits, from faster type buildings to better hot-reloadings.
 
 ## Install
 
