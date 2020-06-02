@@ -37,8 +37,9 @@ class OverlayContainer extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault()
+        const settings = this.props.data.allGhostSettings.edges[0].node
 
-        const cmsUrl = this.props.data.ghostConfig.cmsUrl
+        const cmsUrl = settings.url
         const postURL = `${cmsUrl}/members/api/send-magic-link/`
 
         const values = {
@@ -76,7 +77,7 @@ class OverlayContainer extends React.Component {
 OverlayContainer.propTypes = {
     render: PropTypes.func.isRequired,
     data: PropTypes.shape({
-        ghostConfig: PropTypes.object.isRequired,
+        allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
 }
 
@@ -84,8 +85,12 @@ const OverlayContainerQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsForOverlayContainer {
-                ghostConfig(id: { eq: "gatsby-theme-try-ghost-config" }) {
-                    cmsUrl
+                allGhostSettings {
+                    edges {
+                        node {
+                            url
+                        }
+                    }
                 }
             }
         `}

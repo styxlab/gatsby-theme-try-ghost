@@ -68,7 +68,7 @@ module.exports = {
                 filter: node => (
                     node.internal.type === `GhostPost` ||
                     node.internal.type === `GhostPage`
-                ) && node.slug !== `data-schema`,
+                ),
                 plugins: [
                     {
                         resolve: `gatsby-rehype-ghost-links`,

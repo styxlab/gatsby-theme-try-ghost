@@ -62,6 +62,8 @@ export const ghostAuthorFields = graphql`
         website
         twitter
         facebook
+        meta_title
+        meta_description
     }
 `
 
@@ -153,12 +155,15 @@ export const ghostPostFields = graphql`
         url
         canonical_url
         uuid
-        page
         codeinjection_foot
         codeinjection_head
         codeinjection_styles
         comment_id
         reading_time
+
+        # Newsletter
+        send_email_when_published
+        email_subject
 
         # Transformed html
         childHtmlRehype {
@@ -295,6 +300,7 @@ export const ghostSettingsFields = graphql`
     fragment GhostSettingsFields on GhostSettings {
         title
         description
+        url
         logo
         icon
         cover_image

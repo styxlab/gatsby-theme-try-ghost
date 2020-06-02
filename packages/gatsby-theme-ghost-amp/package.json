@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-amp",
     "description": "Gatsby theme to add Google AMP pages to gatsby-theme-try-ghost",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -35,7 +35,7 @@
         "eslint": "^7.1.0",
         "eslint-plugin-ghost": "^1.5.0",
         "eslint-plugin-react": "^7.20.0",
-        "gatsby": "2.21.1",
+        "gatsby": "^2.22.15",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     }

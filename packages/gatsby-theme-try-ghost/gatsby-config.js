@@ -42,7 +42,7 @@ module.exports = (themeOptions) => {
             `gatsby-plugin-sharp`,
             `gatsby-transformer-sharp`,
             {
-                resolve: `gatsby-source-ghost`,
+                resolve: `jamify-source-ghost`,
                 options:
                     process.env.NODE_ENV === `development`
                         ? ghostConfig.development

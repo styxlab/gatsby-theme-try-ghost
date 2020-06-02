@@ -92,7 +92,6 @@ const gatsbyNodeQuery = `{
                 url
                 canonical_url
                 uuid
-                page
                 codeinjection_foot
                 codeinjection_head
                 codeinjection_styles

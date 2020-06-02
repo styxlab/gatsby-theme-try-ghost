@@ -67,12 +67,10 @@ exports.onCreateNode = async function ({
         return {}
     }
 
+    // foreign-key linking
     fileNodes.map((fileNode, i) => {
         const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}___NODE`
 
-        //if (verbose) {
-        //    reporter.info(`${node.slug}/${allImgTags[i]}/${id}/${fileNode.id}`)
-        //}
         node[id] = fileNode.id
     })
 
