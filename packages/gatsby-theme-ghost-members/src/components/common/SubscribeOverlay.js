@@ -19,15 +19,15 @@ const SubscribeOverlay = ({ data, overlay }) => {
     if (overlay === null || overlay === undefined) {
         return null
     }
-
     const text = get(useLang())
-    const site = data.allGhostSettings.edges[0].node
+    const site = data.ghostSettings
     const title = text(`SITE_TITLE`, site.title)
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
+    const closingStyle = { opacity: 0, pointerEvents: null }
 
     return (
-        <div className="subscribe-overlay" style={ isOpen ? openingStyle : null } >
+        <div className="subscribe-overlay" style={ isOpen ? openingStyle : closingStyle } >
             <a className="subscribe-close-overlay" onClick={overlay.handleClose}></a>
             <a className="subscribe-close-button" onClick={overlay.handleClose}></a>
             <div className="subscribe-overlay-content">
@@ -63,7 +63,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
 
 SubscribeOverlay.propTypes = {
     data: PropTypes.shape({
-        allGhostSettings: PropTypes.object.isRequired,
+        ghostSettings: PropTypes.object.isRequired,
     }).isRequired,
     overlay: PropTypes.object,
 }
@@ -72,12 +72,9 @@ const SubscribeOverlayQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsForSubscribeOverlay {
-                allGhostSettings {
-                    edges {
-                        node {
-                            ...GhostSettingsFields
-                        }
-                    }
+                ghostSettings {
+                    title
+                    logo
                 }
             }
         `}

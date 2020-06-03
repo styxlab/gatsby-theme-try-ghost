@@ -8,10 +8,11 @@ import { SubscribeForm } from '.'
 
 // The actual component
 const Subscribe = ({ data }) => {
-    const text = get(useLang())
-    const site = data.allGhostSettings.edges[0].node
-    const title = text(`SITE_TITLE`, site.title)
+    const site = data.ghostSettings
     const cmsUrl = site.url
+
+    const text = get(useLang())
+    const title = text(`SITE_TITLE`, site.title)
 
     return (
         <React.Fragment>
@@ -24,7 +25,7 @@ const Subscribe = ({ data }) => {
 
 Subscribe.propTypes = {
     data: PropTypes.shape({
-        allGhostSettings: PropTypes.object.isRequired,
+        ghostSettings: PropTypes.object.isRequired,
     }).isRequired,
 }
 
@@ -32,12 +33,9 @@ const SubscribeQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsForSubscribe {
-                allGhostSettings {
-                    edges {
-                        node {
-                            ...GhostSettingsFields
-                        }
-                    }
+                ghostSettings {
+                    url
+                    title
                 }
             }
         `}

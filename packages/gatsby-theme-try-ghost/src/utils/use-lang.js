@@ -4,16 +4,12 @@ import lang from './lang'
 const useLang = (locale) => {
     const data = useStaticQuery(graphql`
     {
-        allGhostSettings {
-            edges {
-                node {
-                    lang
-                }
-            }
+        ghostSettings {
+            lang
         }
     }`)
 
-    return lang[locale || data.allGhostSettings.edges[0].node.lang || `en`]
+    return lang[locale || data.ghostSettings.lang || `en`]
 }
 
 const get = text => (name, fallback) => {
