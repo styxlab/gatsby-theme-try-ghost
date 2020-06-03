@@ -1,28 +1,18 @@
 const _ = require(`lodash`)
 const visit = require(`unist-util-visit`)
 
-module.exports = ({ htmlAst, htmlNode, getNode, reporter }) => {
+module.exports = ({ htmlAst, htmlNode, getNode, getNodesByType, reporter }) => {
     const config = getNode(`gatsby-theme-try-ghost-config`)
     const basePath = config && config.basePath || `/`
+
+    const settings = getNodesByType(`GhostSettings`)
+    const cmsUrl = `${settings[0].url}/`
 
     const url = htmlNode && htmlNode.context && htmlNode.context.url
     const slug = htmlNode && htmlNode.context && htmlNode.context.slug
 
     if (!url && slug){
         reporter.warn(`Expected url and slug not defined.`)
-        return htmlAst
-    }
-
-    function isUrl(s) {
-        const regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/
-        return regexp.test(s)
-    }
-
-    // Regexp to extract the absolute part of the CMS url
-    const regexp = /^(([\w-]+:\/\/?|www[.])[^\s()<>^/]+(?:\([\w\d]+\)|([^[:punct:]\s]|\/)))/
-    const cmsUrl = _.head(url.match(regexp))
-
-    if (!isUrl(cmsUrl)) {
         return htmlAst
     }
 
