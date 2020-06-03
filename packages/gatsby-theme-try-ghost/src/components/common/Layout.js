@@ -4,6 +4,7 @@ import { StaticQuery, graphql, Link } from 'gatsby'
 
 import { DocumentHead, StickyNav, SubscribeOverlay } from '.'
 import { BodyClass } from './helpers'
+import { RenderOnClientOnly } from './effects'
 
 import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
@@ -74,13 +75,15 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 </footer>
             </div>
 
-            <div className="subscribe-success-message">
-                <a className="subscribe-close"></a>
-                {text(`SUBSCRIBED_TO`)} {title}!
-            </div>
+            <RenderOnClientOnly>
+                <div className="subscribe-success-message">
+                    <a className="subscribe-close"></a>
+                    {text(`SUBSCRIBED_TO`)} {title}!
+                </div>
 
-            {/* The big email subscribe modal content */}
-            <SubscribeOverlay overlay={overlay} />
+                {/* The big email subscribe modal content */}
+                <SubscribeOverlay overlay={overlay} />
+            </RenderOnClientOnly>
 
         </React.Fragment>
     )
