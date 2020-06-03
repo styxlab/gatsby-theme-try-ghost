@@ -19,15 +19,15 @@ const SubscribeOverlay = ({ data, overlay }) => {
     if (overlay === null || overlay === undefined) {
         return null
     }
-
     const text = get(useLang())
     const site = data.ghostSettings
     const title = text(`SITE_TITLE`, site.title)
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
+    const closingStyle = { opacity: 0, pointerEvents: null }
 
     return (
-        <div className="subscribe-overlay" style={ isOpen ? openingStyle : null } >
+        <div className="subscribe-overlay" style={ isOpen ? openingStyle : closingStyle } >
             <a className="subscribe-close-overlay" onClick={overlay.handleClose}></a>
             <a className="subscribe-close-button" onClick={overlay.handleClose}></a>
             <div className="subscribe-overlay-content">
