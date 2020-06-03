@@ -35,6 +35,7 @@ module.exports = ({
     type,
     basePath,
     getNode,
+    getNodesByType,
     cache,
     getCache: possibleGetCache,
     reporter,
@@ -77,7 +78,7 @@ module.exports = ({
             await Promise.each(pluginOptions.plugins, (plugin) => {
                 const requiredPlugin = require(plugin.resolve)
                 if (_.isFunction(requiredPlugin.mutateSource)) {
-                    return requiredPlugin.mutateSource({ htmlNode, getNode,
+                    return requiredPlugin.mutateSource({ htmlNode, getNode, getNodesByType,
                         reporter, cache: getCache(plugin.name), getCache,
                         compiler: {
                             parseString: rehype.parse.bind(rehype),
@@ -104,6 +105,7 @@ module.exports = ({
                             generateTableOfContents,
                             htmlNode,
                             getNode,
+                            getNodesByType,
                             basePath,
                             reporter,
                             cache: getCache(plugin.name),
