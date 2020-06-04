@@ -23,7 +23,7 @@ module.exports = {
     themeColor: `#15171A`,
 
     // Include Gatsby images for lazy loading and image optimizations
-    gatsbyImages: true,
+    gatsbyImages: false,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],

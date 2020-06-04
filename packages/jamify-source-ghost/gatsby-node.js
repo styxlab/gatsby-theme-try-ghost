@@ -1,8 +1,17 @@
 const Promise = require(`bluebird`)
 const ContentAPI = require(`./content-api`)
-const { PostNode, PageNode, TagNode, AuthorNode, SettingsNode } = require(`./ghost-nodes`)
 const _ = require(`lodash`)
 const cheerio = require(`cheerio`)
+
+const {
+    PostNode,
+    PageNode,
+    TagNode,
+    AuthorNode,
+    SettingsNode,
+    GhostTypes,
+    generateNodeId,
+} = require(`./ghost-nodes`)
 
 const parseCodeinjection = (html) => {
     let $ = null
@@ -56,23 +65,101 @@ const transformCodeinjection = (posts) => {
  * Uses the Ghost Content API to fetch all posts, pages, tags, authors and settings
  * Creates nodes for each record, so that they are all available to Gatsby
  */
-const createLiveGhostNodes = ({ actions }, configOptions) => {
-    const { createNode } = actions
+const createLiveGhostNodes = ({ actions, getNodesByType, getNode, triggerTime }, configOptions) => {
+    const { createNode, touchNode, deleteNode } = actions
+
+    // touch nodes to ensure they aren't garbage collected
+    //const currentPosts = getNodesByType(GhostTypes.post)
+    //const currentPages = getNodesByType(GhostTypes.page)
+    //const currentTags = getNodesByType(GhostTypes.tag)
+    //const currentAuthors = getNodesByType(GhostTypes.author)
+    //const currentSettings = getNodesByType(GhostTypes.settings)
+
+    //currentPosts.forEach(node => touchNode({ nodeId: node.id }))
+    //currentPages.forEach(node => touchNode({ nodeId: node.id }))
+    //currentTags.forEach(node => touchNode({ nodeId: node.id }))
+    //currentAuthors.forEach(node => touchNode({ nodeId: node.id }))
+    //currentSettings.forEach(node => touchNode({ nodeId: node.id }))
 
     const api = ContentAPI.configure(configOptions)
 
+    // deletions
+    const removeFetchOptions = {
+        limit: `all`,
+        fields: `id`,
+    }
+
+    //const removePosts = api.posts.browse(removeFetchOptions).then((posts) => {
+    //    currentPosts
+    //        .filter(current => posts.findIndex(post => current.id === generateNodeId(GhostTypes.post, post.id)) === -1)
+    //        .forEach((current) => {
+    //            deleteNode({ node: getNode(current.id) })
+    //            console.log(`deleted post`)
+    //            console.log(current.id)
+    //        })
+    //})
+
+    //const removePages = api.posts.browse(removeFetchOptions).then((pages) => {
+    //    currentPages
+    //        .filter(current => pages.findIndex(page => current.id === generateNodeId(GhostTypes.page, page.id)) === -1)
+    //        .forEach((current) => {
+    //            deleteNode({ node: getNode(current.id) })
+    //            console.log(`deleted page`)
+    //            console.log(current.id)
+    //        })
+    //})
+
+    //const removeTags = api.tags.browse(removeFetchOptions).then((tags) => {
+    //    currentTags
+    //        .filter(current => tags.findIndex(tag => current.id === generateNodeId(GhostTypes.tag, tag.id)) === -1)
+    //        .forEach((current) => {
+    //            deleteNode({ node: getNode(current.id) })
+    //            console.log(`deleted tags`)
+    //            console.log(current.id)
+    //        })
+    //})
+
+    //const removeAuthors = api.authors.browse(removeFetchOptions).then((authors) => {
+    //    currentAuthors
+    //        .filter(current => authors.findIndex(author => current.id === generateNodeId(GhostTypes.author, author.id)) === -1)
+    //        .forEach((current) => {
+    //            deleteNode({ node: getNode(current.id) })
+    //            console.log(`deleted authors`)
+    //            console.log(current.id)
+    //        })
+    //})
+
+    //const removeSettings = api.settings.browse(removeFetchOptions).then((settings) => {
+    //    currentSettings
+    //        .filter(current => settings.findIndex(setting => current.id === generateNodeId(GhostTypes.settings, setting.id)) === -1)
+    //        .forEach((current) => {
+    //            deleteNode({ node: getNode(current.id) })
+    //            console.log(`deleted settings`)
+    //            console.log(current.id)
+    //        })
+    //})
+
+    console.log(triggerTime)
+
+    // new and updated
     const postAndPageFetchOptions = {
         limit: `all`,
         include: `tags,authors`,
         formats: `html,plaintext`,
+        //filter: `created_at:>${triggerTime},updated_at:>${triggerTime},published_at:>${triggerTime}`,
     }
 
+    // ALWAYS NEED TO CREATE ALL NODES
+    // FETCH DATA FROM CACHE
+
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
+        console.log(`createPosts: ${posts.length}`)
         posts = transformCodeinjection(posts)
         posts.forEach(post => createNode(PostNode(post)))
     })
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
+        console.log(`createPages: ${pages.length}`)
         pages.forEach(page => createNode(PageNode(page)))
     })
 
@@ -81,7 +168,9 @@ const createLiveGhostNodes = ({ actions }, configOptions) => {
         include: `count.posts`,
     }
 
+    // tags, authors, settings: createNode only, if cached hash has changed
     const fetchTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
+        console.log(`createTags: ${tags.length}`)
         tags.forEach((tag) => {
             tag.postCount = tag.count.posts
             createNode(TagNode(tag))
@@ -89,6 +178,7 @@ const createLiveGhostNodes = ({ actions }, configOptions) => {
     })
 
     const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
+        console.log(`createAuthors: ${authors.length}`)
         authors.forEach((author) => {
             author.postCount = author.count.posts
             createNode(AuthorNode(author))
@@ -119,11 +209,24 @@ const createLiveGhostNodes = ({ actions }, configOptions) => {
         createNode(SettingsNode(setting))
     })
 
+    //removePosts, removePages, removeTags, removeAuthors, removeSettings,
     return Promise.all([fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings])
 }
 
 // Standard way to create nodes
-exports.sourceNodes = ({ actions }, configOptions) => createLiveGhostNodes({ actions }, configOptions)
+exports.sourceNodes = ({ actions, cache, getNodesByType, getNode }, configOptions) => {
+    const startTime = new Date(0).toISOString()
+    const lastFetched = null //await cache.get(`jamify-source-timestamp`)
+    const triggerTime = lastFetched || startTime
+
+    createLiveGhostNodes({ actions, getNodesByType, getNode, triggerTime }, configOptions)
+}
 
 // Explicitely typed
 exports.createSchemaCustomization = require(`./create-schema-customization`)
+
+// set a timestamp at the end of the build
+exports.onPostBuild = async ({ cache }) => {
+    const now = new Date().toISOString()
+    await cache.set(`jamify-source-timestamp`, now)
+}
