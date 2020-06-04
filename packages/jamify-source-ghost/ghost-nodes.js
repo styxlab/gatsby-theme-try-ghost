@@ -21,12 +21,19 @@ const AuthorNode = createNodeFactory(AUTHOR)
 const SettingsNode = createNodeFactory(SETTINGS)
 
 const GhostTypes = {
-    prefix: PREFIX,
     post: POST,
     page: PAGE,
     tag: TAG,
     author: AUTHOR,
     settings: SETTINGS,
+}
+
+const PrefixedGhostTypes = {
+    post: `${PREFIX}${POST}`,
+    page: `${PREFIX}${PAGE}`,
+    tag: `${PREFIX}${TAG}`,
+    author: `${PREFIX}${AUTHOR}`,
+    settings: `${PREFIX}${SETTINGS}`,
 }
 
 module.exports = {
@@ -36,5 +43,6 @@ module.exports = {
     AuthorNode,
     SettingsNode,
     GhostTypes,
+    PrefixedGhostTypes,
     generateNodeId,
 }

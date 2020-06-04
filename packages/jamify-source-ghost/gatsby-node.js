@@ -10,6 +10,7 @@ const {
     AuthorNode,
     SettingsNode,
     GhostTypes,
+    PrefixedGhostTypes,
     generateNodeId,
 } = require(`./ghost-nodes`)
 
@@ -60,67 +61,85 @@ const transformCodeinjection = (posts) => {
     return posts
 }
 
-/**
- * Create Live Ghost Nodes
- * Uses the Ghost Content API to fetch all posts, pages, tags, authors and settings
- * Creates nodes for each record, so that they are all available to Gatsby
- */
-const createLiveGhostNodes = ({ actions, getNodesByType, getNode, triggerTime }, configOptions) => {
-    const { createNode, touchNode, deleteNode } = actions
+// touch nodes to ensure they aren't garbage collected
+const touchNodes = (types, getNodesByType, touchNode) => {
+    const existingPosts = getNodesByType(PrefixedGhostTypes.post)
+    const existingPages = getNodesByType(PrefixedGhostTypes.page)
+    const existingTags = getNodesByType(PrefixedGhostTypes.tag)
+    const existingAuthors = getNodesByType(PrefixedGhostTypes.author)
+    const existingSettings = getNodesByType(PrefixedGhostTypes.settings)
 
-    // touch nodes to ensure they aren't garbage collected
-    const currentPosts = getNodesByType(GhostTypes.post)
-    const currentPages = getNodesByType(GhostTypes.page)
-    const currentTags = getNodesByType(GhostTypes.tag)
-    const currentAuthors = getNodesByType(GhostTypes.author)
-    const currentSettings = getNodesByType(GhostTypes.settings)
+    existingPosts.forEach(node => touchNode({ nodeId: node.id }))
+    existingPages.forEach(node => touchNode({ nodeId: node.id }))
+    existingTags.forEach(node => touchNode({ nodeId: node.id }))
+    existingAuthors.forEach(node => touchNode({ nodeId: node.id }))
+    existingSettings.forEach(node => touchNode({ nodeId: node.id }))
 
-    currentPosts.forEach(node => touchNode({ nodeId: node.id }))
-    currentPages.forEach(node => touchNode({ nodeId: node.id }))
-    currentTags.forEach(node => touchNode({ nodeId: node.id }))
-    currentAuthors.forEach(node => touchNode({ nodeId: node.id }))
-    currentSettings.forEach(node => touchNode({ nodeId: node.id }))
+    return ({
+        posts: existingPosts,
+        pages: existingPages,
+        tags: existingTags,
+        authors: existingAuthors,
+    })
+}
 
-    const api = ContentAPI.configure(configOptions)
-
-    // deletions
+const removeNodes = (existingNodes, api, deleteNode, getNode) => {
     const removeFetchOptions = {
         limit: `all`,
         fields: `id`,
     }
 
-    const removeItems = (type, localItems, remoteItems) => {
-        localItems
-            .filter(local => remoteItems.findIndex(remote => local.id === generateNodeId(type, remote.id)) === -1)
-            .forEach((local) => {
-                deleteNode({ node: getNode(local.id) })
-                console.log(`deleted ${local.id}`)
-            })
-    }
-
     const removePosts = api.posts.browse(removeFetchOptions).then((posts) => {
-        removeItems(GhostTypes.post, currentPosts, posts)
+        removeNode(GhostTypes.post, existingNodes.posts, posts, deleteNode, getNode)
     })
 
     const removePages = api.posts.browse(removeFetchOptions).then((pages) => {
-        removeItems(GhostTypes.page, currentPages, pages)
+        removeNode(GhostTypes.page, existingNodes.pages, pages, deleteNode, getNode)
     })
 
     const removeTags = api.tags.browse(removeFetchOptions).then((tags) => {
-        removeItems(GhostTypes.tags, currentTags, tags)
+        removeNode(GhostTypes.tag, existingNodes.tags, tags, deleteNode, getNode)
     })
 
     const removeAuthors = api.authors.browse(removeFetchOptions).then((authors) => {
-        removeItems(GhostTypes.authors, currentAuthors, authors)
+        removeNode(GhostTypes.author, existingNodes.authors, authors, deleteNode, getNode)
     })
 
-    const removeSettings = api.settings.browse(removeFetchOptions).then((settings) => {
-        removeItems(GhostTypes.settings, currentSettings, settings)
-    })
+    /**
+    * Settings are always present, no need to remove them
+    * Only handle updates
+    *
+    */
 
-    console.log(triggerTime)
+    return ([removePosts, removePages, removeTags, removeAuthors])
+}
 
-    // new and updated
+const removeNode = (type, nodes, remoteNodes, deleteNode, getNode) => {
+    nodes
+        .filter(node => remoteNodes.findIndex(remote => node.id === generateNodeId(type, remote.id)) === -1)
+        .forEach((node) => {
+            deleteNode({ node: getNode(node.id) })
+            console.info(`removed node with id: ${node.id}`)
+        })
+}
+
+/**
+ * Create Ghost Nodes
+ * Uses the Ghost Content API to fetch all posts, pages, tags, authors and settings
+ * Creates nodes for each record, so that they are all available to Gatsby
+ */
+const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, createContentDigest, triggerTime }, configOptions) => {
+    const { createNode, touchNode, deleteNode } = actions
+    const api = ContentAPI.configure(configOptions)
+
+    // Step 1: Keep all existing nodes
+    const existingNodes = touchNodes(PrefixedGhostTypes, getNodesByType, touchNode)
+
+    // Step 2: Remove vanished nodes
+    const removeItems = removeNodes(existingNodes, api, deleteNode, getNode)
+
+    // Step 3: Fetch only new and updated posts based on timestamp
+    console.info(`Last updated: ${triggerTime}`)
     const postAndPageFetchOptions = {
         limit: `all`,
         include: `tags,authors`,
@@ -129,39 +148,53 @@ const createLiveGhostNodes = ({ actions, getNodesByType, getNode, triggerTime },
     }
 
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
-        console.log(`createPosts: ${posts.length}`)
+        console.info(`createPosts: ${posts.length}`)
         posts = transformCodeinjection(posts)
         posts.forEach(post => createNode(PostNode(post)))
     })
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
-        console.log(`createPages: ${pages.length}`)
+        console.info(`createPages: ${pages.length}`)
         pages.forEach(page => createNode(PageNode(page)))
     })
 
+    // Step 4: Always fetch tags, authors, seetings (no timestamp available)
+    // Only create/update if contentDigest changes
     const tagAndAuthorFetchOptions = {
         limit: `all`,
         include: `count.posts`,
     }
-
-    // tags, authors, settings: createNode only, if cached hash has changed
     const fetchTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
-        console.log(`createTags: ${tags.length}`)
-        tags.forEach((tag) => {
+        console.info(`createTags: ${tags.length}`)
+        tags.forEach(async (tag) => {
             tag.postCount = tag.count.posts
-            createNode(TagNode(tag))
+            const existingDigest = await cache.get(`jamify-source-ghost-tag-${tag.id}`)
+            const newDigest = createContentDigest(JSON.stringify(tag))
+            if (existingDigest !== newDigest) {
+                createNode(TagNode(tag))
+                await cache.set(`jamify-source-ghost-tag-${tag.id}`, newDigest)
+            } else {
+                console.info(`Tag node not updated`)
+            }
         })
     })
 
     const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
-        console.log(`createAuthors: ${authors.length}`)
-        authors.forEach((author) => {
+        console.info(`createAuthors: ${authors.length}`)
+        authors.forEach(async (author) => {
             author.postCount = author.count.posts
-            createNode(AuthorNode(author))
+            const existingDigest = await cache.get(`jamify-source-ghost-author-${author.id}`)
+            const newDigest = createContentDigest(JSON.stringify(author))
+            if (existingDigest !== newDigest) {
+                createNode(AuthorNode(author))
+                await cache.set(`jamify-source-ghost-author-${author.id}`, createContentDigest(JSON.stringify(author)))
+            } else {
+                console.info(`Author node not updated`)
+            }
         })
     })
 
-    const fetchSettings = api.settings.browse().then((setting) => {
+    const fetchSettings = api.settings.browse().then(async (setting) => {
         const codeinjectionHead = setting.codeinjection_head || setting.ghost_head
         const codeinjectionFoot = setting.codeinjection_foot || setting.ghost_foot
         const allCodeinjections = codeinjectionHead ? codeinjectionHead.concat(codeinjectionFoot) :
@@ -182,26 +215,34 @@ const createLiveGhostNodes = ({ actions, getNodesByType, getNode, triggerTime },
         setting.id = 1
         // Remove trailing slashes
         setting.url = setting.url.replace(/\/$/, ``)
-        createNode(SettingsNode(setting))
+
+        const existingDigest = await cache.get(`jamify-source-ghost-settings`)
+        const newDigest = createContentDigest(JSON.stringify(setting))
+        if (existingDigest !== newDigest) {
+            createNode(SettingsNode(setting))
+            await cache.set(`jamify-source-ghost-settings`, createContentDigest(JSON.stringify(setting)))
+        } else {
+            console.info(`Settings node not updated`)
+        }
     })
 
-    return Promise.all([removePosts, removePages, removeTags, removeAuthors, removeSettings, fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings])
+    return Promise.all([...removeItems, fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings])
 }
 
 // Standard way to create nodes
-exports.sourceNodes = async ({ actions, cache, getNodesByType, getNode }, configOptions) => {
+exports.sourceNodes = async ({ actions, cache, getNodesByType, getNode, createContentDigest }, configOptions) => {
     const startTime = new Date(0).toISOString()
-    const lastFetched = await cache.get(`jamify-source-timestamp`)
+    const lastFetched = await cache.get(`jamify-source-ghost-timestamp`)
     const triggerTime = lastFetched || startTime
 
-    return createLiveGhostNodes({ actions, getNodesByType, getNode, triggerTime }, configOptions)
+    return createGhostNodes({ actions, cache, getNodesByType, getNode, createContentDigest, triggerTime }, configOptions)
 }
 
-// Explicitely typed
+// Explicitely typed schema
 exports.createSchemaCustomization = require(`./create-schema-customization`)
 
-// set a timestamp at the end of the build
-exports.onPostBuild = async ({ cache }) => {
+// Set a timestamp at the end of the bootstrap
+exports.onPostBootstrap = async ({ cache }) => {
     const now = new Date().toISOString()
-    await cache.set(`jamify-source-timestamp`, now)
+    await cache.set(`jamify-source-ghost-timestamp`, now)
 }
