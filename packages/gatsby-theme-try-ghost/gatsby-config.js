@@ -43,10 +43,13 @@ module.exports = (themeOptions) => {
             `gatsby-transformer-sharp`,
             {
                 resolve: `jamify-source-ghost`,
-                options:
-                    process.env.NODE_ENV === `development`
+                options: {
+                    ghostConfig: process.env.NODE_ENV === `development`
                         ? ghostConfig.development
                         : ghostConfig.production,
+                    cacheResponse: true,
+                    verbose: true,
+                },
             },
             {
                 resolve: `gatsby-plugin-ghost-images`,
