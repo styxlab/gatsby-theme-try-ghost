@@ -1,6 +1,15 @@
 # Jamify Source Ghost
 
-Gatsby source plugin for pulling data from headless [Ghost](https://ghost.org) CMS, using the Ghost [Content API](https://docs.ghost.org/api/content/). This plugin uses the Gatsby schmema customization API to provide a strictly typed content schema. This has many benefits, from faster type buildings to better hot-reloadings.
+Gatsby source plugin for pulling data from headless [Ghost CMS](https://ghost.org/changelog/jamstack/). This plugin uses the [Gatsby schema customization](https://www.gatsbyjs.org/docs/schema-customization/) API to provide a strictly typed content schema. Data is fetched
+via the [Ghost Content API Client](https://ghost.org/docs/api/v3/javascript/content/).
+
+## Features
+
+- [First class](https://www.gatsbyjs.com/docs/integration-guide/source-plugin/) Gatsby source plugin ✨
+- Strictly typed schema
+- Only fetch new or updated content from Ghost CMS
+- Create or update GraphQL nodes only if content changes
+- Ready for incremental builds
 
 ## Install
 
@@ -14,28 +23,30 @@ Plugin configuration for `gatsby-config.js`:
 {
    resolve: `jamify-source-ghost`,
    options: {
-       apiUrl: `https://<your-subdomain>.ghost.io`,
-       contentApiKey: `<your content api key>`,
-       version: `v3` // Ghost API version, optional, defaults to "v3".
-                     // Pass in "v2" if your Ghost install is not on 3.0 yet!!!
+      ghostConfig: {
+        apiUrl: `https://<cms.your-ghost.com>`,
+        contentApiKey: `<your content api key>`,
+        version: `v3` // Ghost API version (optional)
+      },
+      // Use cache (optional, default: true)
+      cacheResponse: true, 
+      // Show info messages (optional, default: true)
+      verbose: false,
    }
 }
 ```
 
-`apiUrl`
- Ghost Content API URL - for Ghost(Pro) customers this is your `.ghost.io` domain, it’s the same URL used to view the admin panel, but without the `/ghost` subdirectory. This should be served over https.
+`apiUrl`: Ghost Content API URL.
 
-`contentApiKey`
-The "Content API Key" copied from the "Integrations" screen in Ghost Admin.
+`contentApiKey`: The Content API Key that can be generated in Ghost Admin under *Integrations*. Use of [environment variables](https://www.gatsbyjs.org/docs/environment-variables/) is recommended.
 
-If you want to keep these values private (if your site is not public) you can do so using [environment variables](https://www.gatsbyjs.org/docs/environment-variables/).
+`cacheResponse`: This plugin uses the cache to hold state information for subsequent runs. For best performance, this setting should be turned on. Only switch off for debugging purposes.
+
+`verbose`: Print informative messages during build processing.
 
 ## How to query
 
-There are 5 node types available from Ghost: Post, Page, Author, Tag, and Settings.
-
-Documentation for the full set of fields made available for each resource type can be
-found in the [Content API docs](https://docs.ghost.org/api/content/). Posts and Pages have the same properties.
+This plugin generates five different node types: Post, Page, Author, Tag, and Settings. A full list of fields can be inspected in the [schema customizaion file](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/packages/jamify-source-ghost/create-schema-customization.js).
 
 **Example Post Query**
 
@@ -73,7 +84,7 @@ found in the [Content API docs](https://docs.ghost.org/api/content/). Posts and 
 
 **Filter Posts by Tag**
 
-A common but tricky example of filtering posts by tag, can be achieved like this (Gatsby v2+):
+A common example of filtering posts by tag, can be achieved like this (Gatsby v2+):
 
 ```
 {
@@ -90,22 +101,18 @@ A common but tricky example of filtering posts by tag, can be achieved like this
 
 **Query Settings**
 
-The settings node is different as there's only one object, and it has the properties [listed here](https://docs.ghost.org/api/content/#settings).
+The settings node is different as there's only one object:
 
 ```
 {
-  allGhostSettings {
-    edges {
-      node {
-        title
-        description
-        lang
-        ...
-        navigation {
-            label
-            url
-        }
-      }
+  ghostSettings {
+    title
+    description
+    lang
+    ...
+    navigation {
+        label
+        url
     }
   }
 }
@@ -129,8 +136,6 @@ The Post, Page, Author and Tag nodes all work the same. Use the node type you ne
   }
 }
 ```
-
-
 
 ## Credits
 

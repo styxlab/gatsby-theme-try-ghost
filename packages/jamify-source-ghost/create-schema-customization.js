@@ -1,6 +1,5 @@
 /**
  * Here is the place where Gatsby creates schema customizations.
- * This is needed to make the secondary_navigation field optional.
  */
 
 const typeDefs = `
