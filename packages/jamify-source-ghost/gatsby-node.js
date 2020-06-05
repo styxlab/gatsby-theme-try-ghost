@@ -262,8 +262,12 @@ exports.sourceNodes = async ({ actions, cache, getNodesByType, getNode, reporter
 // Explicitely typed schema
 exports.createSchemaCustomization = require(`./create-schema-customization`)
 
-// Set a timestamp at the end of the bootstrap
+// Set a timestamp at the end of the bootstrap and build
 exports.onPostBootstrap = async ({ cache }) => {
+    const now = new Date().toISOString()
+    await cache.set(`jamify-source-ghost-timestamp`, now)
+}
+exports.onPostBuild = async ({ cache }) => {
     const now = new Date().toISOString()
     await cache.set(`jamify-source-ghost-timestamp`, now)
 }
