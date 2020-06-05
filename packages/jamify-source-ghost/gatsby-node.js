@@ -245,7 +245,10 @@ const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, repor
         }
     })
 
-    return Promise.all([...removeItems, fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings])
+    return Promise.all([...removeItems, fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings]).then(() => {
+        const now = new Date().toISOString()
+        cache.set(`jamify-source-ghost-timestamp`, now)
+    })
 }
 
 // Standard way to create nodes
@@ -261,13 +264,3 @@ exports.sourceNodes = async ({ actions, cache, getNodesByType, getNode, reporter
 
 // Explicitely typed schema
 exports.createSchemaCustomization = require(`./create-schema-customization`)
-
-// Set a timestamp at the end of the bootstrap and build
-exports.onPostBootstrap = async ({ cache }) => {
-    const now = new Date().toISOString()
-    await cache.set(`jamify-source-ghost-timestamp`, now)
-}
-exports.onPostBuild = async ({ cache }) => {
-    const now = new Date().toISOString()
-    await cache.set(`jamify-source-ghost-timestamp`, now)
-}
