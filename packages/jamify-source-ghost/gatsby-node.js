@@ -185,7 +185,7 @@ const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, repor
                 createNode(TagNode(tag))
                 await cache.set(`jamify-source-ghost-tag-${tag.id}`, newDigest)
             } else {
-                verbose && reporter.info(`Tag node has not changed`)
+                verbose && reporter.info(`Tag node ${tag.slug} has not changed`)
             }
         })
     })
@@ -201,7 +201,7 @@ const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, repor
                 createNode(AuthorNode(author))
                 await cache.set(`jamify-source-ghost-author-${author.id}`, newDigest)
             } else {
-                verbose && reporter.info(`Author node has not changed`)
+                verbose && reporter.info(`Author node ${author.slug} has not changed`)
             }
         })
     })
