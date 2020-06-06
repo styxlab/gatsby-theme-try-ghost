@@ -9,6 +9,11 @@ const typeDefs = `
 const useTypeExists = (store, name) => (type) => {
     const types = store.getState().schemaCustomization.types
     const plugin = types.find(node => node.plugin.name === name)
+
+    if (plugin === undefined) {
+        return false
+    }
+
     const defs = plugin.typeOrTypeDef.definitions
     const exists = defs.find(node => node.name.value === type)
     return exists !== undefined

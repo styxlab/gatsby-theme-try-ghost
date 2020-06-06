@@ -9,7 +9,7 @@ via the [Ghost Content API Client](https://ghost.org/docs/api/v3/javascript/cont
 - Strictly typed schema
 - Only fetch new or updated content from Ghost CMS
 - Create or update GraphQL nodes only if content changes
-- Ready for incremental builds
+- Enabling incremental builds on Gatsby Cloud
 
 ## Install
 
@@ -43,6 +43,13 @@ Plugin configuration for `gatsby-config.js`:
 `cacheResponse`: This plugin uses the cache to hold state information for subsequent runs. For best performance, this setting should be turned on. Only switch off for debugging purposes.
 
 `verbose`: Print informative messages during build processing.
+
+## Details
+
+This plugin makes an effort to only fetch the minimal amount of data needed from the Ghost CMS to deliver exceptional performance. Equally important, only the GraphQL nodes that are new or have changed are updated. The latter is needed for incremental builds to function. In a first step, all existing nodes are touched, so they do not get garbage collected by Gatsby. Second, all node types are fetched from Ghost CMS, but only with a minimal field list in order to detect which nodes have been deleted. 
+
+For the post and page types, a cached timestamp is used to only fetch new content. As authors and tag types do not contain a timestamp, all of them need to be fetched. This plugin uses a hash for authors and tags, so it creates GraphQL nodes only if changed. Set the `verbose` flag to true to get additional build time information about which nodes have been deleted, updated or created.
+
 
 ## How to query
 

@@ -30,6 +30,7 @@ Play with the [Demo](https://demo.jamify.org/) to get a first impression.
 - Fully responsive
 - Advanced routing 🆕
 - Composable and extensible
+- Incremental build enabled 🚀 🆕 
 
 ## Performance
 

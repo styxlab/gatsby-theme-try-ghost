@@ -1,7 +1,7 @@
 {
     "name": "gatsby-transformer-rehype",
     "description": "Gatsby transformer plugin for HTML using the Rehype library and ecosystem",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -20,7 +20,8 @@
         "html",
         "rehype",
         "jamify",
-        "table-of-contents"
+        "jamify-transformer",
+        "jamify-transformer-rehype"
     ],
     "scripts": {
         "build": "babel src --out-dir . --ignore **/__tests__",
