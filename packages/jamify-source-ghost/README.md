@@ -46,7 +46,7 @@ Plugin configuration for `gatsby-config.js`:
 
 ## Details
 
-This plugin makes an effort to only fetch the minimal amount of data needed from the Ghost CMS to deliver exceptional performance. Equally important, only the GraphQL nodes that are new or have changed are updated. The latter is needed for incremental builds to function. In a first step, all existing nodes are touched, so they do not get garbage collected by Gatsby. Second, all node types are feteched from Ghost CMS, but only with a minimal field list in order to detect which nodes have been deleted. 
+This plugin makes an effort to only fetch the minimal amount of data needed from the Ghost CMS to deliver exceptional performance. Equally important, only the GraphQL nodes that are new or have changed are updated. The latter is needed for incremental builds to function. In a first step, all existing nodes are touched, so they do not get garbage collected by Gatsby. Second, all node types are fetched from Ghost CMS, but only with a minimal field list in order to detect which nodes have been deleted. 
 
 For the post and page types, a cached timestamp is used to only fetch new content. As authors and tag types do not contain a timestamp, all of them need to be fetched. This plugin uses a hash for authors and tags, so it creates GraphQL nodes only if changed. Set the `verbose` flag to true to get additional build time information about which nodes have been deleted, updated or created.
 
