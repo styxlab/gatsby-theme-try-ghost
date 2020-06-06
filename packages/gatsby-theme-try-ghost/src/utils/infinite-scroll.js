@@ -30,26 +30,29 @@ const infiniteScroll = (posts) => {
     posts.forEach(({ node }) => {
         saveInfiniteScrollPost(node)
         indexIds.push(node.id)
-
-        node.tags.forEach((tag) => {
-            if (tagIds[tag.slug] === undefined) {
-                tagIds[tag.slug] = []
-            }
-            tagIds[tag.slug].push(node.id)
-        })
-
-        node.authors.forEach((author) => {
-            if (authorIds[author.slug] === undefined) {
-                authorIds[author.slug] = []
-            }
-            authorIds[author.slug].push(node.id)
-        })
+        createIds(node, tagIds, authorIds)
     })
 
     return ({
         indexIds: indexIds,
         tagIds: tagIds,
         authorIds: authorIds,
+    })
+}
+
+const createIds = (node, tagIds, authorIds) => {
+    node.tags.forEach((tag) => {
+        if (tagIds[tag.slug] === undefined) {
+            tagIds[tag.slug] = []
+        }
+        tagIds[tag.slug].push(node.id)
+    })
+
+    node.authors.forEach((author) => {
+        if (authorIds[author.slug] === undefined) {
+            authorIds[author.slug] = []
+        }
+        authorIds[author.slug].push(node.id)
     })
 }
 
