@@ -97,7 +97,7 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
         const url = resolveUrl(basePath, `/`, node.slug, node.url)
         const collectionPaths = getCollectionPaths(postIds[node.slug], allPosts)
 
-        Array.from({ length: numberOfPages }).forEach((_, i) => {
+        Array.from({ length: numberOfPages }).forEach((__, i) => {
             const currentPage = i + 1
             const prevPageNumber = currentPage <= 1 ? null : currentPage - 1
             const nextPageNumber =
@@ -223,8 +223,13 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
 
     // Taxonomies are not split by collections
     const { tagIds, authorIds } = infiniteScroll(data.posts)
-    createTaxonomyPages(createPage, data.tags, tagIds, basePath, templates.tag, postsPerPage, data.posts)
-    createTaxonomyPages(createPage, data.authors, authorIds, basePath, templates.author, postsPerPage, data.posts)
+
+    // Only use tags, authors present in posts (page only tags should not create tag/author pages)
+    const postTags = data.tags.filter(({ node }) => node.postCount > 0)
+    const postAuthors = data.authors.filter(({ node }) => node.postCount > 0)
+
+    createTaxonomyPages(createPage, postTags, tagIds, basePath, templates.tag, postsPerPage, data.posts)
+    createTaxonomyPages(createPage, postAuthors, authorIds, basePath, templates.author, postsPerPage, data.posts)
 }
 
 // Plugins can access basePath with GraphQL query

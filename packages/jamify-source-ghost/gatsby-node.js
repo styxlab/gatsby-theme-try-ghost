@@ -3,16 +3,25 @@ const ContentAPI = require(`./content-api`)
 const _ = require(`lodash`)
 const cheerio = require(`cheerio`)
 
+const PLUGIN = `jamify-source-ghost`
+
 const {
-    PostNode,
-    PageNode,
-    TagNode,
-    AuthorNode,
-    SettingsNode,
+    GhostNodes,
     GhostTypes,
     PrefixedGhostTypes,
     generateNodeId,
 } = require(`./ghost-nodes`)
+
+const asyncFilter = async (arr, predicate) => Promise.all(arr.map(predicate))
+    .then(results => arr.filter((_v, index) => results[index]))
+
+const normalizedContentDigest = (node, createContentDigest) => {
+    // eslint-disable-next-line camelcase
+    const { id, updated_at, tags, authors } = node
+    //const normalize = arr => arr.map(element => element.id)
+
+    return createContentDigest(JSON.stringify({ id, updated_at, tags: tags, authors: authors }))
+}
 
 const parseCodeinjection = (html) => {
     let $ = null
@@ -85,26 +94,83 @@ const touchNodes = (types, getNodesByType, touchNode) => {
     })
 }
 
-const removeNodes = (existingNodes, api, deleteNode, getNode, reporter, verbose) => {
-    const removeFetchOptions = {
+const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) => {
+    const { reporter } = sourceNodeFields
+    const { api, verbose } = settings
+
+    // Fetch full data for tag an authors here,
+    // so we do not need to fetch a second time
+    const tagAndAuthorFetchOptions = {
         limit: `all`,
-        fields: `id`,
+        include: `count.posts`,
     }
 
-    const removePosts = api.posts.browse(removeFetchOptions).then((posts) => {
-        removeNode(GhostTypes.post, existingNodes.posts, posts, deleteNode, getNode, reporter, verbose)
+    const removeTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
+        verbose && reporter.info(`Fetched Tags: ${tags.length}`)
+        const type = GhostTypes.tag
+        const typeLower = type.toLowerCase()
+
+        removeNode(type, existingNodes.tags, tags, sourceNodeFields, settings)
+        updateTagAndAuthorNode(typeLower, tags, sourceNodeFields, settings)
     })
 
-    const removePages = api.posts.browse(removeFetchOptions).then((pages) => {
-        removeNode(GhostTypes.page, existingNodes.pages, pages, deleteNode, getNode, reporter, verbose)
+    const removeAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
+        verbose && reporter.info(`Fetched Authors: ${authors.length}`)
+        const type = GhostTypes.author
+        const typeLower = type.toLowerCase()
+
+        removeNode(type, existingNodes.authors, authors, sourceNodeFields, settings)
+        updateTagAndAuthorNode(typeLower, authors, sourceNodeFields, settings)
     })
 
-    const removeTags = api.tags.browse(removeFetchOptions).then((tags) => {
-        removeNode(GhostTypes.tag, existingNodes.tags, tags, deleteNode, getNode, reporter, verbose)
+    return [removeTags, removeAuthors]
+}
+
+const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => {
+    const { triggerTime, reporter } = sourceNodeFields
+    const { api, verbose } = settings
+
+    // Working around Ghost bugs
+    // Need to include tags and authors, because page/post timestamps are not updated on changing tags/authors
+    const prefetchOptions = {
+        limit: `all`,
+        include: `tags,authors`,
+        // Another Ghost API glitch
+        // url must be included as main field, otherwise url is missing in authors and tags!
+        fields: `id,updated_at,url`,
+    }
+    const lastUpdated = new Date(triggerTime)
+
+    const removeOrUpdatePosts = api.posts.browse(prefetchOptions).then(async (posts) => {
+        verbose && reporter.info(`Prefetched Posts: ${posts.length}`)
+        const type = GhostTypes.post
+        const typeLower = type.toLowerCase()
+        removeNode(GhostTypes.post, existingNodes.posts, posts, sourceNodeFields, settings)
+
+        const checkOldPosts = posts.filter(post => lastUpdated >= new Date(post.updated_at))
+        const updateNodes = await getNodesForUpdate(typeLower, checkOldPosts, sourceNodeFields, settings)
+
+        // Update old nodes with changes in tag or author
+        if (updateNodes.length > 0) {
+            verbose && reporter.info(`Found old ${typeLower}s with changes: ${updateNodes.length}`)
+            await updatePostAndPageNode(typeLower, updateNodes, sourceNodeFields, settings, transformCodeinjection)
+        }
     })
 
-    const removeAuthors = api.authors.browse(removeFetchOptions).then((authors) => {
-        removeNode(GhostTypes.author, existingNodes.authors, authors, deleteNode, getNode, reporter, verbose)
+    const removeOrUpdatePages = api.pages.browse(prefetchOptions).then(async (pages) => {
+        verbose && reporter.info(`Prefetched Pages: ${pages.length}`)
+        const type = GhostTypes.page
+        const typeLower = type.toLowerCase()
+        removeNode(GhostTypes.page, existingNodes.pages, pages, sourceNodeFields, settings)
+
+        const checkOldPages = pages.filter(page => lastUpdated >= new Date(page.updated_at))
+        const updateNodes = await getNodesForUpdate(typeLower, checkOldPages, sourceNodeFields, settings)
+
+        // Update old nodes with changes in tag or author
+        if (updateNodes.length > 0) {
+            verbose && reporter.info(`Found old ${typeLower}s with changes: ${updateNodes.length}`)
+            await updatePostAndPageNode(type.toLowerCase(), updateNodes, sourceNodeFields, settings)
+        }
     })
 
     /**
@@ -113,16 +179,81 @@ const removeNodes = (existingNodes, api, deleteNode, getNode, reporter, verbose)
     *
     */
 
-    return ([removePosts, removePages, removeTags, removeAuthors])
+    return [removeOrUpdatePosts, removeOrUpdatePages]
 }
 
-const removeNode = (type, nodes, remoteNodes, deleteNode, getNode, reporter, verbose = false) => {
+const removeNode = (type, nodes, remoteNodes, sourceNodeFields, settings) => {
+    const { actions, getNode, reporter } = sourceNodeFields
+    const { verbose = false } = settings
+
     nodes
         .filter(node => remoteNodes.findIndex(remote => node.id === generateNodeId(type, remote.id)) === -1)
         .forEach((node) => {
-            deleteNode({ node: getNode(node.id) })
-            verbose && reporter.info(`removed node with id: ${node.id}`)
+            actions.deleteNode({ node: getNode(node.id) })
+            verbose && reporter.info(`Removed node with id: ${node.id}`)
         })
+}
+
+const updateTagAndAuthorNode = async (type, nodes, sourceNodeFields, settings) => {
+    const { actions, cache, createContentDigest, reporter } = sourceNodeFields
+    const { createNode } = actions
+    const { verbose, cacheResponse } = settings
+
+    await nodes.forEach(async (node) => {
+        node.postCount = node.count.posts
+        const newDigest = createContentDigest(JSON.stringify(node))
+        const existingDigest = cacheResponse && await cache.get(`${PLUGIN}-${type}-${node.id}`)
+        if (existingDigest !== newDigest) {
+            createNode(GhostNodes[type](node))
+            await cache.set(`${PLUGIN}-${type}-${node.id}`, newDigest)
+            verbose && reporter.info(`Updated ${type} ${node.slug}`)
+        } else {
+            verbose && reporter.info(`Preserved ${type} ${node.slug}`)
+        }
+    })
+}
+
+const getNodesForUpdate = async (type, nodes, sourceNodeFields, settings) => {
+    const { cache, createContentDigest } = sourceNodeFields
+    const { cacheResponse } = settings
+
+    // always update nodes, if cacheResponse is disabled
+    if (cacheResponse === false) {
+        return nodes
+    }
+
+    return asyncFilter(nodes, async (node) => {
+        const newDigest = normalizedContentDigest(node, createContentDigest)
+        const existingDigest = await cache.get(`${PLUGIN}-${type}-${node.id}`)
+        return existingDigest !== newDigest
+    })
+}
+
+const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settings, transform = n => n) => {
+    const { actions, cache, createContentDigest, reporter } = sourceNodeFields
+    const { createNode } = actions
+    const { api, verbose } = settings
+
+    const fetchOptions = {
+        limit: `all`,
+        include: `tags,authors`,
+        filter: `id:[${updateNodes.map(node => node.id)}]`,
+    }
+
+    // fetch complete data now
+    const updateRemote = await api[`${type}s`].browse(fetchOptions)
+
+    verbose && reporter.info(`${type}s update due to tag/author change: ${updateRemote.length}`)
+
+    // only needed for post type
+    const transformed = transform(updateRemote)
+
+    transformed.forEach(async (node) => {
+        createNode(GhostNodes[type](node))
+        const newDigest = normalizedContentDigest(node, createContentDigest)
+        await cache.set(`${PLUGIN}-${type}-${node.id}`, newDigest)
+        verbose && reporter.info(`${type}: ${node.slug}, updated_at: ${node.updated_at}`)
+    })
 }
 
 /**
@@ -130,88 +261,65 @@ const removeNode = (type, nodes, remoteNodes, deleteNode, getNode, reporter, ver
  * Uses the Ghost Content API to fetch all posts, pages, tags, authors and settings
  * Creates nodes for each record, so that they are all available to Gatsby
  */
-const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, reporter, createContentDigest, triggerTime }, configOptions) => {
-    const { createNode, touchNode, deleteNode } = actions
+const createGhostNodes = async (sourceNodeFields , configOptions) => {
+    const { triggerTime, actions, reporter, cache, createContentDigest, getNodesByType } = sourceNodeFields
+    const { createNode, touchNode } = actions
     const { ghostConfig, verbose = false, cacheResponse = true } = configOptions
     const api = ContentAPI.configure(ghostConfig)
+    const settings = { api, verbose, cacheResponse }
 
     verbose && reporter.info(`Last updated: ${triggerTime}`)
 
     // Step 1: Keep all existing nodes
     const existingNodes = touchNodes(PrefixedGhostTypes, getNodesByType, touchNode)
 
-    // Step 2: Remove vanished nodes
-    const removeItems = removeNodes(existingNodes, api, deleteNode, getNode, reporter, verbose)
+    // Step 2: Remove vanished tags and authors
+    // Update if content digest changes
+    const removeOrUpdateTagAndAuthor = prefetchTagAndAuthorNodes(existingNodes, sourceNodeFields, settings)
 
-    // Step 3: Fetch only new and updated posts based on timestamp
+    // Step 3: Remove vanished posts and pages
+    // Check old nodes only, if content digest changes for tags and authors: update
+    const removeOrUpdatePostAndPage = prefetchPostAndPageNodes(existingNodes, sourceNodeFields, settings)
+
+    // Step 4: Fetch new and updated posts and pages based on timestamp
     const postAndPageFetchOptions = {
         limit: `all`,
+        // Room for improvement: Do not fetch tags and authors with every post
+        // Rather establish a link to previously fetched tags and authors
         include: `tags,authors`,
         formats: `html,plaintext`,
-        filter: `created_at:>${triggerTime},updated_at:>${triggerTime},published_at:>${triggerTime}`,
+        filter: `updated_at:>${triggerTime}`,
     }
 
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
         verbose && reporter.info(`Fetched Posts: ${posts.length}`)
         posts = transformCodeinjection(posts)
-        posts.forEach((post) => {
-            verbose && reporter.info(`Post: ${post.slug}, created_at: ${post.created_at}, updated_at: ${post.updated_at}, published_at: ${post.published_at}`)
-            createNode(PostNode(post))
+        posts.forEach(async (post) => {
+            verbose && reporter.info(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
+            createNode(GhostNodes.post(post))
+            const newDigest = normalizedContentDigest(post, createContentDigest)
+            await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
         })
     })
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
         verbose && reporter.info(`Fetched Pages: ${pages.length}`)
-        pages.forEach((page) => {
-            verbose && reporter.info(`Page: ${page.slug}, created_at: ${page.created_at}, updated_at: ${page.updated_at}, published_at: ${page.published_at}`)
-            createNode(PageNode(page))
+        pages.forEach(async (page) => {
+            verbose && reporter.info(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
+            createNode(GhostNodes.page(page))
+            const newDigest = normalizedContentDigest(page, createContentDigest)
+            await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
         })
     })
 
-    // Step 4: Always fetch tags, authors, seetings (no timestamp available)
-    // Only create/update if contentDigest changes
-    const tagAndAuthorFetchOptions = {
-        limit: `all`,
-        include: `count.posts`,
-    }
-    const fetchTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
-        verbose && reporter.info(`Fetched Tags: ${tags.length}`)
-
-        tags.forEach(async (tag) => {
-            tag.postCount = tag.count.posts
-            const newDigest = createContentDigest(JSON.stringify(tag))
-            const existingDigest = cacheResponse && await cache.get(`jamify-source-ghost-tag-${tag.id}`)
-            if (existingDigest !== newDigest) {
-                createNode(TagNode(tag))
-                await cache.set(`jamify-source-ghost-tag-${tag.id}`, newDigest)
-            } else {
-                verbose && reporter.info(`Tag node ${tag.slug} has not changed`)
-            }
-        })
-    })
-
-    const fetchAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
-        verbose && reporter.info(`Fetched Authors: ${authors.length}`)
-
-        authors.forEach(async (author) => {
-            author.postCount = author.count.posts
-            const newDigest = createContentDigest(JSON.stringify(author))
-            const existingDigest = cacheResponse && await cache.get(`jamify-source-ghost-author-${author.id}`)
-            if (existingDigest !== newDigest) {
-                createNode(AuthorNode(author))
-                await cache.set(`jamify-source-ghost-author-${author.id}`, newDigest)
-            } else {
-                verbose && reporter.info(`Author node ${author.slug} has not changed`)
-            }
-        })
-    })
-
+    // Step 5: Always fetch settings (no updated timestamp available)
+    // Only update as it is never deleted
     const fetchSettings = api.settings.browse().then(async (setting) => {
         verbose && reporter.info(`Fetched Settings`)
 
         const rawSettings = setting
         const newDigest = createContentDigest(JSON.stringify(rawSettings))
-        const existingDigest = cacheResponse && await cache.get(`jamify-source-ghost-settings`)
+        const existingDigest = cacheResponse && await cache.get(`${PLUGIN}-settings`)
 
         if (existingDigest !== newDigest) {
             verbose && reporter.info(`Settings are being updated`)
@@ -238,28 +346,31 @@ const createGhostNodes = async ({ actions, cache, getNodesByType, getNode, repor
             // Remove trailing slashes
             setting.url = setting.url.replace(/\/$/, ``)
 
-            createNode(SettingsNode(setting))
-            await cache.set(`jamify-source-ghost-settings`, newDigest)
+            createNode(GhostNodes.settings(setting))
+            await cache.set(`${PLUGIN}-settings`, newDigest)
         } else {
             verbose && reporter.info(`Settings node has not changed`)
         }
     })
 
-    return Promise.all([...removeItems, fetchPosts, fetchPages, fetchTags, fetchAuthors, fetchSettings]).then(() => {
+    // Now we have a bunch of independent promises
+    // Set timestamp after completion
+    return Promise.all([...removeOrUpdateTagAndAuthor, ...removeOrUpdatePostAndPage, fetchPosts, fetchPages, fetchSettings]).then(async () => {
         const now = new Date().toISOString()
-        cache.set(`jamify-source-ghost-timestamp`, now)
+        await cache.set(`${PLUGIN}-timestamp`, now)
+        verbose && reporter.info(`Timestamp updated to ${now}`)
     })
 }
 
 // Standard way to create nodes
-exports.sourceNodes = async ({ actions, cache, getNodesByType, getNode, reporter, createContentDigest }, configOptions) => {
+exports.sourceNodes = async (sourceNodeFields, configOptions) => {
     const { cacheResponse = true } = configOptions
 
     const startTime = new Date(0).toISOString()
-    const lastFetched = cacheResponse && await cache.get(`jamify-source-ghost-timestamp`)
-    const triggerTime = lastFetched || startTime
+    const lastFetched = cacheResponse && await sourceNodeFields.cache.get(`${PLUGIN}-timestamp`)
+    sourceNodeFields.triggerTime = lastFetched || startTime
 
-    return createGhostNodes({ actions, cache, getNodesByType, getNode, reporter, createContentDigest, triggerTime }, configOptions)
+    return createGhostNodes(sourceNodeFields, configOptions)
 }
 
 // Explicitely typed schema
