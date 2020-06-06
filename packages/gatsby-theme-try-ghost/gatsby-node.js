@@ -225,8 +225,8 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
     const { tagIds, authorIds } = infiniteScroll(data.posts)
 
     // Only use tags, authors present in posts (page only tags should not create tag/author pages)
-    const postTags = data.tags.filter(({ node }) => 0 < node.postCount)
-    const postAuthors = data.authors.filter(({ node }) => 0 < node.postCount)
+    const postTags = data.tags.filter(({ node }) => node.postCount > 0)
+    const postAuthors = data.authors.filter(({ node }) => node.postCount > 0)
 
     createTaxonomyPages(createPage, postTags, tagIds, basePath, templates.tag, postsPerPage, data.posts)
     createTaxonomyPages(createPage, postAuthors, authorIds, basePath, templates.author, postsPerPage, data.posts)
