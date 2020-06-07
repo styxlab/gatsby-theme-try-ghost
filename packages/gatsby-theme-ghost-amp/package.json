@@ -27,15 +27,15 @@
     ],
     "dependencies": {
         "@tryghost/helpers": "^1.1.27",
-        "gatsby-plugin-react-helmet": "^3.3.2",
-        "react-helmet": "^5.2.1"
+        "gatsby-plugin-react-helmet": "^3.3.3",
+        "react-helmet": "^6.0.0"
     },
     "devDependencies": {
         "babel-eslint": "^10.1.0",
-        "eslint": "^7.1.0",
+        "eslint": "^7.2.0",
         "eslint-plugin-ghost": "^1.5.0",
         "eslint-plugin-react": "^7.20.0",
-        "gatsby": "^2.22.15",
+        "gatsby": "^2.23.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1"
     }
