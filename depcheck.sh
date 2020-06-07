@@ -5,6 +5,42 @@ npm-upgrade
 cd packages/gatsby-theme-try-ghost
 npm-upgrade
 
+cd ../jamify-source-ghost
+npm-upgrade
+
+cd ../gatsby-plugin-ghost-images
+npm-upgrade
+
+cd ../gatsby-rehype-ghost-links
+npm-upgrade
+
+#cd ../packages/gatsby-rehype-inline-images
+#npm-upgrade
+
+cd ../gatsby-rehype-prismjs
+npm-upgrade
+
+#cd ../packages/gatsby-theme-ghost-amp
+#npm-upgrade
+
+cd ../gatsby-theme-ghost-commento
+npm-upgrade
+
+cd ../gatsby-theme-ghost-contact
+npm-upgrade
+
+cd ../gatsby-theme-ghost-dark-mode
+npm-upgrade
+
+cd ../gatsby-theme-ghost-members
+npm-upgrade
+
+cd ../gatsby-theme-ghost-toc
+npm-upgrade
+
+cd ../gatsby-transformer-rehype
+npm-upgrade
+
 cd ../../demo
 npm-upgrade
 
@@ -21,4 +57,4 @@ wget -q -P compare -N ${github}/${repo}/${branch}/assets/css/screen.css
 diff -q -s compare/global.css packages/gatsby-theme-try-ghost/src/styles/global-original.css
 diff -q -s compare/screen.css packages/gatsby-theme-try-ghost/src/styles/screen-original.css
 
-#rm -rf compare out
+rm -rf compare out

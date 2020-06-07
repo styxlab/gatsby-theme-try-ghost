@@ -28,16 +28,16 @@
         "ghost-cms"
     ],
     "devDependencies": {
-        "@babel/cli": "7.8.4",
-        "@babel/core": "7.8.7",
-        "babel-preset-gatsby-package": "0.2.16",
+        "@babel/cli": "7.10.1",
+        "@babel/core": "7.10.2",
+        "babel-preset-gatsby-package": "0.4.3",
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": "^2.22.15"
+        "gatsby": "^2.23.1"
     },
     "dependencies": {
-        "@babel/runtime": "7.8.7",
+        "@babel/runtime": "7.10.2",
         "lodash": "^4.17.15",
         "unist-util-visit": "^2.0.2"
     }
