@@ -66,7 +66,7 @@ export const pageQuery = graphql`
     }
     file(relativePath: {eq: "site-meta.png"}) {
         childImageSharp {
-            fluid(maxWidth: 1040) {
+            fluid(maxWidth: 1280) {
                 ...GatsbyImageSharpFluid
             }
         }
