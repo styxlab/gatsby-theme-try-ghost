@@ -17,12 +17,13 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
+    const image = data.file && data.file.childImageSharp && data.file.childImageSharp.fluid && data.file.childImageSharp.fluid.src
     const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || {}
 
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
-                <MetaData location={location} />
+                <MetaData location={location} image={image} />
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
                     <OverlayContainer render={ overlay => (
                         <Layout action={action} isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
@@ -39,6 +40,7 @@ const Index = ({ data, location, pageContext }) => {
 Index.propTypes = {
     data: PropTypes.shape({
         allGhostPost: PropTypes.object.isRequired,
+        file: PropTypes.object,
     }).isRequired,
     location: PropTypes.object.isRequired,
     pageContext: PropTypes.object.isRequired,
@@ -61,6 +63,13 @@ export const pageQuery = graphql`
           ...GhostPostFields
         }
       }
+    }
+    file(relativePath: {eq: "site-meta.png"}) {
+        childImageSharp {
+            fluid(maxWidth: 1280) {
+                ...GatsbyImageSharpFluid
+            }
+        }
     }
   }
 `
