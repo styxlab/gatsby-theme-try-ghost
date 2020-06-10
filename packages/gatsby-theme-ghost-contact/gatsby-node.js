@@ -13,11 +13,26 @@ const PageNode = createNodeFactory(`Page`)
 exports.createSchemaCustomization = ({ actions }) => {
     const { createTypes } = actions
     const typeDefs = `
-        type allContactPage implements Node {
+        type ContactPage implements Node @dontinfer {
+            id: String
+            title: String
+            slug: String
+            html: String
+            feature_image: String
+            featured: Boolean
+            visibility: String
+            url: String
+            excerpt: String
+            custom_excerpt: String
+            meta_title: String
+            meta_description: String
             form_topics: [String!]
+            serviceConfig: ServiceConfig
+            featureImageSharp: File @link
         }
-        type ContactPage implements Node {
-            form_topics: [String!]
+        type ServiceConfig {
+            url: String
+            contentType: String
         }
     `
     createTypes(typeDefs)
@@ -36,10 +51,11 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
     const pages = [pageContext]
 
     //Create GhostPage nodes
-    pages.forEach((node) => {
+    pages.forEach((node, num) => {
         const url = _.trim(node.path,`/`)
         node.url = `/${url}/`
         node.slug = _.last(_.split(url,`/`))
+        node.id = num.toString()
         createNode(PageNode(node))
     })
 
@@ -47,8 +63,7 @@ exports.sourceNodes = ({ actions }, themeOptions) => {
 }
 
 /**
- * Here is the place where Gatsby creates the URLs for all the
- * posts, tags, pages and authors that we fetched from the Ghost site.
+ * Here is the place where Gatsby creates the URLs
  */
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions

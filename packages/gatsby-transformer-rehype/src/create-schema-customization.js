@@ -1,5 +1,5 @@
 const typeDefs = `
-    type HtmlRehype implements Node {
+    type HtmlRehype implements Node @dontinfer {
         html: String
         tableOfContents: JSON
     }
