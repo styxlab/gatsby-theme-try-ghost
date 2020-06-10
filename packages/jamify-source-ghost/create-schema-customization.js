@@ -3,7 +3,7 @@
  */
 
 const typeDefs = `
-    type GhostTag implements Node {
+    type GhostTag implements Node @dontinfer {
         id: String
         name: String
         slug: String
@@ -15,7 +15,7 @@ const typeDefs = `
         postCount: Int
         url: String
     }
-    type GhostAuthor implements Node {
+    type GhostAuthor implements Node @dontinfer {
         id: String
         name: String
         slug: String
@@ -31,7 +31,7 @@ const typeDefs = `
         postCount: Int
         url: String
     }
-    type GhostPost implements Node {
+    type GhostPost implements Node @dontinfer {
         id: String
         uuid: String
         title: String
@@ -68,10 +68,10 @@ const typeDefs = `
         meta_title: String
         meta_description: String
         email_subject: String
-        featureImageSharp: File @link(from: "featureImageSharp___NODE")
+        featureImageSharp: File @link
         childHtmlRehype: HtmlRehype @link
     }
-    type GhostPage implements Node {
+    type GhostPage implements Node @dontinfer {
         id: String
         uuid: String
         title: String
@@ -107,10 +107,10 @@ const typeDefs = `
         twitter_description: String
         meta_title: String
         meta_description: String
-        featureImageSharp: File @link(from: "featureImageSharp___NODE")
+        featureImageSharp: File @link
         childHtmlRehype: HtmlRehype @link
     }
-    type GhostSettings implements Node {
+    type GhostSettings implements Node @dontinfer {
         title: String
         description: String
         logo: String
@@ -122,17 +122,25 @@ const typeDefs = `
         timezone: String
         navigation: [Navigation]
         secondary_navigation: [Navigation]
+        meta_title: String,
+        meta_description: String,
+        og_image: String,
+        og_title: String,
+        og_description: String,
+        twitter_image: String,
+        twitter_title: String,
+        twitter_description: String,
         codeinjection_head: String
         codeinjection_foot: String
         codeinjection_styles: String
         url: String
-        coverImageSharp: File @link(from: "featureImageSharp___NODE")
+        coverImageSharp: File @link
     }
     type Navigation {
         label: String
         url: String
     }
-    type HtmlRehype implements Node {
+    type HtmlRehype implements Node @dontinfer {
         html: String
         tableOfContents: JSON
     }
