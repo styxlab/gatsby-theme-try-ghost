@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "gatsby build"
   publish = "demo/public"
 
 [template]
