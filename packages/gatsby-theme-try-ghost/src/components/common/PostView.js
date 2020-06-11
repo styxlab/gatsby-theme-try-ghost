@@ -39,7 +39,9 @@ class PostView extends React.Component {
             isAuthor,
         } = this.props
 
-        const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
+        const iScrollEnabled = pageContext.iScrollEnabled
+        const items = (iScrollEnabled && !g.isInitializing() ? g.getItems(pageContext) : posts)
+
         items.forEach(({ node }) => {
             node.collectionPath = pageContext.collectionPath || (pageContext.collectionPaths && pageContext.collectionPaths[node.id])
         })
@@ -48,21 +50,25 @@ class PostView extends React.Component {
             <React.Fragment>
                 <div className="inner posts">
                     <div className="post-feed">
-                        <InfiniteScroll throttle={300} threshold={900} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
+                        { iScrollEnabled ? (
+                            <InfiniteScroll throttle={300} threshold={900} isLoading={g.isLoading} hasMore={g.hasMore(pageContext)} onLoadMore={g.loadMore(pageContext)}>
+                                <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
+                            </InfiniteScroll>
+                        ) : (
                             <PostItems posts={items} isHome={isHome} isAuthor={isAuthor} />
-                        </InfiniteScroll>
+                        )}
                     </div>
                 </div>
 
                 {/* Loading spinner. */}
-                {g.isLoading &&
+                { iScrollEnabled && g.isLoading &&
                     <Spinner infiniteScroll={g.useInfiniteScroll} >
                         <FaSpinner/>
                     </Spinner>
                 }
 
                 {/* Fallback to Pagination for non JS users. */}
-                {g.useInfiniteScroll &&
+                { iScrollEnabled && g.useInfiniteScroll &&
                     <noscript>
                         <style>
                             {`.spinner { display: none !important; }`}
@@ -72,7 +78,7 @@ class PostView extends React.Component {
                 }
 
                 {/* Fallback to Pagination on error. */}
-                {!g.useInfiniteScroll &&
+                { (!iScrollEnabled || !g.useInfiniteScroll) &&
                     <Pagination pageContext={pageContext} />
                 }
 

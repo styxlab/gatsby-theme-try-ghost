@@ -11,7 +11,7 @@ const fs = require(`fs`)
 *
 */
 
-const infiniteScroll = (posts) => {
+const infiniteScroll = (enable, posts) => {
     const indexIds = []
     const tagIds = {}
     const authorIds = {}
@@ -28,7 +28,9 @@ const infiniteScroll = (posts) => {
     }
 
     posts.forEach(({ node }) => {
-        saveInfiniteScrollPost(node)
+        if (enable) {
+            saveInfiniteScrollPost(node)
+        }
         indexIds.push(node.id)
         createIds(node, tagIds, authorIds)
     })

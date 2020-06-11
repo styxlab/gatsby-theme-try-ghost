@@ -63,7 +63,7 @@ const createPostPages = (createPage, posts, basePath, tags, template, ampPath = 
 }
 
 // Create index page with pagination
-const createIndexPage = (createPage, posts, postIds, basePath, template, postsPerPage, collectionPath = `/`) => {
+const createIndexPage = (createPage, posts, postIds, basePath, template, postsPerPage, iScrollEnabled, collectionPath = `/`) => {
     const path = resolveUrl(basePath, collectionPath)
 
     paginate({
@@ -81,6 +81,7 @@ const createIndexPage = (createPage, posts, postIds, basePath, template, postsPe
         context: {
             collectionPath: collectionPath,
             // Infinite Scroll
+            iScrollEnabled: iScrollEnabled,
             postIds: postIds,
             cursor: 0,
         },
@@ -88,7 +89,7 @@ const createIndexPage = (createPage, posts, postIds, basePath, template, postsPe
 }
 
 // Create taxonomy pages (tags, authors)
-const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, postsPerPage, allPosts) => {
+const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, postsPerPage, allPosts, iScrollEnabled) => {
     taxonomy.forEach(({ node }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
@@ -126,6 +127,7 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
                     nextPagePath: nextPagePath,
                     collectionPaths: collectionPaths,
                     // Infinite Scroll
+                    iScrollEnabled: iScrollEnabled,
                     postIds: postIds[node.slug],
                     cursor: 0,
                 },
@@ -139,12 +141,12 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
  *
  */
 
-const createCollection = (createPage, basePath, data, templates, allTags, postsPerPage, collectionPath) => {
+const createCollection = (createPage, basePath, data, templates, allTags, postsPerPage, iScrollEnabled, collectionPath) => {
     // per collectionPath
     createPostPages(createPage, data.posts, basePath, allTags, templates.post)
 
-    const { indexIds } = infiniteScroll(data.posts)
-    createIndexPage(createPage, data.posts, indexIds, basePath, templates.index, postsPerPage, collectionPath)
+    const { indexIds } = infiniteScroll(iScrollEnabled, data.posts)
+    createIndexPage(createPage, data.posts, indexIds, basePath, templates.index, postsPerPage, iScrollEnabled, collectionPath)
 }
 
 const getCollection = (data, collectionPath, selector = () => false) => {
@@ -178,7 +180,7 @@ const getCollectionPaths = (ids, posts) => {
  */
 exports.createPages = async ({ graphql, actions }, themeOptions) => {
     const { createPage } = actions
-    const { routes } = themeOptions
+    const { routes, siteConfig: { infiniteScroll: iScrollEnabled } } = themeOptions
     const basePath = routes && routes.basePath || `/`
     const collections = routes && routes.collections || []
 
@@ -216,20 +218,20 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
     let collectionData = data
     collections.forEach((collection) => {
         collectionData = getCollection(collectionData, collection.path, collection.selector)
-        createCollection(createPage, basePath, collectionData.primary, templates, data.tags, postsPerPage, collection.path)
+        createCollection(createPage, basePath, collectionData.primary, templates, data.tags, postsPerPage, iScrollEnabled, collection.path)
         collectionData = collectionData.residual
     })
-    createCollection(createPage, basePath, collectionData, templates, data.tags, postsPerPage)
+    createCollection(createPage, basePath, collectionData, templates, data.tags, postsPerPage, iScrollEnabled)
 
     // Taxonomies are not split by collections
-    const { tagIds, authorIds } = infiniteScroll(data.posts)
+    const { tagIds, authorIds } = infiniteScroll(iScrollEnabled, data.posts)
 
     // Only use tags, authors present in posts (page only tags should not create tag/author pages)
     const postTags = data.tags.filter(({ node }) => node.postCount > 0)
     const postAuthors = data.authors.filter(({ node }) => node.postCount > 0)
 
-    createTaxonomyPages(createPage, postTags, tagIds, basePath, templates.tag, postsPerPage, data.posts)
-    createTaxonomyPages(createPage, postAuthors, authorIds, basePath, templates.author, postsPerPage, data.posts)
+    createTaxonomyPages(createPage, postTags, tagIds, basePath, templates.tag, postsPerPage, data.posts, iScrollEnabled)
+    createTaxonomyPages(createPage, postAuthors, authorIds, basePath, templates.author, postsPerPage, data.posts, iScrollEnabled)
 }
 
 // Plugins can access basePath with GraphQL query
