@@ -3,7 +3,12 @@ module.exports = {
     // Site domain. Do not include a trailing slash!
     siteUrl: `https://demo.jamify.org`,
 
-    // Not used - will be removed in next release
+    // Enable infinite scroll (default: true)
+    infiniteScroll: true,
+
+    // Maximum number of post shown per page
+    // With Infinite Scroll this is the initial number fetched
+    // Subsequent posts will be fetched one by one
     postsPerPage: 12,
 
     // This allows an alternative site title for meta data for pages.

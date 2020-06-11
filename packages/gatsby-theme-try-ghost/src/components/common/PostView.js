@@ -37,9 +37,11 @@ class PostView extends React.Component {
             posts,
             isHome,
             isAuthor,
+            iScrollEnabled,
         } = this.props
 
-        const items = (!g.isInitializing() ? g.getItems(pageContext) : posts)
+        const items = (iScrollEnabled && !g.isInitializing() ? g.getItems(pageContext) : posts)
+
         items.forEach(({ node }) => {
             node.collectionPath = pageContext.collectionPath || (pageContext.collectionPaths && pageContext.collectionPaths[node.id])
         })
@@ -55,14 +57,14 @@ class PostView extends React.Component {
                 </div>
 
                 {/* Loading spinner. */}
-                {g.isLoading &&
+                {iScrollEnabled && g.isLoading &&
                     <Spinner infiniteScroll={g.useInfiniteScroll} >
                         <FaSpinner/>
                     </Spinner>
                 }
 
                 {/* Fallback to Pagination for non JS users. */}
-                {g.useInfiniteScroll &&
+                {iScrollEnabled && g.useInfiniteScroll &&
                     <noscript>
                         <style>
                             {`.spinner { display: none !important; }`}
@@ -72,7 +74,7 @@ class PostView extends React.Component {
                 }
 
                 {/* Fallback to Pagination on error. */}
-                {!g.useInfiniteScroll &&
+                {(!iScrollEnabled || !g.useInfiniteScroll) &&
                     <Pagination pageContext={pageContext} />
                 }
 
@@ -87,6 +89,7 @@ PostView.propTypes = {
     posts: PropTypes.array.isRequired,
     isHome: PropTypes.bool,
     isAuthor: PropTypes.bool,
+    iScrollEnabled: PropTypes.bool.isRequired,
 }
 
 export default PostView

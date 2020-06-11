@@ -17,6 +17,7 @@ import { GlobalStateContext } from "../context/GlobalState"
 const Tag = ({ data, location, pageContext }) => {
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges
+    const iScroll = pageContext.iScrollEnabled
 
     return (
         <GlobalStateContext.Consumer>{ g => (
@@ -25,7 +26,7 @@ const Tag = ({ data, location, pageContext }) => {
                 <OverlayContainer render={ overlay => (
                     <Layout tags={[tag]} overlay={overlay}
                         header={<HeaderTag overlay={overlay} tag={tag} numberOfPosts={pageContext.totalPosts} />}>
-                        <PostView globalState={g} pageContext={pageContext} posts={posts} />
+                        <PostView iScrollEnabled={iScroll} globalState={g} pageContext={pageContext} posts={posts} />
                     </Layout>
                 )}/>
             </React.Fragment>
