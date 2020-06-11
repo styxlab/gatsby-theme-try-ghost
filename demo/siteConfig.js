@@ -3,12 +3,11 @@ module.exports = {
     siteUrl: `https://demo.jamify.org`,
 
     // Enable infinite scroll (default: true)
-    infiniteScroll: true,
+    infiniteScroll: false,
 
-    // Maximum number of post shown per page
-    // With Infinite Scroll this is the initial number fetched
-    // Subsequent posts will be fetched one by one
-    postsPerPage: 3,
+    // Initial number fetched, scrolling lazy loads posts one by one
+    // If infinite scroll is disabled: maximum number of post shown per page
+    postsPerPage: 4,
 
     // This allows an alternative site title for meta data for pages.
     siteTitleMeta: `Gatsby Ghost Casper`,

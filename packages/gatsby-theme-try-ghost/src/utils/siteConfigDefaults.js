@@ -6,9 +6,8 @@ module.exports = {
     // Enable infinite scroll (default: true)
     infiniteScroll: true,
 
-    // Maximum number of post shown per page
-    // With Infinite Scroll this is the initial number fetched
-    // Subsequent posts will be fetched one by one
+    // Initial number fetched, scrolling lazy loads posts one by one
+    // If infinite scroll is disabled: maximum number of post shown per page
     postsPerPage: 12,
 
     // This allows an alternative site title for meta data for pages.
