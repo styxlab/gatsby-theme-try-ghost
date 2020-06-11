@@ -19,7 +19,6 @@ const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
     const image = data.file && data.file.childImageSharp && data.file.childImageSharp.fluid && data.file.childImageSharp.fluid.src
     const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || {}
-    const iScroll = pageContext.iScrollEnabled
 
     return (
         <GlobalStateContext.Consumer>{ g => (
@@ -28,7 +27,7 @@ const Index = ({ data, location, pageContext }) => {
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
                     <OverlayContainer render={ overlay => (
                         <Layout action={action} isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
-                            <PostView iScrollEnabled={iScroll} globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
+                            <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
                         </Layout>
                     )}/>
                 )}/>

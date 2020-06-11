@@ -18,7 +18,6 @@ import { GlobalStateContext } from "../context/GlobalState"
 const Author = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
     const author = data.ghostAuthor
-    const iScroll = pageContext.iScrollEnabled
 
     return (
         <GlobalStateContext.Consumer>{ g => (
@@ -27,7 +26,7 @@ const Author = ({ data, location, pageContext }) => {
                 <OverlayContainer render={ overlay => (
                     <Layout author={author} overlay={overlay}
                         header={<HeaderAuthor overlay={overlay} author={author} numberOfPosts={pageContext.totalPosts}/>}>
-                        <PostView iScrollEnabled={iScroll} globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
+                        <PostView globalState={g} pageContext={pageContext} posts={posts} isAuthor={true} />
                     </Layout>
                 )}/>
             </React.Fragment>
