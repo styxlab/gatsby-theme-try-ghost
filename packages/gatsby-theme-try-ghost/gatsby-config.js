@@ -48,7 +48,7 @@ module.exports = (themeOptions) => {
                         ? ghostConfig.development
                         : ghostConfig.production,
                     cacheResponse: true,
-                    verbose: true,
+                    verbose: siteConfig.verbose,
                 },
             },
             {

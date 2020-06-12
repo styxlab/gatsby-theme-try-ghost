@@ -31,6 +31,9 @@ module.exports = {
     // Include Gatsby images for lazy loading and image optimizations (default: true)
     gatsbyImages: true,
 
+    // Show more logs for debugging purposes (default: false)
+    verbose: false,
+
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 

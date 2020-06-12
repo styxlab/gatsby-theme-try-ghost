@@ -1,6 +1,6 @@
 {
   "name": "jamify-source-ghost",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Gatsby source plugin for fetching content from headless Ghost CMS.",
   "repository": {
     "type": "git",
