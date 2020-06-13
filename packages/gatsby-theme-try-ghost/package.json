@@ -60,7 +60,7 @@
     "gatsby-plugin-styled-components": "^3.3.4",
     "gatsby-source-filesystem": "^2.3.11",
     "gatsby-transformer-sharp": "^2.5.5",
-    "jamify-source-ghost": "^1.7.2",
+    "jamify-source-ghost": "^1.8.0",
     "lodash": "^4.17.15",
     "parse-numeric-range": "^1.2.0",
     "postcss-color-function": "^4.1.0",
