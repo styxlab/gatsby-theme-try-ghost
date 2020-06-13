@@ -10,9 +10,6 @@
     "type": "git",
     "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost"
   },
-  "resolutions": {
-    "sharp": "0.23.4"
-  },
   "engines": {
     "node": ">= 10.13.0"
   },
