@@ -7,7 +7,7 @@ module.exports = {
 
     // Initial number fetched, scrolling lazy loads posts one by one
     // If infinite scroll is disabled: maximum number of post shown per page
-    postsPerPage: 3,
+    postsPerPage: 4,
 
     // This allows an alternative site title for meta data for pages.
     siteTitleMeta: `Gatsby Ghost Casper`,
@@ -32,7 +32,7 @@ module.exports = {
     verbose: true,
 
     // Severity for verbose mode: (`info`, `warn`, `error`)
-    severity: `warn`,
+    severity: `info`,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
