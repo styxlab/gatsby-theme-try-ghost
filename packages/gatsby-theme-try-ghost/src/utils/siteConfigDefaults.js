@@ -34,6 +34,9 @@ module.exports = {
     // Show more logs for debugging purposes (default: false)
     verbose: false,
 
+    // Severity for verbose mode: (`info`, `warn`, `error`)
+    severity: `info`,
+
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 

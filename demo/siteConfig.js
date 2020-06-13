@@ -29,7 +29,10 @@ module.exports = {
     gatsbyImages: true,
 
     // Show more logs for debugging purposes (default: false)
-    verbose: false,
+    verbose: true,
+
+    // Severity for verbose mode: (`info`, `warn`, `error`)
+    severity: `warn`,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],

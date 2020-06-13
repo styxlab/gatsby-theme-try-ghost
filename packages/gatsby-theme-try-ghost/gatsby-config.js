@@ -49,6 +49,7 @@ module.exports = (themeOptions) => {
                         : ghostConfig.production,
                     cacheResponse: true,
                     verbose: siteConfig.verbose,
+                    severity: siteConfig.severity,
                 },
             },
             {
