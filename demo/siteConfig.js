@@ -3,7 +3,7 @@ module.exports = {
     siteUrl: `https://demo.jamify.org`,
 
     // Enable infinite scroll (default: true)
-    infiniteScroll: false,
+    infiniteScroll: true,
 
     // Initial number fetched, scrolling lazy loads posts one by one
     // If infinite scroll is disabled: maximum number of post shown per page
@@ -27,6 +27,12 @@ module.exports = {
 
     // Include Gatsby images for lazy loading and image optimizations
     gatsbyImages: true,
+
+    // Show more logs for debugging purposes (default: false)
+    verbose: true,
+
+    // Severity for verbose mode: (`info`, `warn`, `error`)
+    severity: `info`,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],

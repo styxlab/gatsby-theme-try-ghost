@@ -96,7 +96,7 @@ const touchNodes = (types, getNodesByType, touchNode) => {
 
 const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) => {
     const { reporter } = sourceNodeFields
-    const { api, verbose } = settings
+    const { api, verbose, severity } = settings
 
     // Fetch full data for tag an authors here,
     // so we do not need to fetch a second time
@@ -106,7 +106,7 @@ const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) =>
     }
 
     const removeTags = api.tags.browse(tagAndAuthorFetchOptions).then((tags) => {
-        verbose && reporter.info(`Fetched Tags: ${tags.length}`)
+        verbose && reporter[severity](`Fetched Tags: ${tags.length}`)
         const type = GhostTypes.tag
         const typeLower = type.toLowerCase()
 
@@ -115,7 +115,7 @@ const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) =>
     })
 
     const removeAuthors = api.authors.browse(tagAndAuthorFetchOptions).then((authors) => {
-        verbose && reporter.info(`Fetched Authors: ${authors.length}`)
+        verbose && reporter[severity](`Fetched Authors: ${authors.length}`)
         const type = GhostTypes.author
         const typeLower = type.toLowerCase()
 
@@ -128,7 +128,7 @@ const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) =>
 
 const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => {
     const { triggerTime, reporter } = sourceNodeFields
-    const { api, verbose } = settings
+    const { api, verbose, severity } = settings
 
     // Working around Ghost bugs
     // Need to include tags and authors, because page/post timestamps are not updated on changing tags/authors
@@ -142,7 +142,7 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => 
     const lastUpdated = new Date(triggerTime)
 
     const removeOrUpdatePosts = api.posts.browse(prefetchOptions).then(async (posts) => {
-        verbose && reporter.info(`Prefetched Posts: ${posts.length}`)
+        verbose && reporter[severity](`Prefetched Posts: ${posts.length}`)
         const type = GhostTypes.post
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.post, existingNodes.posts, posts, sourceNodeFields, settings)
@@ -152,13 +152,13 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => 
 
         // Update old nodes with changes in tag or author
         if (updateNodes.length > 0) {
-            verbose && reporter.info(`Found old ${typeLower}s with changes: ${updateNodes.length}`)
+            verbose && reporter[severity](`Found old ${typeLower}s with changes: ${updateNodes.length}`)
             await updatePostAndPageNode(typeLower, updateNodes, sourceNodeFields, settings, transformCodeinjection)
         }
     })
 
     const removeOrUpdatePages = api.pages.browse(prefetchOptions).then(async (pages) => {
-        verbose && reporter.info(`Prefetched Pages: ${pages.length}`)
+        verbose && reporter[severity](`Prefetched Pages: ${pages.length}`)
         const type = GhostTypes.page
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.page, existingNodes.pages, pages, sourceNodeFields, settings)
@@ -168,7 +168,7 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => 
 
         // Update old nodes with changes in tag or author
         if (updateNodes.length > 0) {
-            verbose && reporter.info(`Found old ${typeLower}s with changes: ${updateNodes.length}`)
+            verbose && reporter[severity](`Found old ${typeLower}s with changes: ${updateNodes.length}`)
             await updatePostAndPageNode(type.toLowerCase(), updateNodes, sourceNodeFields, settings)
         }
     })
@@ -184,20 +184,20 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => 
 
 const removeNode = (type, nodes, remoteNodes, sourceNodeFields, settings) => {
     const { actions, getNode, reporter } = sourceNodeFields
-    const { verbose = false } = settings
+    const { verbose, severity } = settings
 
     nodes
         .filter(node => remoteNodes.findIndex(remote => node.id === generateNodeId(type, remote.id)) === -1)
         .forEach((node) => {
             actions.deleteNode({ node: getNode(node.id) })
-            verbose && reporter.info(`Removed node with id: ${node.id}`)
+            verbose && reporter[severity](`Removed node with id: ${node.id}`)
         })
 }
 
 const updateTagAndAuthorNode = async (type, nodes, sourceNodeFields, settings) => {
     const { actions, cache, createContentDigest, reporter } = sourceNodeFields
     const { createNode } = actions
-    const { verbose, cacheResponse } = settings
+    const { verbose, severity, cacheResponse } = settings
 
     await nodes.forEach(async (node) => {
         node.postCount = node.count.posts
@@ -206,9 +206,9 @@ const updateTagAndAuthorNode = async (type, nodes, sourceNodeFields, settings) =
         if (existingDigest !== newDigest) {
             createNode(GhostNodes[type](node))
             await cache.set(`${PLUGIN}-${type}-${node.id}`, newDigest)
-            verbose && reporter.info(`Updated ${type} ${node.slug}`)
+            verbose && reporter[severity](`Updated ${type} ${node.slug}`)
         } else {
-            verbose && reporter.info(`Preserved ${type} ${node.slug}`)
+            verbose && reporter[severity](`Preserved ${type} ${node.slug}`)
         }
     })
 }
@@ -232,7 +232,7 @@ const getNodesForUpdate = async (type, nodes, sourceNodeFields, settings) => {
 const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settings, transform = n => n) => {
     const { actions, cache, createContentDigest, reporter } = sourceNodeFields
     const { createNode } = actions
-    const { api, verbose } = settings
+    const { api, verbose, severity } = settings
 
     const fetchOptions = {
         limit: `all`,
@@ -243,7 +243,7 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
     // fetch complete data now
     const updateRemote = await api[`${type}s`].browse(fetchOptions)
 
-    verbose && reporter.info(`${type}s update due to tag/author change: ${updateRemote.length}`)
+    verbose && reporter[severity](`${type}s update due to tag/author change: ${updateRemote.length}`)
 
     // only needed for post type
     const transformed = transform(updateRemote)
@@ -252,7 +252,7 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
         createNode(GhostNodes[type](node))
         const newDigest = normalizedContentDigest(node, createContentDigest)
         await cache.set(`${PLUGIN}-${type}-${node.id}`, newDigest)
-        verbose && reporter.info(`${type}: ${node.slug}, updated_at: ${node.updated_at}`)
+        verbose && reporter[severity](`${type}: ${node.slug}, updated_at: ${node.updated_at}`)
     })
 }
 
@@ -264,11 +264,11 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
 const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const { triggerTime, actions, reporter, cache, createContentDigest, getNodesByType } = sourceNodeFields
     const { createNode, touchNode } = actions
-    const { ghostConfig, verbose = false, cacheResponse = true } = configOptions
+    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true } = configOptions
     const api = ContentAPI.configure(ghostConfig)
-    const settings = { api, verbose, cacheResponse }
+    const settings = { api, verbose, cacheResponse, severity }
 
-    verbose && reporter.info(`Last updated: ${triggerTime}`)
+    verbose && reporter[severity](`Last updated: ${triggerTime}`)
 
     // Step 1: Keep all existing nodes
     const existingNodes = touchNodes(PrefixedGhostTypes, getNodesByType, touchNode)
@@ -292,10 +292,10 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     }
 
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
-        verbose && reporter.info(`Fetched Posts: ${posts.length}`)
+        verbose && reporter[severity](`Fetched Posts: ${posts.length}`)
         posts = transformCodeinjection(posts)
         posts.forEach(async (post) => {
-            verbose && reporter.info(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
+            verbose && reporter[severity](`Post: ${post.slug}, updated_at: ${post.updated_at}`)
             createNode(GhostNodes.post(post))
             const newDigest = normalizedContentDigest(post, createContentDigest)
             await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
@@ -303,9 +303,9 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     })
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
-        verbose && reporter.info(`Fetched Pages: ${pages.length}`)
+        verbose && reporter[severity](`Fetched Pages: ${pages.length}`)
         pages.forEach(async (page) => {
-            verbose && reporter.info(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
+            verbose && reporter[severity](`Page: ${page.slug}, updated_at: ${page.updated_at}`)
             createNode(GhostNodes.page(page))
             const newDigest = normalizedContentDigest(page, createContentDigest)
             await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
@@ -315,14 +315,14 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     // Step 5: Always fetch settings (no updated timestamp available)
     // Only update as it is never deleted
     const fetchSettings = api.settings.browse().then(async (setting) => {
-        verbose && reporter.info(`Fetched Settings`)
+        verbose && reporter[severity](`Fetched Settings`)
 
         const rawSettings = setting
         const newDigest = createContentDigest(JSON.stringify(rawSettings))
         const existingDigest = cacheResponse && await cache.get(`${PLUGIN}-settings`)
 
         if (existingDigest !== newDigest) {
-            verbose && reporter.info(`Settings are being updated`)
+            verbose && reporter[severity](`Settings are being updated`)
             const codeinjectionHead = setting.codeinjection_head || setting.ghost_head
             const codeinjectionFoot = setting.codeinjection_foot || setting.ghost_foot
             const allCodeinjections = codeinjectionHead ? codeinjectionHead.concat(codeinjectionFoot) :
@@ -349,7 +349,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
             createNode(GhostNodes.settings(setting))
             await cache.set(`${PLUGIN}-settings`, newDigest)
         } else {
-            verbose && reporter.info(`Settings node has not changed`)
+            verbose && reporter[severity](`Settings node has not changed`)
         }
     })
 
@@ -358,7 +358,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     return Promise.all([...removeOrUpdateTagAndAuthor, ...removeOrUpdatePostAndPage, fetchPosts, fetchPages, fetchSettings]).then(async () => {
         const now = new Date().toISOString()
         await cache.set(`${PLUGIN}-timestamp`, now)
-        verbose && reporter.info(`Timestamp updated to ${now}`)
+        verbose && reporter[severity](`Timestamp updated to ${now}`)
     })
 }
 

@@ -1,15 +1,22 @@
 const _ = require(`lodash`)
-const { paginate } = require(`gatsby-awesome-pagination`)
 const { resolveUrl } = require(`./src/utils/routing`)
 const { createContentDigest } = require(`gatsby-core-utils`)
 
 const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
+const paginate = require(`./src/utils/pagination`)
 const infiniteScroll = require(`./src/utils/infinite-scroll`)
 
 exports.createSchemaCustomization = require(`./src/utils/create-schema-customization`)
 
+// Simple logging
+const useLog = (reporter, verbose, severity) => (message) => {
+    verbose && reporter[severity](message)
+}
+
 // Create pages
-const createOrdinaryPages = (createPage, pages, basePath, template) => {
+const createOrdinaryPages = (createOptions, pages, template) => {
+    const { createPage, basePath, log } = createOptions
+
     pages.forEach(({ node }) => {
         // Use url to analyze routing structure coming from Ghost CMS
         const url = resolveUrl(basePath, `/`, node.slug, node.url)
@@ -24,14 +31,19 @@ const createOrdinaryPages = (createPage, pages, basePath, template) => {
             },
         })
     })
+
+    log(`createOrdinaryPages: finished`)
 }
 
 // Create post pages
-const createPostPages = (createPage, posts, basePath, tags, template, ampPath = ``) => {
+const createPostPages = (createOptions, posts, tags, template, ampPath = ``) => {
+    const { createPage, log, basePath } = createOptions
     const prevNodes = _.concat([{ node: { slug: `` } }],_.dropRight(posts))
     const nextNodes = _.concat(_.drop(posts),[{ node: { slug: `` } }])
 
     const collectionPaths = getCollectionPaths(posts.map(({ node }) => node.id), posts)
+
+    log(`createPostPages: ${posts.length > 0 && posts[0].node.title}`)
 
     posts.forEach(({ node }, i) => {
         const collectionPath = collectionPaths[node.id]
@@ -60,24 +72,25 @@ const createPostPages = (createPage, posts, basePath, tags, template, ampPath = 
             },
         })
     })
+
+    log(`createPostPages: finished`)
 }
 
 // Create index page with pagination
-const createIndexPage = (createPage, posts, postIds, basePath, template, postsPerPage, iScrollEnabled, collectionPath = `/`) => {
+const createIndexPage = (createOptions, posts, postIds, template, collectionPath = `/`) => {
+    const { createPage, log, basePath, iScrollEnabled, postsPerPage } = createOptions
     const path = resolveUrl(basePath, collectionPath)
+
+    log(`createIndexPage: ${posts.length > 0 && posts[0].node.title}`)
 
     paginate({
         createPage,
-        items: posts,
+        totalItems: posts.length,
         itemsPerPage: postsPerPage,
         component: template,
-        pathPrefix: ({ pageNumber }) => {
-            if (pageNumber === 0) {
-                return path
-            } else {
-                return `${path}page`
-            }
-        },
+        pathPrefix: ({ pageNumber }) => (
+            pageNumber === 0 ? path : `${path}page`
+        ),
         context: {
             collectionPath: collectionPath,
             // Infinite Scroll
@@ -86,54 +99,39 @@ const createIndexPage = (createPage, posts, postIds, basePath, template, postsPe
             cursor: 0,
         },
     })
+
+    log(`createIndexPage: finished`)
 }
 
 // Create taxonomy pages (tags, authors)
-const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, postsPerPage, allPosts, iScrollEnabled) => {
-    taxonomy.forEach(({ node }) => {
-        const totalPosts = node.postCount !== null ? node.postCount : 0
-        const numberOfPages = Math.ceil(totalPosts / postsPerPage)
+const createTaxonomyPages = (createOptions, taxonomy, postIds, template, allPosts) => {
+    const { createPage, log, basePath, iScrollEnabled, postsPerPage } = createOptions
 
+    taxonomy.forEach(({ node }) => {
         // Use url to analyze routing structure coming from Ghost CMS
         const url = resolveUrl(basePath, `/`, node.slug, node.url)
         const collectionPaths = getCollectionPaths(postIds[node.slug], allPosts)
 
-        Array.from({ length: numberOfPages }).forEach((__, i) => {
-            const currentPage = i + 1
-            const prevPageNumber = currentPage <= 1 ? null : currentPage - 1
-            const nextPageNumber =
-                currentPage + 1 > numberOfPages ? null : currentPage + 1
-            const previousPagePath = prevPageNumber
-                ? prevPageNumber === 1
-                    ? url
-                    : `${url}page/${prevPageNumber}/` : null
-            const nextPagePath = nextPageNumber
-                ? `${url}page/${nextPageNumber}/`
-                : null
-
-            createPage({
-                path: i === 0 ? url : `${url}page/${i + 1}/`,
-                component: template,
-                context: {
-                    slug: node.slug,
-                    limit: postsPerPage,
-                    skip: i * postsPerPage,
-                    totalPosts: totalPosts,
-                    numberOfPages: numberOfPages,
-                    humanPageNumber: currentPage,
-                    prevPageNumber: prevPageNumber,
-                    nextPageNumber: nextPageNumber,
-                    previousPagePath: previousPagePath,
-                    nextPagePath: nextPagePath,
-                    collectionPaths: collectionPaths,
-                    // Infinite Scroll
-                    iScrollEnabled: iScrollEnabled,
-                    postIds: postIds[node.slug],
-                    cursor: 0,
-                },
-            })
+        paginate({
+            createPage,
+            totalItems: node.postCount,
+            itemsPerPage: postsPerPage,
+            component: template,
+            pathPrefix: ({ pageNumber }) => (
+                pageNumber === 0 ? url : `${url}page`
+            ),
+            context: {
+                slug: node.slug,
+                collectionPaths: collectionPaths,
+                // Infinite Scroll
+                iScrollEnabled: iScrollEnabled,
+                postIds: postIds[node.slug],
+                cursor: 0,
+            },
         })
     })
+
+    log(`createTaxonomyPages: finished`)
 }
 
 /**
@@ -141,12 +139,13 @@ const createTaxonomyPages = (createPage, taxonomy, postIds, basePath, template, 
  *
  */
 
-const createCollection = (createPage, basePath, data, templates, allTags, postsPerPage, iScrollEnabled, collectionPath) => {
+const createCollection = (createOptions, data, templates, allTags, collectionPath) => {
+    const { iScrollEnabled } = createOptions
     // per collectionPath
-    createPostPages(createPage, data.posts, basePath, allTags, templates.post)
+    createPostPages(createOptions, data.posts, allTags, templates.post)
 
     const { indexIds } = infiniteScroll(iScrollEnabled, data.posts)
-    createIndexPage(createPage, data.posts, indexIds, basePath, templates.index, postsPerPage, iScrollEnabled, collectionPath)
+    createIndexPage(createOptions, data.posts, indexIds, templates.index, collectionPath)
 }
 
 const getCollection = (data, collectionPath, selector = () => false) => {
@@ -178,30 +177,35 @@ const getCollectionPaths = (ids, posts) => {
  * Here is the place where Gatsby creates the URLs for all the
  * posts, tags, pages and authors that we fetched from the Ghost site.
  */
-exports.createPages = async ({ graphql, actions }, themeOptions) => {
+exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
     const { createPage } = actions
-    const { routes, siteConfig: { infiniteScroll: iScrollEnabled } } = themeOptions
+    const { routes, siteConfig: { verbose, severity, infiniteScroll: iScrollEnabled } } = themeOptions
     const basePath = routes && routes.basePath || `/`
     const collections = routes && routes.collections || []
+    const log = useLog(reporter, verbose, severity)
 
     /* Fragment are not yet possible here */
     /* Further info 👉🏼 https://github.com/gatsbyjs/gatsby/issues/12155 */
-
     const result = await graphql(`${gatsbyNodeQuery}`)
 
     // Check for any errors
     if (result.errors) {
         throw new Error(result.errors)
     }
+    log(`GraphQL data sucessfully fetched`)
 
     // Extract query results
     const postsPerPage = result.data.site.siteMetadata.postsPerPage
+    const createOptions = { createPage, log, basePath, iScrollEnabled, postsPerPage }
+
     const data = {
         pages: result.data.allGhostPage.edges,
         posts: result.data.allGhostPost.edges,
         tags: result.data.allGhostTag.edges,
         authors: result.data.allGhostAuthor.edges,
     }
+
+    log(`createPages: ${data.posts.length > 0 && data.posts[0].node.title}`)
 
     // Load templates
     const templates = {
@@ -212,16 +216,16 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
         author: require.resolve(`./src/templates/author.js`),
     }
 
-    createOrdinaryPages(createPage, data.pages, basePath, templates.page)
+    createOrdinaryPages(createOptions, data.pages, templates.page)
 
     // Split index pages by collections
     let collectionData = data
     collections.forEach((collection) => {
         collectionData = getCollection(collectionData, collection.path, collection.selector)
-        createCollection(createPage, basePath, collectionData.primary, templates, data.tags, postsPerPage, iScrollEnabled, collection.path)
+        createCollection(createOptions, collectionData.primary, templates, data.tags, collection.path)
         collectionData = collectionData.residual
     })
-    createCollection(createPage, basePath, collectionData, templates, data.tags, postsPerPage, iScrollEnabled)
+    createCollection(createOptions, collectionData, templates, data.tags)
 
     // Taxonomies are not split by collections
     const { tagIds, authorIds } = infiniteScroll(iScrollEnabled, data.posts)
@@ -230,8 +234,10 @@ exports.createPages = async ({ graphql, actions }, themeOptions) => {
     const postTags = data.tags.filter(({ node }) => node.postCount > 0)
     const postAuthors = data.authors.filter(({ node }) => node.postCount > 0)
 
-    createTaxonomyPages(createPage, postTags, tagIds, basePath, templates.tag, postsPerPage, data.posts, iScrollEnabled)
-    createTaxonomyPages(createPage, postAuthors, authorIds, basePath, templates.author, postsPerPage, data.posts, iScrollEnabled)
+    createTaxonomyPages(createOptions, postTags, tagIds, templates.tag, data.posts)
+    createTaxonomyPages(createOptions, postAuthors, authorIds, templates.author, data.posts)
+
+    log(`createPages finished`)
 }
 
 // Plugins can access basePath with GraphQL query
@@ -239,7 +245,7 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {} }
     const { basePath = `/` } = routes
 
     createTypes(`
-        type GhostConfig implements Node {
+        type GhostConfig implements Node @dontinfer {
             basePath: String!
         }
     `)
@@ -261,19 +267,3 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {} }
         },
     })
 }
-
-//exports.createResolvers = ({ createResolvers }) => {
-//    const featureImageSharp = {
-//        type: `File`,
-//    }
-//
-//    const resolvers = {
-//        GhostPost: {
-//            featureImageSharp,
-//        },
-//        GhostPage: {
-//            featureImageSharp,
-//        },
-//    }
-//    createResolvers(resolvers)
-//}
