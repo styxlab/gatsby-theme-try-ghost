@@ -1,9 +1,15 @@
 const _ = require(`lodash`)
-const Promise = require(`bluebird`)
 const Rehype = require(`rehype`)
 const stripPosition = require(`unist-util-remove-position`)
 const hastReparseRaw = require(`hast-util-raw`)
 const visit = require(`unist-util-visit`)
+
+// ES6 instead of Bluebird's promise.each
+Promise.each = async function (arr, fn) {
+    for (const item of arr) {
+        await fn(item)
+    }
+}
 
 let pluginsCacheStr = ``
 let pathPrefixCacheStr = ``
