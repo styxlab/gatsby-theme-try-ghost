@@ -142,6 +142,7 @@ const typeDefs = `
     }
     type HtmlRehype implements Node @dontinfer {
         html: String
+        htmlAst: JSON
         tableOfContents: JSON
     }
 `
