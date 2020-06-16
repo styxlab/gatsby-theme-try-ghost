@@ -22,7 +22,8 @@ const PostCard = ({ post, num, isHome }) => {
 
     if (mediaUrl !== null && mediaUrl !== undefined) {
         fluidFeatureImg.src = fluidFeatureImg.src.replace(/^\/static/g,`${mediaUrl}/static`)
-        fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/^\/static/g,`${mediaUrl}/static`)
+        fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/(^|\r\n|\r|\n)\/static/g,`${mediaUrl}/static`).replace(/,https/g,`,\nhttps`)
+        console.log(fluidFeatureImg.srcSet)
     }
 
     return (
