@@ -5,6 +5,7 @@ const useOptions = () => {
     {
         ghostConfig(id: { eq: "gatsby-theme-try-ghost-config" }) {
             basePath
+            mediaUrl
         }
     }`)
 
