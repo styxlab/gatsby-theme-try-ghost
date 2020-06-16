@@ -72,7 +72,7 @@ module.exports = (themeOptions) => {
                     exclude: node => (
                         node.ghostId === undefined
                     ),
-                    verbose: true,
+                    verbose: siteConfig.verbose,
                     // Option to disable this module (default: false)
                     disable: !siteConfig.gatsbyImages,
                 },

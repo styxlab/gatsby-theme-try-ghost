@@ -34,6 +34,9 @@ module.exports = {
     // Severity for verbose mode: (`info`, `warn`, `error`)
     severity: `info`,
 
+    // External URL for serving images, videos and other media (e.g. `https://media.jamify.org`)
+    mediaUrl: null,
+
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 }
