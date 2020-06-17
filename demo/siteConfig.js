@@ -35,7 +35,7 @@ module.exports = {
     severity: `info`,
 
     // External URL for serving images, videos and other media (e.g. `https://media.jamify.org`)
-    mediaUrl: `https://media.jamify.org`,
+    mediaUrl: null,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
