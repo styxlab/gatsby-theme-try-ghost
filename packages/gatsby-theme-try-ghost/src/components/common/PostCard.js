@@ -20,9 +20,10 @@ const PostCard = ({ post, num, isHome }) => {
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
 
-    if (mediaUrl !== null) {
+    if (mediaUrl !== null && mediaUrl !== undefined) {
         fluidFeatureImg.src = fluidFeatureImg.src.replace(/^\/static/g,`${mediaUrl}/static`)
-        fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/^\/static/g,`${mediaUrl}/static`)
+        fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/(^|\r\n|\r|\n)\/static/g,`${mediaUrl}/static`).replace(/,https/g,`,\nhttps`)
+        console.log(fluidFeatureImg.srcSet)
     }
 
     return (
