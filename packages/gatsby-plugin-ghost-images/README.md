@@ -57,9 +57,8 @@ plugins: [
             disable: false,
         },
     },
-]      
+]
 ```
-
 
 ## Image nodes
 
