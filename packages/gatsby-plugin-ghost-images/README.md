@@ -24,19 +24,42 @@ While you can use `gatsby-plugin-ghost-images` on its own, you most likely want 
 ```javascript
 // In your gatsby-config.js
 plugins: [
-  {
-    resolve: `gatsby-transformer-rehype`,
-    options: {
-      plugins: [
-        {
-          resolve: `gatsby-rehype-ghost-links`,
+    // sharp plugins are only needed if you want to use gatsby image processing tools
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+        resolve: `gatsby-plugin-ghost-images`,
+        options: {
+            // An array of node types and image fields per node
+            // Image fields must contain a valid absolute path to the image to be downloaded
+            lookup: [
+                {
+                    type: `GhostPost`,
+                    imgTags: [`feature_image`],
+                },
+                {
+                    type: `GhostPage`,
+                    imgTags: [`feature_image`],
+                },
+                {
+                    type: `GhostSettings`,
+                    imgTags: [`cover_image`],
+                },
+            ],
+            // Additional condition to exclude nodes 
+            // Takes precedence over lookup
+            exclude: node => (
+                node.ghostId === undefined
+            ),
+            // Additional information messages useful for debugging
+            verbose: true,
+            // Option to disable the module (default: false)
+            disable: false,
         },
-      ],
     },
-  },
-]
+]      
 ```
-```
+
 
 ## Image nodes
 
