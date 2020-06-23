@@ -18,7 +18,7 @@ const supportedExtensions = {
 }
 
 const fileCacheKey = url => `gatsby-rehype-inline-images-file-${url}`
-const fluidImageCacheKey = fileId => `gatsby-rehype-inline-images-fluid-image-${fileId}`
+const fluidImageCacheKey = key => `gatsby-rehype-inline-images-fluid-image-${key}`
 
 const getContext = (node, field) => node && node.context && node.context[field]
 

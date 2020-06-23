@@ -24,8 +24,8 @@ const RenderContent = ({ htmlAst, html }) => (
 )
 
 RenderContent.propTypes = {
-    htmlAst: PropTypes.elementType,
-    html: PropTypes.string,
+    htmlAst: PropTypes.object,
+    html: PropTypes.string.isRequired,
 }
 
 export default RenderContent

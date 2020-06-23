@@ -42,10 +42,11 @@
     },
     "dependencies": {
         "@babel/runtime": "7.8.7",
+        "fs-extra": "^9.0.1",
         "gatsby-plugin-sharp": "^2.6.11",
         "gatsby-source-filesystem": "^2.3.11",
-        "image-size": "^0.8.3",
         "lodash": "^4.17.15",
+        "path": "^0.12.7",
         "sharp": "^0.25.4",
         "unist-util-visit-parents": "^3.0.2"
     }

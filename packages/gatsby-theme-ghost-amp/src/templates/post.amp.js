@@ -8,7 +8,7 @@ import { resolveUrl } from 'gatsby-theme-try-ghost/src/utils/routing'
 import useOptions from 'gatsby-theme-try-ghost/src/utils/use-options'
 import { useLang, get } from 'gatsby-theme-try-ghost/src/utils/use-lang'
 
-import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp } from 'gatsby-theme-try-ghost/src/components/common'
+import { Layout, HeaderPost, AuthorList, PreviewPosts, ImgSharp, RenderContent } from 'gatsby-theme-try-ghost/src/components/common'
 import { Comments, TableOfContents, Subscribe } from 'gatsby-theme-try-ghost/src/components/common'
 
 import { StickyNavContainer, OverlayContainer } from 'gatsby-theme-try-ghost/src/components/common/effects'
@@ -33,10 +33,12 @@ const Post = ({ data, location, pageContext }) => {
     const featImg = post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
-
     const primaryTagCount = pageContext.primaryTagCount
-    const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
+    const htmlAst = post.childHtmlRehype && post.childHtmlRehype.htmlAst
+    const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+
 
     // Collection paths must be retreived from pageContext
     previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])
@@ -100,9 +102,7 @@ const Post = ({ data, location, pageContext }) => {
 
                                 <section className="post-full-content">
                                     <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
-
-                                    <div className="post-content load-external-scripts"
-                                        dangerouslySetInnerHTML={{ __html: transformedHtml || post.html }}/>
+                                    <RenderContent htmlAst={htmlAst} html={transformedHtml || post.html} />
                                 </section>
 
                                 <Subscribe />
@@ -120,37 +120,7 @@ const Post = ({ data, location, pageContext }) => {
 
 Post.propTypes = {
     data: PropTypes.shape({
-        ghostPost: PropTypes.shape({
-            codeinjection_styles: PropTypes.string,
-            url: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            html: PropTypes.string.isRequired,
-            custom_excerpt: PropTypes.string,
-            feature_image: PropTypes.string,
-            featured: PropTypes.bool,
-            tags: PropTypes.arrayOf(
-                PropTypes.object.isRequired,
-            ),
-            authors: PropTypes.arrayOf(
-                PropTypes.object.isRequired,
-            ).isRequired,
-            primary_tag: PropTypes.shape({
-                name: PropTypes.string,
-                slug: PropTypes.string.isRequired,
-                url: PropTypes.string.isRequired,
-            }),
-            published_at: PropTypes.string.isRequired,
-            published_at_pretty: PropTypes.string.isRequired,
-            featureImageSharp: PropTypes.object,
-            childHtmlRehype: PropTypes.shape({
-                html: PropTypes.string,
-                tableOfContents: PropTypes.arrayOf(
-                    PropTypes.object,
-                ),
-            }),
-        }).isRequired,
+        ghostPost: PropTypes.object.isRequired,
         prev: PropTypes.object,
         next: PropTypes.object,
         allGhostPost: PropTypes.object.isRequired,
