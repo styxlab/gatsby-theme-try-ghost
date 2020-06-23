@@ -21,6 +21,7 @@
     "keywords": [
         "gatsby",
         "gatsby-plugin",
+        "gatsby-inline-images",
         "rehype",
         "html",
         "images",
@@ -30,24 +31,24 @@
         "ghost",
         "ghost-cms"
     ],
-    "devDependencies": {
-        "@babel/cli": "7.8.4",
-        "@babel/core": "7.8.7",
-        "babel-preset-gatsby-package": "0.2.16",
-        "cross-env": "7.0.2"
-    },
-    "peerDependencies": {
-        "gatsby": "^2.22.15",
-        "gatsby-transformer-rehype": "1.0.3"
-    },
     "dependencies": {
-        "@babel/runtime": "7.8.7",
+        "@babel/runtime": "7.10.3",
         "fs-extra": "^9.0.1",
-        "gatsby-plugin-sharp": "^2.6.11",
-        "gatsby-source-filesystem": "^2.3.11",
+        "gatsby-plugin-sharp": "^2.6.13",
+        "gatsby-source-filesystem": "^2.3.13",
         "lodash": "^4.17.15",
         "path": "^0.12.7",
         "sharp": "^0.25.4",
         "unist-util-visit-parents": "^3.0.2"
+    },
+    "peerDependencies": {
+        "gatsby": "^2.23.10",
+        "gatsby-transformer-rehype": "1.6.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "7.10.3",
+        "@babel/core": "7.10.3",
+        "babel-preset-gatsby-package": "0.4.5",
+        "cross-env": "7.0.2"
     }
 }

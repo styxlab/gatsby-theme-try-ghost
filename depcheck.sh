@@ -14,13 +14,13 @@ npm-upgrade
 cd ../gatsby-rehype-ghost-links
 npm-upgrade
 
-#cd ../packages/gatsby-rehype-inline-images
-#npm-upgrade
+cd ../gatsby-rehype-inline-images
+npm-upgrade
 
 cd ../gatsby-rehype-prismjs
 npm-upgrade
 
-#cd ../packages/gatsby-theme-ghost-amp
+#cd ../gatsby-theme-ghost-amp
 #npm-upgrade
 
 cd ../gatsby-theme-ghost-commento

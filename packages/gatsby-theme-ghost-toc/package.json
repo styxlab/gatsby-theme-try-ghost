@@ -25,13 +25,13 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.10.2"
+        "@babel/runtime": "^7.10.3"
     },
     "devDependencies": {
-        "@babel/cli": "^7.10.1",
-        "@babel/core": "^7.10.2",
-        "babel-preset-gatsby-package": "^0.4.4",
+        "@babel/cli": "^7.10.3",
+        "@babel/core": "^7.10.3",
+        "babel-preset-gatsby-package": "^0.4.5",
         "cross-env": "^7.0.2",
-        "gatsby": "^2.23.3"
+        "gatsby": "^2.23.10"
     }
 }

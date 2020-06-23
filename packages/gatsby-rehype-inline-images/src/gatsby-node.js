@@ -38,7 +38,7 @@ const copyToStatic = ({ file, pathPrefix = `` }) => {
     return `${pathPrefix}/static/${fileName}`
 }
 
-module.exports = async (pluginParams, pluginOptions = { withWebp: true }) => {
+module.exports = async (pluginParams, pluginOptions) => {
     const { htmlAst, htmlNode, reporter } = pluginParams
     const url = getContext(htmlNode, `url`)
     const slug = getContext(htmlNode, `slug`)
@@ -69,13 +69,13 @@ module.exports = async (pluginParams, pluginOptions = { withWebp: true }) => {
         const image = await replaceNewImage(node, pluginParams, pluginOptions)
         if (image) {
             node.tagName = `img-sharp-inline`
-            node.properties.fluidClass = image.className
+            node.properties.className = image.className
             node.properties.fluidImg = JSON.stringify(image.fluid)
-            node.properties.fluidTitle = image.alt
+            node.properties.alt = image.alt
 
-            // add new selector for different styling
+            // add new class to parent for styling
             ancestor.properties.className.push(`fluid-image`)
-            node.properties.className = ancestor.properties.className
+            node.properties.parentClassName = ancestor.properties.className
         }
         return node
     }))
@@ -127,10 +127,10 @@ const processImage = async ({ fileNode, node, pluginParams, pluginOptions }) => 
     return image
 }
 
-// imageCache is disabled by default to safeguard against out of memory
+// imageCache can be disabled if you need to save memory
 const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
     const { cache, reporter } = pluginParams
-    const { withWebp, useImageCache = false } = pluginOptions
+    const { withWebp = true, useImageCache = true } = pluginOptions
 
     if (!fileNode || !fileNode.absolutePath) {
         return false
@@ -146,13 +146,13 @@ const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
 
     try {
         const { width } = await sharp(fileNode.absolutePath).metadata()
-        const maxWidth = pluginOptions.maxWidth ? Math.min(pluginOptions.maxWidth, width) : undefined
+        const maxWidth = pluginOptions.maxWidth ? Math.min(pluginOptions.maxWidth, width) : width
 
         const fluidParams = {
             file: fileNode,
             args: {
                 ...pluginOptions,
-                maxWidth: maxWidth,
+                maxWidth,
             },
             reporter,
             cache,
