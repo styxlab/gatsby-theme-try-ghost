@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-toc",
     "description": "Gatsby theme to add table of contents (ToC) to gatsby-theme-try-ghost.",
-    "version": "1.2.4",
+    "version": "1.3.0",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
