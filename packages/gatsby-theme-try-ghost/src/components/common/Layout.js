@@ -10,6 +10,7 @@ import { useLang, get } from '../../utils/use-lang'
 
 // Styles
 import '../../styles/screen.css'
+import '../../styles/fluid.css'
 import '../../styles/dark-mode.css'
 import '../../styles/pagination.css'
 import '../../styles/prism.css'

@@ -101,6 +101,7 @@ const gatsbyNodeQuery = `{
                 # Transformed html
                 childHtmlRehype {
                     html
+                    htmlAst
                     tableOfContents
                 }
 

@@ -55,7 +55,7 @@ html.casper .kg-width-full {
 html.casper .kg-gallery-card > *,
 html.casper .kg-width-wide > *,
 html.casper .kg-width-full > *,
-html.casper figure.kg-width-full img {
+html.casper figure.kg-width-full:not(.fluid-image) img {
     margin-left: -50vw;
     margin-right: -50vw;
     z-index: 1;
