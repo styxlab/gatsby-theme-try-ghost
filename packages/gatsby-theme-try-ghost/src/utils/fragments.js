@@ -167,6 +167,7 @@ export const ghostPostFields = graphql`
         # Transformed html
         childHtmlRehype {
             html
+            htmlAst
             tableOfContents
         }
 
@@ -279,6 +280,7 @@ export const ghostPageFields = graphql`
         # Transformed html
         childHtmlRehype {
             html
+            htmlAst
             tableOfContents
         }
 

@@ -243,7 +243,7 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
 // Plugins can access basePath with GraphQL query
 exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, siteConfig }) => {
     const { basePath = `/` } = routes
-    const { mediaUrl = null } = siteConfig
+    const { mediaUrl } = siteConfig
 
     createTypes(`
         type GhostConfig implements Node @dontinfer {
@@ -254,7 +254,7 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, 
 
     const config = {
         basePath: resolveUrl(basePath),
-        mediaUrl: mediaUrl && mediaUrl.replace(/\/$/,``),
+        mediaUrl: mediaUrl && mediaUrl.replace(/\/$/,``) || ``,
     }
 
     createNode({

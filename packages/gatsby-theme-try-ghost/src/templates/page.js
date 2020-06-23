@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { HeaderPage, Layout, ImgSharp } from '../components/common'
+import { HeaderPage, Layout, ImgSharp, RenderContent } from '../components/common'
 import { OverlayContainer } from '../components/common/effects'
 
 import { PostClass } from '../components/common/helpers'
@@ -20,6 +20,8 @@ const Page = ({ data, location }) => {
     const featImg = page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
+
+    const htmlAst = page.childHtmlRehype && page.childHtmlRehype.htmlAst
     const transformedHtml = page.childHtmlRehype && page.childHtmlRehype.html
 
     return (
@@ -42,8 +44,7 @@ const Page = ({ data, location }) => {
 
                             {/* The main page content */}
                             <section className="post-full-content">
-                                <div className="post-content load-external-scripts"
-                                    dangerouslySetInnerHTML={{ __html: transformedHtml || page.html }} />
+                                <RenderContent htmlAst={htmlAst} html={transformedHtml || page.html} />
                             </section>
                         </article>
                     </div>
@@ -55,22 +56,7 @@ const Page = ({ data, location }) => {
 
 Page.propTypes = {
     data: PropTypes.shape({
-        ghostPage: PropTypes.shape({
-            codeinjection_styles: PropTypes.object,
-            title: PropTypes.string.isRequired,
-            html: PropTypes.string.isRequired,
-            feature_image: PropTypes.string,
-            tags: PropTypes.arrayOf(
-                PropTypes.object
-            ),
-            childHtmlRehype: PropTypes.shape({
-                html: PropTypes.string,
-                tableOfContents: PropTypes.arrayOf(
-                    PropTypes.object,
-                ),
-            }),
-            featureImageSharp: PropTypes.object,
-        }).isRequired,
+        ghostPage: PropTypes.object.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
 }
