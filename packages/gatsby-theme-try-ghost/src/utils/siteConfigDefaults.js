@@ -38,7 +38,7 @@ module.exports = {
     severity: `info`,
 
     // External URL for serving images, videos and other media
-    mediaUrl: null,
+    mediaUrl: ``,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
