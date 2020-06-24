@@ -74,8 +74,15 @@ module.exports = async (pluginParams, pluginOptions) => {
             node.properties.alt = image.alt
 
             // add new class to parent for styling
-            ancestor.properties.className.push(`fluid-image`)
+            const fluidClass = `fluid-image`
+            const parentClass = ancestor.properties.className
+            ancestor.properties.className = Array.isArray(parentClass) && [...parentClass, fluidClass] || [fluidClass]
             node.properties.parentClassName = ancestor.properties.className
+
+            // add flex style to parent to keep aspect ratio
+            const flex = `flex: ${image.aspectRatio} 1 0`
+            const parentStyle = ancestor.properties.style
+            ancestor.properties.style = Array.isArray(parentStyle) && [...parentStyle, flex] || [flex]
         }
         return node
     }))
@@ -121,8 +128,9 @@ const processImage = async ({ fileNode, node, pluginParams, pluginOptions }) => 
     image.alt = node.properties.alt || fileNode.name
     image.className = classList.join(` `)
 
-    const fluidResult = await fluidImage({ fileNode, pluginParams, pluginOptions })
+    const { fluidResult, aspectRatio } = await fluidImage({ fileNode, pluginParams, pluginOptions })
     image.fluid = fluidResult
+    image.aspectRatio = aspectRatio
 
     return image
 }
@@ -145,8 +153,9 @@ const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
     }
 
     try {
-        const { width } = await sharp(fileNode.absolutePath).metadata()
+        const { width, height } = await sharp(fileNode.absolutePath).metadata()
         const maxWidth = pluginOptions.maxWidth ? Math.min(pluginOptions.maxWidth, width) : width
+        const aspectRatio = `${width / height}`
 
         const fluidParams = {
             file: fileNode,
@@ -177,7 +186,10 @@ const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
         if (useImageCache) {
             await cache.set(fluidImageKey, JSON.stringify(fluidResult))
         }
-        return fluidResult
+        return ({
+            fluidResult,
+            aspectRatio,
+        })
     } catch (e) {
         throw Error(e)
     }

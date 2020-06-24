@@ -38,9 +38,11 @@ const Page = ({ data, location }) => {
                                 <h1 className="post-full-title">{page.title}</h1>
                             </header>
 
-                            <figure className="post-full-image">
-                                <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
-                            </figure>
+                            { featImg &&
+                                <figure className="post-full-image">
+                                    <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={page.title} />
+                                </figure>
+                            }
 
                             {/* The main page content */}
                             <section className="post-full-content">

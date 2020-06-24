@@ -95,9 +95,11 @@ const Post = ({ data, location, pageContext }) => {
                                     </div>
                                 </header>
 
-                                <figure className="post-full-image">
-                                    <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
-                                </figure>
+                                { featImg &&
+                                    <figure className="post-full-image">
+                                        <ImgSharp fluidClass="kg-card kg-code-card" fluidImg={fluidFeatureImg} srcImg={featImg} title={post.title}/>
+                                    </figure>
+                                }
 
                                 <section className="post-full-content">
                                     <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
