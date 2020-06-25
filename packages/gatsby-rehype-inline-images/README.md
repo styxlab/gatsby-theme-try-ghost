@@ -140,7 +140,7 @@ This will make your inline images fully responsive and plays nicely with all `ga
 
 ## Caveats
 
-If your site contains many inline images, your build times may be considerably increased by using this plugin. Every image needs to be downloaded and processed which are network and computationally heavy tasks. This plugin utilizes the cache, so *subsequent builds* will fast. Property injection into the parent has been hard-coded, which could be made configurable. If that limits your use case, let me know.
+If your site contains many inline images, your build times may be considerably increased by using this plugin. Every image needs to be downloaded and processed which are network and computationally heavy tasks. This plugin utilizes the cache, so *subsequent builds* will be fast. Property injection into the parent has been hard-coded -- this could be made configurable. If that limits your use case, let me know.
 
 ## Troubleshooting
 
