@@ -81,6 +81,18 @@ where
 
 These properties give you the needed flexibility in your React components.
 
+## Properties injected into parent
+
+CSS flexbox layouts need a little help in order to be able to display images with correct aspect ratios. For that reason, the following *style property* is added to the parent of the `img` tag:
+
+```html
+style="flex: ${image.aspectRatio} 1 0"
+```
+
+where the `image.aspectRatio`is computed directly from the image. If you do not use CSS flexbox styles, the added style instruction won't have any effect.
+
+In addition, the attribute `fluid-image` is added to the parent's `class` property, which you can use in your style sheets.
+
 
 ## Use in React components
 
@@ -124,7 +136,11 @@ export default ImgSharpInline
 
 ```
 
-This will make your inline images fully responsive and plays nicely with all `gatsby-image` features such as the blur effect.
+This will make your inline images fully responsive and plays nicely with all `gatsby-image` features such as the blur-up effect.
+
+## Caveats
+
+If your site contains many inline images, your build times may be considerably increased by using this plugin. Every image needs to be downloaded and processed which are network and computationally heavy tasks. This plugin utilizes the cache, so *subsequent builds* will be fast. Property injection into the parent has been hard-coded -- this could be made configurable. If that limits your use case, let me know.
 
 ## Troubleshooting
 

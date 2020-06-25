@@ -175,8 +175,8 @@ export const ghostPostFields = graphql`
         featureImageSharp {
             base
             childImageSharp {
-                fluid(maxWidth: 1040) {
-                    ...GatsbyImageSharpFluid
+                fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
                 }
             }
         }
@@ -288,8 +288,8 @@ export const ghostPageFields = graphql`
         featureImageSharp {
             base
             childImageSharp {
-                fluid(maxWidth: 1040) {
-                    ...GatsbyImageSharpFluid
+                fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
                 }
             }
         }
@@ -326,7 +326,7 @@ export const ghostSettingsFields = graphql`
             base
             childImageSharp {
                 fluid(quality: 90, maxWidth: 1920) {
-                    ...GatsbyImageSharpFluid
+                    ...GatsbyImageSharpFluid_withWebp
                 }
             }
         }
