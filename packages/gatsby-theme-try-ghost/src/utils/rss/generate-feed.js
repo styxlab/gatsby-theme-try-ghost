@@ -1,11 +1,16 @@
 const cheerio = require(`cheerio`)
 const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
+const url = require(`url`)
 
 const generateItem = function generateItem(post) {
     const itemUrl = post.canonical_url || post.url
     const html = post.html || ``
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
+    //ToDo fetch siteUrl
+    //const featureImgUrl = url.resolve(config.siteUrl, post.featureImgSharp && post.featureImgSharp.publicURL || post.feature_image)
+    const featureImgUrl = post.feature_image
+
     const item = {
         title: post.title,
         description: post.excerpt,
@@ -16,10 +21,10 @@ const generateItem = function generateItem(post) {
         author: post.primary_author ? post.primary_author.name : null,
         custom_elements: [],
     }
-    let imageUrl
 
-    if (post.feature_image) {
-        imageUrl = post.feature_image
+    let imageUrl
+    if (featureImgUrl) {
+        imageUrl = featureImgUrl
 
         // Add a media content tag
         item.custom_elements.push({
@@ -54,7 +59,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                 title: siteTitle,
                 description: siteDescription,
                 // generator: `Ghost ` + data.safeVersion,
-                generator: `Ghost 2.9`,
+                generator: `Jamify 1.0`,
                 feed_url: `${siteConfig.siteUrl}/rss/`,
                 site_url: `${siteConfig.siteUrl}/`,
                 image_url: `${siteConfig.siteUrl}/${siteConfig.siteIcon}`,
@@ -110,6 +115,9 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                         # Additional fields
                         url
                         canonical_url
+                        featureImageSharp {
+                            publicURL
+                        }
                     }
                 }
             }

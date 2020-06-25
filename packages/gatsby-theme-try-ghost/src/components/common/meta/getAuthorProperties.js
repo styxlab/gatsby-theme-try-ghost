@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 export const getAuthorProperties = (primaryAuthor) => {
     let authorProfiles = []
+    const publicURL = primaryAuthor.profileImageSharp && primaryAuthor.profileImageSharp.publicURL
 
     authorProfiles.push(
         primaryAuthor.website ? primaryAuthor.website : null,
@@ -15,7 +16,7 @@ export const getAuthorProperties = (primaryAuthor) => {
     return {
         name: primaryAuthor.name || null,
         sameAsArray: authorProfiles.length ? `["${_.join(authorProfiles, `", "`)}"]` : null,
-        image: primaryAuthor.profile_image || null,
+        image: publicURL || primaryAuthor.profile_image || null,
         facebookUrl: primaryAuthor.facebook ? `https://www.facebook.com/${primaryAuthor.facebook.replace(/^\//, ``)}/` : null,
     }
 }
@@ -31,6 +32,7 @@ getAuthorProperties.PropTypes = {
         website: PropTypes.string,
         twitter: PropTypes.string,
         facebook: PropTypes.string,
+        profileImageSharp: PropTypes.object,
     }).isRequired,
 }
 

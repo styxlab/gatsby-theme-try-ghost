@@ -10,9 +10,11 @@ import getAuthorProperties from './getAuthorProperties'
 const AuthorMeta = ({ data, settings, canonical }) => {
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
+    const settingsImgURL = settings.coverImageSharp && settings.coverImageSharp.publicURL
+    const authorImgURL = data.coverImageSharp && data.coverImageSharp.publicURL
 
     const author = getAuthorProperties(data)
-    const shareImage = author.image || _.get(settings, `cover_image`, null)
+    const shareImage = author.image || authorImgURL || settingsImgURL || _.get(settings, `cover_image`, null)
     const title = `${data.name} - ${settings.title}`
     const description = data.bio || config.siteDescriptionMeta || settings.description
 
@@ -59,21 +61,8 @@ const AuthorMeta = ({ data, settings, canonical }) => {
 }
 
 AuthorMeta.propTypes = {
-    data: PropTypes.shape({
-        name: PropTypes.string,
-        bio: PropTypes.string,
-        profile_image: PropTypes.string,
-        website: PropTypes.string,
-        twitter: PropTypes.string,
-        facebook: PropTypes.string,
-    }).isRequired,
-    settings: PropTypes.shape({
-        title: PropTypes.string,
-        twitter: PropTypes.string,
-        description: PropTypes.string,
-        allGhostSettings: PropTypes.object.isRequired,
-        site: PropTypes.object.isRequired,
-    }).isRequired,
+    data: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
     canonical: PropTypes.string.isRequired,
 }
 
