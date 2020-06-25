@@ -101,8 +101,8 @@ This plugin will dramatically improve user experience and site performance! Gats
       node {
         featureImageSharp {
           childImageSharp {
-            fluid(maxWidth: 1024) {
-              ...GatsbyImageSharpFluid
+            fluid(maxWidth: 1920) {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }

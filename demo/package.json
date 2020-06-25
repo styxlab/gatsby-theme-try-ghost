@@ -11,11 +11,11 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.23.10",
+    "gatsby": "^2.23.11",
     "gatsby-plugin-ackee-tracker": "^1.4.0",
-    "gatsby-plugin-netlify": "^2.3.6",
-    "gatsby-rehype-inline-images": "*",
+    "gatsby-plugin-netlify": "^2.3.7",
     "gatsby-rehype-ghost-links": "*",
+    "gatsby-rehype-inline-images": "*",
     "gatsby-rehype-prismjs": "*",
     "gatsby-theme-ghost-commento": "*",
     "gatsby-theme-ghost-contact": "*",
@@ -32,7 +32,7 @@
     "eslint": "^7.3.1",
     "eslint-plugin-ghost": "^1.5.0",
     "eslint-plugin-react": "^7.20.0",
-    "gatsby": "^2.23.10",
+    "gatsby": "^2.23.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

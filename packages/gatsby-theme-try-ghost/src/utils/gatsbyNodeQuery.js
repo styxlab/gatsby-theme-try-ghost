@@ -109,11 +109,13 @@ const gatsbyNodeQuery = `{
                 featureImageSharp {
                     base
                     childImageSharp {
-                        fluid(maxWidth: 1040) {
+                        fluid(maxWidth: 1920) {
                             base64
                             aspectRatio
                             src
                             srcSet
+                            srcWebp
+                            srcSetWebp
                             sizes
                         }
                     }
