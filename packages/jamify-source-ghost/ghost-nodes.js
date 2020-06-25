@@ -44,9 +44,18 @@ const PrefixedGhostTypes = {
     settings: `${PREFIX}${SETTINGS}`,
 }
 
+const GhostIdPrefix = {
+    post: `${PREFIX}__${POST}__`,
+    page: `${PREFIX}__${PAGE}__`,
+    tag: `${PREFIX}__${TAG}__`,
+    author: `${PREFIX}__${AUTHOR}__`,
+    settings: `${PREFIX}__${SETTINGS}__`,
+}
+
 module.exports = {
     GhostNodes,
     GhostTypes,
     PrefixedGhostTypes,
     generateNodeId,
+    GhostIdPrefix,
 }

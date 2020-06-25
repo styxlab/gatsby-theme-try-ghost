@@ -43,7 +43,7 @@
     },
     "peerDependencies": {
         "gatsby": "^2.23.11",
-        "gatsby-transformer-rehype": "1.7.0"
+        "gatsby-transformer-rehype": "1.7.1"
     },
     "devDependencies": {
         "@babel/cli": "7.10.3",
