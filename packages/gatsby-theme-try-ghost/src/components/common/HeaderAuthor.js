@@ -4,12 +4,17 @@ import PropTypes from 'prop-types'
 import { SiteNav, HeaderBackground } from '.'
 import { useLang, get } from '../../utils/use-lang'
 
+import { ImgSharp } from '.'
+
 import AvatarIcon from './icons/avatar-icon'
 
 const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
     const text = get(useLang())
     const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
     const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
+
+    const profileImg = author.profile_image
+    const fluidProfileImg = author.profileImageSharp && author.profileImageSharp.childImageSharp && author.profileImageSharp.childImageSharp.fluid
 
     return (
         <header className="site-archive-header">
@@ -18,11 +23,11 @@ const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
                     <SiteNav className="site-nav" overlay={overlay}/>
                 </div>
             </div>
-            <HeaderBackground srcImg={author.cover_image}>
+            <HeaderBackground fluidImg={author.coverImageSharp} srcImg={author.cover_image}>
                 <div className="inner">
                     <div className="site-header-content author-header">
-                        {author.profile_image ? (
-                            <img className="author-profile-image" src={author.profile_image} alt={author.name} />
+                        {profileImg ? (
+                            <ImgSharp fluidClass="author-profile-image" fluidImg={fluidProfileImg} srcImg={profileImg} title={author.name}/>
                         ) : (
                             <div className="author-profile-image"><AvatarIcon /></div>
                         )}
@@ -47,16 +52,7 @@ const HeaderAuthor = ({ author, numberOfPosts, overlay }) => {
 }
 
 HeaderAuthor.propTypes = {
-    author: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        cover_image: PropTypes.string,
-        profile_image: PropTypes.string,
-        website: PropTypes.string,
-        bio: PropTypes.string,
-        location: PropTypes.string,
-        facebook: PropTypes.string,
-        twitter: PropTypes.string,
-    }).isRequired,
+    author: PropTypes.object.isRequired,
     numberOfPosts: PropTypes.number,
     overlay: PropTypes.object.isRequired,
 }

@@ -7,6 +7,7 @@ import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
 
 import { HoverOnAvatar } from './effects'
+import { ImgSharp } from '.'
 
 import AvatarIcon from './icons/avatar-icon'
 
@@ -18,6 +19,8 @@ const AuthorList = ({ authors, isPost }) => {
         <ul className="author-list">
             {authors.map((author, i) => {
                 const url = resolveUrl(basePath, `/`, author.slug, author.url)
+                const profileImg = author.profile_image
+                const fluidProfileImg = author.profileImageSharp && author.profileImageSharp.childImageSharp && author.profileImageSharp.childImageSharp.fluid
 
                 return (
                     <HoverOnAvatar key={i} activeClass="hovered" render={ hover => (
@@ -29,8 +32,8 @@ const AuthorList = ({ authors, isPost }) => {
                             }
                             { isPost &&
                                 <div className={`author-card ${hover.state.currentClass}`}>
-                                    { author.profile_image ? (
-                                        <img className="author-profile-image" src={author.profile_image} alt={author.name} />
+                                    { profileImg ? (
+                                        <ImgSharp fluidClass="author-profile-image" fluidImg={fluidProfileImg} srcImg={profileImg} title={author.name}/>
                                     ) : (
                                         <div className="author-profile-image"><AvatarIcon /></div>
                                     )}
@@ -50,9 +53,9 @@ const AuthorList = ({ authors, isPost }) => {
                                     </div>
                                 </div>
                             }
-                            { author.profile_image ? (
+                            { profileImg ? (
                                 <Link to={url} className={`${isPost && `author` || `static`}-avatar`}>
-                                    <img className="author-profile-image" src={author.profile_image} alt={author.name} />
+                                    <ImgSharp fluidClass="author-profile-image" fluidImg={fluidProfileImg} srcImg={profileImg} title={author.name}/>
                                 </Link>
                             ) : (
                                 <Link to={url} className={`${isPost && `author` || `static`}-avatar author-profile-image`}><AvatarIcon /></Link>
@@ -67,13 +70,7 @@ const AuthorList = ({ authors, isPost }) => {
 
 AuthorList.propTypes = {
     authors: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-            url: PropTypes.string.isRequired,
-            profile_image: PropTypes.string,
-            bio: PropTypes.string,
-        })
+        PropTypes.object,
     ).isRequired,
     isPost: PropTypes.bool,
 }

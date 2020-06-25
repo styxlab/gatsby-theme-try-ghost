@@ -57,6 +57,14 @@ module.exports = (themeOptions) => {
                 options: {
                     lookup: [
                         {
+                            type: `GhostAuthor`,
+                            imgTags: [`cover_image`,`profile_image`],
+                        },
+                        {
+                            type: `GhostTag`,
+                            imgTags: [`feature_image`],
+                        },
+                        {
                             type: `GhostPost`,
                             imgTags: [`feature_image`],
                         },

@@ -14,6 +14,7 @@ const typeDefs = `
         meta_description: String
         postCount: Int
         url: String
+        featureImageSharp: File @link
     }
     type GhostAuthor implements Node @dontinfer {
         id: String
@@ -30,6 +31,8 @@ const typeDefs = `
         meta_description: String
         postCount: Int
         url: String
+        profileImageSharp: File @link
+        coverImageSharp: File @link
     }
     type GhostPost implements Node @dontinfer {
         id: String

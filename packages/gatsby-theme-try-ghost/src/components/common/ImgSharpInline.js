@@ -12,13 +12,14 @@ const ImgSharpInline = ({ parentClassName, className, fluidImg, alt }) => {
     return (
         <Img
             style={{
+                position: `${bookmark ? null : `relative`}`,
                 width: `${fullWidth ? `6000px` : null}`,
                 height: `100%`,
             }}
             className={className}
             fluid={fluid}
             alt={alt}
-            imgStyle={{ objectFit: `${bookmark ? `cover` : `contain`}` }}
+            imgStyle={{ objectFit: `${bookmark ? null : `contain`}` }}
         />
     )
 }

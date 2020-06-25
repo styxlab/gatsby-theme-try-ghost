@@ -15,10 +15,13 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
 
+    const featureImgUrl = ghostPost.featureImgSharp && ghostPost.featureImgSharp.publicURL || ghostPost.feature_image
+    const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || _.get(settings, `cover_image`, null)
+
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
-    const shareImage = ghostPost.feature_image ? ghostPost.feature_image : _.get(settings, `cover_image`, null)
+    const shareImage = featureImgUrl || coverImgUrl
     const publisherLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
 
     const jsonLd = {
@@ -117,37 +120,8 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
 }
 
 ArticleMetaGhost.propTypes = {
-    data: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        published_at: PropTypes.string.isRequired,
-        updated_at: PropTypes.string.isRequired,
-        meta_title: PropTypes.string,
-        meta_description: PropTypes.string,
-        primary_author: PropTypes.object.isRequired,
-        feature_image: PropTypes.string,
-        tags: PropTypes.arrayOf(
-            PropTypes.shape({
-                name: PropTypes.string,
-                slug: PropTypes.string,
-                visibility: PropTypes.string,
-            })
-        ),
-        primaryTag: PropTypes.shape({
-            name: PropTypes.string,
-        }),
-        og_title: PropTypes.string,
-        og_description: PropTypes.string,
-        twitter_title: PropTypes.string,
-        twitter_description: PropTypes.string,
-        excerpt: PropTypes.string.isRequired,
-    }).isRequired,
-    settings: PropTypes.shape({
-        logo: PropTypes.object,
-        title: PropTypes.string,
-        twitter: PropTypes.string,
-        allGhostSettings: PropTypes.object.isRequired,
-        site: PropTypes.object.isRequired,
-    }).isRequired,
+    data: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
     canonical: PropTypes.string.isRequired,
 }
 

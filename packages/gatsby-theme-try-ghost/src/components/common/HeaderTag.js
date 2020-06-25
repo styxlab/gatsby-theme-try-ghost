@@ -14,7 +14,7 @@ const HeaderTag = ({ tag, numberOfPosts, overlay }) => {
                     <SiteNav className="site-nav" overlay={overlay}/>
                 </div>
             </div>
-            <HeaderBackground srcImg={tag.feature_image}>
+            <HeaderBackground fluidImg={tag.featureImageSharp} srcImg={tag.feature_image}>
                 <div className="inner site-header-content">
                     <h1 className="site-title">{tag.name}</h1>
                     <h2 className="site-description">
@@ -29,11 +29,7 @@ const HeaderTag = ({ tag, numberOfPosts, overlay }) => {
 }
 
 HeaderTag.propTypes = {
-    tag: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        feature_image: PropTypes.string,
-        description: PropTypes.string,
-    }).isRequired,
+    tag: PropTypes.object.isRequired,
     numberOfPosts: PropTypes.number.isRequired,
     overlay: PropTypes.object.isRequired,
 }

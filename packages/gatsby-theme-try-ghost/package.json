@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-try-ghost",
   "description": "A Gatsby theme for building flaring fast blogs from headless Ghost CMS.",
-  "version": "1.35.0",
+  "version": "1.36.0",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",
@@ -57,7 +57,7 @@
     "gatsby-plugin-styled-components": "^3.3.6",
     "gatsby-source-filesystem": "^2.3.14",
     "gatsby-transformer-sharp": "^2.5.7",
-    "jamify-source-ghost": "^1.11.0",
+    "jamify-source-ghost": "^1.13.0",
     "lodash": "^4.17.15",
     "parse-numeric-range": "^1.2.0",
     "postcss-color-function": "^4.1.0",

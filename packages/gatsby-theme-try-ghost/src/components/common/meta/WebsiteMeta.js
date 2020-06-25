@@ -11,9 +11,11 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
 
-    const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    let shareImage = image || data.feature_image || _.get(settings, `cover_image`, null)
+    const featureImgUrl = data.featureImgSharp && data.featureImgSharp.publicURL || data.feature_image
+    const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || settings.cover_image
 
+    const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
+    let shareImage = image || featureImgUrl || coverImgUrl || null
     shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
 
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
@@ -71,24 +73,8 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
 }
 
 WebsiteMeta.propTypes = {
-    data: PropTypes.shape({
-        title: PropTypes.string,
-        meta_title: PropTypes.string,
-        meta_description: PropTypes.string,
-        name: PropTypes.string,
-        feature_image: PropTypes.string,
-        description: PropTypes.string,
-        bio: PropTypes.string,
-        profile_image: PropTypes.string,
-    }).isRequired,
-    settings: PropTypes.shape({
-        logo: PropTypes.object,
-        description: PropTypes.string,
-        title: PropTypes.string,
-        twitter: PropTypes.string,
-        allGhostSettings: PropTypes.object.isRequired,
-        site: PropTypes.object.isRequired,
-    }).isRequired,
+    data: PropTypes.object.isRequired,
+    settings: PropTypes.object.isRequired,
     canonical: PropTypes.string.isRequired,
     title: PropTypes.string,
     description: PropTypes.string,

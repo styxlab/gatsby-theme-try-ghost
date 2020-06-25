@@ -46,6 +46,16 @@ export const ghostTagFields = graphql`
         description
         meta_title
         meta_description
+
+        # ImgSharp
+        featureImageSharp {
+            base
+            childImageSharp {
+                fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
     }
 `
 
@@ -64,6 +74,24 @@ export const ghostAuthorFields = graphql`
         facebook
         meta_title
         meta_description
+
+        # ImgSharp
+        coverImageSharp {
+            base
+            childImageSharp {
+                fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
+        profileImageSharp {
+            base
+            childImageSharp {
+                fluid(maxWidth: 1920) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
     }
 `
 

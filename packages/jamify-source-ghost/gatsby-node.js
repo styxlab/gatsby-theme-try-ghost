@@ -379,3 +379,6 @@ exports.sourceNodes = async (sourceNodeFields, configOptions) => {
 
 // Explicitely typed schema
 exports.createSchemaCustomization = require(`./create-schema-customization`)
+
+// Resolvers for linking tags/authors to posts/pages
+exports.createResolvers = require(`./create-resolvers`)
