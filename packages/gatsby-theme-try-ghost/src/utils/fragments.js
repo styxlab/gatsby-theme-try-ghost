@@ -138,6 +138,7 @@ export const ghostPostFields = graphql`
             url
             bio
             # email
+            cover_image
             profile_image
             twitter
             facebook
@@ -169,6 +170,7 @@ export const ghostPostFields = graphql`
             url
             bio
             # email
+            cover_image
             profile_image
             twitter
             facebook

@@ -9,7 +9,6 @@ const gatsbyNodeQuery = `{
                 id
                 title
                 slug
-                url
                 featured
                 feature_image
                 excerpt
@@ -43,10 +42,43 @@ const gatsbyNodeQuery = `{
                     url
                     bio
                     # email
+                    cover_image
                     profile_image
                     twitter
                     facebook
                     website
+
+                    # ImgSharp
+                    coverImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
+                    profileImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
                 }
 
                 primary_author {
@@ -55,10 +87,43 @@ const gatsbyNodeQuery = `{
                     url
                     bio
                     # email
+                    cover_image
                     profile_image
                     twitter
                     facebook
                     website
+
+                    # ImgSharp
+                    coverImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
+                    profileImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
                 }
 
                 # Tags
@@ -71,6 +136,23 @@ const gatsbyNodeQuery = `{
                     meta_description
                     meta_title
                     visibility
+
+                    # ImgSharp
+                    featureImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
                 }
 
                 tags {
@@ -82,6 +164,23 @@ const gatsbyNodeQuery = `{
                     meta_description
                     meta_title
                     visibility
+
+                    # ImgSharp
+                    featureImageSharp {
+                        base
+                        publicURL
+                        childImageSharp {
+                            fluid(maxWidth: 1920) {
+                                base64
+                                aspectRatio
+                                src
+                                srcSet
+                                srcWebp
+                                srcSetWebp
+                                sizes
+                            }
+                        }
+                    }
                 }
 
                 # Content
