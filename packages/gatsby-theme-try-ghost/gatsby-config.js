@@ -40,7 +40,12 @@ module.exports = (themeOptions) => {
                 },
             },
             `gatsby-plugin-sharp`,
-            `gatsby-transformer-sharp`,
+            {
+                resolve: `gatsby-transformer-sharp`,
+                options: {
+                    checkSupportedExtensions: false,
+                },
+            },
             {
                 resolve: `jamify-source-ghost`,
                 options: {
@@ -58,7 +63,7 @@ module.exports = (themeOptions) => {
                     lookup: [
                         {
                             type: `GhostAuthor`,
-                            imgTags: [`cover_image`,`profile_image`],
+                            imgTags: [`cover_image`, `profile_image`],
                         },
                         {
                             type: `GhostTag`,
@@ -74,7 +79,7 @@ module.exports = (themeOptions) => {
                         },
                         {
                             type: `GhostSettings`,
-                            imgTags: [`cover_image`],
+                            imgTags: [`logo`, `icon`, `cover_image`],
                         },
                     ],
                     exclude: node => (

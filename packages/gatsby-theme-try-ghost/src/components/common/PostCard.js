@@ -14,12 +14,13 @@ const PostCard = ({ post, num, isHome }) => {
     const { basePath, mediaUrl } = useOptions()
     const text = get(useLang())
     const url = resolveUrl(basePath, post.collectionPath, post.slug, post.url)
-    const featImg = post.feature_image
+    const featImg = post.featureImageSharp && post.featureImageSharp.publicURL || post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const readingTime = readingTimeHelper(post).replace(`min read`,text(`MIN_READ`))
     const postClass = PostClass({ tags: post.tags, isFeatured: post.featured, isImage: featImg && true })
     const large = featImg && isHome && 0 === num % 6 && `post-card-large` || ``
 
+    // experimental (do not use option yet)
     if (mediaUrl !== null && mediaUrl !== undefined && fluidFeatureImg !== null) {
         fluidFeatureImg.src = fluidFeatureImg.src.replace(/^\/static/g,`${mediaUrl}/static`)
         fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/(^|\r\n|\r|\n)\/static/g,`${mediaUrl}/static`).replace(/,https/g,`,\nhttps`)

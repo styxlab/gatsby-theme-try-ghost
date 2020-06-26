@@ -17,7 +17,7 @@ import { MetaData } from '../components/common/meta'
 */
 const Page = ({ data, location }) => {
     const page = data.ghostPage
-    const featImg = page.feature_image
+    const featImg = page.featureImageSharp && page.featureImageSharp.publicURL || page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
 

@@ -10,11 +10,14 @@ import ImageMeta from './ImageMeta'
 const WebsiteMeta = ({ data, settings, canonical, title, description, image, type }) => {
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
+    const settingsLogo = settings.logoSharp && settings.logoSharp.publicURL
 
     const featureImgUrl = data.featureImgSharp && data.featureImgSharp.publicURL || data.feature_image
     const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || settings.cover_image
 
-    const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
+    const configLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
+    const publisherLogo = settingsLogo || configLogo
+
     let shareImage = image || featureImgUrl || coverImgUrl || null
     shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
 

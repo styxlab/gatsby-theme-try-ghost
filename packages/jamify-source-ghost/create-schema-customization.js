@@ -137,6 +137,8 @@ const typeDefs = `
         codeinjection_foot: String
         codeinjection_styles: String
         url: String
+        logoSharp: File @link
+        iconSharp: File @link
         coverImageSharp: File @link
     }
     type Navigation {

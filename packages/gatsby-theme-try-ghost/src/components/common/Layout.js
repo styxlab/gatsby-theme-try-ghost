@@ -97,7 +97,6 @@ DefaultLayout.propTypes = {
     isPost: PropTypes.bool,
     data: PropTypes.shape({
         allGhostSettings: PropTypes.object.isRequired,
-        file: PropTypes.object,
         site: PropTypes.object.isRequired,
     }).isRequired,
     sticky: PropTypes.shape({
@@ -124,13 +123,6 @@ const DefaultLayoutSettingsQuery = props => (
                     edges {
                         node {
                             ...GhostSettingsFields
-                        }
-                    }
-                }
-                file(relativePath: {eq: "ghost-icon.png"}) {
-                    childImageSharp {
-                        fixed(width: 30, height: 30) {
-                            ...GatsbyImageSharpFixed
                         }
                     }
                 }

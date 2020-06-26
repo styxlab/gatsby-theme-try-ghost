@@ -6,6 +6,7 @@ import { useLang, get } from '../../utils/use-lang'
 
 const HeaderTag = ({ tag, numberOfPosts, overlay }) => {
     const text = get(useLang())
+    const featureImg = tag.featureImageSharp && tag.featureImageSharp.publicURL || tag.feature_image
 
     return (
         <header className="site-archive-header">
@@ -14,7 +15,7 @@ const HeaderTag = ({ tag, numberOfPosts, overlay }) => {
                     <SiteNav className="site-nav" overlay={overlay}/>
                 </div>
             </div>
-            <HeaderBackground fluidImg={tag.featureImageSharp} srcImg={tag.feature_image}>
+            <HeaderBackground fluidImg={tag.featureImageSharp} srcImg={featureImg}>
                 <div className="inner site-header-content">
                     <h1 className="site-title">{tag.name}</h1>
                     <h2 className="site-description">

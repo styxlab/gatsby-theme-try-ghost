@@ -9,7 +9,7 @@ module.exports = ({ createResolvers }) => {
             primary_author: {
                 resolve: (source, args, context) => (
                     context.nodeModel.getNodeById({
-                        id: `${GhostIdPrefix.author}${source.primary_author.id}`,
+                        id: `${GhostIdPrefix.author}${source.primary_author && source.primary_author.id}`,
                         type: PrefixedGhostTypes.author,
                     })
                 ),
@@ -17,7 +17,7 @@ module.exports = ({ createResolvers }) => {
             primary_tag: {
                 resolve: (source, args, context) => (
                     context.nodeModel.getNodeById({
-                        id: `${GhostIdPrefix.tag}${source.primary_tag.id}`,
+                        id: `${GhostIdPrefix.tag}${source.primary_tag && source.primary_tag.id}`,
                         type: PrefixedGhostTypes.tag,
                     })
                 ),
@@ -45,7 +45,7 @@ module.exports = ({ createResolvers }) => {
             primary_author: {
                 resolve: (source, args, context) => (
                     context.nodeModel.getNodeById({
-                        id: `${GhostIdPrefix.author}${source.primary_author.id}`,
+                        id: `${GhostIdPrefix.author}${source.primary_author && source.primary_author.id}`,
                         type: PrefixedGhostTypes.author,
                     })
                 ),
@@ -53,7 +53,7 @@ module.exports = ({ createResolvers }) => {
             primary_tag: {
                 resolve: (source, args, context) => (
                     context.nodeModel.getNodeById({
-                        id: `${GhostIdPrefix.tag}${source.primary_tag.id}`,
+                        id: `${GhostIdPrefix.tag}${source.primary_tag && source.primary_tag.id}`,
                         type: PrefixedGhostTypes.tag,
                     })
                 ),

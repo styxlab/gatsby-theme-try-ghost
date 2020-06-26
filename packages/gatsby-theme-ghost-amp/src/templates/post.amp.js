@@ -30,7 +30,7 @@ const Post = ({ data, location, pageContext }) => {
     const nextPost = data.next
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post).replace(`min read`,text(`MIN_READ`))
-    const featImg = post.feature_image
+    const featImg = post.featureImageSharp && post.featureImageSharp.publicURL || post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
     const primaryTagCount = pageContext.primaryTagCount
@@ -38,7 +38,6 @@ const Post = ({ data, location, pageContext }) => {
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
     const htmlAst = post.childHtmlRehype && post.childHtmlRehype.htmlAst
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
-
 
     // Collection paths must be retreived from pageContext
     previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])

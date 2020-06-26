@@ -30,7 +30,7 @@ const Post = ({ data, location, pageContext }) => {
     const nextPost = data.next
     const previewPosts = data.allGhostPost.edges
     const readingTime = readingTimeHelper(post).replace(`min read`,text(`MIN_READ`))
-    const featImg = post.feature_image
+    const featImg = post.featureImageSharp && post.featureImageSharp.publicURL || post.feature_image
     const fluidFeatureImg = post.featureImageSharp && post.featureImageSharp.childImageSharp && post.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: post.tags, isFeatured: featImg, isImage: featImg && true })
     const primaryTagCount = pageContext.primaryTagCount

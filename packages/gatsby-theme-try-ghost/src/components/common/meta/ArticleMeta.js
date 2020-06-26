@@ -14,6 +14,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const ghostPost = data
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
+    const settingsLogo = settings.logoSharp && settings.logoSharp.publicURL
 
     const featureImgUrl = ghostPost.featureImgSharp && ghostPost.featureImgSharp.publicURL || ghostPost.feature_image
     const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || _.get(settings, `cover_image`, null)
@@ -22,7 +23,9 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
     const shareImage = featureImgUrl || coverImgUrl
-    const publisherLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
+
+    const configLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
+    const publisherLogo = settingsLogo || configLogo
 
     const jsonLd = {
         "@context": `https://schema.org/`,
