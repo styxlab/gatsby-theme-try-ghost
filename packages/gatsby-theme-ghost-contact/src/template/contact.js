@@ -11,7 +11,7 @@ import { MetaData } from 'gatsby-theme-try-ghost/src/components/common/meta'
 const ContactPage = ({ data, location }) => {
     const page = data.contactPage
     const posts = data.allGhostPost.edges
-    const featImg = page.feature_image
+    const featImg = page.featureImageSharp && page.featureImageSharp.publicURL || page.feature_image
     const fluidFeatureImg = page.featureImageSharp && page.featureImageSharp.childImageSharp && page.featureImageSharp.childImageSharp.fluid
     const postClass = PostClass({ tags: page.tags, isPage: page && true, isImage: featImg && true })
     const transformedHtml = page.children && page.children[0] && page.children[0].html

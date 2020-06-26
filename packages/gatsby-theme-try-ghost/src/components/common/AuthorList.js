@@ -19,7 +19,7 @@ const AuthorList = ({ authors, isPost }) => {
         <ul className="author-list">
             {authors.map((author, i) => {
                 const url = resolveUrl(basePath, `/`, author.slug, author.url)
-                const profileImg = author.profile_image
+                const profileImg = author.profileImageSharp && author.profileImageSharp.publicURL || author.profile_image
                 const fluidProfileImg = author.profileImageSharp && author.profileImageSharp.childImageSharp && author.profileImageSharp.childImageSharp.fluid
 
                 return (

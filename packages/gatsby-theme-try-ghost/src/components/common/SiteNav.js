@@ -14,6 +14,7 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
     const site = data.allGhostSettings.edges[0].node
     const title = text(`SITE_TITLE`, site.title)
     const secondaryNav = site.secondary_navigation && 0 < site.secondary_navigation.length
+    const siteLogo = site.logoSharp && site.logoSharp.publicURL || site.logo
 
     // add basePath only to navigation items coming from Ghost CMS
     const navigation = site.navigation.map((item) => {
@@ -44,8 +45,10 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
         <nav className={className}>
             <div className="site-nav-left-wrapper">
                 <div className="site-nav-left">
-                    {site.logo ? (
-                        <a className="site-nav-logo" href={siteUrl}><img src={site.logo} alt={title} /></a>
+                    {siteLogo ? (
+                        <a className="site-nav-logo" href={siteUrl}>
+                            <img src={siteLogo} alt={title} />
+                        </a>
                     ) : (
                         <a className="site-nav-logo" href={siteUrl}>{title}</a>
                     )}
@@ -74,7 +77,6 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
 
 SiteNav.propTypes = {
     data: PropTypes.shape({
-        file: PropTypes.object,
         allGhostSettings: PropTypes.object.isRequired,
         site: PropTypes.object.isRequired,
     }).isRequired,
@@ -91,13 +93,6 @@ const SiteNavQuery = props => (
                     edges {
                         node {
                             ...GhostSettingsFields
-                        }
-                    }
-                }
-                file(relativePath: {eq: "ghost-icon.png"}) {
-                    childImageSharp {
-                        fixed(width: 30, height: 30) {
-                            ...GatsbyImageSharpFixed
                         }
                     }
                 }

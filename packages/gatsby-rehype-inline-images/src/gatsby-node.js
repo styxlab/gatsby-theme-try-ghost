@@ -91,7 +91,7 @@ module.exports = async (pluginParams, pluginOptions) => {
 }
 
 const replaceNewImage = async (node, pluginParams, pluginOptions) => {
-    const url = node.properties.src
+    const url = node.properties.src.replace(/^\/\//,`https://`)
 
     if (!url) {
         return false

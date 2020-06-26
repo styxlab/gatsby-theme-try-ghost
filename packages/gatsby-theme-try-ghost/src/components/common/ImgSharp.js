@@ -7,7 +7,7 @@ const ImgSharp = ({ fluidClass, fluidImg, srcClass, srcImg, title, clearPosition
         { fluidImg ? (
             <Img style={{ position: `${clearPosition ? null : `relative`}` }} className={fluidClass} fluid={fluidImg} alt={title} />
         ) : (
-            srcImg && <img className={srcClass} src={srcImg} alt={title} />
+            srcImg && <img className={srcClass || fluidClass} src={srcImg} alt={title} />
         )}
     </React.Fragment>
 )
