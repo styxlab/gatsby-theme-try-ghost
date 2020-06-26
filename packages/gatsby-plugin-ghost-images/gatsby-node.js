@@ -52,7 +52,7 @@ exports.onCreateNode = async function ({
 
 
   const promises = allImgTags.map(async tag => {
-    let imgUrl = node[tag].replace(/^\/\//, `https://`);
+    const imgUrl = node[tag].replace(/^\/\//, `https://`);
 
     if (verbose) {
       reporter.info(`${node.internal.type}/${tag}/${node.slug}/${imgUrl}`);
