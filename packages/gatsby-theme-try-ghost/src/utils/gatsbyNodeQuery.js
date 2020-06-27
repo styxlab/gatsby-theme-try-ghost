@@ -53,7 +53,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 1040, quality: 90) {
                                 base64
                                 aspectRatio
                                 src
@@ -68,7 +68,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 110, quality: 100) {
                                 base64
                                 aspectRatio
                                 src
@@ -98,7 +98,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 1040, quality: 90) {
                                 base64
                                 aspectRatio
                                 src
@@ -113,7 +113,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 110, quality: 90) {
                                 base64
                                 aspectRatio
                                 src
@@ -142,7 +142,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 1040, quality: 90) {
                                 base64
                                 aspectRatio
                                 src
@@ -170,7 +170,7 @@ const gatsbyNodeQuery = `{
                         base
                         publicURL
                         childImageSharp {
-                            fluid(maxWidth: 1920) {
+                            fluid(maxWidth: 1040, quality: 90) {
                                 base64
                                 aspectRatio
                                 src
@@ -208,7 +208,7 @@ const gatsbyNodeQuery = `{
                 featureImageSharp {
                     base
                     childImageSharp {
-                        fluid(maxWidth: 1920) {
+                        fluid(maxWidth: 700, quality: 90) {
                             base64
                             aspectRatio
                             src

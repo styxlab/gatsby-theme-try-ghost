@@ -58,7 +58,7 @@ export const pageQuery = graphql`
         ) {
             edges {
                 node {
-                ...GhostPostFields
+                ...GhostPostFieldsForIndex
                 }
             }
         }

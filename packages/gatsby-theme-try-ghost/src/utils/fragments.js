@@ -52,7 +52,7 @@ export const ghostTagFields = graphql`
             base
             publicURL
             childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
@@ -81,7 +81,7 @@ export const ghostAuthorFields = graphql`
             base
             publicURL
             childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
@@ -90,7 +90,7 @@ export const ghostAuthorFields = graphql`
             base
             publicURL
             childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 110, quality: 100) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
@@ -98,9 +98,9 @@ export const ghostAuthorFields = graphql`
     }
 `
 
-// Used for single posts
-export const ghostPostFields = graphql`
-    fragment GhostPostFields on GhostPost {
+/* eslint-disable camelcase */
+export const ghostPostFields_main = graphql`
+    fragment GhostPostFields_main on GhostPost {
         # Main fields
         id
         title
@@ -133,112 +133,18 @@ export const ghostPostFields = graphql`
 
         # Authors
         authors {
-            name
-            slug
-            url
-            bio
-            # email
-            cover_image
-            profile_image
-            twitter
-            facebook
-            website
-
-            # ImgSharp
-            coverImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            profileImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostAuthorFields
         }
         primary_author {
-            name
-            slug
-            url
-            bio
-            # email
-            cover_image
-            profile_image
-            twitter
-            facebook
-            website
-
-            # ImgSharp
-            coverImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            profileImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostAuthorFields
         }
 
         # Tags
         primary_tag {
-            name
-            slug
-            url
-            description
-            feature_image
-            meta_description
-            meta_title
-            visibility
-
-            # ImgSharp
-            featureImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostTagFields
         }
         tags {
-            name
-            slug
-            url
-            description
-            feature_image
-            meta_description
-            meta_title
-            visibility
-
-            # ImgSharp
-            featureImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostTagFields
         }
 
         # Content
@@ -265,18 +171,40 @@ export const ghostPostFields = graphql`
             htmlAst
             tableOfContents
         }
+    }
+`
+
+export const ghostPostFields = graphql`
+    fragment GhostPostFields on GhostPost {
+        ...GhostPostFields_main
 
         # ImgSharp
         featureImageSharp {
             base
             publicURL
             childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
         }
+    }
+`
 
+export const ghostPostFieldsForIndex = graphql`
+    fragment GhostPostFieldsForIndex on GhostPost {
+        ...GhostPostFields_main
+
+        # ImgSharp
+        featureImageSharp {
+            base
+            publicURL
+            childImageSharp {
+                fluid(maxWidth: 700, quality: 90) {
+                    ...GatsbyImageSharpFluid_withWebp
+                }
+            }
+        }
     }
 `
 
@@ -314,109 +242,18 @@ export const ghostPageFields = graphql`
 
         # Authors
         authors {
-            name
-            slug
-            url
-            bio
-            # email
-            profile_image
-            twitter
-            facebook
-            website
-
-            # ImgSharp
-            coverImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            profileImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostAuthorFields
         }
         primary_author {
-            name
-            slug
-            url
-            bio
-            # email
-            profile_image
-            twitter
-            facebook
-            website
-
-            # ImgSharp
-            coverImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            profileImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostAuthorFields
         }
 
         # Tags
         primary_tag {
-            name
-            slug
-            url
-            description
-            feature_image
-            meta_description
-            meta_title
-            visibility
-
-            # ImgSharp
-            featureImageSharp {
-                base
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostTagFields
         }
         tags {
-            name
-            slug
-            url
-            description
-            feature_image
-            meta_description
-            meta_title
-            visibility
-
-            # ImgSharp
-            featureImageSharp {
-                base
-                publicURL
-                childImageSharp {
-                    fluid(maxWidth: 1920) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
+            ...GhostTagFields
         }
 
         # Content
@@ -446,7 +283,7 @@ export const ghostPageFields = graphql`
             base
             publicURL
             childImageSharp {
-                fluid(maxWidth: 1920) {
+                fluid(maxWidth: 1040) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
@@ -504,7 +341,7 @@ export const ghostSettingsFields = graphql`
             base
             publicURL
             childImageSharp {
-                fluid(quality: 90, maxWidth: 1920) {
+                fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
                 }
             }
