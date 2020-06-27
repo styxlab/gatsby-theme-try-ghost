@@ -212,7 +212,6 @@ module.exports = (themeOptions) => {
             `gatsby-plugin-catch-links`,
             `gatsby-plugin-react-helmet`,
             `gatsby-plugin-force-trailing-slashes`,
-            `gatsby-plugin-offline`,
             {
                 resolve: `gatsby-plugin-postcss`,
                 options: {
@@ -228,6 +227,7 @@ module.exports = (themeOptions) => {
                 },
             },
             `gatsby-plugin-styled-components`,
+            `gatsby-plugin-offline`,
         ],
     }
 }
