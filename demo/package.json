@@ -14,7 +14,6 @@
     "gatsby": "^2.23.11",
     "gatsby-plugin-ackee-tracker": "^1.4.0",
     "gatsby-plugin-netlify": "^2.3.7",
-    "gatsby-plugin-preload-link-crossorigin": "^1.0.2",
     "gatsby-rehype-ghost-links": "*",
     "gatsby-rehype-inline-images": "*",
     "gatsby-rehype-prismjs": "*",
