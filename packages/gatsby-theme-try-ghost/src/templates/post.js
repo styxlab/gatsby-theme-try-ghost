@@ -138,10 +138,10 @@ export const postQuery = graphql`
             ...GhostPostFields
         }
         prev: ghostPost(slug: { eq: $prev }) {
-            ...GhostPostFields
+            ...GhostPostFieldsForIndex
         }
         next: ghostPost(slug: { eq: $next }) {
-            ...GhostPostFields
+            ...GhostPostFieldsForIndex
         }
         allGhostPost(
             filter: {slug: { ne: $slug },tags: {elemMatch: {slug: {eq: $tag}}}},
@@ -151,7 +151,7 @@ export const postQuery = graphql`
         ) {
             edges {
                 node {
-                ...GhostPostFields
+                ...GhostPostFieldsForIndex
                 }
             }
         }
