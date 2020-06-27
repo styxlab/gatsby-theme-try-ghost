@@ -49,12 +49,6 @@ module.exports = {
         `gatsby-plugin-netlify`,
         `gatsby-plugin-preload-link-crossorigin`,
         {
-            resolve: `gatsby-plugin-sri`,
-            options: {
-                crossorigin: true,
-            },
-        },
-        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 path: path.join(__dirname, `src`, `images`),
