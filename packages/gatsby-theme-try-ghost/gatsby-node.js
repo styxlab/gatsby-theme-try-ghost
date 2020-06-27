@@ -2,6 +2,7 @@ const _ = require(`lodash`)
 const { resolveUrl } = require(`./src/utils/routing`)
 const { createContentDigest } = require(`gatsby-core-utils`)
 
+const mediaConfigDefaults = require(`./src/utils/mediaConfigDefaults`)
 const gatsbyNodeQuery = require(`./src/utils/gatsbyNodeQuery`)
 const paginate = require(`./src/utils/pagination`)
 const infiniteScroll = require(`./src/utils/infinite-scroll`)
@@ -241,20 +242,24 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
 }
 
 // Plugins can access basePath with GraphQL query
-exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, siteConfig }) => {
+exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, mediaConfig }) => {
     const { basePath = `/` } = routes
-    const { mediaUrl } = siteConfig
+    const { mediaUrl, gatsbyImageLoading, gatsbyImageFadeIn } = _.merge({}, mediaConfigDefaults, mediaConfig)
 
     createTypes(`
         type GhostConfig implements Node @dontinfer {
             basePath: String!
-            mediaUrl: String!
+            mediaUrl: String
+            gatsbyImageLoading: String
+            gatsbyImageFadeIn: Boolean
         }
     `)
 
     const config = {
         basePath: resolveUrl(basePath),
-        mediaUrl: mediaUrl && mediaUrl.replace(/\/$/,``) || ``,
+        mediaUrl: mediaUrl && mediaUrl.replace(/\/$/,``),
+        gatsbyImageLoading,
+        gatsbyImageFadeIn,
     }
 
     createNode({
