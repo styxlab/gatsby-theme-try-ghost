@@ -2,6 +2,7 @@ const _ = require(`lodash`)
 const path = require(`path`)
 
 const siteConfigDefaults = require(`./src/utils/siteConfigDefaults`)
+const mediaConfigDefaults = require(`./src/utils/mediaConfigDefaults`)
 const ghostConfigDefaults = require(`./src/utils/.ghost.json`)
 
 const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
@@ -15,6 +16,7 @@ const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
 */
 module.exports = (themeOptions) => {
     const siteConfig = _.merge({}, siteConfigDefaults, themeOptions.siteConfig)
+    const mediaConfig = _.merge({}, mediaConfigDefaults, themeOptions.mediaConfig)
     const ghostConfig = _.merge({}, ghostConfigDefaults, themeOptions.ghostConfig)
 
     return {
@@ -87,7 +89,7 @@ module.exports = (themeOptions) => {
                     ),
                     verbose: siteConfig.verbose,
                     // Option to disable this module (default: false)
-                    disable: !siteConfig.gatsbyImages,
+                    disable: !mediaConfig.gatsbyImages,
                 },
             },
             /**

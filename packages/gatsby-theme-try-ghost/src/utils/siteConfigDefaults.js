@@ -28,17 +28,11 @@ module.exports = {
     backgroundColor: `#e9e9e9`,
     themeColor: `#15171A`,
 
-    // Include Gatsby images for lazy loading and image optimizations (default: true)
-    gatsbyImages: true,
-
     // Show more logs for debugging purposes (default: false)
     verbose: false,
 
     // Severity for verbose mode: (`info`, `warn`, `error`)
     severity: `info`,
-
-    // External URL for serving images, videos and other media
-    mediaUrl: ``,
 
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
