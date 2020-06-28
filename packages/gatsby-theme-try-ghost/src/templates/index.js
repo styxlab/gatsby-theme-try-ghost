@@ -18,7 +18,7 @@ import { GlobalStateContext } from "../context/GlobalState"
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
     const image = data.file && data.file.childImageSharp && data.file.childImageSharp.fluid && data.file.childImageSharp.fluid.src
-    const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || {}
+    const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || { action: `ssr` }
 
     return (
         <GlobalStateContext.Consumer>{ g => (
