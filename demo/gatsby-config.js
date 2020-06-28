@@ -46,6 +46,7 @@ try {
 
 module.exports = {
     plugins: [
+        `gatsby-plugin-preact`,
         `gatsby-plugin-netlify`,
         {
             resolve: `gatsby-source-filesystem`,
@@ -141,6 +142,9 @@ module.exports = {
                 detailed: true,
             },
         },
+        // this (optional) plugin enables Progressive Web App + Offline functionality
+        // This plugin is currently causing issues: https://github.com/gatsbyjs/gatsby/issues/25360
+        //`gatsby-plugin-offline`,
         //{
         //    resolve: `gatsby-theme-ghost-amp`,
         //    options: {
