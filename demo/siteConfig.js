@@ -31,6 +31,9 @@ module.exports = {
     // Severity for verbose mode: (`info`, `warn`, `error`)
     severity: `info`,
 
+    // Exclude post or pages (default: do not exclude)
+    // excludePostsOrPages: (node => node.tags.find(tag => tag.slug === `hash-hidden`) !== undefined),
+
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 }
