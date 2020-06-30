@@ -34,6 +34,9 @@ module.exports = {
     // Severity for verbose mode: (`info`, `warn`, `error`)
     severity: `info`,
 
+    // Exclude post or pages (default: do not exclude)
+    excludePostsOrPages: (() => false),
+
     // Overwrite navigation menu (default: []), label is case sensitive
     // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
 

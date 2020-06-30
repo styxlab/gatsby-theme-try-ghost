@@ -174,13 +174,23 @@ const getCollectionPaths = (ids, posts) => {
     return paths
 }
 
+const calcPostCounts = (data) => {
+    data.tags.forEach(({ node: tag }) => {
+        tag.postCount = data.posts.filter(({ node }) => node.tags.find(t => t.slug === tag.slug) !== undefined).length
+    })
+    data.authors.forEach(({ node: author }) => {
+        author.postCount = data.posts.filter(({ node }) => node.authors.find(a => a.slug === author.slug) !== undefined).length
+    })
+}
+
 /**
  * Here is the place where Gatsby creates the URLs for all the
  * posts, tags, pages and authors that we fetched from the Ghost site.
  */
 exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
     const { createPage } = actions
-    const { routes, siteConfig: { verbose, severity, infiniteScroll: iScrollEnabled } } = themeOptions
+    const { routes, siteConfig } = themeOptions
+    const { verbose, severity, infiniteScroll: iScrollEnabled, excludePostsOrPages = (() => false) } = siteConfig
     const basePath = routes && routes.basePath || `/`
     const collections = routes && routes.collections || []
     const log = useLog(reporter, verbose, severity)
@@ -205,6 +215,11 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
         tags: result.data.allGhostTag.edges,
         authors: result.data.allGhostAuthor.edges,
     }
+
+    // exclude posts or pages
+    data.posts = data.posts.filter(({ node }) => !excludePostsOrPages(node))
+    data.pages = data.pages.filter(({ node }) => !excludePostsOrPages(node))
+    calcPostCounts(data)
 
     log(`createPages: ${data.posts.length > 0 && data.posts[0].node.title}`)
 

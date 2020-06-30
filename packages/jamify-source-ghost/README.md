@@ -6,9 +6,10 @@ via the [Ghost Content API Client](https://ghost.org/docs/api/v3/javascript/cont
 ## Features
 
 - [First class](https://www.gatsbyjs.com/docs/integration-guide/source-plugin/) Gatsby source plugin ✨
-- Strictly typed schema
 - Only fetch new or updated content from Ghost CMS
 - Create or update GraphQL nodes only if content changes
+- Strictly typed schema
+- Foreign-key linking between post/pages and authors/tags
 - Enabling incremental builds on Gatsby Cloud
 
 ## Install
