@@ -7,13 +7,16 @@ Downloads remote inline images and processes them with the [Gatsby image tool ch
 
 ## Install
 
-`yarn add gatsby-transformer-rehype gatsby-rehype-inline-images`
+`yarn add gatsby-plugin-sharp gatsby-transformer-rehype gatsby-rehype-inline-images`
 
 ## How to use
 
 ```javascript
 // In your gatsby-config.js
 plugins: [
+  {
+    resolve: `gatsby-plugin-sharp`,
+  },
   {
     resolve: `gatsby-transformer-rehype`,
     options: {
