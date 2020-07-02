@@ -21,10 +21,15 @@ const SubscribeOverlay = ({ data, overlay }) => {
     }
     const text = get(useLang())
     const site = data.ghostSettings
+    const cmsUrl = site.url
     const title = text(`SITE_TITLE`, site.title)
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
     const closingStyle = { opacity: 0, pointerEvents: null }
+
+    if (site.logo) {
+        site.logo = site.logo.replace(cmsUrl, '');
+    }
 
     return (
         <div className="subscribe-overlay" style={ isOpen ? openingStyle : closingStyle } >
