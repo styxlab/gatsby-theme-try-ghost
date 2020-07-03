@@ -21,6 +21,7 @@ const SubscribeOverlay = ({ data, overlay }) => {
     }
     const text = get(useLang())
     const site = data.ghostSettings
+    const siteLogo = site.logoSharp && site.logoSharp.publicURL || site.logo
     const title = text(`SITE_TITLE`, site.title)
     const { isOpen, value, message } = overlay.state
     const openingStyle = { opacity: 1, pointerEvents: `auto` }
@@ -31,8 +32,8 @@ const SubscribeOverlay = ({ data, overlay }) => {
             <a className="subscribe-close-overlay" onClick={overlay.handleClose}></a>
             <a className="subscribe-close-button" onClick={overlay.handleClose}></a>
             <div className="subscribe-overlay-content">
-                {site.logo &&
-                    <img className="subscribe-overlay-logo" src={site.logo} alt={title} />
+                {siteLogo &&
+                    <img className="subscribe-overlay-logo" src={siteLogo} alt={title} />
                 }
                 <div className="subscribe-form">
                     <h1 className="subscribe-overlay-title">{text(`SUBSCRIBE_TO`)} {title}</h1>
