@@ -1,20 +1,20 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import { StaticQuery, graphql } from 'gatsby'
 
 import ImageMeta from './ImageMeta'
 import getAuthorProperties from './getAuthorProperties'
+import getShareImage from './getShareImage'
 
 const AuthorMeta = ({ data, settings, canonical }) => {
     const config = settings.site.siteMetadata
     settings = settings.allGhostSettings.edges[0].node
-    const settingsImgURL = settings.coverImageSharp && settings.coverImageSharp.publicURL
-    const authorImgURL = data.coverImageSharp && data.coverImageSharp.publicURL
 
     const author = getAuthorProperties(data)
-    const shareImage = author.image || authorImgURL || settingsImgURL || _.get(settings, `cover_image`, null)
+    const sharpImages = [author.image, data.coverImageSharp, settings.coverImageSharp]
+    const shareImage = getShareImage(sharpImages, settings.cover_image, config.siteUrl)
+
     const title = `${data.name} - ${settings.title}`
     const description = data.bio || config.siteDescriptionMeta || settings.description
 
@@ -26,9 +26,9 @@ const AuthorMeta = ({ data, settings, canonical }) => {
         url: canonical,
         image: shareImage ? {
             "@type": `ImageObject`,
-            url: shareImage,
-            width: config.shareImageWidth,
-            height: config.shareImageHeight,
+            url: shareImage.url,
+            width: shareImage.imageMeta.width,
+            height: shareImage.imageMeta.height,
         } : undefined,
         mainEntityOfPage: {
             "@type": `WebPage`,

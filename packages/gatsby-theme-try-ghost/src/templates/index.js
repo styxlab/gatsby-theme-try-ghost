@@ -17,13 +17,12 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
-    const image = data.file && data.file.childImageSharp && data.file.childImageSharp.fluid && data.file.childImageSharp.fluid.src
     const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || { action: `ssr` }
 
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
-                <MetaData location={location} image={image} />
+                <MetaData location={location} image={data.file} />
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
                     <OverlayContainer render={ overlay => (
                         <Layout action={action} isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
@@ -65,10 +64,10 @@ export const pageQuery = graphql`
       }
     }
     file(relativePath: {eq: "site-meta.png"}) {
-        childImageSharp {
-            fluid(maxWidth: 1280) {
-                ...GatsbyImageSharpFluid_withWebp
-            }
+        publicURL
+        imageMeta {
+            width
+            height
         }
     }
   }

@@ -1,14 +1,14 @@
 const cheerio = require(`cheerio`)
 const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
-const url = require(`url`)
+//const url = require(`url`)
 
 const generateItem = function generateItem(post) {
     const itemUrl = post.canonical_url || post.url
     const html = post.html || ``
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     //ToDo fetch siteUrl
-    //const featureImgUrl = url.resolve(config.siteUrl, post.featureImgSharp && post.featureImgSharp.publicURL || post.feature_image)
+    //const featureImgUrl = url.resolve(config.siteUrl, post.featureImageSharp && post.featureImageSharp.publicURL || post.feature_image)
     const featureImgUrl = post.feature_image
 
     const item = {

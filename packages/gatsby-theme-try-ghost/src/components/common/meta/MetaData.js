@@ -59,11 +59,6 @@ const MetaData = ({
         title = title || config.siteTitleMeta || settings.title
         description = description || config.siteDescriptionMeta || settings.description
 
-        const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || settings.cover_image
-        image = image || coverImgUrl || null
-
-        image = image ? url.resolve(config.siteUrl, image) : null
-
         return (
             <WebsiteMeta
                 data={{}}
@@ -97,7 +92,7 @@ MetaData.propTypes = {
     }).isRequired,
     title: PropTypes.string,
     description: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.object,
 }
 
 const MetaDataQuery = props => (

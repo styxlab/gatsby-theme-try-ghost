@@ -16,7 +16,7 @@ const SubscribeSuccess = ({ action, title }) => {
 }
 
 SubscribeSuccess.propTypes = {
-    action: PropTypes.string.isRequired,
+    action: PropTypes.string,
     title: PropTypes.string.isRequired,
 }
 

@@ -6,6 +6,7 @@ import _ from 'lodash'
 import url from 'url'
 
 import getAuthorProperties from './getAuthorProperties'
+import getShareImage from './getShareImage'
 import ImageMeta from './ImageMeta'
 
 import { tags as tagsHelper } from '@tryghost/helpers'
@@ -16,13 +17,13 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     settings = settings.allGhostSettings.edges[0].node
     const settingsLogo = settings.logoSharp && settings.logoSharp.publicURL
 
-    const featureImgUrl = ghostPost.featureImgSharp && ghostPost.featureImgSharp.publicURL || ghostPost.feature_image
-    const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || _.get(settings, `cover_image`, null)
-
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
-    const shareImage = featureImgUrl || coverImgUrl
+
+    const sharpImages = [ghostPost.featureImageSharp, settings.coverImageSharp]
+    const fallbackImage = ghostPost.feature_image || settings.cover_image
+    const shareImage = getShareImage(sharpImages, fallbackImage, config.siteUrl)
 
     const configLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
     const publisherLogo = settingsLogo || configLogo
@@ -43,9 +44,9 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
         dateModified: ghostPost.updated_at,
         image: shareImage ? {
             "@type": `ImageObject`,
-            url: shareImage,
-            width: config.shareImageWidth,
-            height: config.shareImageHeight,
+            url: shareImage.url,
+            width: shareImage.imageMeta.width,
+            height: shareImage.imageMeta.height,
         } : undefined,
         publisher: {
             "@type": `Organization`,

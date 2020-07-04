@@ -18,8 +18,6 @@ export const siteMetadataFields = graphql`
         postsPerPage
         siteTitleMeta
         siteDescriptionMeta
-        shareImageWidth
-        shareImageHeight
         shortTitle
         siteIcon
         backgroundColor
@@ -51,6 +49,10 @@ export const ghostTagFields = graphql`
         featureImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -80,6 +82,10 @@ export const ghostAuthorFields = graphql`
         coverImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -89,6 +95,10 @@ export const ghostAuthorFields = graphql`
         profileImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 110, quality: 100) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -182,6 +192,10 @@ export const ghostPostFields = graphql`
         featureImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -199,6 +213,10 @@ export const ghostPostFieldsForIndex = graphql`
         featureImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 700, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -282,6 +300,10 @@ export const ghostPageFields = graphql`
         featureImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040) {
                     ...GatsbyImageSharpFluid_withWebp
@@ -320,6 +342,10 @@ export const ghostSettingsFields = graphql`
         logoSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid {
                     ...GatsbyImageSharpFluid_withWebp
@@ -330,6 +356,10 @@ export const ghostSettingsFields = graphql`
         iconSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid {
                     ...GatsbyImageSharpFluid_withWebp
@@ -340,6 +370,10 @@ export const ghostSettingsFields = graphql`
         coverImageSharp {
             base
             publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040, quality: 90) {
                     ...GatsbyImageSharpFluid_withWebp
