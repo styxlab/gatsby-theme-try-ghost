@@ -1,10 +1,10 @@
 import React from 'react'
 import { Helmet } from "react-helmet"
 import PropTypes from 'prop-types'
-import _ from 'lodash'
 import { StaticQuery, graphql } from 'gatsby'
 import url from 'url'
 
+import getShareImage from './getShareImage'
 import ImageMeta from './ImageMeta'
 
 const WebsiteMeta = ({ data, settings, canonical, title, description, image, type }) => {
@@ -12,14 +12,12 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     settings = settings.allGhostSettings.edges[0].node
     const settingsLogo = settings.logoSharp && settings.logoSharp.publicURL
 
-    const featureImgUrl = data.featureImgSharp && data.featureImgSharp.publicURL || data.feature_image
-    const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || settings.cover_image
-
     const configLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
     const publisherLogo = settingsLogo || configLogo
 
-    let shareImage = image || featureImgUrl || coverImgUrl || null
-    shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
+    const sharpImages = [image, data.featureImageSharp, settings.coverImageSharp]
+    const fallbackImage = data.feature_image || settings.cover_image
+    const shareImage = getShareImage(sharpImages, fallbackImage, config.siteUrl)
 
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
     title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
@@ -31,9 +29,9 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
         image: shareImage ?
             {
                 "@type": `ImageObject`,
-                url: shareImage,
-                width: config.shareImageWidth,
-                height: config.shareImageHeight,
+                url: shareImage.url,
+                width: shareImage.imageMeta.width,
+                height: shareImage.imageMeta.height,
             } : undefined,
         publisher: {
             "@type": `Organization`,

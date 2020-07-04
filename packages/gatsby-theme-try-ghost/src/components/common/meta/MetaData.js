@@ -7,6 +7,8 @@ import ArticleMeta from './ArticleMeta'
 import WebsiteMeta from './WebsiteMeta'
 import AuthorMeta from './AuthorMeta'
 
+import getShareImage from './getShareImage'
+
 /**
 * MetaData will generate all relevant meta data information incl.
 * JSON-LD (schema.org), Open Graph (Facebook) and Twitter properties.
@@ -59,10 +61,9 @@ const MetaData = ({
         title = title || config.siteTitleMeta || settings.title
         description = description || config.siteDescriptionMeta || settings.description
 
-        const coverImgUrl = settings.coverImgSharp && settings.coverImgSharp.publicURL || settings.cover_image
-        image = image || coverImgUrl || null
-
-        image = image ? url.resolve(config.siteUrl, image) : null
+        const sharpImages = [image, settings.coverImageSharp]
+        const shareImage = getShareImage(sharpImages, settings.cover_image, config.siteUrl)
+        const imageUrl = shareImage && shareImage.url || null
 
         return (
             <WebsiteMeta
@@ -70,7 +71,7 @@ const MetaData = ({
                 canonical={canonical}
                 title={title}
                 description={description}
-                image={image}
+                image={imageUrl}
                 type="WebSite"
             />
         )

@@ -76,6 +76,9 @@ const SubscribeOverlayQuery = props => (
                 ghostSettings {
                     title
                     logo
+                    logoSharp {
+                        publicURL
+                    }
                 }
             }
         `}

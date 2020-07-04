@@ -42,6 +42,11 @@ export const contactPageFields = graphql`
         # ImgSharp
         featureImageSharp {
             base
+            publicURL
+            imageMeta {
+                width
+                height
+            }
             childImageSharp {
                 fluid(maxWidth: 1040, maxHeight: 250) {
                     ...GatsbyImageSharpFluid_withWebp
