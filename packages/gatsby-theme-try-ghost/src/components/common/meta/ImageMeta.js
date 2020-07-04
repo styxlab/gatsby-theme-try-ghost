@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet'
 import PropTypes from 'prop-types'
 
 const ImageMeta = ({ image }) => {
-    if (!image) {
+    if (!(image && image.url)) {
         return null
     }
 
