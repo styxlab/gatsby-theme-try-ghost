@@ -85,8 +85,6 @@ If you want to add this blog theme to an existing site, follow these instruction
                 postsPerPage: 3,
                 siteTitleMeta: `Gatsby frontend powered by headless Ghost CMS`,
                 siteDescriptionMeta: `Turn your Ghost blog into a flaring fast static site with Gatsby`, 
-                shareImageWidth: 1000,
-                shareImageHeight: 523,
                 shortTitle: `Ghost`,
                 siteIcon: `favicon.png`,
                 backgroundColor: `#e9e9e9`,

@@ -79,7 +79,7 @@ WebsiteMeta.propTypes = {
     canonical: PropTypes.string.isRequired,
     title: PropTypes.string,
     description: PropTypes.string,
-    image: PropTypes.string,
+    image: PropTypes.object,
     type: PropTypes.oneOf([`WebSite`, `Series`]).isRequired,
 }
 

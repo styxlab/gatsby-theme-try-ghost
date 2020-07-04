@@ -19,7 +19,7 @@ const ImageMeta = ({ image }) => {
 }
 
 ImageMeta.propTypes = {
-    image: PropTypes.string,
+    image: PropTypes.object,
 }
 
 export default ImageMeta
