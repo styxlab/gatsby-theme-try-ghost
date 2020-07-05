@@ -11,6 +11,9 @@ npm-upgrade
 cd ../gatsby-plugin-ghost-images
 npm-upgrade
 
+cd ../gatsby-rehype-ghost-images
+npm-upgrade
+
 cd ../gatsby-rehype-ghost-links
 npm-upgrade
 

@@ -1,0 +1,44 @@
+{
+    "name": "gatsby-rehype-ghost-images",
+    "description": "Gatsby rehype plugin that rewrites absolute links to relative links coming from a Ghost CMS.",
+    "version": "1.0.0",
+    "license": "MIT",
+    "author": "darkninja462",
+    "homepage": "https://github.com/styxlab/",
+    "main": "gatsby-node.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-images"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "scripts": {
+        "build": "babel src --out-dir . --ignore **/__tests__",
+        "prepare": "cross-env NODE_ENV=production npm run build",
+        "watch": "babel -w src --out-dir . --ignore **/__tests__"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "rehype",
+        "html",
+        "jamify",
+        "ghost",
+        "ghost-cms"
+    ],
+    "devDependencies": {
+        "@babel/cli": "7.10.4",
+        "@babel/core": "7.10.4",
+        "babel-preset-gatsby-package": "0.5.1",
+        "cross-env": "7.0.2"
+    },
+    "peerDependencies": {
+        "gatsby": "^2.23.20"
+    },
+    "dependencies": {
+        "@babel/runtime": "7.10.4",
+        "lodash": "^4.17.15",
+        "unist-util-visit": "^2.0.2"
+    }
+}
