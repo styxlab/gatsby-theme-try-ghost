@@ -21,7 +21,7 @@ export const TocAside = styled.aside`
             top: 120px;
             min-width: 260px;
             font-size: 1.4rem;
-            padding: 0 0.8rem;
+            padding: 0 2.4rem;
             margin-left: 0.2rem;
         }
     }
