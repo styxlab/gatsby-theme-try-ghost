@@ -52,6 +52,10 @@ const gatsbyNodeQuery = `{
                     coverImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 1040, quality: 90) {
                                 base64
@@ -67,6 +71,10 @@ const gatsbyNodeQuery = `{
                     profileImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 110, quality: 100) {
                                 base64
@@ -97,6 +105,10 @@ const gatsbyNodeQuery = `{
                     coverImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 1040, quality: 90) {
                                 base64
@@ -112,6 +124,10 @@ const gatsbyNodeQuery = `{
                     profileImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 110, quality: 90) {
                                 base64
@@ -141,6 +157,10 @@ const gatsbyNodeQuery = `{
                     featureImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 1040, quality: 90) {
                                 base64
@@ -169,6 +189,10 @@ const gatsbyNodeQuery = `{
                     featureImageSharp {
                         base
                         publicURL
+                        imageMeta {
+                            width
+                            height
+                        }
                         childImageSharp {
                             fluid(maxWidth: 1040, quality: 90) {
                                 base64

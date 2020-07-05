@@ -15,10 +15,6 @@ module.exports = {
     // This allows an site description for meta data for pages.
     siteDescriptionMeta: `Gastby with Ghost CMS and Casper Theme`,
 
-    // Change to the width and height of your default share image
-    shareImageWidth: 1000,
-    shareImageHeight: 523,
-
     // Used for App and Offline manifest e.g. Mobile Home Screen
     shortTitle: `Jamify`,
     siteIcon: `favicon.png`,

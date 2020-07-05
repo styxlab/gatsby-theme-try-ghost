@@ -1,7 +1,7 @@
 {
     "name": "gatsby-transformer-rehype",
     "description": "Gatsby transformer plugin for HTML using the Rehype library and ecosystem",
-    "version": "1.7.1",
+    "version": "1.7.3",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -39,10 +39,10 @@
     "devDependencies": {
         "@babel/cli": "7.10.4",
         "@babel/core": "7.10.4",
-        "babel-preset-gatsby-package": "0.5.0",
+        "babel-preset-gatsby-package": "0.5.1",
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": "^2.23.14"
+        "gatsby": "^2.23.20"
     }
 }

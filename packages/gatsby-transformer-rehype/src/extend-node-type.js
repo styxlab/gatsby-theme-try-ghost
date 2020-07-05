@@ -158,7 +158,11 @@ module.exports = ({
                 return cachedHTML
             } else {
                 const htmlAst = await getAst(htmlNode)
-                const html = rehype.stringify(htmlAst)
+
+                // ToDo: need transform map and apply it on htmlAst
+                const html = rehype
+                    .stringify(htmlAst)
+                    .replace(`img-sharp-inline`,`img`)
 
                 // Save new HTML to cache
                 cache.set(htmlCacheKey(htmlNode), html)

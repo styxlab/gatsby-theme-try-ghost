@@ -8,6 +8,7 @@ const paginate = require(`./src/utils/pagination`)
 const infiniteScroll = require(`./src/utils/infinite-scroll`)
 
 exports.createSchemaCustomization = require(`./src/utils/create-schema-customization`)
+exports.setFieldsOnGraphQLNodeType = require(`./src/utils/extend-node-type`)
 
 // Simple logging
 const useLog = (reporter, verbose, severity) => (message) => {
