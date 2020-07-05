@@ -129,6 +129,7 @@ module.exports = (themeOptions) => {
                                 node {
                                     title
                                     description
+                                    url
                                 }
                             }
                         }

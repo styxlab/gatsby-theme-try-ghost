@@ -1,15 +1,18 @@
 const cheerio = require(`cheerio`)
 const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
-//const url = require(`url`)
+const url = require(`url`)
 
-const generateItem = function generateItem(post) {
-    const itemUrl = post.canonical_url || post.url
-    const html = post.html || ``
+const generateItem = function generateItem(post, settings, config) {
+    const cmsUrl = settings.url
+    const postUrl = post.canonical_url || post.url
+    const itemUrl = _.replace(postUrl, cmsUrl , config.siteUrl)
+    const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+    const html = transformedHtml || post.html || ``
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
-    //ToDo fetch siteUrl
-    //const featureImgUrl = url.resolve(config.siteUrl, post.featureImageSharp && post.featureImageSharp.publicURL || post.feature_image)
-    const featureImgUrl = post.feature_image
+
+    const featureImgSharp = post.featureImageSharp && post.featureImageSharp.publicURL
+    const featureImgUrl = url.resolve(config.siteUrl, featureImgSharp) || post.feature_image
 
     const item = {
         title: post.title,
@@ -51,14 +54,17 @@ const generateItem = function generateItem(post) {
 
 const generateRSSFeed = function generateRSSFeed(siteConfig) {
     return {
-        serialize: ({ query: { allGhostPost } }) => allGhostPost.edges.map(edge => Object.assign({}, generateItem(edge.node))),
+        serialize: ({ query: { allGhostPost, allGhostSettings } }) => (
+            allGhostPost.edges.map(edge => (
+                Object.assign({}, generateItem(edge.node, allGhostSettings.edges[0].node, siteConfig))
+            ))
+        ),
         setup: ({ query: { allGhostSettings } }) => {
             const siteTitle = allGhostSettings.edges[0].node.title || `No Title`
             const siteDescription = allGhostSettings.edges[0].node.description || `No Description`
             const feed = {
                 title: siteTitle,
                 description: siteDescription,
-                // generator: `Ghost ` + data.safeVersion,
                 generator: `Jamify 1.0`,
                 feed_url: `${siteConfig.siteUrl}/rss/`,
                 site_url: `${siteConfig.siteUrl}/`,
@@ -115,6 +121,11 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                         # Additional fields
                         url
                         canonical_url
+
+                        childHtmlRehype {
+                            html
+                        }
+
                         featureImageSharp {
                             publicURL
                         }
@@ -124,7 +135,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
         }
   `,
         output: `/rss`,
-        title: `RSS Feed`,
+        title: `Jamify RSS Feed`,
     }
 }
 
