@@ -72,7 +72,7 @@ As this plugin mutates the `htmlAst` all changes are included in this syntax tre
 An image that is transformed gets additional properties:
 
 ```html
-<img-sharp-inline parentClassName="" className="" fluidImg="" alt="" />
+<img-sharp-inline parentClassName="" className="" fluidImg="" alt="" maxWidth="" />
 ```
 
 where
@@ -81,6 +81,7 @@ where
 - className: class attribute from replaced `img`
 - fluidImg: fluid image object as string (use JSON.parse(fluidImg) to transform back to object)
 - alt: alternative image title
+- maxWidth: maximum image width (number in pixels)
 
 These properties give you the needed flexibility in your React components.
 
