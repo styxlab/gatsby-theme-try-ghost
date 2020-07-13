@@ -34,21 +34,21 @@
     "dependencies": {
         "@babel/runtime": "7.10.4",
         "fs-extra": "^9.0.1",
-        "gatsby-plugin-sharp": "^2.6.17",
-        "gatsby-source-filesystem": "^2.3.18",
-        "lodash": "^4.17.15",
+        "gatsby-plugin-sharp": "^2.6.19",
+        "gatsby-source-filesystem": "^2.3.19",
+        "lodash": "^4.17.19",
         "path": "^0.12.7",
         "sharp": "^0.25.4",
-        "unist-util-visit-parents": "^3.0.2"
+        "unist-util-visit-parents": "^3.1.0"
     },
     "peerDependencies": {
-        "gatsby": "^2.23.20",
+        "gatsby": "^2.24.2",
         "gatsby-transformer-rehype": "1.7.3"
     },
     "devDependencies": {
         "@babel/cli": "7.10.4",
         "@babel/core": "7.10.4",
-        "babel-preset-gatsby-package": "0.5.1",
+        "babel-preset-gatsby-package": "0.5.2",
         "cross-env": "7.0.2"
     }
 }
