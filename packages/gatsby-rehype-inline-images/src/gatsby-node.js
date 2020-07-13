@@ -72,6 +72,7 @@ module.exports = async (pluginParams, pluginOptions) => {
             node.properties.className = image.className
             node.properties.fluidImg = JSON.stringify(image.fluid)
             node.properties.alt = image.alt
+            node.properties.maxWidth = image.maxWidth
 
             // add new class to parent for styling
             const fluidClass = `fluid-image`
@@ -128,9 +129,10 @@ const processImage = async ({ fileNode, node, pluginParams, pluginOptions }) => 
     image.alt = node.properties.alt || fileNode.name
     image.className = classList.join(` `)
 
-    const { fluidResult, aspectRatio } = await fluidImage({ fileNode, pluginParams, pluginOptions })
+    const { fluidResult, aspectRatio, maxWidth } = await fluidImage({ fileNode, pluginParams, pluginOptions })
     image.fluid = fluidResult
     image.aspectRatio = aspectRatio
+    image.maxWidth = maxWidth
 
     return image
 }
@@ -189,6 +191,7 @@ const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
         return ({
             fluidResult,
             aspectRatio,
+            maxWidth,
         })
     } catch (e) {
         throw Error(e)
