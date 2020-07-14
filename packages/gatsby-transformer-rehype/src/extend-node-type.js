@@ -152,6 +152,23 @@ module.exports = ({
             }
         }
 
+        function preserveHtmlTags(htmlAst) {
+            const tags = node => node.properties && node.properties.htmlTag && node.properties.htmlTag.length > 0
+
+            visit(htmlAst, tags, (node) => {
+                // preserve original html tag here
+                node.tagName = node.properties.htmlTag
+
+                // do not include these props in html output
+                const props = [...node.properties.htmlClearProps, `htmlTag`]
+                if (props.length > 1) {
+                    props.push(`htmlClearProps`)
+                }
+                props.forEach(prop => node.properties[prop] = null)
+            })
+            return htmlAst
+        }
+
         async function getHtml(htmlNode) {
             const cachedHTML = await cache.get(htmlCacheKey(htmlNode))
             if (cachedHTML) {
@@ -159,10 +176,8 @@ module.exports = ({
             } else {
                 const htmlAst = await getAst(htmlNode)
 
-                // ToDo: need transform map and apply it on htmlAst
-                const html = rehype
-                    .stringify(htmlAst)
-                    .replace(`img-sharp-inline`,`img`)
+                // clone htmlAst so it does not get mutated here
+                const html = rehype.stringify(preserveHtmlTags(_.cloneDeep(htmlAst)))
 
                 // Save new HTML to cache
                 cache.set(htmlCacheKey(htmlNode), html)

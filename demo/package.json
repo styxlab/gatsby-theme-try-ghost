@@ -24,8 +24,8 @@
     "gatsby-theme-ghost-members": "*",
     "gatsby-theme-try-ghost": "*",
     "gatsby-transformer-rehype": "*",
-    "preact": "^10.4.5",
-    "preact-render-to-string": "^5.1.9",
+    "preact": "^10.4.6",
+    "preact-render-to-string": "^5.1.10",
     "prismjs": "^1.20.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
