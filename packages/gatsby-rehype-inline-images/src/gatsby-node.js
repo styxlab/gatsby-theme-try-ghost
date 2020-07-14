@@ -68,8 +68,10 @@ module.exports = async (pluginParams, pluginOptions) => {
     await Promise.all(nodes.map(async ({ node, ancestor }) => {
         const image = await replaceNewImage(node, pluginParams, pluginOptions)
         if (image) {
-            // save original tag to property
+            // save original tag to special property
             node.properties.htmlTag = node.tagName
+
+            // add new tag and properties for React component
             node.tagName = `img-sharp-inline`
             node.properties.className = image.className
             node.properties.fluidImg = JSON.stringify(image.fluid)
@@ -86,6 +88,9 @@ module.exports = async (pluginParams, pluginOptions) => {
             const flex = `flex: ${image.aspectRatio} 1 0`
             const parentStyle = ancestor.properties.style
             ancestor.properties.style = Array.isArray(parentStyle) && [...parentStyle, flex] || [flex]
+
+            // do not include these props in html output
+            node.properties.htmlClearProps = [`className`, `fluidImg`, `htmlClearProps`, `parentClassName`]
         }
         return node
     }))

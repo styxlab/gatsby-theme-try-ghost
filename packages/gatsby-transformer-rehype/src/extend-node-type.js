@@ -47,7 +47,7 @@ module.exports = ({
     reporter,
     ...rest
 }, pluginOptions) => {
-    const { type: nodeType, htmlTagMapper } = _.merge({}, pluginDefaults, pluginOptions)
+    const { type: nodeType } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (type.name !== nodeType) {
         return {}
@@ -158,6 +158,10 @@ module.exports = ({
             visit(htmlAst, tags, (node) => {
                 node.tagName = node.properties.htmlTag
                 node.properties.htmlTag = null
+
+                // do not include these props in html output
+                const props = node.properties.htmlClearProps || []
+                props.forEach(prop => node.properties[prop] = null)
             })
             return htmlAst
         }
@@ -169,8 +173,8 @@ module.exports = ({
             } else {
                 const htmlAst = await getAst(htmlNode)
 
-                // copy htmlAst so it does not get mutated here
-                const html = rehype.stringify(preserveHtmlTags({...htmlAst}))
+                // clone htmlAst so it does not get mutated here
+                const html = rehype.stringify(preserveHtmlTags(_.cloneDeep(htmlAst)))
 
                 // Save new HTML to cache
                 cache.set(htmlCacheKey(htmlNode), html)
