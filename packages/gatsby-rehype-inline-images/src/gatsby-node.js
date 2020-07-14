@@ -90,7 +90,7 @@ module.exports = async (pluginParams, pluginOptions) => {
             ancestor.properties.style = Array.isArray(parentStyle) && [...parentStyle, flex] || [flex]
 
             // do not include these props in html output
-            node.properties.htmlClearProps = [`className`, `fluidImg`, `htmlClearProps`, `parentClassName`]
+            node.properties.htmlClearProps = [`className`, `fluidImg`, `parentClassName`]
         }
         return node
     }))
