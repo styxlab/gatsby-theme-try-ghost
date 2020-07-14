@@ -72,13 +72,13 @@ As this plugin mutates the `htmlAst` all changes are included in this syntax tre
 An image that is transformed gets additional properties:
 
 ```html
-<img-sharp-inline htmlTag="" htmlCleanProps="" parentClassName="" className="" fluidImg="" alt="" maxWidth="" />
+<img-sharp-inline htmlTag="" htmlClearProps="" parentClassName="" className="" fluidImg="" alt="" maxWidth="" />
 ```
 
 where
 
 - htmlTag: original tag name before transformation (always `img`)
-- htmlCleanProps: array of property names that should not be included in html output
+- htmlClearProps: array of property names that should not be included in html output
 - parentClassName: class attribute from parent plus `fluid-image`
 - className: class attribute from replaced `img`
 - fluidImg: fluid image object as string (use JSON.parse(fluidImg) to transform back to object)
