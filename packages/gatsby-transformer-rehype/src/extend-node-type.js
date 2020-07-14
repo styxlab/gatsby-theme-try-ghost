@@ -47,7 +47,7 @@ module.exports = ({
     reporter,
     ...rest
 }, pluginOptions) => {
-    const { type: nodeType } = _.merge({}, pluginDefaults, pluginOptions)
+    const { type: nodeType, htmlTagMapper } = _.merge({}, pluginDefaults, pluginOptions)
 
     if (type.name !== nodeType) {
         return {}
@@ -152,6 +152,15 @@ module.exports = ({
             }
         }
 
+        function mapTags(htmlAst, mapperFunc) {
+            const tags = node => mapperFunc(node.tagName).length > 0
+
+            visit(htmlAst, tags, (node) => {
+                node.tagName = mapperFunc(node.tagName)
+            })
+            return htmlAst
+        }
+
         async function getHtml(htmlNode) {
             const cachedHTML = await cache.get(htmlCacheKey(htmlNode))
             if (cachedHTML) {
@@ -159,10 +168,8 @@ module.exports = ({
             } else {
                 const htmlAst = await getAst(htmlNode)
 
-                // ToDo: need transform map and apply it on htmlAst
-                const html = rehype
-                    .stringify(htmlAst)
-                    .replace(`img-sharp-inline`,`img`)
+                // copy htmlAst so it does not get mutated here
+                const html = rehype.stringify(mapTags({...htmlAst}, htmlTagMapper))
 
                 // Save new HTML to cache
                 cache.set(htmlCacheKey(htmlNode), html)
