@@ -158,11 +158,10 @@ module.exports = ({
             visit(htmlAst, tags, (node) => {
                 // preserve original html tag here
                 node.tagName = node.properties.htmlTag
-                node.properties.htmlTag = null
 
                 // do not include these props in html output
-                const props = node.properties.htmlClearProps || []
-                if (props.length > 0) {
+                const props = [...node.properties.htmlClearProps, `htmlTag`]
+                if (props.length > 1) {
                     props.push(`htmlClearProps`)
                 }
                 props.forEach(prop => node.properties[prop] = null)
