@@ -68,6 +68,8 @@ module.exports = async (pluginParams, pluginOptions) => {
     await Promise.all(nodes.map(async ({ node, ancestor }) => {
         const image = await replaceNewImage(node, pluginParams, pluginOptions)
         if (image) {
+            // save original tag to property
+            node.properties.htmlTag = node.tagName
             node.tagName = `img-sharp-inline`
             node.properties.className = image.className
             node.properties.fluidImg = JSON.stringify(image.fluid)

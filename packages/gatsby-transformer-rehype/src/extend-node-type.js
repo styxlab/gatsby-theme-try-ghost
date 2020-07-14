@@ -152,11 +152,12 @@ module.exports = ({
             }
         }
 
-        function mapTags(htmlAst, mapperFunc) {
-            const tags = node => mapperFunc(node.tagName).length > 0
+        function preserveHtmlTags(htmlAst) {
+            const tags = node => node.properties && node.properties.htmlTag && node.properties.htmlTag.length > 0
 
             visit(htmlAst, tags, (node) => {
-                node.tagName = mapperFunc(node.tagName)
+                node.tagName = node.properties.htmlTag
+                node.properties.htmlTag = null
             })
             return htmlAst
         }
@@ -169,7 +170,7 @@ module.exports = ({
                 const htmlAst = await getAst(htmlNode)
 
                 // copy htmlAst so it does not get mutated here
-                const html = rehype.stringify(mapTags({...htmlAst}, htmlTagMapper))
+                const html = rehype.stringify(preserveHtmlTags({...htmlAst}))
 
                 // Save new HTML to cache
                 cache.set(htmlCacheKey(htmlNode), html)
