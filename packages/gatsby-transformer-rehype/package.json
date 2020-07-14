@@ -29,16 +29,16 @@
         "watch": "babel -w src --out-dir . --ignore **/__tests__"
     },
     "dependencies": {
-        "@babel/runtime": "7.10.4",
+        "@babel/runtime": "7.10.5",
         "hast-util-raw": "^6.0.0",
         "lodash": "^4.17.19",
         "rehype": "^11.0.0",
-        "unist-util-remove-position": "^2.0.1",
+        "unist-util-remove-position": "^3.0.0",
         "unist-util-visit": "^2.0.3"
     },
     "devDependencies": {
-        "@babel/cli": "7.10.4",
-        "@babel/core": "7.10.4",
+        "@babel/cli": "7.10.5",
+        "@babel/core": "7.10.5",
         "babel-preset-gatsby-package": "0.5.2",
         "cross-env": "7.0.2"
     },
