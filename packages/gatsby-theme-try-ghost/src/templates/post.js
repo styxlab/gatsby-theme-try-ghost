@@ -39,7 +39,7 @@ const Post = ({ data, location, pageContext }) => {
     const htmlAst = post.childHtmlRehype && post.childHtmlRehype.htmlAst
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
 
-    // Collection paths must be retreived from pageContext
+    // Collection paths must be retrieved from pageContext
     previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])
     if (prevPost) {
         prevPost.collectionPath = pageContext.collectionPaths[prevPost.id]
@@ -58,7 +58,7 @@ const Post = ({ data, location, pageContext }) => {
                 <OverlayContainer render={ overlay => (
                     <Layout isPost={true} sticky={sticky} overlay={overlay}
                         header={<HeaderPost sticky={sticky} title={post.title} overlay={overlay}/>}
-                        previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
+                        previewPosts={<PreviewPosts primaryTag={post.primary_tag} primaryTagCount={primaryTagCount} posts={previewPosts} prev={prevPost} next={nextPost}/>}>
                         <div className="inner">
                             <article className={`post-full ${postClass}`}>
                                 <header className="post-full-header">

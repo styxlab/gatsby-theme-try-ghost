@@ -9,10 +9,9 @@ import { resolveUrl } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
 
-const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
+const PreviewPosts = ({ primaryTag, posts, primaryTagCount, prev, next }) => {
     const { basePath } = useOptions()
     const text = get(useLang())
-    const primaryTag = posts && posts[0] && posts[0].node && posts[0].node.primary_tag
     const url = primaryTag && resolveUrl(basePath, `/`, primaryTag.slug, primaryTag.url)
 
     return (
@@ -55,6 +54,7 @@ const PreviewPosts = ({ posts, primaryTagCount, prev, next }) => {
 }
 
 PreviewPosts.propTypes = {
+    primaryTag: PropTypes.object.isRequired,
     posts: PropTypes.arrayOf(
         PropTypes.shape({
             node: PropTypes.shape({

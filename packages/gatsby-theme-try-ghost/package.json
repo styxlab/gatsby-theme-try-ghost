@@ -1,7 +1,7 @@
 {
   "name": "gatsby-theme-try-ghost",
   "description": "A Gatsby theme for building flaring fast blogs from headless Ghost CMS.",
-  "version": "1.43.0",
+  "version": "1.43.1",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",
@@ -69,7 +69,7 @@
     "styled-components": "^5.1.1"
   },
   "peerDependencies": {
-    "gatsby": "^2.24.2",
+    "gatsby": "^2.24.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -78,7 +78,7 @@
     "eslint": "^7.4.0",
     "eslint-plugin-ghost": "^1.5.0",
     "eslint-plugin-react": "^7.20.3",
-    "gatsby": "^2.24.2",
+    "gatsby": "^2.24.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }
