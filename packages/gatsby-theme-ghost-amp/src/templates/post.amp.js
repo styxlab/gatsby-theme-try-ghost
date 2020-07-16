@@ -58,7 +58,7 @@ const Post = ({ data, location, pageContext }) => {
                 <OverlayContainer render={ overlay => (
                     <Layout isPost={true} sticky={sticky} overlay={overlay}
                         header={<HeaderPost sticky={sticky} title={post.title} overlay={overlay}/>}
-                        previewPosts={<PreviewPosts posts={previewPosts} primaryTagCount={primaryTagCount} prev={prevPost} next={nextPost}/>}>
+                        previewPosts={<PreviewPosts primaryTag={post.primary_tag} primaryTagCount={primaryTagCount} posts={previewPosts} prev={prevPost} next={nextPost}/>}>
                         <div className="inner">
                             <article className={`post-full ${postClass}`}>
                                 <header className="post-full-header">
