@@ -39,7 +39,7 @@ const Post = ({ data, location, pageContext }) => {
     const htmlAst = post.childHtmlRehype && post.childHtmlRehype.htmlAst
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
 
-    // Collection paths must be retreived from pageContext
+    // Collection paths must be retrieved from pageContext
     previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])
     if (prevPost) {
         prevPost.collectionPath = pageContext.collectionPaths[prevPost.id]
