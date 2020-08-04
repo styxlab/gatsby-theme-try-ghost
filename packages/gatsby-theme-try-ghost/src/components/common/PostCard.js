@@ -26,6 +26,8 @@ const PostCard = ({ post, num, isHome }) => {
         fluidFeatureImg.srcSet = fluidFeatureImg.srcSet.replace(/(^|\r\n|\r|\n)\/static/g,`${mediaUrl}/static`).replace(/,https/g,`,\nhttps`)
     }
 
+    const authors = post.authors.filter((author, i) => (i < 2 ? true : false))
+
     return (
         <article className={`post-card ${postClass} ${large}`}>
 
@@ -50,9 +52,19 @@ const PostCard = ({ post, num, isHome }) => {
                 <footer className="post-card-meta">
                     <AuthorList authors={post.authors} />
                     <div className="post-card-byline-content">
-                        <span>
-                            <Link to={resolveUrl(basePath, `/`, post.primary_author.slug, post.primary_author.url)}>{post.primary_author.name}</Link>
-                        </span>
+                        {post.authors.length > 2 &&
+                            <span>MULTIPLE AUTHORS</span>
+                        }
+                        {post.authors.length < 3 &&
+                            <span>
+                                {authors.map((author, i) => (
+                                    <>
+                                        {i > 0 ? `, ` : ``}
+                                        <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
+                                    </>
+                                ))}
+                            </span>
+                        }
                         <span className="post-card-byline-date">
                             <time dateTime={post.published_at}>
                                 {post.published_at_pretty}&nbsp;

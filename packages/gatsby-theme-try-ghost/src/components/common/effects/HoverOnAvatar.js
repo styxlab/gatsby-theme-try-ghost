@@ -28,9 +28,11 @@ export default class HoverOnAvatar extends React.Component {
 
     onHoverOut = () => {
         let self = this
+
+        // no delay for multiple authors
         this.hoverTimeout = setTimeout(function () {
             self.setState({ currentClass: `` })
-        },800)
+        }, 0)
     }
 
     render() {

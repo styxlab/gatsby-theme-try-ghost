@@ -81,7 +81,10 @@ const Post = ({ data, location, pageContext }) => {
                                             <section className="post-full-byline-meta">
                                                 <h4 className="author-name">
                                                     {post.authors.map((author, i) => (
-                                                        <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
+                                                        <>
+                                                            {i > 0 ? `, ` : ``}
+                                                            <Link key={i} to={resolveUrl(basePath, `/`, author.slug, author.url)}>{author.name}</Link>
+                                                        </>
                                                     ))}
                                                 </h4>
                                                 <div className="byline-meta-content">

@@ -24,19 +24,17 @@ module.exports = ({ createResolvers }) => {
             },
             authors: {
                 resolve: (source, args, context) => (
-                    context.nodeModel
-                        .getAllNodes({ type: PrefixedGhostTypes.author })
-                        .filter(author => source.authors.find(
-                            postAuthor => author.id === `${GhostIdPrefix.author}${postAuthor.id}`) !== undefined
+                    source.authors
+                        .filter(postAuthor => context.nodeModel.getAllNodes({ type: PrefixedGhostTypes.author })
+                            .find(author => author.id === `${GhostIdPrefix.author}${postAuthor.id}`) !== undefined
                         )
                 ),
             },
             tags: {
                 resolve: (source, args, context) => (
-                    context.nodeModel
-                        .getAllNodes({ type: PrefixedGhostTypes.tag })
-                        .filter(tag => source.tags.find(
-                            postTag => tag.id === `${GhostIdPrefix.tag}${postTag.id}`) !== undefined
+                    source.tags
+                        .filter(postTag => context.nodeModel.getAllNodes({ type: PrefixedGhostTypes.tag })
+                            .find(tag => tag.id === `${GhostIdPrefix.tag}${postTag.id}`) !== undefined
                         )
                 ),
             },
@@ -60,19 +58,17 @@ module.exports = ({ createResolvers }) => {
             },
             authors: {
                 resolve: (source, args, context) => (
-                    context.nodeModel
-                        .getAllNodes({ type: PrefixedGhostTypes.author })
-                        .filter(author => source.authors.find(
-                            postAuthor => author.id === `${GhostIdPrefix.author}${postAuthor.id}`) !== undefined
+                    source.authors
+                        .filter(postAuthor => context.nodeModel.getAllNodes({ type: PrefixedGhostTypes.author })
+                            .find(author => author.id === `${GhostIdPrefix.author}${postAuthor.id}`) !== undefined
                         )
                 ),
             },
             tags: {
                 resolve: (source, args, context) => (
-                    context.nodeModel
-                        .getAllNodes({ type: PrefixedGhostTypes.tag })
-                        .filter(tag => source.tags.find(
-                            postTag => tag.id === `${GhostIdPrefix.tag}${postTag.id}`) !== undefined
+                    source.tags
+                        .filter(postTag => context.nodeModel.getAllNodes({ type: PrefixedGhostTypes.tag })
+                            .find(tag => tag.id === `${GhostIdPrefix.tag}${postTag.id}`) !== undefined
                         )
                 ),
             },
