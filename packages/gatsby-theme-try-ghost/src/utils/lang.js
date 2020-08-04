@@ -20,6 +20,7 @@ const lang = {
         SEE_ALL: `See all`,
         SUBSCRIBED_TO: `You've successfully subscribed to`,
         WEBSITE: `Website`,
+        MULTIPLE_AUTHORS: `Multiple authors`,
     },
     de: {
         A_COLLECTION_OF: `Zu diesem Thema gibt es`,
@@ -42,6 +43,7 @@ const lang = {
         SEE_ALL: `Alle`,
         SUBSCRIBED_TO: `Du hast dich erfolgreich angemeldet bei`,
         WEBSITE: `Webseite`,
+        MULTIPLE_AUTHORS: `Mehrere Autoren`,
     },
 }
 

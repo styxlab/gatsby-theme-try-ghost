@@ -53,7 +53,7 @@ const PostCard = ({ post, num, isHome }) => {
                     <AuthorList authors={post.authors} />
                     <div className="post-card-byline-content">
                         {post.authors.length > 2 &&
-                            <span>MULTIPLE AUTHORS</span>
+                            <span>{text(`MULTIPLE_AUTHORS`)}</span>
                         }
                         {post.authors.length < 3 &&
                             <span>
