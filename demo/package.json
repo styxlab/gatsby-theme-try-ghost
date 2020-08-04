@@ -11,7 +11,7 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.24.3",
+    "gatsby": "^2.24.26",
     "gatsby-plugin-ackee-tracker": "^1.4.0",
     "gatsby-plugin-netlify": "^2.3.11",
     "gatsby-plugin-preact": "^4.0.9",
@@ -32,10 +32,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.4.0",
+    "eslint": "^7.6.0",
     "eslint-plugin-ghost": "^1.5.0",
-    "eslint-plugin-react": "^7.20.3",
-    "gatsby": "^2.24.3",
+    "eslint-plugin-react": "^7.20.5",
+    "gatsby": "^2.24.26",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   }

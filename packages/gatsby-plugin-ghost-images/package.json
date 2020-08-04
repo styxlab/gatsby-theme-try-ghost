@@ -30,16 +30,16 @@
     },
     "devDependencies": {
         "@babel/cli": "7.10.5",
-        "@babel/core": "7.10.5",
+        "@babel/core": "7.11.0",
         "babel-preset-gatsby-package": "0.5.2",
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": "^2.24.3"
+        "gatsby": "^2.24.26"
     },
     "dependencies": {
-        "@babel/runtime": "7.10.5",
-        "gatsby-source-filesystem": "^2.3.19",
+        "@babel/runtime": "7.11.0",
+        "gatsby-source-filesystem": "^2.3.23",
         "lodash": "^4.17.19"
     }
 }

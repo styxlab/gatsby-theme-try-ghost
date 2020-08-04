@@ -25,7 +25,7 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.10.5",
+        "@babel/runtime": "^7.11.0",
         "formik": "^2.1.5",
         "gatsby-node-helpers": "^0.3.0",
         "gatsby-plugin-ghost-images": "^1.5.1",
@@ -33,9 +33,9 @@
     },
     "devDependencies": {
         "@babel/cli": "^7.10.5",
-        "@babel/core": "^7.10.5",
+        "@babel/core": "^7.11.0",
         "babel-preset-gatsby-package": "^0.5.2",
         "cross-env": "^7.0.2",
-        "gatsby": "^2.24.3"
+        "gatsby": "^2.24.26"
     }
 }
