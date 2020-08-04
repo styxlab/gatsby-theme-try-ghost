@@ -26,7 +26,7 @@
     "prismjs": "^1.20.0"
   },
   "peerDependencies": {
-    "gatsby": "^2.24.26",
+    "gatsby": "^2.24.27",
     "prismjs": "^1.20.0"
   },
   "keywords": [
