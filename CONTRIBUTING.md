@@ -24,11 +24,14 @@ For example, the [gatsby-rehype-prismjs](https://github.com/styxlab/gatsby-theme
 
 It's always rewarding to write a new plugin as you really see your own accomplishments. Again, choose something that is missing in your own project. Some obvious plugins that are currently missing are:
 
-- Social link plugin (social links can be more easily added and configured)
-- Google AMP pages
 - Search plugin (UI and backend)
+- A new theme (e.g. [London](https://london.ghost.io/elements/))
+- Social link plugin (social links can be more easily added and configured)
 - About page (similar to [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact))
-- Gatsby images within content areas
+
+# Typescipt
+
+This project has been written in plain JS and uses runtime type checking with property types. I am in favour of the strongly typed Typescript system, so type issues can already been detected at build time. The great thing about Typescript is that one can migrate to it incrementally. You can pick just one project file, convert it to Typescript and leave everything else as is. So, this is also a good place to contribute to this project.
 
 # Write unit tests
 
