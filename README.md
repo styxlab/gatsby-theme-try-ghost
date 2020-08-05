@@ -89,7 +89,7 @@ This project would not be possible without the great [Gatsby](https://www.gatsby
 
 ## Disclaimer
 
-This project is not affiliated with [Ghost](https://ghost.org/).
+This project is not affiliated with [Gatsby](https://www.gatsbyjs.org/) or [Ghost](https://ghost.org/).
 
 
 # Copyright & License
