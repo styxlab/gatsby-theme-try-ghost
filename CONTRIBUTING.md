@@ -29,7 +29,7 @@ It's always rewarding to write a new plugin as you really see your own accomplis
 - Social link plugin (social links can be more easily added and configured)
 - About page (similar to [gatsby-theme-ghost-contact](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact))
 
-# Typescipt
+# Help convert to Typescipt
 
 This project has been written in plain JS and uses runtime type checking with property types. I am in favour of the strongly typed Typescript system, so type issues can already been detected at build time. The great thing about Typescript is that one can migrate to it incrementally. You can pick just one project file, convert it to Typescript and leave everything else as is. So, this is also a good place to contribute to this project.
 
