@@ -7,6 +7,7 @@ import { BodyClass } from './helpers'
 
 import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
+import Search from '../Search'
 
 // Styles
 import '../../styles/screen.css'
@@ -48,6 +49,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
                 {/* The main content area */}
                 <main ref={isHome && sticky && sticky.anchorRef} id="site-main" className={`site-main outer ${errorClass}`}>
+                    <Search />
                     {/* All the main content gets inserted here, index.js, post.js */}
                     {children}
                 </main>
