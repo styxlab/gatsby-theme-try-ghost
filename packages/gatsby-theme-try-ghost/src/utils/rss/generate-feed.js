@@ -12,7 +12,7 @@ const generateItem = function generateItem(post, settings, config) {
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
 
     const featureImgSharp = post.featureImageSharp && post.featureImageSharp.publicURL
-    const featureImgUrl = url.resolve(config.siteUrl, featureImgSharp) || post.feature_image
+    const featureImgUrl = (featureImgSharp && url.resolve(config.siteUrl, featureImgSharp)) || post.feature_image
 
     const item = {
         title: post.title,
