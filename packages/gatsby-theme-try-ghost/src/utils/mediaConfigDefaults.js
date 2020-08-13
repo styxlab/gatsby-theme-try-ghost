@@ -9,7 +9,4 @@ module.exports = {
     // Fading in transition (default: true)
     gatsbyImageFadeIn: true,
 
-    // External URL for serving images, videos and other media
-    mediaUrl: ``,
-
 }

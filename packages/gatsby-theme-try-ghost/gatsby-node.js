@@ -260,12 +260,11 @@ exports.createPages = async ({ graphql, actions, reporter }, themeOptions) => {
 // Plugins can access basePath with GraphQL query
 exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, mediaConfig }) => {
     const { basePath = `/` } = routes
-    const { mediaUrl, gatsbyImageLoading, gatsbyImageFadeIn } = _.merge({}, mediaConfigDefaults, mediaConfig)
+    const { gatsbyImageLoading, gatsbyImageFadeIn } = _.merge({}, mediaConfigDefaults, mediaConfig)
 
     createTypes(`
         type GhostConfig implements Node @dontinfer {
             basePath: String!
-            mediaUrl: String
             gatsbyImageLoading: String
             gatsbyImageFadeIn: Boolean
         }
@@ -273,7 +272,6 @@ exports.sourceNodes = ({ actions: { createTypes, createNode } }, { routes = {}, 
 
     const config = {
         basePath: resolveUrl(basePath),
-        mediaUrl: mediaUrl && mediaUrl.replace(/\/$/,``),
         gatsbyImageLoading,
         gatsbyImageFadeIn,
     }
