@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-inline-images",
     "description": "Gatsby plugin to download external images",
-    "version": "1.6.0",
+    "version": "1.6.2",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -32,22 +32,22 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "7.11.0",
+        "@babel/runtime": "7.11.2",
         "fs-extra": "^9.0.1",
-        "gatsby-plugin-sharp": "^2.6.24",
-        "gatsby-source-filesystem": "^2.3.23",
+        "gatsby-plugin-sharp": "^2.6.27",
+        "gatsby-source-filesystem": "^2.3.24",
         "lodash": "^4.17.19",
         "path": "^0.12.7",
         "sharp": "^0.25.4",
         "unist-util-visit-parents": "^3.1.0"
     },
     "peerDependencies": {
-        "gatsby": "^2.24.27",
-        "gatsby-transformer-rehype": "1.8.0"
+        "gatsby": "^2.24.47",
+        "gatsby-transformer-rehype": "1.8.1"
     },
     "devDependencies": {
         "@babel/cli": "7.10.5",
-        "@babel/core": "7.11.0",
+        "@babel/core": "7.11.1",
         "babel-preset-gatsby-package": "0.5.2",
         "cross-env": "7.0.2"
     }
