@@ -1,7 +1,7 @@
 {
     "name": "gatsby-plugin-ghost-images",
     "description": "Gatsby plugin that downloads images from Ghost CMS to be used with Gatsby image tools.",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -35,11 +35,11 @@
         "cross-env": "7.0.2"
     },
     "peerDependencies": {
-        "gatsby": "^2.24.66"
+        "gatsby": "^2.24.67"
     },
     "dependencies": {
         "@babel/runtime": "7.11.2",
-        "gatsby-source-filesystem": "^2.3.31",
+        "gatsby-source-filesystem": "^2.3.32",
         "lodash": "^4.17.20"
     }
 }
