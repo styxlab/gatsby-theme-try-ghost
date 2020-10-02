@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-inline-images",
     "description": "Gatsby plugin to download external images",
-    "version": "1.7.1",
+    "version": "1.7.2",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -38,7 +38,7 @@
         "gatsby-source-filesystem": "^2.3.32",
         "lodash": "^4.17.20",
         "path": "^0.12.7",
-        "sharp": "^0.26.1",
+        "sharp": "0.25.4",
         "unist-util-visit-parents": "^3.1.0"
     },
     "peerDependencies": {
