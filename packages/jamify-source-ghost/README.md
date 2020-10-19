@@ -1,6 +1,6 @@
 # Jamify Source Ghost
 
-This plugin is depricated due to naming conflicts. Please use [gatsby-theme-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/packages/gatsby-source-try-ghost) instead.
+This plugin is depricated due to naming conflicts. Please use [gatsby-source-try-ghost](https://www.npmjs.com/package/gatsby-source-try-ghost) instead.
 
 # Copyright & License
 

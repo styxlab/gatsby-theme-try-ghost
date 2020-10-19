@@ -1,6 +1,6 @@
 {
   "name": "gatsby-source-try-ghost",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Gatsby source plugin for fetching content from headless Ghost CMS.",
   "repository": {
     "type": "git",

@@ -3,7 +3,7 @@
 Gatsby source plugin for pulling data from headless [Ghost CMS](https://ghost.org/changelog/jamstack/). This plugin uses the [Gatsby schema customization](https://www.gatsbyjs.org/docs/schema-customization/) API to provide a strictly typed content schema. Data is fetched
 via the [Ghost Content API Client](https://ghost.org/docs/api/v3/javascript/content/).
 
-*Note:* This plugin replaces [jamify-source-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/packages/jamify-source-ghost).
+*Note:* This plugin replaces [jamify-source-ghost](https://www.npmjs.com/package/jamify-source-ghost).
 
 ## Features
 
