@@ -49,7 +49,7 @@ module.exports = (themeOptions) => {
                 },
             },
             {
-                resolve: `jamify-source-ghost`,
+                resolve: `gatsby-source-try-ghost`,
                 options: {
                     ghostConfig: process.env.NODE_ENV === `development`
                         ? ghostConfig.development

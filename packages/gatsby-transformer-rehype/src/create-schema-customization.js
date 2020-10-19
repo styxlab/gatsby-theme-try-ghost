@@ -22,7 +22,8 @@ const useTypeExists = (store, name) => (type) => {
 
 module.exports = (nodeApiArgs, pluginOptions = {}) => {
     const { plugins = [] } = pluginOptions
-    const typeExists = useTypeExists(nodeApiArgs.store, `jamify-source-ghost`)
+    const typeExists = useTypeExists(nodeApiArgs.store, `jamify-source-ghost`) ||
+        useTypeExists(nodeApiArgs.store, `gatsby-source-try-ghost`)
 
     if (!typeExists(`HtmlRehype`)) {
         nodeApiArgs.actions.createTypes(typeDefs)
