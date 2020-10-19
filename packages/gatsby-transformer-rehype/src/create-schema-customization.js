@@ -22,9 +22,10 @@ const useTypeExists = (store, name) => (type) => {
 
 module.exports = (nodeApiArgs, pluginOptions = {}) => {
     const { plugins = [] } = pluginOptions
-    const typeExists = useTypeExists(nodeApiArgs.store, `jamify-source-ghost`)
+    const typeExistsDeprecated = useTypeExists(nodeApiArgs.store, `jamify-source-ghost`)
+    const typeExists = useTypeExists(nodeApiArgs.store, `gatsby-source-try-ghost`)
 
-    if (!typeExists(`HtmlRehype`)) {
+    if (!(typeExists(`HtmlRehype`) || typeExistsDeprecated(`HtmlRehype`))) {
         nodeApiArgs.actions.createTypes(typeDefs)
     }
 
