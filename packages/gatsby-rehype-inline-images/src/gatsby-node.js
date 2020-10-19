@@ -94,7 +94,6 @@ module.exports = async (pluginParams, pluginOptions) => {
         }
         return node
     }))
-
     return htmlAst
 }
 
@@ -127,7 +126,7 @@ const replaceNewImage = async (node, pluginParams, pluginOptions) => {
     }
 
     // process supported images
-    return processImage({ fileNode, node, pluginParams, pluginOptions })
+    return await processImage({ fileNode, node, pluginParams, pluginOptions })
 }
 
 const processImage = async ({ fileNode, node, pluginParams, pluginOptions }) => {
