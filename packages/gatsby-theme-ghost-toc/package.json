@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-toc",
     "description": "Gatsby theme to add table of contents (ToC) to gatsby-theme-try-ghost.",
-    "version": "1.5.1",
+    "version": "1.5.2",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -25,13 +25,13 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.11.2"
+        "@babel/runtime": "^7.12.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.11.6",
-        "@babel/core": "^7.11.6",
+        "@babel/cli": "^7.12.1",
+        "@babel/core": "^7.12.3",
         "babel-preset-gatsby-package": "^0.5.3",
         "cross-env": "^7.0.2",
-        "gatsby": "^2.24.67"
+        "gatsby": "^2.24.88"
     }
 }
