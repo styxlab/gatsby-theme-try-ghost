@@ -5,7 +5,7 @@ npm-upgrade
 cd packages/gatsby-theme-try-ghost
 npm-upgrade
 
-cd ../jamify-source-ghost
+cd ../gatsby-source-try-ghost
 npm-upgrade
 
 cd ../gatsby-plugin-ghost-images
