@@ -31,7 +31,7 @@ module.exports = async function onCreateNode({
             parent: node.id,
             context: context,
             internal: {
-                content: content,
+                content: content || ``,
                 type: type,
             },
         }

@@ -1,7 +1,7 @@
 {
     "name": "gatsby-rehype-inline-images",
     "description": "Gatsby plugin to download external images",
-    "version": "1.7.4",
+    "version": "1.7.5",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -43,7 +43,7 @@
     },
     "peerDependencies": {
         "gatsby": "^2.24.88",
-        "gatsby-transformer-rehype": "1.9.4"
+        "gatsby-transformer-rehype": "1.9.5"
     },
     "devDependencies": {
         "@babel/cli": "7.12.1",
