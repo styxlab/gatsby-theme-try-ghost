@@ -29,7 +29,7 @@ const DarkModeToggle = () => {
     const text = get(useLang())
 
     return (
-        <ThemeContext.Consumer>{theme => (
+        <ThemeContext.Consumer>{theme => (theme.dark !== null ? (
             <Button className="rss-button" onClick={theme.toggleDark} title={text(`DARK_MODE`)}>
                 { theme.dark ? (
                     <SunIconWrapper><SunIcon /></SunIconWrapper>
@@ -37,7 +37,7 @@ const DarkModeToggle = () => {
                     <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
                 )}
             </Button>
-        )}
+        ) : ``)}
         </ThemeContext.Consumer>
     )
 }
