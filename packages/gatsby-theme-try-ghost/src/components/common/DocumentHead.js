@@ -6,7 +6,7 @@ const DocumentHead = ({ site, className, action }) => (
     <Helmet>
         <html lang={site.lang} className="casper" />
         <style type="text/css">{`${site.codeinjection_styles}`}</style>
-        <body className={`${className} ${action && action === `subscribe` ? `subscribe-success` : null}`} />
+        <body className={`${className}`} />
     </Helmet>
 )
 

@@ -2594,13 +2594,13 @@ html.casper .subscribe-success-message {
     color: #fff;
     text-align: center;
     background: var(--green);
-    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
     transform: translateY(-175%);
 }
 
-html.casper .subscribe-success .subscribe-success-message {
-    visibility: visible;
-    transform: translateY(0);
+html.casper .subscribe-success-message .subscribe-close-button {
+    top: 50%;
+    transform: translateY(-58%);
 }
 
 html.casper .subscribe-success-message.close {

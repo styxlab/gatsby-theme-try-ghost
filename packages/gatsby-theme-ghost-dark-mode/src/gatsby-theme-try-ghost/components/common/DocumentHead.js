@@ -9,7 +9,7 @@ const DocumentHead = ({ site, className, action }) => (
         <Helmet>
             <html lang={site.lang} className="casper"/>
             <style type="text/css">{`${site.codeinjection_styles}`}</style>
-            <body className={`${className} ${theme.dark && `dark`}  ${action === `subscribe` ? `subscribe-success` : ``}`} />
+            <body className={`${className} ${theme.dark && `dark`} `} />
         </Helmet>
     )}
     </ThemeContext.Consumer>
