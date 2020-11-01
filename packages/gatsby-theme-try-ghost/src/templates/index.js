@@ -17,7 +17,8 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
-    const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || { action: `ssr` }
+    const parsedQuery = location.search && location.search.length > 0 && queryString.parse(location.search)
+    const { action } = parsedQuery.action ? parsedQuery : parsedQuery.ssr !== undefined ? {action:`ssr`} : false
 
     return (
         <GlobalStateContext.Consumer>{ g => (
