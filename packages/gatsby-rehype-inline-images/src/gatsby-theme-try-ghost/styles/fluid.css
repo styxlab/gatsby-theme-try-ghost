@@ -3,8 +3,7 @@
 /* Fluid inline images
 /* ---------------------------------------------------------- */
 
-html.casper .post-content {
-    display: block;
+html.casper .post-content figure {
     min-width: 100%;
 }
 
