@@ -4,7 +4,6 @@
 /* ---------------------------------------------------------- */
 
 html.casper .post-content {
-    display: block;
     min-width: 100%;
 }
 
@@ -24,4 +23,10 @@ html.casper .kg-bookmark-thumbnail .gatsby-image-wrapper {
     height: 100%;
     border-radius: 0 3px 3px 0;
     object-fit: cover;
+}
+
+@media (max-width:1040px) {
+    html.casper .post-content {
+        min-width: 100%;
+    }
 }

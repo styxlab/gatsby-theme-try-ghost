@@ -2092,7 +2092,7 @@ html.casper .post-full-content .kg-width-full .kg-image {
 }
 
 html.casper .post-full-content figure {
-    margin: 0.8em 0 2.3em;
+    margin: 0 0 2.3em;
 }
 
 html.casper .post-full-content h1 + figure,
@@ -2293,7 +2293,7 @@ html.casper .kg-bookmark-publisher {
 
 @media (max-width: 800px) {
     html.casper .post-full-content figure {
-        margin: 0.2em 0 1.3em;
+        margin: 0 0 1.3em;
     }
 
     html.casper .post-full-content h1 + figure,

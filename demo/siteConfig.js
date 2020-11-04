@@ -1,6 +1,6 @@
 module.exports = {
     // Do not include a trailing slash!
-    siteUrl: `https://tryghost404.netlify.app/`,
+    siteUrl: `https://demo.jamify.org`,
 
     // Enable infinite scroll (default: true)
     infiniteScroll: true,
