@@ -71,7 +71,7 @@ class PostView extends React.Component {
                 { iScrollEnabled && g.useInfiniteScroll &&
                     <noscript>
                         <style>
-                            {`.spinner { display: none !important; }`}
+                            {`${Spinner} { display: none !important; }`}
                         </style>
                         <Pagination pageContext={pageContext} />
                     </noscript>

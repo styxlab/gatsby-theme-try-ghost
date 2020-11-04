@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from 'prop-types'
-import { ThemeProvider } from "./src/context/ThemeContext"
+import { ThemeProvider, getDefault } from "./src/context/ThemeContext"
 
 export const wrapRootElement = ({ element }, themeOptions) => {
     const {
@@ -9,7 +9,7 @@ export const wrapRootElement = ({ element }, themeOptions) => {
     } = themeOptions
 
     return (
-        <ThemeProvider defaultMode={defaultModeDark} overrideOS={overrideOS}>{element}</ThemeProvider>
+        <ThemeProvider defaultMode={getDefault(defaultModeDark, overrideOS)} overrideOS={overrideOS}>{element}</ThemeProvider>
     )
 }
 
