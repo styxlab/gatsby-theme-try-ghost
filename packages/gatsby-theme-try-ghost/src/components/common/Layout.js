@@ -24,7 +24,7 @@ import '../../styles/toc.css'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, action, overlay }) => {
+const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, parsedQuery, overlay }) => {
     const { basePath } = useOptions()
     const text = get(useLang())
     const config = data.site.siteMetadata
@@ -40,7 +40,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
     return (
         <React.Fragment>
             {/* Dark Mode shadows DocumentHead */}
-            <DocumentHead site={site} className={bodyClass} action={action} />
+            <DocumentHead site={site} className={bodyClass} parsedQuery={parsedQuery} />
 
             <div className="site-wrapper">
                 {/* The main header section on top of the screen */}
@@ -75,7 +75,7 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
                 </footer>
             </div>
 
-            <SubscribeSuccess action={action} title={title} />
+            <SubscribeSuccess parsedQuery={parsedQuery} title={title} />
 
             {/* The big email subscribe modal content */}
             <SubscribeOverlay overlay={overlay} />
@@ -106,7 +106,7 @@ DefaultLayout.propTypes = {
     ),
     page: PropTypes.object,
     errorClass: PropTypes.string,
-    action: PropTypes.string,
+    parsedQuery: PropTypes.object,
     overlay: PropTypes.object,
 }
 

@@ -2584,7 +2584,7 @@ html.casper .error-link {
 /* 10. Subscribe Message and Overlay
 /* ---------------------------------------------------------- */
 
-html.casper .subscribe-success-message {
+html.casper .subscribe-notification {
     position: fixed;
     top: 0;
     right: 0;
@@ -2594,19 +2594,43 @@ html.casper .subscribe-success-message {
     color: #fff;
     text-align: center;
     background: var(--green);
-    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+    transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
     transform: translateY(-175%);
 }
 
-html.casper .subscribe-success-message .subscribe-close-button {
-    top: 50%;
-    transform: translateY(-58%);
+html.casper .subscribe-notification.subscribe-failure-message {
+    background: var(--red);
 }
 
-html.casper .subscribe-success-message.close {
+html.casper .subscribe-success .subscribe-success-message {
+    visibility: visible;
+    transform: translateY(0);
+}
+
+html.casper .subscribe-failure .subscribe-failure-message {
+    visibility: visible;
+    transform: translateY(0);
+}
+
+html.casper .subscribe-notification.close {
     visibility: hidden;
     transition: all 1.35s cubic-bezier(0.19, 1, 0.22, 1);
     transform: translateY(-175%);
+}
+
+html.casper .subscribe-notification .subscribe-close-button {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+html.casper .subscribe-notification .subscribe-close-button:before,
+html.casper .subscribe-notification .subscribe-close-button:after {
+    top: 31px;
+    right: 20px;
+    width: 18px;
+    height: 2px;
 }
 
 html.casper .subscribe-close-overlay {
