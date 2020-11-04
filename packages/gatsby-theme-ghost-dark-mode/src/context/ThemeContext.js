@@ -1,63 +1,52 @@
-import React from "react"
+import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
-*
-* Further info 👉🏼 https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/
-*
-*/
+ *
+ * Further info 👉🏼 https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/
+ *
+ */
 
-const defaultState = {
-    dark: false,
-    toggleDark: () => {},
-}
-
-const ThemeContext = React.createContext(defaultState)
+const ThemeContext = React.createContext({ dark: null })
 
 // Getting dark mode information from OS!
 // You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
-const supportsDarkMode = () => {
-    window.matchMedia(`(prefers-color-scheme: dark)`).matches === true
-}
-const supportsLightMode = () => {
-    window.matchMedia(`(prefers-color-scheme: light)`).matches === true
+const supportsDarkMode = () => window.matchMedia(`(prefers-color-scheme: dark)`).matches === true
+
+const supportsLightMode = () => window.matchMedia(`(prefers-color-scheme: light)`).matches === true
+
+const getLocalStoragelsDark = () => JSON.parse(localStorage.getItem(`dark`))
+
+export const getDefault = (defaultMode, overrideOS) => {
+    const lsDark = getLocalStoragelsDark()
+    if (lsDark !== null) {
+        return lsDark
+    } else if (overrideOS) {
+        return defaultMode
+    } else if (supportsDarkMode()) {
+        return true
+    } else if (supportsLightMode()) {
+        return false
+    } else {
+        return defaultMode
+    }
 }
 
 class ThemeProvider extends React.Component {
     state = {
-        dark: false,
+        dark: getDefault(this.props.defaultMode, this.props.overrideOS),
     }
 
     toggleDark = () => {
-        let dark = !this.state.dark
+        const dark = !this.state.dark
         localStorage.setItem(`dark`, JSON.stringify(dark))
         this.setState({ dark })
-    }
-
-    componentDidMount() {
-        // Getting dark mode value from localStorage!
-        const lsDark = JSON.parse(localStorage.getItem(`dark`))
-        if (lsDark !== null) {
-            this.setState({ dark: lsDark })
-        } else if (this.props.overrideOS) {
-            this.setState({ dark: this.props.defaultMode })
-        } else if (supportsDarkMode()) {
-            this.setState({ dark: true })
-        } else if (supportsLightMode()) {
-            this.setState({ dark: false })
-        } else {
-            this.setState({ dark: this.props.defaultMode })
-        }
     }
 
     render() {
         const { children } = this.props
         const { dark } = this.state
-        return (
-            <ThemeContext.Provider value={{ dark, toggleDark: this.toggleDark }}>
-                {children}
-            </ThemeContext.Provider>
-        )
+        return <ThemeContext.Provider value={{ dark, toggleDark: this.toggleDark }}>{children}</ThemeContext.Provider>
     }
 }
 

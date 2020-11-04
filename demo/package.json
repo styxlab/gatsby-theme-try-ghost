@@ -22,6 +22,7 @@
     "gatsby-theme-ghost-contact": "*",
     "gatsby-theme-ghost-dark-mode": "*",
     "gatsby-theme-ghost-members": "*",
+    "gatsby-theme-ghost-toc": "*",
     "gatsby-theme-try-ghost": "*",
     "gatsby-transformer-rehype": "*",
     "preact": "^10.5.5",

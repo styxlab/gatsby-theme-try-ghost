@@ -9,7 +9,7 @@ const DocumentHead = ({ site, className, parsedQuery :{action, success} }) => (
         <Helmet>
             <html lang={site.lang} className="casper"/>
             <style type="text/css">{`${site.codeinjection_styles}`}</style>
-            <body className={`${className} ${theme.dark && `dark`}  ${action && action === `subscribe`  ? success === `true` ? `subscribe-success` : `subscribe-failure` : ``}`} />
+            <body className={`${className} ${theme.dark ? `dark` : ``}${action && action === `subscribe`  ? success === `true` ? ` subscribe-success` : ` subscribe-failure` : ``}`} />
         </Helmet>
     )}
     </ThemeContext.Consumer>
