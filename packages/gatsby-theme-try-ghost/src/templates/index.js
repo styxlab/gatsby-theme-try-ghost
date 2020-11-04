@@ -17,15 +17,14 @@ import { GlobalStateContext } from "../context/GlobalState"
 */
 const Index = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
-    const { action } = location.search && location.search.length > 0 && queryString.parse(location.search) || { action: `ssr` }
-
+    const parsedQuery = location.search && location.search.length > 0 && queryString.parse(location.search)
     return (
         <GlobalStateContext.Consumer>{ g => (
             <React.Fragment>
                 <MetaData location={location} image={data.file} />
                 <StickyNavContainer throttle={300} activeClass="fixed-nav-active" render={ sticky => (
                     <OverlayContainer render={ overlay => (
-                        <Layout action={action} isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
+                        <Layout parsedQuery={parsedQuery !== '' ? parsedQuery : undefined } isHome={true} header={<HeaderIndex overlay={overlay}/>} sticky={sticky} overlay={overlay} >
                             <PostView globalState={g} pageContext={pageContext} posts={posts} isHome={true} />
                         </Layout>
                     )}/>
