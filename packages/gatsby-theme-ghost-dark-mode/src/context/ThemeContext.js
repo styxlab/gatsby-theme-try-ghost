@@ -1,13 +1,13 @@
-import React from "react"
+import React from 'react'
 import PropTypes from 'prop-types'
 
 /**
-*
-* Further info 👉🏼 https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/
-*
-*/
+ *
+ * Further info 👉🏼 https://www.gatsbyjs.org/blog/2019-01-31-using-react-context-api-with-gatsby/
+ *
+ */
 
-const ThemeContext = React.createContext({dark:null})
+const ThemeContext = React.createContext({ dark: null })
 
 // Getting dark mode information from OS!
 // You need macOS Mojave + Safari Technology Preview Release 68 to test this currently.
@@ -46,11 +46,7 @@ class ThemeProvider extends React.Component {
     render() {
         const { children } = this.props
         const { dark } = this.state
-        return (
-            <ThemeContext.Provider value={{ dark, toggleDark: this.toggleDark }}>
-                {children}
-            </ThemeContext.Provider>
-        )
+        return <ThemeContext.Provider value={{ dark, toggleDark: this.toggleDark }}>{children}</ThemeContext.Provider>
     }
 }
 

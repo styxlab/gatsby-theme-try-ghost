@@ -1,8 +1,10 @@
-const React = require("react")
+const React = require(`react`)
 
-const preBodyComponents = [<script
+const preBodyComponents = [
+    <script
+        key={1}
         dangerouslySetInnerHTML={{
-          __html: `
+            __html: `
             (function(){
                 window.isDark = JSON.parse(localStorage.getItem('dark'));
                 if ( window.isDark ) {
@@ -12,9 +14,10 @@ const preBodyComponents = [<script
                 }
             })()
           `,
-          }}
-        />]
+        }}
+    />,
+]
 
-exports.onRenderBody = ({
-  setPreBodyComponents
-}) => setPreBodyComponents(preBodyComponents)
+exports.onRenderBody = ({ setPreBodyComponents }) => {
+    setPreBodyComponents(preBodyComponents)
+}

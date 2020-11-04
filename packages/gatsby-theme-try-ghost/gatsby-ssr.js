@@ -1,20 +1,20 @@
-const React = require("react")
+const React = require(`react`)
 
 const HtmlAttributes = {
-  "data-support": "no-js"
+    'data-support': `no-js`,
 }
-const preBodyComponents = [<script
+const preBodyComponents = [
+    <script
+        key={1}
         dangerouslySetInnerHTML={{
-          __html: `
+            __html: `
             document.documentElement.dataset.support = 'js';
           `,
-          }}
-        />]
+        }}
+    />,
+]
 
-exports.onRenderBody = ({
-  setHtmlAttributes,
-  setPreBodyComponents
-}) => {
-  setHtmlAttributes(HtmlAttributes)
-  setPreBodyComponents(preBodyComponents)
+exports.onRenderBody = ({ setHtmlAttributes, setPreBodyComponents }) => {
+    setHtmlAttributes(HtmlAttributes)
+    setPreBodyComponents(preBodyComponents)
 }
