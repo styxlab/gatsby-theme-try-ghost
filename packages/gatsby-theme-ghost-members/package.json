@@ -1,7 +1,7 @@
 {
     "name": "gatsby-theme-ghost-members",
     "description": "Gatsby theme to easily add a members form to gatsby-theme-try-ghost",
-    "version": "1.5.0",
+    "version": "1.5.1",
     "license": "MIT",
     "author": "styxlab",
     "homepage": "https://github.com/styxlab/",
@@ -27,8 +27,8 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.12.1",
-        "styled-components": "^5.2.0"
+        "@babel/runtime": "^7.12.5",
+        "styled-components": "^5.2.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.12.1",
@@ -39,6 +39,6 @@
         "eslint": "^7.12.1",
         "eslint-plugin-ghost": "^2.0.0",
         "eslint-plugin-react": "^7.21.5",
-        "gatsby": "^2.24.88"
+        "gatsby": "^2.25.2"
     }
 }
