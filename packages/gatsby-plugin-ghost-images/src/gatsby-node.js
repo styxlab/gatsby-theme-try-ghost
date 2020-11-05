@@ -41,14 +41,14 @@ exports.onCreateNode = async function ({
     }
 
     // remaining image fields
-    const promises = allImgTags.map(async (tag) => {
+    const promises = allImgTags.map((tag) => {
         const imgUrl = node[tag].replace(/^\/\//,`https://`)
 
         if (verbose) {
             reporter.info(`${node.internal.type}/${tag}/${node.slug}/${imgUrl}`)
         }
 
-        return await createRemoteFileNode({
+        return createRemoteFileNode({
             url: imgUrl,
             parentNodeId: node.id,
             createNode,

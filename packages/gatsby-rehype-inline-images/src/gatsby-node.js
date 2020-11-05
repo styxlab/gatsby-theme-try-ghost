@@ -22,17 +22,24 @@ const fluidImageCacheKey = key => `gatsby-rehype-inline-images-fluid-image-${key
 
 const getContext = (node, field) => node && node.context && node.context[field]
 
-const copyToStatic = ({ file, pathPrefix = `` }) => {
+const copyToStatic = async ({ file, pathPrefix = `` }) => {
     const fileName = `${file.internal.contentDigest}/${file.base}`
 
     const publicPath = path.join(process.cwd(), `public`, `static`, fileName)
 
-    if (!fs.existsSync(publicPath)) {
-        fs.copy(file.absolutePath, publicPath, { dereference: true }, (err) => {
-            if (err) {
-                console.error(`error copying file from ${file.absolutePath} to ${publicPath}`, err)
-            }
-        })
+    let fileExists
+    try {
+        fileExists = await fs.stat(publicPath)
+    } catch {
+        fileExists = false
+    }
+
+    if (!fileExists) {
+        try {
+            await fs.copy(file.absolutePath, publicPath, { dereference: true })
+        } catch (err) {
+            console.error(`error copying file from ${file.absolutePath} to ${publicPath}`, err)
+        }
     }
 
     return `${pathPrefix}/static/${fileName}`
@@ -65,9 +72,11 @@ module.exports = async (pluginParams, pluginOptions) => {
         reporter.info(node.properties.src)
     })
 
-    await Promise.all(nodes.map(async ({ node, ancestor }) => {
-        const image = await replaceNewImage(node, pluginParams, pluginOptions)
+    const images = await Promise.all(nodes.map(({ node }) => replaceNewImage(node, pluginParams, pluginOptions)))
+
+    images.forEach((image, i) => {
         if (image) {
+            const { node, ancestor } = nodes[i]
             // save original tag to special property
             node.properties.htmlTag = node.tagName
 
@@ -92,8 +101,8 @@ module.exports = async (pluginParams, pluginOptions) => {
             // do not include these props in html output
             node.properties.htmlClearProps = [`className`, `fluidImg`, `parentClassName`]
         }
-        return node
-    }))
+    })
+
     return htmlAst
 }
 
@@ -118,7 +127,7 @@ const replaceNewImage = async (node, pluginParams, pluginOptions) => {
     // unsupported image files are copied to the `/static` folder
     if (!supportedExtensions[fileNode.extension]) {
         const { pathPrefix } = pluginParams
-        const src = copyToStatic({ file: fileNode, pathPrefix })
+        const src = await copyToStatic({ file: fileNode, pathPrefix })
 
         // mutate here
         node.properties.src = src
@@ -194,6 +203,7 @@ const fluidImage = async ({ fileNode, pluginParams, pluginOptions }) => {
         if (useImageCache) {
             await cache.set(fluidImageKey, JSON.stringify(fluidResult))
         }
+
         return ({
             fluidResult,
             aspectRatio,

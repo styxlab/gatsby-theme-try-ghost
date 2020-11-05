@@ -11,9 +11,9 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.24.88",
+    "gatsby": "^2.25.2",
     "gatsby-plugin-ackee-tracker": "^2.0.1",
-    "gatsby-plugin-netlify": "^2.3.25",
+    "gatsby-plugin-netlify": "^2.4.0",
     "gatsby-plugin-preact": "^4.0.16",
     "gatsby-rehype-ghost-links": "*",
     "gatsby-rehype-inline-images": "*",
