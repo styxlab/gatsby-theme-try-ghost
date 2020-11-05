@@ -38,6 +38,9 @@ class ThemeProvider extends React.Component {
     }
 
     toggleDark = () => {
+        if (this.state.dark === null) {
+            return
+        }
         const dark = !this.state.dark
         localStorage.setItem(`dark`, JSON.stringify(dark))
         this.setState({ dark })
