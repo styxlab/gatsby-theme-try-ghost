@@ -26,7 +26,7 @@
     ],
     "dependencies": {
         "@babel/runtime": "^7.12.5",
-        "formik": "^2.2.1",
+        "formik": "^2.2.2",
         "gatsby-node-helpers": "^0.3.0",
         "gatsby-plugin-ghost-images": "^1.7.0",
         "lodash": "^4.17.20"

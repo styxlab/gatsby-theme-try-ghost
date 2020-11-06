@@ -63,7 +63,7 @@
     "postcss-color-function": "^4.1.0",
     "postcss-custom-properties": "^10.0.0",
     "postcss-easy-import": "^3.0.0",
-    "query-string": "^6.13.6",
+    "query-string": "^6.13.7",
     "react-helmet": "^6.1.0",
     "react-icons": "^3.11.0",
     "rehype-react": "^6.1.0",

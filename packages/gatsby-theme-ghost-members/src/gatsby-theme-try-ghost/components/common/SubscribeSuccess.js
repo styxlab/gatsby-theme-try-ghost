@@ -6,8 +6,9 @@ import { useLang, get } from '../../../utils/use-lang'
 const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     const [type, setType] = useState(``)
     const [closeState, setCloseState] = useState(``)
-    const {action, success} = parsedQuery
-    const showBanner = typeof window === `undefined` || (action && action === `subscribe` && success !== undefined)
+    const { action, success } = parsedQuery
+    const ssr = typeof window === `undefined`
+    const showBanner = ssr || (action && action === `subscribe` && success !== undefined)
     const text = get(useLang())
     const message = success === `true` ? `${text(`SUBSCRIBED_TO`)} ${title}!` : `Could not sign up! Invalid sign up link.`
     useEffect(() => {
@@ -17,8 +18,8 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     }
     , [setType, action])
 
-    return showBanner ? (
-        <div className={`subscribe-notification subscribe-${type}-message${closeState}`}>
+    return (
+        <div className={`subscribe-notification subscribe-${type}-message${closeState}`} style={{ opacity: showBanner }}>
             <a
                 onClick={(e) => {
                     e.preventDefault()
@@ -28,12 +29,13 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
             ></a>
             {message}
         </div>
-    ) : ''
+    )
 }
 
 SubscribeSuccess.propTypes = {
     action: PropTypes.string,
     title: PropTypes.string.isRequired,
+    parsedQuery: PropTypes.object,
 }
 
 export default SubscribeSuccess
