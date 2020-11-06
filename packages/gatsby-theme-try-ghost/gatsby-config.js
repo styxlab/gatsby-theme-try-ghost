@@ -221,7 +221,7 @@ module.exports = (themeOptions) => {
                         require(`postcss-custom-properties`)({
                             preserve: false,
                         }),
-                        require(`postcss-color-function`)(),
+                        require(`postcss-color-mod-function`)(),
                         require(`autoprefixer`)(),
                         require(`cssnano`)(),
                     ],

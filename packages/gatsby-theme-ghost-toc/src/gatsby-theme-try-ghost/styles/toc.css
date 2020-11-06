@@ -64,7 +64,7 @@ html.casper figure.kg-width-full:not(.fluid-image) img {
 /* Dark mode */
 html.casper body.dark .post-full-content aside {
     color: #BBB;
-    background: color(var(--darkgrey) alpha(0.6));
+    background: color-mod(var(--darkgrey) alpha(0.6));
 }
 html.casper body.dark .post-full-content aside a {
     box-shadow: none;

@@ -39,6 +39,6 @@
         "eslint": "^7.12.1",
         "eslint-plugin-ghost": "^2.0.0",
         "eslint-plugin-react": "^7.21.5",
-        "gatsby": "^2.25.2"
+        "gatsby": "^2.25.3"
     }
 }

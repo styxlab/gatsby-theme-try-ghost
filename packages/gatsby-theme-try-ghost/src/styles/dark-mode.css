@@ -22,7 +22,7 @@
 
     html.casper .post-card,
     html.casper .post-card:hover {
-        border-bottom-color: color(var(--darkmode) l(+8%));
+        border-bottom-color: color-mod(var(--darkmode) l(+8%));
     }
 
     html.casper .author-profile-image {
@@ -46,12 +46,12 @@
     }
 
     html.casper .post-card-excerpt {
-        color: color(var(--midgrey) l(+10%));
+        color: color-mod(var(--midgrey) l(+10%));
     }
 
     html.casper .author-avatar,
     html.casper .static-avatar {
-        border-color: color(var(--darkgrey) l(+2%));
+        border-color: color-mod(var(--darkgrey) l(+2%));
     }
 
     html.casper .site-main,
@@ -69,15 +69,15 @@
     }
 
     html.casper .post-full-custom-excerpt {
-        color: color(var(--midgrey) l(+10%));
+        color: color-mod(var(--midgrey) l(+10%));
     }
 
     html.casper .post-full-image {
-        background-color: color(var(--darkmode) l(+8%));
+        background-color: color-mod(var(--darkmode) l(+8%));
     }
 
     html.casper .post-full-byline {
-        border-top-color: color(var(--darkmode) l(+15%));
+        border-top-color: color-mod(var(--darkmode) l(+15%));
     }
 
     html.casper .post-full-byline-meta h4 a {
@@ -89,12 +89,12 @@
     }
 
     html.casper .author-list-item .author-card {
-        background: color(var(--darkmode) l(+4%));
+        background: color-mod(var(--darkmode) l(+4%));
         box-shadow: 0 12px 26px rgba(0,0,0,0.4);
     }
 
     html.casper .author-list-item .author-card:before {
-        border-top-color: color(var(--darkmode) l(+4%));
+        border-top-color: color-mod(var(--darkmode) l(+4%));
     }
 
     html.casper .no-image .author-social-link a {
@@ -128,7 +128,12 @@
     }
 
     html.casper hr {
-        border-top-color: color(var(--darkmode) l(+8%));
+        border-top-color: color-mod(var(--darkmode) l(+8%));
+    }
+
+    html.casper .post-full-content hr:after {
+        background: color-mod(var(--darkmode) l(+8%));
+        box-shadow: var(--darkmode) 0 0 0 5px;
     }
 
     html.casper .post-full-content figcaption {
@@ -136,27 +141,31 @@
     }
 
     html.casper .post-full-content table td:first-child {
-        background-image: linear-gradient(to right, var(--darkmode) 50%, color(var(--darkmode) a(0%)) 100%);
+        background-image: linear-gradient(to right, var(--darkmode) 50%, color-mod(var(--darkmode) a(0%)) 100%);
     }
 
     html.casper .post-full-content table td:last-child {
-        background-image: linear-gradient(to left, var(--darkmode) 50%, color(var(--darkmode) a(0%)) 100%);
+        background-image: linear-gradient(to left, var(--darkmode) 50%, color-mod(var(--darkmode) a(0%)) 100%);
     }
 
     html.casper .post-full-content table th {
         color: rgba(255, 255, 255, 0.85);
-        background-color: color(var(--darkmode) l(+8%));
+        background-color: color-mod(var(--darkmode) l(+8%));
     }
 
     html.casper .post-full-content table th,
     html.casper .post-full-content table td {
-        border: color(var(--darkmode) l(+8%)) 1px solid;
+        border: color-mod(var(--darkmode) l(+8%)) 1px solid;
     }
 
     html.casper .post-full-content .kg-bookmark-container,
     html.casper .post-full-content .kg-bookmark-container:hover {
         color: rgba(255, 255, 255, 0.75);
         box-shadow: 0 0 1px rgba(255,255,255,0.9);
+    }
+
+    html.casper .post-full-content input {
+        color: color-mod(var(--midgrey) l(-30%));
     }
 
     html.casper .kg-bookmark-title {
@@ -177,7 +186,7 @@
     }
 
     html.casper .site-archive-header .no-image .site-header-content {
-        border-bottom-color: color(var(--darkmode) l(+15%));
+        border-bottom-color: color-mod(var(--darkmode) l(+15%));
     }
 
     html.casper .site-header-content .author-profile-image {
@@ -186,7 +195,7 @@
 
     html.casper .subscribe-form {
         border: none;
-        background: linear-gradient(color(var(--darkmode) l(-6%)), color(var(--darkmode) l(-3%)));
+        background: linear-gradient(color-mod(var(--darkmode) l(-6%)), color-mod(var(--darkmode) l(-3%)));
     }
 
     html.casper .subscribe-form-title {
@@ -198,13 +207,13 @@
     }
 
     html.casper .subscribe-email {
-        border-color: color(var(--darkmode) l(+6%));
+        border-color: color-mod(var(--darkmode) l(+6%));
         color: rgba(255, 255, 255, 0.9);
-        background: color(var(--darkmode) l(+3%));
+        background: color-mod(var(--darkmode) l(+3%));
     }
 
     html.casper .subscribe-email:focus {
-        border-color: color(var(--darkmode) l(+25%));
+        border-color: color-mod(var(--darkmode) l(+25%));
     }
 
     html.casper .subscribe-form button {
@@ -213,11 +222,11 @@
 
     html.casper .subscribe-form .invalid .message-error,
     html.casper .subscribe-form .error .message-error {
-        color: color(var(--red) l(+5%) s(-5%));
+        color: color-mod(var(--red) l(+5%) s(-5%));
     }
 
     html.casper .subscribe-form .success .message-success {
-        color: color(var(--green) l(+5%) s(-5%));
+        color: color-mod(var(--green) l(+5%) s(-5%));
     }
 
     html.casper code[class*='language-'],
