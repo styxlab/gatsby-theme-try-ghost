@@ -42,7 +42,7 @@
         "unist-util-visit-parents": "^3.1.1"
     },
     "peerDependencies": {
-        "gatsby": "^2.25.2",
+        "gatsby": "^2.25.3",
         "gatsby-transformer-rehype": "1.9.6"
     },
     "devDependencies": {
