@@ -31,7 +31,9 @@ const DarkModeToggle = () => {
     return (
         <ThemeContext.Consumer>{theme => (
             <Button className="rss-button" onClick={theme.toggleDark} title={text(`DARK_MODE`)}>
-                { theme.dark ? (
+                { theme.dark === null ? (
+                    <MoonIconWrapper><svg viewBox="0 0 512 512"></svg></MoonIconWrapper>
+                ) : theme.dark ? (
                     <SunIconWrapper><SunIcon /></SunIconWrapper>
                 ) : (
                     <MoonIconWrapper><MoonIcon /></MoonIconWrapper>
