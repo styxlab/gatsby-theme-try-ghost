@@ -6,7 +6,7 @@ import { useLang, get } from '../../../utils/use-lang'
 const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     const [type, setType] = useState(``)
     const [closeState, setCloseState] = useState(``)
-    const [closeOpacity, setCloseOpacity] = useState(0)
+    const [closeButtonOpacity, setCloseButtonOpacity] = useState(0)
     const { action, success } = parsedQuery
     const ssr = typeof window === `undefined`
     const showBanner = ssr || (action && action === `subscribe` && success !== undefined)
@@ -15,7 +15,7 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     useEffect(() => {
         const timer = setTimeout(
             () =>
-                setCloseOpacity(1),
+                setCloseButtonOpacity(1),
             1500
         );
         setType(
@@ -23,11 +23,11 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
         )
         return () => clearTimeout(timer);
     }
-    , [setType, action])
+    , [setType, setCloseButtonOpacity, action])
 
     return (
         <div className={`subscribe-notification subscribe-${type}-message${closeState}`} style={{ opacity: showBanner }}>
-            <a style={{opacity: closeOpacity }}
+            <a style={{opacity: closeButtonOpacity }}
                 onClick={(e) => {
                     e.preventDefault()
                     setCloseState(` close`)
