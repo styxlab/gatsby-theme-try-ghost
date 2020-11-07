@@ -13,11 +13,12 @@ const ImgSharpInline = ({ parentClassName, className, fluidImg, alt, maxWidth })
     const widthInt = parseInt(maxWidth, 10)
     const mWidth = !fullWidth && image && widthInt > 0 && maxWidth
     const width = widthInt > 0 && Math.min(widthInt, max)
+
     const style = {
         height: `100%`,
-        position: `${bookmark ? `static` : `relative`}`,
-        margin: `${mWidth ? `auto` : `0 auto`}`,
-        width: `${width}px`,
+        position: bookmark ? `static` : `relative`,
+        margin: mWidth ? `auto` : `0 auto`,
+        width: width && width > 0 ? `${width}px` : `100%`,
         maxWidth: `100${fullWidth ? 'vw' : '%' }`,
     }
 
