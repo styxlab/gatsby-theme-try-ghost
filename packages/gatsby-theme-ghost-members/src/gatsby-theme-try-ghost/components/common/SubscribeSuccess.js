@@ -19,7 +19,7 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     , [setType, action])
 
     return (
-        <div className={`subscribe-notification subscribe-${type}-message${closeState}`} style={{ opacity: showBanner }}>
+        <div className={`subscribe-notification subscribe-${type}-message${closeState}`} style={{ opacity: showBanner ? 1 : 0 }}>
             <a
                 onClick={(e) => {
                     e.preventDefault()
