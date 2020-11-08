@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import { useLang, get } from '../../../utils/use-lang'
 
@@ -26,16 +27,16 @@ const SubscribeSuccess = ({ parsedQuery = {}, title }) => {
     , [setType, setCloseButtonOpacity, action])
 
     return (
-        <div className={`subscribe-notification subscribe-${type}-message${closeState}`} style={{ opacity: showBanner }}>
-            <a style={{opacity: closeButtonOpacity }}
+        <Banner opacity={showBanner} className={`subscribe-notification subscribe-${type}-message${closeState}`}>
+            <CloseButton opacity={closeButtonOpacity}
                 onClick={(e) => {
                     e.preventDefault()
                     setCloseState(` close`)
                 }}
                 className="subscribe-close-button"
-            ></a>
+            ></CloseButton>
             {message}
-        </div>
+        </Banner>
     )
 }
 
@@ -44,5 +45,25 @@ SubscribeSuccess.propTypes = {
     title: PropTypes.string.isRequired,
     parsedQuery: PropTypes.object,
 }
+const Banner = styled.div`
+    html.casper &.subscribe-notification {
+        opacity: ${props => props.opacity ? 1 : 0};
+        @media (max-width: 368px) {
+            padding: 5.5rem 0 2rem;
+        }
+    }
+`
+
+const CloseButton = styled.a`
+    html.casper .subscribe-notification &.subscribe-close-button {
+        left: unset;
+        right: 0;
+        width: 5rem;
+        opacity: ${props => props.opacity};
+        &:hover {
+            cursor: pointer;
+        }
+    }
+`
 
 export default SubscribeSuccess
