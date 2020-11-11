@@ -20,6 +20,7 @@
     "CHANGELOG.md",
     "**/__tests__/**",
     "**/__mocks__/**",
-    "**/__testfixtures__/**"
+    "**/__testfixtures__/**",
+    "demo/**"
   ]
 }
