@@ -4,23 +4,27 @@ import Img from 'gatsby-image'
 
 const ImgSharpInline = ({ parentClassName, className, fluidImg, alt, maxWidth }) => {
     const classList = parentClassName && parentClassName.split(` `) || []
-    const fullWidth = classList.includes(`kg-width-full`)
+    const wideWidth = classList.includes(`kg-width-wide`) ? 1040 : null
+    const fullWidth = classList.includes(`kg-width-full`) ? 5000 : null
     const bookmark = classList.includes(`kg-bookmark-thumbnail`)
-    const image = classList.includes(`kg-image-card`)
-
+    const image = classList.includes(`kg-image-card`) ? 700 : null
+    const max = wideWidth || fullWidth || image
     const fluid = fluidImg && JSON.parse(fluidImg)
-    const mWidth = !fullWidth && image && parseInt(maxWidth, 10) > 0 && maxWidth
-    const fWidth = parseInt(maxWidth, 10) > 0 && Math.min(parseInt(maxWidth, 10), 6000) || 6000
+    const widthInt = parseInt(maxWidth, 10)
+    const mWidth = !fullWidth && image && widthInt > 0 && maxWidth
+    const width = widthInt > 0 && Math.min(widthInt, max)
+
+    const style = {
+        height: `100%`,
+        position: bookmark ? `static` : `relative`,
+        margin: mWidth ? `auto` : `0 auto`,
+        width: width && width > 0 ? `${width}px` : `100%`,
+        maxWidth: `100${fullWidth ? 'vw' : '%' }`,
+    }
 
     return (
         <Img
-            style={{
-                height: `100%`,
-                position: `${bookmark ? null : `relative`}`,
-                width: `${fullWidth ? `${fWidth}px` : null}`,
-                maxWidth: `${mWidth ? `${mWidth}px` : null}`,
-                margin: `${mWidth ? `auto` : null}`,
-            }}
+            style={{...style}}
             className={className}
             fluid={fluid}
             alt={alt}
