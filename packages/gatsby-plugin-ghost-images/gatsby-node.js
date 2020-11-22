@@ -79,7 +79,7 @@ exports.onCreateNode = async function ({
 
   fileNodes.map((fileNode, i) => {
     const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}`;
-    node[id] = fileNode.id;
+    node[`${id}___NODE`] = fileNode.id;
   });
   return {};
 };
