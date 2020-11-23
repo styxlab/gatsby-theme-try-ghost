@@ -21,13 +21,13 @@
     "gatsby-cloud"
   ],
   "dependencies": {
-    "@tryghost/content-api": "1.4.8",
+    "@tryghost/content-api": "1.4.10",
     "cheerio": "1.0.0-rc.3",
     "gatsby-node-helpers": "0.3.0",
     "qs": "6.9.4"
   },
   "devDependencies": {
-    "eslint": "7.12.1",
+    "eslint": "7.14.0",
     "eslint-plugin-ghost": "2.0.0"
   }
 }
