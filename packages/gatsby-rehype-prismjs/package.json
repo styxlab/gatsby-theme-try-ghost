@@ -1,7 +1,7 @@
 {
   "name": "gatsby-rehype-prismjs",
   "description": "Adds syntax highlighting to HTML using PrismJS at build time.",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "MIT",
   "author": "styxlab",
   "homepage": "https://github.com/styxlab/",

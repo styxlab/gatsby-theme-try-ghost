@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.3](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@1.49.2...gatsby-theme-try-ghost@1.49.3) (2020-11-23)
+
+**Note:** Version bump only for package gatsby-theme-try-ghost
+
+
+
+
+
 ## [1.49.2](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@1.49.1...gatsby-theme-try-ghost@1.49.2) (2020-11-11)
 
 **Note:** Version bump only for package gatsby-theme-try-ghost

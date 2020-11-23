@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode/compare/gatsby-theme-ghost-dark-mode@1.8.4...gatsby-theme-ghost-dark-mode@1.8.5) (2020-11-23)
+
+**Note:** Version bump only for package gatsby-theme-ghost-dark-mode
+
+
+
+
+
 ## 1.8.4 (2020-11-06)
 
 
