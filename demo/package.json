@@ -11,10 +11,10 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.25.3",
-    "gatsby-plugin-ackee-tracker": "^2.0.1",
-    "gatsby-plugin-netlify": "^2.4.0",
-    "gatsby-plugin-preact": "^4.0.16",
+    "gatsby": "^2.27.0",
+    "gatsby-plugin-ackee-tracker": "^2.1.0",
+    "gatsby-plugin-netlify": "^2.6.0",
+    "gatsby-plugin-preact": "^4.2.0",
     "gatsby-rehype-ghost-links": "*",
     "gatsby-rehype-inline-images": "*",
     "gatsby-rehype-prismjs": "*",
@@ -25,15 +25,15 @@
     "gatsby-theme-ghost-toc": "*",
     "gatsby-theme-try-ghost": "*",
     "gatsby-transformer-rehype": "*",
-    "preact": "^10.5.5",
-    "preact-render-to-string": "^5.1.11",
+    "preact": "^10.5.7",
+    "preact-render-to-string": "^5.1.12",
     "prismjs": "^1.22.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.12.1",
+    "eslint": "^7.14.0",
     "eslint-plugin-ghost": "^2.0.0",
     "eslint-plugin-react": "^7.21.5",
     "react": "^17.0.1",
