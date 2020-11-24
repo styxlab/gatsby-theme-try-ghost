@@ -39,4 +39,4 @@ In order to make this repository more robust and to being able to handle more co
 
 # Where to go from here?
 
-If you have picked your area, a specific task or an idea where you want to contribute, just [get in contact](https://atmolabs.org/contact/), so we can coordinate.
+If you have picked your area, a specific task or an idea where you want to contribute, just [send a private message on twitter](https://twitter.com/JamifyJS), so we can coordinate.
