@@ -1,11 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StaticQuery, graphql, Link } from 'gatsby'
+import { StaticQuery, graphql } from 'gatsby'
 
-import { DocumentHead, StickyNav, SubscribeOverlay, SubscribeSuccess } from '.'
+import { DocumentHead, Footer, StickyNav, SubscribeOverlay, SubscribeSuccess } from '.'
 import { BodyClass } from './helpers'
 
-import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
 
 // Styles
@@ -25,15 +24,10 @@ import '../../styles/toc.css'
 *
 */
 const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, previewPosts, author, tags, page, errorClass, parsedQuery, overlay }) => {
-    const { basePath } = useOptions()
     const text = get(useLang())
-    const config = data.site.siteMetadata
     const site = data.allGhostSettings.edges[0].node
     const title = text(`SITE_TITLE`, site.title)
     const bodyClass = BodyClass({ isHome: isHome, isPost: isPost, author: author, tags: tags, page: page })
-
-    const twitterUrl = site.twitter && `https://twitter.com/${site.twitter.replace(/^@/, ``)}`
-    const facebookUrl = site.facebook && `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}`
 
     errorClass = errorClass || ``
 
@@ -57,22 +51,8 @@ const DefaultLayout = ({ data, header, children, isHome, isPost, sticky, preview
 
                 {/* Links to Previous/Next posts */}
                 {previewPosts}
-
-                {/* The footer at the very bottom of the screen */}
-                <footer className="site-footer outer" >
-                    <div className="site-footer-content inner">
-                        <section className="copyright">
-                            <a href={config.siteUrl}>{title}</a> &copy; {new Date().getFullYear()}
-                        </section>
-
-                        <nav className="site-footer-nav">
-                            <Link to={basePath}>{text(`LATEST_POSTS`)}</Link>
-                            { site.facebook && <a href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a> }
-                            { site.twitter && <a href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a> }
-                            <a href="https://www.jamify.org" target="_blank" rel="noopener noreferrer">Jamify</a>
-                        </nav>
-                    </div>
-                </footer>
+ 
+                <Footer data={data} />
             </div>
 
             <SubscribeSuccess parsedQuery={parsedQuery} title={title} />
