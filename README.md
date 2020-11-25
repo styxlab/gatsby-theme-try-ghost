@@ -75,7 +75,7 @@ cd gatsby-theme-try-ghost
 
 ## Contributions
 
-Special thanks go to the following contributors: [marcoSven](https://github.com/marcoSven), [jem](https://github.com/jempurich), [tobimori](https://github.com/tobimori) and [Torqu3Wr3nch](https://github.com/Torqu3Wr3nch).
+Special thanks go to the following contributors: [marcoSven](https://github.com/marcoSven), [jem](https://github.com/jempurich), [sawilde](https://github.com/sawilde), [tobimori](https://github.com/tobimori) and [Torqu3Wr3nch](https://github.com/Torqu3Wr3nch).
 
 PRs are welcome! Consider contributing to this project if you are missing feature that is also useful for others. Explore [this guide](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/CONTRIBUTING.md), to get some more ideas.
 
