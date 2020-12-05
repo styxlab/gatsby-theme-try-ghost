@@ -1,65 +1,64 @@
 # gatsby-theme-try-ghost
+
 [![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
 [![gatsby-theme-try-ghost npm package version.](https://badgen.net/npm/v/gatsby-theme-try-ghost)](https://www.npmjs.org/package/gatsby-theme-try-ghost)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
- 
+
 A Gatsby theme plugin for creating blogs from headless [Ghost CMS](https://ghost.org/changelog/jamstack/).
 
 Turn your Ghost blog into a flaring fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
 
+## 🔥 Variants
+
+Favor [Next.js](https://nextjs.org/) over Gatsby? Head over to [next-cms-ghost](https://github.com/styxlab/next-cms-ghost)!
 
 ## Tutorials ✨ 🆕
 
->Check out the [Tutorials](https://www.jamify.org) for practical guides on using this project.
-
+> Check out the [Tutorials](https://www.jamify.org) for practical guides on using this project.
 
 ## Demo
 
 Play with the [Demo](https://demo.jamify.org/) to get a first impression.
 
-
 ## Features
 
-- Ghost Casper look and feel
-- *Feature & inline* images with [lazy-loading and blur-up effect](https://using-gatsby-image.gatsbyjs.org/)  🚀🚀 🆕
-- Infinite Scroll ✨
-- Featured posts pinned on top 🆕
-- Sticky navigation headers
-- Hover on author avatar
-- Styled 404 page
-- SEO optimized
-- Fully responsive
-- Advanced routing 🆕
-- Composable and extensible
-- Incremental build enabled 🚀 🆕 
+-   Ghost Casper look and feel
+-   _Feature & inline_ images with [lazy-loading and blur-up effect](https://using-gatsby-image.gatsbyjs.org/) 🚀🚀 🆕
+-   Infinite Scroll ✨
+-   Featured posts pinned on top 🆕
+-   Sticky navigation headers
+-   Hover on author avatar
+-   Styled 404 page
+-   SEO optimized
+-   Fully responsive
+-   Advanced routing 🆕
+-   Composable and extensible
+-   Incremental build enabled 🚀 🆕
 
 ## Performance
 
 ![Lighthouse Score](https://static.gotsby.org/v1/assets/images/jamify-lighthouse.png)
 
-
 ## Plugins
 
 Additional features can be integrated by installing Gatsby themes or plugins. The following plugins have been tested to work with [`gatsby-theme-try-ghost`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-try-ghost):
 
-| Name | Version | Description |   
-| ---- | ------- | ----------- |
-| [`gatsby-theme-ghost-dark-mode`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode) | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-dark-mode)](https://www.npmjs.com/package/gatsby-theme-ghost-dark-mode) | Dark mode toggle 🌗 |
-| [`gatsby-rehype-ghost-links`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links) | [![version](https://badgen.net/npm/v/gatsby-rehype-ghost-links)](https://www.npmjs.com/package/gatsby-rehype-ghost-links) | Rewrite CMS links from absolute to relative |
-| [`gatsby-rehype-inline-images`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-inline-images) 🆕 | [![version](https://badgen.net/npm/v/gatsby-rehype-inline-images)](https://www.npmjs.com/package/gatsby-rehype-inline-images) | Lazy-loading inline images with blur-up |
-| [`gatsby-rehype-prismjs`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs) | [![version](https://badgen.net/npm/v/gatsby-rehype-prismjs)](https://www.npmjs.com/package/gatsby-rehype-prismjs) | Syntax highlighting with [PrismJS](http://prismjs.com/) |
-| [`gatsby-theme-ghost-contact`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact) | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.com/package/gatsby-theme-ghost-contact) | Contact page |
-| [`gatsby-theme-ghost-commento`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento) | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.com/package/gatsby-theme-ghost-commento) | Commenting system with [Commento](https://commento.io/) |
-| [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc) | Table of Contents |
-| [`gatsby-theme-ghost-members`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-members) 🆕 | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-members)](https://www.npmjs.com/package/gatsby-theme-ghost-members) | Member Subscriptions |
-| [`gatsby-plugin-ackee-tracker`](https://github.com/burnsy/gatsby-plugin-ackee-tracker) | [![version](https://badgen.net/npm/v/gatsby-plugin-ackee-tracker)](https://www.npmjs.com/package/gatsby-plugin-ackee-tracker) | Site tracking with [Ackee](https://github.com/electerious/Ackee) |
-| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics) | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | Site tracking with [Google Analytics](https://developers.google.com/analytics) |
-
+| Name                                                                                                                                   | Version                                                                                                                             | Description                                                                    |
+| -------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`gatsby-theme-ghost-dark-mode`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-dark-mode)  | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-dark-mode)](https://www.npmjs.com/package/gatsby-theme-ghost-dark-mode)     | Dark mode toggle 🌗                                                            |
+| [`gatsby-rehype-ghost-links`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links)        | [![version](https://badgen.net/npm/v/gatsby-rehype-ghost-links)](https://www.npmjs.com/package/gatsby-rehype-ghost-links)           | Rewrite CMS links from absolute to relative                                    |
+| [`gatsby-rehype-inline-images`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-inline-images) 🆕 | [![version](https://badgen.net/npm/v/gatsby-rehype-inline-images)](https://www.npmjs.com/package/gatsby-rehype-inline-images)       | Lazy-loading inline images with blur-up                                        |
+| [`gatsby-rehype-prismjs`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-prismjs)                | [![version](https://badgen.net/npm/v/gatsby-rehype-prismjs)](https://www.npmjs.com/package/gatsby-rehype-prismjs)                   | Syntax highlighting with [PrismJS](http://prismjs.com/)                        |
+| [`gatsby-theme-ghost-contact`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-contact)      | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-contact)](https://www.npmjs.com/package/gatsby-theme-ghost-contact)         | Contact page                                                                   |
+| [`gatsby-theme-ghost-commento`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento)    | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-commento)](https://www.npmjs.com/package/gatsby-theme-ghost-commento)       | Commenting system with [Commento](https://commento.io/)                        |
+| [`gatsby-theme-ghost-toc`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-toc) 🆕           | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-toc)](https://www.npmjs.com/package/gatsby-theme-ghost-toc)                 | Table of Contents                                                              |
+| [`gatsby-theme-ghost-members`](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-members) 🆕   | [![version](https://badgen.net/npm/v/gatsby-theme-ghost-members)](https://www.npmjs.com/package/gatsby-theme-ghost-members)         | Member Subscriptions                                                           |
+| [`gatsby-plugin-ackee-tracker`](https://github.com/burnsy/gatsby-plugin-ackee-tracker)                                                 | [![version](https://badgen.net/npm/v/gatsby-plugin-ackee-tracker)](https://www.npmjs.com/package/gatsby-plugin-ackee-tracker)       | Site tracking with [Ackee](https://github.com/electerious/Ackee)               |
+| [`gatsby-plugin-google-analytics`](https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-plugin-google-analytics)             | [![version](https://badgen.net/npm/v/gatsby-plugin-google-analytics)](https://www.npmjs.com/package/gatsby-plugin-google-analytics) | Site tracking with [Google Analytics](https://developers.google.com/analytics) |
 
 ## Installation
 
-> Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-ghost) to get up and running quickly! 
-
+> Head over to the [starter repo](https://github.com/styxlab/gatsby-starter-try-ghost) to get up and running quickly!
 
 If you want to add this blog theme to an existing site, follow these instructions:
 
@@ -76,47 +75,47 @@ If you want to add this blog theme to an existing site, follow these instruction
     ```js
     // gatsby-config.js
     module.exports = {
-    plugins: [
-        {
-        resolve: `gatsby-theme-try-ghost`,
-        options: {
-            siteConfig: {
-                siteUrl: `https://your-bog.com`,
-                postsPerPage: 3,
-                siteTitleMeta: `Gatsby frontend powered by headless Ghost CMS`,
-                siteDescriptionMeta: `Turn your Ghost blog into a flaring fast static site with Gatsby`, 
-                shortTitle: `Ghost`,
-                siteIcon: `favicon.png`,
-                backgroundColor: `#e9e9e9`,
-                themeColor: `#15171A`,
-                gatsbyImages: true,
-                // Overwrite navigation menu (default: []), label is case sensitive
-                // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
-            },
-            ghostConfig: {
-                "development": {
-                    "apiUrl": "https://your-ghost-cms.com",
-                    "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
+        plugins: [
+            {
+                resolve: `gatsby-theme-try-ghost`,
+                options: {
+                    siteConfig: {
+                        siteUrl: `https://your-bog.com`,
+                        postsPerPage: 3,
+                        siteTitleMeta: `Gatsby frontend powered by headless Ghost CMS`,
+                        siteDescriptionMeta: `Turn your Ghost blog into a flaring fast static site with Gatsby`,
+                        shortTitle: `Ghost`,
+                        siteIcon: `favicon.png`,
+                        backgroundColor: `#e9e9e9`,
+                        themeColor: `#15171A`,
+                        gatsbyImages: true,
+                        // Overwrite navigation menu (default: []), label is case sensitive
+                        // overwriteGhostNavigation: [{ label: `Home`, url: `/` }],
+                    },
+                    ghostConfig: {
+                        development: {
+                            apiUrl: "https://your-ghost-cms.com",
+                            contentApiKey: "9fcfdb1e5ea5b472e2e5b92942",
+                        },
+                        production: {
+                            apiUrl: "https://your-ghost-cms.com",
+                            contentApiKey: "9fcfdb1e5ea5b472e2e5b92942",
+                        },
+                    },
+                    //routes: {
+                    //    // Root url for Ghost posts and pages (optional, defaults to `/`)
+                    //    basePath: `/blog`,
+                    //
+                    //    // Collections (optional , default: [])
+                    //    collections: [{
+                    //        path: `speeches`,
+                    //        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
+                    //    }],
+                    //},
                 },
-                "production": {
-                    "apiUrl": "https://your-ghost-cms.com",
-                    "contentApiKey": "9fcfdb1e5ea5b472e2e5b92942",
-                },
             },
-            //routes: {
-            //    // Root url for Ghost posts and pages (optional, defaults to `/`)
-            //    basePath: `/blog`,
-            //
-            //    // Collections (optional , default: [])
-            //    collections: [{
-            //        path: `speeches`,
-            //        selector: node => node.primary_tag && node.primary_tag.slug === `speeches`,
-            //    }],
-            //},
-          },
-       },
-    ],  
-    }
+        ],
+    };
     ```
 
 3. Update siteConfig
@@ -125,7 +124,7 @@ If you want to add this blog theme to an existing site, follow these instruction
 
 4. Ghost Content API Keys
 
-    Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to *Integrations* and click *Add new integration*. Give the integration a name and click create.
+    Change the `apiUrl` value to the URL of your Ghost CMS site. Next, update the `contentApiKey` value to a key associated with the Ghost CMS site. A key can be provided by creating an integration within Ghost Admin. Navigate to _Integrations_ and click _Add new integration_. Give the integration a name and click create.
 
 5. Advanced Routing
 
@@ -141,8 +140,7 @@ gatsby develop
 
 ## Ensure headless mode of Ghost CMS
 
-For best SEO results it is strongly recommended to disable the default Ghost Handlebars theme front-end by selecting the *Make this site private* flag within your Ghost admin settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
-
+For best SEO results it is strongly recommended to disable the default Ghost Handlebars theme front-end by selecting the _Make this site private_ flag within your Ghost admin settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
 
 ## Contributions
 
