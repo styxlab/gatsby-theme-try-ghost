@@ -7,6 +7,7 @@ const ImgSharpInline = ({ parentClassName, className, fluidImg, alt, maxWidth })
     const wideWidth = classList.includes(`kg-width-wide`) ? 1040 : null
     const fullWidth = classList.includes(`kg-width-full`) ? 5000 : null
     const bookmark = classList.includes(`kg-bookmark-thumbnail`)
+    const bookmarkMeta = classList.includes(`kg-bookmark-metadata`)
     const image = classList.includes(`kg-image-card`) ? 700 : null
     const max = wideWidth || fullWidth || image
     const fluid = fluidImg && JSON.parse(fluidImg)
@@ -17,8 +18,8 @@ const ImgSharpInline = ({ parentClassName, className, fluidImg, alt, maxWidth })
     const style = {
         height: `100%`,
         position: bookmark ? `static` : `relative`,
-        margin: mWidth ? `auto` : `0 auto`,
-        width: width && width > 0 ? `${width}px` : `100%`,
+        margin: bookmarkMeta ? null : (mWidth ? `auto` : `0 auto`),
+        width: bookmark || width && width > 0 ? `${width}px` : (bookmarkMeta ? null : `100%`),
         maxWidth: `100${fullWidth ? 'vw' : '%' }`,
     }
 
