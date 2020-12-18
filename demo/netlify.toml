@@ -1,6 +1,6 @@
 [build]
   command = "gatsby build"
-  publish = "demo/public"
+  publish = "demo/public/"
 
 [template]
   incoming-hooks = ["Ghost"]
