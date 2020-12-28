@@ -23,9 +23,6 @@ npm-upgrade
 cd ../gatsby-theme-ghost-amp
 npm-upgrade
 
-cd ../gatsby-theme-ghost-commento
-npm-upgrade
-
 cd ../gatsby-theme-ghost-contact
 npm-upgrade
 

@@ -129,9 +129,9 @@ module.exports = {
                 },
             },
         },
-        {
-            resolve: `gatsby-theme-ghost-commento`,
-        },
+       // {
+       //     resolve: `gatsby-theme-ghost-commento`,
+       // },
         {
             resolve: `gatsby-plugin-ackee-tracker`,
             options: {
