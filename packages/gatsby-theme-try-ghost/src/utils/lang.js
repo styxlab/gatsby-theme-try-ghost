@@ -43,6 +43,28 @@ const lang = {
         WEBSITE: `Webseite`,
         MULTIPLE_AUTHORS: `Mehrere Autoren`,
     },
+	ru: {
+        A_COLLECTION_OF: `Коллекция`,
+        BY: `от`,
+        BY_THIS_AUTHOR: `этого автора`,
+        GOTO_FRONT_PAGE: `Перейти на главную страницу`,
+        LATEST_POSTS: `Последние посты`,
+        IS_REQUIRED: `требуется для`,
+        MIN_READ: `мин чтения`,
+        MORE_IN: `Больше в`,
+        MORE_POSTS: `Больше постов`,
+        MORE_POSTS_SM: `больше постов`,
+        NEXT: `Следующий`,
+        NO_POSTS: `Нет постов`,
+        PAGE_NOT_FOUND: `Страница не найдена`,
+        POST: `пост`,
+        POSTS: `постов`,
+        PREVIOUS: `Предыдущий`,
+        READ: `Читать`,
+        SEE_ALL: `Смотреть все`,
+        WEBSITE: `Вебсайт`,
+        MULTIPLE_AUTHORS: `Несколько авторов`,
+    },
 }
 
 module.exports = lang
