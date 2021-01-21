@@ -25,6 +25,19 @@ const lang = {
         SUBSCRIBED_TO: `Du hast dich erfolgreich angemeldet bei`,
         YOUR_EMAIL: `deinemail@example.de`,
     },
+	ru: {
+        CHECK_YOUR_INBOX: `Проверьте свой почтовый ящик и нажмите на ссылку, чтобы подтвердить подписку`,
+        EMAIL: `Email`,
+        ENTER_VALID_EMAIL: `Пожалуйста, введите действительный адрес электронной почты`,
+        GREAT: `Отлично`,
+        SUBSCRIBE: `Подписка`,
+        SUBSCRIBE_OVERLAY: `Будьте в курсе! Получайте все самые свежие и лучшие сообщения прямо на ваш почтовый ящик`,
+        SUBSCRIBE_SECTION: `Получайте самые свежие сообщения прямо на ваш почтовый ящик`,
+        SUBSCRIBE_TO: `Подписаться на`,
+        SUBSCRIBED_FAILED: `Не удалось зарегистрироваться! Неверная ссылка для регистрации.`,
+        SUBSCRIBED_TO: `Вы успешно подписались на`,
+        YOUR_EMAIL: `youremail@example.com`,
+    },
 }
 
 module.exports = lang

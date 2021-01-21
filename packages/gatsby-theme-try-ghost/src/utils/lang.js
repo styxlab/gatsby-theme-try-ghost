@@ -44,7 +44,7 @@ const lang = {
         MULTIPLE_AUTHORS: `Mehrere Autoren`,
     },
 	ru: {
-        A_COLLECTION_OF: `Коллекция`,
+        A_COLLECTION_OF: `В коллекции`,
         BY: `от`,
         BY_THIS_AUTHOR: `этого автора`,
         GOTO_FRONT_PAGE: `Перейти на главную страницу`,
