@@ -1,25 +1,18 @@
-const _ = require(`lodash`)
+const url = require(`url`)
 const visit = require(`unist-util-visit`)
 
-module.exports = ({ htmlAst, htmlNode, getNode, getNodesByType, reporter }) => {
+module.exports = ({ htmlAst, getNode, getNodesByType }) => {
     const config = getNode(`gatsby-theme-try-ghost-config`)
-    const basePath = config && config.basePath || `/`
+    const basePath = (config && config.basePath) || `/`
 
     const settings = getNodesByType(`GhostSettings`)
-    const cmsUrl = `${settings[0].url}/`
-
-    const url = htmlNode && htmlNode.context && htmlNode.context.url
-    const slug = htmlNode && htmlNode.context && htmlNode.context.slug
-
-    if (!url && slug){
-        reporter.warn(`Expected url and slug not defined.`)
-        return htmlAst
-    }
+    const cmsUrl = url.parse(settings[0].url)
 
     visit(htmlAst, { tagName: `a` }, (node) => {
-        const href = node.properties && node.properties.href
-        if (href && _.startsWith(href, cmsUrl)) {
-            node.properties.href = _.replace(href, cmsUrl , basePath)
+        const href = url.parse(node.properties && node.properties.href)
+
+        if (href.protocol === cmsUrl.protocol && href.host === cmsUrl.host) {
+            node.properties.href = basePath + href.pathname.substring(1)
         }
     })
 
