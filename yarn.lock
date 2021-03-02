@@ -8879,14 +8879,14 @@ gatsby-page-utils@^1.0.0:
     lodash "^4.17.20"
     micromatch "^4.0.2"
 
-gatsby-plugin-ackee-tracker@^2.1.0:
+gatsby-plugin-ackee-tracker@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-ackee-tracker/-/gatsby-plugin-ackee-tracker-2.2.0.tgz#6d517defed84373b2085916bd8ec7fd86c8277a8"
   integrity sha512-8M94z0Km6b/V24Nt/ucuNFfZjgDowKIwT5/Dde7Sc7caA3AvzumBUzC4tQyl0LpInZjLVqoS7JmYWqA4zOGFcw==
   dependencies:
     ackee-tracker "^5"
 
-gatsby-plugin-advanced-sitemap@^1.5.6:
+gatsby-plugin-advanced-sitemap@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.6.0.tgz#9976579110799480f3def0892591b6ede5bc284c"
   integrity sha512-GU0v3Qt8LagfYZH/KQJuDtjLT+B1ZuwUcT225gQG9v9OUKVGGnPHXhMCLZvqdH1Ntwa4X8Zh+g2B/FE/vT7UJQ==
@@ -8993,10 +8993,10 @@ gatsby-plugin-postcss@^3.2.0:
     "@babel/runtime" "^7.12.5"
     postcss-loader "^4.1.0"
 
-gatsby-plugin-preact@^4.2.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-4.7.0.tgz#2a4097db2eb8d859e1711a39d85ce662318c1b97"
-  integrity sha512-GkHr9hx2Kd5GvJbQREEN016+LTIBrHK3thfwI0muEpckISJXtLLaPD+4bjClLG51zy6y4JzLdSOw+wxt6BYG6Q==
+gatsby-plugin-preact@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-preact/-/gatsby-plugin-preact-5.0.0.tgz#aabc6c7625855454d0a5d94703776c405391d97b"
+  integrity sha512-snW1+lXk0LoZjkmeUpMAhQVNw47IGxqOtvnAwAVqqMAMuj9jFx6cJy6TP63/f2yXXHi+LfcJxPK34iV/t+ddJw==
   dependencies:
     "@prefresh/babel-plugin" "^0.4.0"
     "@prefresh/webpack" "^1.1.0"
@@ -15434,7 +15434,7 @@ preact-render-to-string@^5.1.12:
   dependencies:
     pretty-format "^3.8.0"
 
-preact@^10.5.7:
+preact@^10.5.12:
   version "10.5.12"
   resolved "https://registry.yarnpkg.com/preact/-/preact-10.5.12.tgz#6a8ee8bf40a695c505df9abebacd924e4dd37704"
   integrity sha512-r6siDkuD36oszwlCkcqDJCAKBQxGoeEGytw2DGMD5A/GGdu5Tymw+N2OBXwvOLxg6d1FeY8MgMV3cc5aVQo4Cg==
@@ -15523,7 +15523,7 @@ pretty-format@^3.8.0:
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-3.8.0.tgz#bfbed56d5e9a776645f4b1ff7aa1a3ac4fa3c385"
   integrity sha1-v77VbV6ad2ZF9LH/eqGjrE+jw4U=
 
-prismjs@^1.22.0, prismjs@^1.23.0:
+prismjs@^1.23.0:
   version "1.23.0"
   resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.23.0.tgz#d3b3967f7d72440690497652a9d40ff046067f33"
   integrity sha512-c29LVsqOaLbBHuIbsTxaKENh1N2EQBOHaWv7gkHN4dgRbxSREqDnDbtFJYdpPauS4YCplMSNCABQ6Eeor69bAA==

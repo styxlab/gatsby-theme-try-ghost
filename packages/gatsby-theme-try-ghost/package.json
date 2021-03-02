@@ -43,7 +43,7 @@
     "cssnano": "^4.1.10",
     "gatsby-background-image": "^1.4.1",
     "gatsby-image": "^2.6.0",
-    "gatsby-plugin-advanced-sitemap": "^1.5.6",
+    "gatsby-plugin-advanced-sitemap": "^1.6.0",
     "gatsby-plugin-amp": "^0.2.2",
     "gatsby-plugin-catch-links": "^3.0.0",
     "gatsby-plugin-feed": "^3.0.0",
