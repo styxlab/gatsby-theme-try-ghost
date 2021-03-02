@@ -3,7 +3,7 @@
 npm-upgrade
 
 
-#cd packages/gatsby-source-try-ghost
+cd packages/gatsby-source-try-ghost
 #npm-upgrade
 
 #cd ../gatsby-plugin-ghost-images
