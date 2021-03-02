@@ -2,10 +2,8 @@
 
 npm-upgrade
 
-cd packages/gatsby-theme-try-ghost
-npm-upgrade
 
-cd ../gatsby-source-try-ghost
+cd packages/gatsby-source-try-ghost
 npm-upgrade
 
 cd ../gatsby-plugin-ghost-images
@@ -39,6 +37,9 @@ cd ../gatsby-theme-ghost-toc
 npm-upgrade
 
 cd ../gatsby-transformer-rehype
+npm-upgrade
+
+cd ../gatsby-theme-try-ghost
 npm-upgrade
 
 cd ../../demo

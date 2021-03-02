@@ -27,18 +27,18 @@
         "ghost-cms"
     ],
     "dependencies": {
-        "@babel/runtime": "^7.12.5",
+        "@babel/runtime": "^7.13.9",
         "styled-components": "^5.2.1"
     },
     "devDependencies": {
-        "@babel/cli": "^7.12.7",
-        "@babel/core": "^7.12.7",
+        "@babel/cli": "^7.13.0",
+        "@babel/core": "^7.13.8",
         "babel-eslint": "^10.1.0",
-        "babel-preset-gatsby-package": "^0.7.0",
-        "cross-env": "^7.0.2",
-        "eslint": "^7.14.0",
+        "babel-preset-gatsby-package": "^1.0.0",
+        "cross-env": "^7.0.3",
+        "eslint": "^7.21.0",
         "eslint-plugin-ghost": "^2.0.0",
-        "eslint-plugin-react": "^7.21.5",
-        "gatsby": "^2.27.0"
+        "eslint-plugin-react": "^7.22.0",
+        "gatsby": "^3.0.0"
     }
 }
