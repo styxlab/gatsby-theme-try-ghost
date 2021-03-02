@@ -27,7 +27,7 @@
   },
   "peerDependencies": {
     "gatsby": "^3.0.0",
-    "prismjs": "^1.22.0"
+    "prismjs": "^1.23.0"
   },
   "keywords": [
     "gatsby",
