@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento/compare/gatsby-theme-ghost-commento@1.3.5...gatsby-theme-ghost-commento@2.0.0) (2021-03-02)
+
+**Note:** Version bump only for package gatsby-theme-ghost-commento
+
+
+
+
+
 ## [1.3.5](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-commento/compare/gatsby-theme-ghost-commento@1.3.4...gatsby-theme-ghost-commento@1.3.5) (2020-11-23)
 
 **Note:** Version bump only for package gatsby-theme-ghost-commento

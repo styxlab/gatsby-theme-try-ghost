@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links/compare/gatsby-rehype-ghost-links@1.6.6...gatsby-rehype-ghost-links@2.0.0) (2021-03-02)
+
+**Note:** Version bump only for package gatsby-rehype-ghost-links
+
+
+
+
+
 ## [1.6.6](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-rehype-ghost-links/compare/gatsby-rehype-ghost-links@1.6.5...gatsby-rehype-ghost-links@1.6.6) (2021-02-04)
 
 
