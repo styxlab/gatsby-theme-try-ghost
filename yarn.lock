@@ -2639,10 +2639,10 @@
     "@octokit/types" "^6.0.3"
     universal-user-agent "^6.0.0"
 
-"@octokit/openapi-types@^5.2.1":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-5.2.1.tgz#5e846f86104aef96ace20091d8afb6be27979d8a"
-  integrity sha512-Bf7MBvQ1nMpv15ANaQtRBsC7YnwQFPM0eUztp3luQs9L6sBEiQ6ArM1Wx5CG+N7tXETtd0oE0DMcU4wbLlCZIw==
+"@octokit/openapi-types@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-5.2.2.tgz#1590c118a131031610faffd4222ae54915e2b82d"
+  integrity sha512-b3nHy/0uufJJsaZERwZM0syLRO6gfr6vvBPLewQxBKzzbhGDx1ygTyoELMNADD7mIPPzGMqbfdCeJTSeZueZwA==
 
 "@octokit/plugin-enterprise-rest@^6.0.1":
   version "6.0.1"
@@ -2703,11 +2703,11 @@
     "@octokit/plugin-rest-endpoint-methods" "4.13.1"
 
 "@octokit/types@^6.0.3", "@octokit/types@^6.11.0", "@octokit/types@^6.11.1", "@octokit/types@^6.7.1":
-  version "6.11.1"
-  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.11.1.tgz#54ece128029526fa99bd71e757b9e35478403d95"
-  integrity sha512-UiSRTG2lrFbMUMwhKNR0uSV33Fzv4bNu1n5iFuuNOg80XCh0VYNhR4TQWgrkLhVxdDuej6s61aP3eQvVm6K6uA==
+  version "6.11.2"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-6.11.2.tgz#43973dc29cdf59bf9d5f3ab0d16275c4b4a6eb8d"
+  integrity sha512-EKQRFZU/oOfUlqk9ntLIE5UO/bcOx8exFpdXGBciJP90f05me3mza0sacIpqVqmiIQP3nJsBjnZHMmtijE5XwQ==
   dependencies:
-    "@octokit/openapi-types" "^5.2.1"
+    "@octokit/openapi-types" "^5.2.2"
 
 "@pieh/friendly-errors-webpack-plugin@1.7.0-chalk-2":
   version "1.7.0-chalk-2"
@@ -13598,9 +13598,9 @@ no-case@^3.0.4:
     tslib "^2.0.3"
 
 node-abi@^2.7.0:
-  version "2.19.3"
-  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.19.3.tgz#252f5dcab12dad1b5503b2d27eddd4733930282d"
-  integrity sha512-9xZrlyfvKhWme2EXFKQhZRp1yNWT/uI1luYPr3sFl+H4keYY4xR+1jO7mvTTijIsHf1M+QDe9uWuKeEpLInIlg==
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/node-abi/-/node-abi-2.20.0.tgz#0659ee1a4a04dacabd3ac4429fac6297ed58e92e"
+  integrity sha512-6ldtfVR5l3RS8D0aT+lj/uM2Vv/PGEkeWzt2tl8DFBsGY/IuVnAIHl+dG6C14NlWClVv7Rn2+ZDvox+35Hx2Kg==
   dependencies:
     semver "^5.4.1"
 
