@@ -13,6 +13,7 @@
   "dependencies": {
     "gatsby": "^3.0.0",
     "gatsby-plugin-ackee-tracker": "^2.2.0",
+    "gatsby-plugin-gatsby-cloud": "^2.0.0",
     "gatsby-plugin-netlify": "^3.0.0",
     "gatsby-plugin-preact": "^5.0.0",
     "gatsby-rehype-ghost-links": "*",
