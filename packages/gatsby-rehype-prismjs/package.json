@@ -14,19 +14,19 @@
     "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
   },
   "dependencies": {
-    "@babel/runtime": "^7.12.5",
+    "@babel/runtime": "^7.13.9",
     "parse-numeric-range": "^1.2.0",
     "unist-util-visit-parents": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.7",
-    "@babel/core": "^7.12.7",
-    "babel-preset-gatsby-package": "^0.7.0",
-    "cross-env": "^7.0.2",
-    "prismjs": "^1.22.0"
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.8",
+    "babel-preset-gatsby-package": "^1.0.0",
+    "cross-env": "^7.0.3",
+    "prismjs": "^1.23.0"
   },
   "peerDependencies": {
-    "gatsby": "^2.27.0",
+    "gatsby": "^3.0.0",
     "prismjs": "^1.22.0"
   },
   "keywords": [
