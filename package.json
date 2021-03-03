@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "develop": "yarn workspace demo develop",
-    "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true yarn workspace demo build --log-pages",
+    "build": "yarn workspace demo build --log-pages",
     "clean": "yarn workspace demo clean",
     "serve": "yarn workspace demo serve",
     "bootstrap": "lerna bootstrap --use-workspaces",
