@@ -21,11 +21,14 @@ const MetaData = ({
     location,
 }) => {
     const config = settings.site.siteMetadata
-    const canonical = url.resolve(config.siteUrl, location.pathname)
+    let canonical = url.resolve(config.siteUrl, location.pathname)
     const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
     settings = settings.allGhostSettings.edges[0].node
 
     if (ghostPost) {
+        if (ghostPost.canonical_url) {
+            canonical = ghostPost.canonical_url
+        }
         return (
             <ArticleMeta
                 data={ghostPost}
