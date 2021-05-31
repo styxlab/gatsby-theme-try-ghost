@@ -57,6 +57,7 @@ module.exports = (themeOptions) => {
                     cacheResponse: true,
                     verbose: siteConfig.verbose,
                     severity: siteConfig.severity,
+                    fetchPostProcessors: siteConfig.fetchPostProcessors
                 },
             },
             {

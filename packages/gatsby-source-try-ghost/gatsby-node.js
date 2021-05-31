@@ -267,7 +267,7 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
 const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const { triggerTime, actions, reporter, cache, createContentDigest, getNodesByType } = sourceNodeFields
     const { createNode, touchNode } = actions
-    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true } = configOptions
+    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true, fetchPostProcessors } = configOptions
     const api = ContentAPI.configure(ghostConfig)
     const log = useLog(reporter, verbose, severity)
     const settings = { api, log , cacheResponse }
@@ -300,9 +300,16 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
         posts = transformCodeinjection(posts)
         posts.forEach(async (post) => {
             log(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
-            createNode(GhostNodes.post(post))
-            const newDigest = normalizedContentDigest(post, createContentDigest)
-            await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
+            if (fetchPostProcessors && fetchPostProcessors.post) {
+                post = fetchPostProcessors.post(post);
+            }
+            if (!!post) {
+                createNode(GhostNodes.post(post))
+                const newDigest = normalizedContentDigest(post, createContentDigest)
+                await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
+            } else {
+                log(`Skipping Post: ${post.slug}`)
+            }
         })
     })
 
@@ -310,9 +317,16 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
         log(`Fetched Pages: ${pages.length}`)
         pages.forEach(async (page) => {
             log(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
-            createNode(GhostNodes.page(page))
-            const newDigest = normalizedContentDigest(page, createContentDigest)
-            await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
+            if (fetchPostProcessors && fetchPostProcessors.page) {
+                page = fetchPostProcessors.page(page);
+            }
+            if (!!page) {
+                createNode(GhostNodes.page(page))
+                const newDigest = normalizedContentDigest(page, createContentDigest)
+                await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
+            } else {
+                log(`Skipping Page: ${page.slug}`)
+            }
         })
     })
 
@@ -320,7 +334,9 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     // Only update as it is never deleted
     const fetchSettings = api.settings.browse().then(async (setting) => {
         log(`Fetched Settings`)
-
+        if (fetchPostProcessors && fetchPostProcessors.setting) {
+            setting = fetchPostProcessors.setting(setting)
+        }
         const rawSettings = setting
         const newDigest = createContentDigest(JSON.stringify(rawSettings))
         const existingDigest = cacheResponse && await cache.get(`${PLUGIN}-settings`)
