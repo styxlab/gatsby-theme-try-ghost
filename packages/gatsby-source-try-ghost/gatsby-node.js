@@ -129,7 +129,7 @@ const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) =>
     return [removeTags, removeAuthors]
 }
 
-const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => {
+const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fetchPostProcessors) => {
     const { triggerTime } = sourceNodeFields
     const { api, log } = settings
 
@@ -146,6 +146,9 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings) => 
 
     const removeOrUpdatePosts = api.posts.browse(prefetchOptions).then(async (posts) => {
         log(`Prefetched Posts: ${posts.length}`)
+        if (fetchPostProcessors && fetchPostProcessors.post) {
+            posts = posts.map(post => fetchPostProcessors.post(post)).filter(post => !!post)
+        }
         const type = GhostTypes.post
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.post, existingNodes.posts, posts, sourceNodeFields, settings)
@@ -283,7 +286,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
 
     // Step 3: Remove vanished posts and pages
     // Check old nodes only, if content digest changes for tags and authors: update
-    const removeOrUpdatePostAndPage = prefetchPostAndPageNodes(existingNodes, sourceNodeFields, settings)
+    const removeOrUpdatePostAndPage = prefetchPostAndPageNodes(existingNodes, sourceNodeFields, settings, fetchPostProcessors)
 
     // Step 4: Fetch new and updated posts and pages based on timestamp
     const postAndPageFetchOptions = {
