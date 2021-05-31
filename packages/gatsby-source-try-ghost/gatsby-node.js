@@ -165,6 +165,9 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fet
 
     const removeOrUpdatePages = api.pages.browse(prefetchOptions).then(async (pages) => {
         log(`Prefetched Pages: ${pages.length}`)
+        if (fetchPostProcessors && fetchPostProcessors.page) {
+            pages = pages.map(page => fetchPostProcessors.post(page)).filter(page => !!page)
+        }
         const type = GhostTypes.page
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.page, existingNodes.pages, pages, sourceNodeFields, settings)
