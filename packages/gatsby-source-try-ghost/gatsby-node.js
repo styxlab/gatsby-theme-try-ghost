@@ -301,14 +301,12 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
         posts.forEach(async (post) => {
             log(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
             if (fetchPostProcessors && fetchPostProcessors.post) {
-                post = fetchPostProcessors.post(post);
+                post = fetchPostProcessors.post(post)
             }
-            if (!!post) {
+            if (post) {
                 createNode(GhostNodes.post(post))
                 const newDigest = normalizedContentDigest(post, createContentDigest)
                 await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
-            } else {
-                log(`Skipping Post: ${post.slug}`)
             }
         })
     })
@@ -318,14 +316,12 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
         pages.forEach(async (page) => {
             log(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
             if (fetchPostProcessors && fetchPostProcessors.page) {
-                page = fetchPostProcessors.page(page);
+                page = fetchPostProcessors.page(page)
             }
-            if (!!page) {
+            if (page) {
                 createNode(GhostNodes.page(page))
                 const newDigest = normalizedContentDigest(page, createContentDigest)
                 await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
-            } else {
-                log(`Skipping Page: ${page.slug}`)
             }
         })
     })
