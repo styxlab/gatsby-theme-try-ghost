@@ -18,7 +18,7 @@ While you can use `gatsby-plugin-ghost-images` on its own, you most likely want 
 
 `yarn add gatsby-plugin-sharp gatsby-transformer-sharp gatsby-image`
 
-## GraphQL schhema
+## GraphQL schema
 
 Note that the GraphQL schema must be explicitely typed. If you use this plugin in conjunction with [gatsby-source-try-ghost](https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-source-try-ghost) this is automatically done for you.
 
