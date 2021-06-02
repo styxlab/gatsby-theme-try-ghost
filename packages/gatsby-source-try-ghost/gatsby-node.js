@@ -146,9 +146,7 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fil
 
     const removeOrUpdatePosts = api.posts.browse(prefetchOptions).then(async (posts) => {
         log(`Prefetched Posts: ${posts.length}`)
-        if (filter && filter.posts) {
-            posts = posts.filter(post => filter.posts(post))
-        }
+        posts = posts.filter(post => filter.posts(post))
         const type = GhostTypes.post
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.post, existingNodes.posts, posts, sourceNodeFields, settings)
@@ -165,9 +163,7 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fil
 
     const removeOrUpdatePages = api.pages.browse(prefetchOptions).then(async (pages) => {
         log(`Prefetched Pages: ${pages.length}`)
-        if (filter && filter.pages) {
-            pages = pages.filter(page => filter.pages(page))
-        }
+        pages = pages.filter(page => filter.pages(page))
         const type = GhostTypes.page
         const typeLower = type.toLowerCase()
         removeNode(GhostTypes.page, existingNodes.pages, pages, sourceNodeFields, settings)
@@ -273,7 +269,7 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
 const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const { triggerTime, actions, reporter, cache, createContentDigest, getNodesByType } = sourceNodeFields
     const { createNode, touchNode } = actions
-    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true, filter } = configOptions
+    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true, filter = { posts: () => true, pages: () => true } } = configOptions
     const api = ContentAPI.configure(ghostConfig)
     const log = useLog(reporter, verbose, severity)
     const settings = { api, log , cacheResponse }
@@ -304,10 +300,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
         log(`Fetched Posts: ${posts.length}`)
         posts = transformCodeinjection(posts)
-        if (filter && filter.posts) {
-            posts = posts.filter(filter.posts)
-        }
-        posts.forEach(async (post) => {
+        posts.filter(filter.posts).forEach(async (post) => {
             log(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
             createNode(GhostNodes.post(post))
             const newDigest = normalizedContentDigest(post, createContentDigest)
@@ -317,10 +310,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
         log(`Fetched Pages: ${pages.length}`)
-        if (filter && filter.pages) {
-            pages = pages.filter(filter.pages)
-        }
-        pages.forEach(async (page) => {
+        pages.filter(filter.pages).forEach(async (page) => {
             log(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
             createNode(GhostNodes.page(page))
             const newDigest = normalizedContentDigest(page, createContentDigest)
