@@ -35,6 +35,11 @@ Plugin configuration for `gatsby-config.js`:
       cacheResponse: true, 
       // Show info messages (optional, default: true)
       verbose: false,
+      // filter retrieved posts/pages (default: retrieve all)
+      filter: {
+          posts: (post) => boolean,
+          pages: (page) => boolean
+      }
    }
 }
 ```
@@ -46,6 +51,8 @@ Plugin configuration for `gatsby-config.js`:
 `cacheResponse`: This plugin uses the cache to hold state information for subsequent runs. For best performance, this setting should be turned on. Only switch off for debugging purposes.
 
 `verbose`: Print informative messages during build processing.
+
+`filter`: Filter retrieved posts/pages by a filter function.
 
 ## Details
 

@@ -129,7 +129,7 @@ const prefetchTagAndAuthorNodes = (existingNodes, sourceNodeFields, settings) =>
     return [removeTags, removeAuthors]
 }
 
-const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fetchPostProcessors) => {
+const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, filter) => {
     const { triggerTime } = sourceNodeFields
     const { api, log } = settings
 
@@ -146,8 +146,8 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fet
 
     const removeOrUpdatePosts = api.posts.browse(prefetchOptions).then(async (posts) => {
         log(`Prefetched Posts: ${posts.length}`)
-        if (fetchPostProcessors && fetchPostProcessors.post) {
-            posts = posts.map(post => fetchPostProcessors.post(post)).filter(post => !!post)
+        if (filter && filter.posts) {
+            posts = posts.filter(post => filter.posts(post))
         }
         const type = GhostTypes.post
         const typeLower = type.toLowerCase()
@@ -165,8 +165,8 @@ const prefetchPostAndPageNodes = (existingNodes, sourceNodeFields, settings, fet
 
     const removeOrUpdatePages = api.pages.browse(prefetchOptions).then(async (pages) => {
         log(`Prefetched Pages: ${pages.length}`)
-        if (fetchPostProcessors && fetchPostProcessors.page) {
-            pages = pages.map(page => fetchPostProcessors.post(page)).filter(page => !!page)
+        if (filter && filter.pages) {
+            pages = pages.filter(page => filter.pages(page))
         }
         const type = GhostTypes.page
         const typeLower = type.toLowerCase()
@@ -273,7 +273,7 @@ const updatePostAndPageNode = async (type, updateNodes, sourceNodeFields, settin
 const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const { triggerTime, actions, reporter, cache, createContentDigest, getNodesByType } = sourceNodeFields
     const { createNode, touchNode } = actions
-    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true, fetchPostProcessors } = configOptions
+    const { ghostConfig, verbose = false, severity = `info`, cacheResponse = true, filter } = configOptions
     const api = ContentAPI.configure(ghostConfig)
     const log = useLog(reporter, verbose, severity)
     const settings = { api, log , cacheResponse }
@@ -289,7 +289,7 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
 
     // Step 3: Remove vanished posts and pages
     // Check old nodes only, if content digest changes for tags and authors: update
-    const removeOrUpdatePostAndPage = prefetchPostAndPageNodes(existingNodes, sourceNodeFields, settings, fetchPostProcessors)
+    const removeOrUpdatePostAndPage = prefetchPostAndPageNodes(existingNodes, sourceNodeFields, settings, filter)
 
     // Step 4: Fetch new and updated posts and pages based on timestamp
     const postAndPageFetchOptions = {
@@ -304,31 +304,27 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     const fetchPosts = api.posts.browse(postAndPageFetchOptions).then((posts) => {
         log(`Fetched Posts: ${posts.length}`)
         posts = transformCodeinjection(posts)
+        if (filter && filter.posts) {
+            posts = posts.filter(filter.posts)
+        }
         posts.forEach(async (post) => {
             log(`Post: ${post.slug}, updated_at: ${post.updated_at}`)
-            if (fetchPostProcessors && fetchPostProcessors.post) {
-                post = fetchPostProcessors.post(post)
-            }
-            if (post) {
-                createNode(GhostNodes.post(post))
-                const newDigest = normalizedContentDigest(post, createContentDigest)
-                await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
-            }
+            createNode(GhostNodes.post(post))
+            const newDigest = normalizedContentDigest(post, createContentDigest)
+            await cache.set(`${PLUGIN}-post-${post.id}`, newDigest)
         })
     })
 
     const fetchPages = api.pages.browse(postAndPageFetchOptions).then((pages) => {
         log(`Fetched Pages: ${pages.length}`)
+        if (filter && filter.pages) {
+            pages = pages.filter(filter.pages)
+        }
         pages.forEach(async (page) => {
             log(`Page: ${page.slug}, updated_at: ${page.updated_at}`)
-            if (fetchPostProcessors && fetchPostProcessors.page) {
-                page = fetchPostProcessors.page(page)
-            }
-            if (page) {
-                createNode(GhostNodes.page(page))
-                const newDigest = normalizedContentDigest(page, createContentDigest)
-                await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
-            }
+            createNode(GhostNodes.page(page))
+            const newDigest = normalizedContentDigest(page, createContentDigest)
+            await cache.set(`${PLUGIN}-page-${page.id}`, newDigest)
         })
     })
 
@@ -336,9 +332,6 @@ const createGhostNodes = async (sourceNodeFields , configOptions) => {
     // Only update as it is never deleted
     const fetchSettings = api.settings.browse().then(async (setting) => {
         log(`Fetched Settings`)
-        if (fetchPostProcessors && fetchPostProcessors.setting) {
-            setting = fetchPostProcessors.setting(setting)
-        }
         const rawSettings = setting
         const newDigest = createContentDigest(JSON.stringify(rawSettings))
         const existingDigest = cacheResponse && await cache.get(`${PLUGIN}-settings`)
