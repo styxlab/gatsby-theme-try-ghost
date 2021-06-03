@@ -36,7 +36,7 @@ Plugin configuration for `gatsby-config.js`:
       // Show info messages (optional, default: true)
       verbose: false,
       // filter retrieved posts/pages (default: retrieve all)
-      filter: {
+      customFilter: {
           posts: (post) => boolean,
           pages: (page) => boolean
       }
@@ -52,7 +52,7 @@ Plugin configuration for `gatsby-config.js`:
 
 `verbose`: Print informative messages during build processing.
 
-`filter`: Filter retrieved posts/pages by a filter function.
+`customFilter`: Filter retrieved posts/pages by a filter function.
 
 ## Details
 
