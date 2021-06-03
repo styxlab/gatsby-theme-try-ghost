@@ -57,7 +57,7 @@ module.exports = (themeOptions) => {
                     cacheResponse: true,
                     verbose: siteConfig.verbose,
                     severity: siteConfig.severity,
-                    filter: siteConfig.filter,
+                    customFilter: siteConfig.customFilter,
                 },
             },
             {
