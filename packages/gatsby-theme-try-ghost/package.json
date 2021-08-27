@@ -34,8 +34,8 @@
     "react"
   ],
   "dependencies": {
-    "@tryghost/helpers": "^1.1.38",
-    "@tryghost/url-utils": "^0.6.26",
+    "@tryghost/helpers": "^1.1.39",
+    "@tryghost/url-utils": "^1.0.1",
     "autoprefixer": "^9.8.6",
     "babel-plugin-styled-components": "^1.12.0",
     "babel-preset-gatsby": "^1.0.0",

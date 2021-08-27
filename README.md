@@ -8,9 +8,11 @@ A Gatsby theme plugin for creating blogs from headless [Ghost CMS](https://ghost
 
 Turn your Ghost blog into a flaring fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
 
-## Variants 🔥
+## 🔥 Alternatives
 
-Favor [Next.js](https://nextjs.org/) over Gatsby? Head over to [next-cms-ghost](https://github.com/styxlab/next-cms-ghost)!
+> Tired of `gatsby-config.js`? Check out [Blogody](https://www.blogody.com) for an integrated solution with many more benefits!
+
+> Favor [Next.js](https://nextjs.org/) over Gatsby? Head over to [next-cms-ghost](https://github.com/styxlab/next-cms-ghost)!
 
 ## Tutorials ✨ 🆕
 

@@ -21,7 +21,7 @@
     "gatsby-cloud"
   ],
   "dependencies": {
-    "@tryghost/content-api": "1.4.14",
+    "@tryghost/content-api": "1.4.15",
     "cheerio": "1.0.0-rc.5",
     "gatsby-node-helpers": "0.3.0",
     "qs": "6.9.6"
