@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { StaticQuery, graphql } from 'gatsby'
 
-import { Navigation, SocialLinks, DarkMode, SubscribeButton } from '.'
+import { Navigation, SocialLinks, DarkMode, SubscribeButton, ShowTags } from '.'
 import { resolveUrl, appendBasePath } from '../../utils/routing'
 import useOptions from '../../utils/use-options'
 import { useLang, get } from '../../utils/use-lang'
@@ -65,6 +65,7 @@ const SiteNav = ({ data, className, postTitle, overlay }) => {
                     <Navigation data={site.secondary_navigation} />
                 ) : (
                     <div className="social-links">
+                        <ShowTags />
                         <SocialLinks site={site} siteUrl={config.siteUrl} />
                     </div>
                 )}
