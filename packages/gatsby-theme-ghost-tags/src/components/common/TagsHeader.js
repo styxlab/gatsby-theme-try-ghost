@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TagHeader = ({title}) => {
+const TagsHeader = ({title}) => {
 
     return (
         <div className="inner">
@@ -14,8 +14,8 @@ const TagHeader = ({title}) => {
     )
 }
 
-TagHeader.propTypes = {
+TagsHeader.propTypes = {
     title: PropTypes.string.isRequired,
 }
 
-export default TagHeader
+export default TagsHeader

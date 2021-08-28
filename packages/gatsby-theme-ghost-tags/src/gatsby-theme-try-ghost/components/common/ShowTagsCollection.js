@@ -4,7 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTags } from '@fortawesome/free-solid-svg-icons'
 
-const ShowTags = ({data}) => {
+const ShowTagsCollection = ({data}) => {
     const tags = data.allTagsPage.edges[0].node
     return (
         <React.Fragment>
@@ -13,16 +13,16 @@ const ShowTags = ({data}) => {
     )
 }
 
-ShowTags.propTypes = {
+ShowTagsCollection.propTypes = {
     data: PropTypes.shape({
         allTagsPage: PropTypes.object.isRequired,
     }).isRequired,
 }
 
-const ShowTagsQuery = props => (
+const ShowTagsCollectionQuery = props => (
     <StaticQuery
         query={graphql`
-            query TagsSettingsForNav {
+            query ShowTagsCollectionForNav {
                 allTagsPage {
                     edges {
                         node {
@@ -32,8 +32,8 @@ const ShowTagsQuery = props => (
                 }
             }
         `}
-        render={data => <ShowTags data={data} {...props} />}
+        render={data => <ShowTagsCollection data={data} {...props} />}
     />
 )
 
-export default ShowTagsQuery
+export default ShowTagsCollectionQuery

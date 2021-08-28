@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Layout, HeaderPage } from 'gatsby-theme-try-ghost/src/components/common'
 import { StickyNavContainer, OverlayContainer } from 'gatsby-theme-try-ghost/src/components/common/effects'
-import TagView from '../components/common/TagView'
-import TagHeader from '../components/common/TagHeader'
+import TagsView from '../components/common/TagsView'
+import TagsHeader from '../components/common/TagsHeader'
 import { MetaData } from 'gatsby-theme-try-ghost/src/components/common/meta'
 
 const TagsPage = ({ data, location, pageContext }) => {
@@ -17,8 +17,8 @@ const TagsPage = ({ data, location, pageContext }) => {
       <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={sticky => (
         <OverlayContainer render={overlay => (
           <Layout isPost={true} overlay={overlay} header={<HeaderPage overlay={overlay} />} >
-            <TagHeader title={page.title}/>
-            <TagView pageContext={pageContext} tags={tags} isHome={true} />
+            <TagsHeader title={page.title}/>
+            <TagsView pageContext={pageContext} tags={tags} isHome={true} />
           </Layout>
         )} />
       )} />

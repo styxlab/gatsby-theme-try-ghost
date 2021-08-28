@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Pagination } from 'gatsby-theme-try-ghost/src/components/common'
 import TagItems from './TagItems'
 
-class TagView extends React.Component {
+class TagsView extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -33,10 +33,10 @@ class TagView extends React.Component {
   }
 }
 
-TagView.propTypes = {
+TagsView.propTypes = {
   pageContext: PropTypes.object.isRequired,
   tags: PropTypes.array.isRequired,
   isHome: PropTypes.bool,
 }
 
-export default TagView
+export default TagsView
