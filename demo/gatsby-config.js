@@ -83,6 +83,12 @@ module.exports = {
         },
         {
             resolve: `gatsby-theme-ghost-tags`,
+            options: {
+                pageContext: {
+                    title: `Tags Collection`,
+                    path: `/tags/`,
+                },
+            },
         },
         {
             resolve: `gatsby-transformer-rehype`,

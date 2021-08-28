@@ -9,6 +9,7 @@ import { MetaData } from 'gatsby-theme-try-ghost/src/components/common/meta'
 
 const TagsPage = ({ data, location, pageContext }) => {
   const tags = data.allGhostTag.edges
+  const page = data.tagsPage
 
   return (
     <React.Fragment>
@@ -16,7 +17,7 @@ const TagsPage = ({ data, location, pageContext }) => {
       <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={sticky => (
         <OverlayContainer render={overlay => (
           <Layout isPost={true} overlay={overlay} header={<HeaderPage overlay={overlay} />} >
-            <TagHeader />
+            <TagHeader title={page.title}/>
             <TagView pageContext={pageContext} tags={tags} isHome={true} />
           </Layout>
         )} />
@@ -27,6 +28,7 @@ const TagsPage = ({ data, location, pageContext }) => {
 
 TagsPage.propTypes = {
   data: PropTypes.shape({
+    tagsPage: PropTypes.object.isRequired,
     allGhostTag: PropTypes.object.isRequired,
     file: PropTypes.object,
   }).isRequired,
@@ -37,7 +39,10 @@ TagsPage.propTypes = {
 export default TagsPage
 
 export const pageQuery = graphql`
-  query GhostTagsQuery {
+  query GhostTagsQuery($slug: String!) {
+    tagsPage(slug: { eq: $slug }) {
+        ...TagsPageFields
+    }
     allGhostTag {
       edges {
         node {
@@ -54,6 +59,6 @@ export const pageQuery = graphql`
           width
           height
       }
-  }
+    }
   }
 `
