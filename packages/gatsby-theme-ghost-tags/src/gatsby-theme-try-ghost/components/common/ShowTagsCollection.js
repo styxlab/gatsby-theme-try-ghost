@@ -6,6 +6,9 @@ import { faTags } from '@fortawesome/free-solid-svg-icons'
 
 const ShowTagsCollection = ({data}) => {
     const tags = data.allTagsPage.edges[0].node
+
+    if (!tags.showIcon) return (<></>)
+
     return (
         <React.Fragment>
             <a href={tags.url} className="social-link" title={tags.title}><FontAwesomeIcon icon={faTags} inverse /></a>

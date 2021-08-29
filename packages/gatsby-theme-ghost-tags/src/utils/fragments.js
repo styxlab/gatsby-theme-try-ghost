@@ -19,5 +19,6 @@ export const tagsPageFields = graphql`
         title
         slug
         url
+        showIcon
     }
 `

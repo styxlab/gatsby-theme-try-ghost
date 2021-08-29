@@ -87,6 +87,7 @@ module.exports = {
                 pageContext: {
                     title: `Tags Collection`,
                     path: `/tags/`,
+                    showIcon: true
                 },
             },
         },

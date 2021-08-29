@@ -5,4 +5,6 @@ module.exports = {
     title: `Tags`,
 
     path: `/tags/`,
+
+    showIcon: true
 }

@@ -17,6 +17,7 @@ exports.createSchemaCustomization = ({ actions }) => {
             title: String
             slug: String
             url: String
+            showIcon: Boolean
         }
     `
     createTypes(typeDefs)
