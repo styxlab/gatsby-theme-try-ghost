@@ -1,4 +1,4 @@
-# gatsby-theme-ghost-members
+# gatsby-theme-ghost-tags
 [![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-ghost-tags/blob/master/LICENSE)
 [![gatsby-theme-ghost-members npm package version.](https://badgen.net/npm/v/gatsby-theme-ghost-members)](https://www.npmjs.org/package/gatsby-theme-ghost-tags)
 [![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
@@ -23,13 +23,25 @@ This theme is an add-on theme designed to seamlessly integrate with [gatsby-them
 plugins: [
     {
         resolve: `gatsby-theme-ghost-tags`,
+        options: {
+            pageContext: {
+                title: `Tags Collection`,
+                path: `/tags/`,
+                showIcon: true
+            },
+        },
     },
 ]
 ```
 
 ## Details
 
-This plugin brings full Tags functionality to your Gatsby site!✨ 
+This plugin brings Tags functionality to your Gatsby site!✨ 
+
+Tags functionality:
+1. a page that shows all your tags in one navigation page for all your visitors to browse
+2. a navigation link (icon) to allow your visitors to reach that page
+3. can configure page title, path and icon visability via config
 
 ## Contributions
 
