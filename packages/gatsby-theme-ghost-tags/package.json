@@ -4,6 +4,9 @@
     "version": "2.0.0",
     "license": "MIT",
     "author": "styxlab",
+    "contributers":[
+      "head_monkey"
+    ],
     "homepage": "https://github.com/styxlab/",
     "main": "index.js",
     "repository": {
