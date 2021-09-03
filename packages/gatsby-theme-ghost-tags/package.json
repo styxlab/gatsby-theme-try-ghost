@@ -1,0 +1,47 @@
+{
+    "name": "gatsby-theme-ghost-tags",
+    "description": "Gatsby theme to easily add a tags page to gatsby-theme-try-ghost",
+    "version": "2.0.0",
+    "license": "MIT",
+    "author": "styxlab",
+    "contributers":[
+      "head_monkey"
+    ],
+    "homepage": "https://github.com/styxlab/",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-theme-ghost-tags"
+    },
+    "bugs": {
+        "url": "https://github.com/styxlab/gatsby-theme-try-ghost/issues"
+    },
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "gatsby-theme",
+        "gatsby-theme-try-ghost",
+        "tags",
+        "jamify",
+        "ghost",
+        "ghost-cms"
+    ],
+    "dependencies": {
+        "@babel/runtime": "^7.13.9",
+        "@fortawesome/fontawesome-svg-core": "^1.2.36",
+        "@fortawesome/free-solid-svg-icons": "^5.15.4",
+        "@fortawesome/react-fontawesome": "^0.1.15",
+        "styled-components": "^5.2.1"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.13.0",
+        "@babel/core": "^7.13.8",
+        "babel-eslint": "^10.1.0",
+        "babel-preset-gatsby-package": "^1.0.0",
+        "cross-env": "^7.0.3",
+        "eslint": "^7.21.0",
+        "eslint-plugin-ghost": "^2.0.0",
+        "eslint-plugin-react": "^7.22.0",
+        "gatsby": "^3.0.0"
+    }
+}

@@ -82,6 +82,16 @@ module.exports = {
             resolve: `gatsby-theme-ghost-members`,
         },
         {
+            resolve: `gatsby-theme-ghost-tags`,
+            options: {
+                pageContext: {
+                    title: `Tags Collection`,
+                    path: `/tags/`,
+                    showIcon: true
+                },
+            },
+        },
+        {
             resolve: `gatsby-transformer-rehype`,
             options: {
                 filter: node => (

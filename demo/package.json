@@ -23,6 +23,7 @@
     "gatsby-theme-ghost-contact": "^2.0.0",
     "gatsby-theme-ghost-dark-mode": "^2.0.0",
     "gatsby-theme-ghost-members": "^2.0.0",
+    "gatsby-theme-ghost-tags": "^2.0.0",
     "gatsby-theme-ghost-toc": "^2.0.0",
     "gatsby-theme-try-ghost": "^2.0.0",
     "gatsby-transformer-rehype": "^2.0.0",
