@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@2.0.0...gatsby-theme-try-ghost@2.0.1) (2021-09-19)
+
+
+### Features
+
+* new theme package to show all the tags as a collection of pages, similar to how posts are displayed in ([1addacc](https://github.com/styxlab/gatsby-theme-try-ghost/commit/1addacc454259968d60666f1d70372b9d6c7e1cf))
+* rename tags components ([a82127c](https://github.com/styxlab/gatsby-theme-try-ghost/commit/a82127ce475c401002405d79d5c8c6396bb165f6))
+
+
+
+
+
 # [2.0.0](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@1.50.5...gatsby-theme-try-ghost@2.0.0) (2021-03-02)
 
 **Note:** Version bump only for package gatsby-theme-try-ghost

@@ -1,11 +1,11 @@
 {
     "name": "gatsby-theme-ghost-tags",
     "description": "Gatsby theme to easily add a tags page to gatsby-theme-try-ghost",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "license": "MIT",
     "author": "styxlab",
-    "contributers":[
-      "head_monkey"
+    "contributers": [
+        "head_monkey"
     ],
     "homepage": "https://github.com/styxlab/",
     "main": "index.js",
