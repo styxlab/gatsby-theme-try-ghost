@@ -45,7 +45,11 @@ const copyToStatic = async ({ file, pathPrefix = `` }) => {
     return `${pathPrefix}/static/${fileName}`
 }
 
-module.exports = async (pluginParams, pluginOptions) => {
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    withWebp: Joi.boolean().default(true).description(`Enables webP.`),
+    useImageCache: Joi.boolean().default(true).description(`Enables Image Cache.`),
+  }).external(async (pluginParams, pluginOptions) => {
     const { htmlAst, htmlNode, reporter } = pluginParams
     const url = getContext(htmlNode, `url`)
     const slug = getContext(htmlNode, `slug`)
@@ -104,7 +108,7 @@ module.exports = async (pluginParams, pluginOptions) => {
     })
 
     return htmlAst
-}
+})}
 
 const replaceNewImage = async (node, pluginParams, pluginOptions) => {
     const url = node.properties.src.replace(/^\/\//,`https://`)
