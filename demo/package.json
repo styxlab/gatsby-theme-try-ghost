@@ -2,7 +2,7 @@
   "private": true,
   "name": "demo",
   "main": "index.js",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
@@ -17,7 +17,7 @@
     "gatsby-plugin-netlify": "^3.0.0",
     "gatsby-plugin-preact": "^5.0.0",
     "gatsby-rehype-ghost-links": "^2.0.0",
-    "gatsby-rehype-inline-images": "^2.0.0",
+    "gatsby-rehype-inline-images": "^2.0.1",
     "gatsby-rehype-prismjs": "^2.0.0",
     "gatsby-theme-ghost-commento": "^2.0.0",
     "gatsby-theme-ghost-contact": "^2.0.1",
