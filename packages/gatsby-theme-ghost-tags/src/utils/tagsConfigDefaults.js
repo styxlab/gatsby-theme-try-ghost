@@ -6,5 +6,5 @@ module.exports = {
 
     path: `/tags/`,
 
-    showIcon: true
+    showIcon: true,
 }
