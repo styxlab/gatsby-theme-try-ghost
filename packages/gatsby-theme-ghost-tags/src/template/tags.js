@@ -8,32 +8,32 @@ import TagsHeader from '../components/common/TagsHeader'
 import { MetaData } from 'gatsby-theme-try-ghost/src/components/common/meta'
 
 const TagsPage = ({ data, location, pageContext }) => {
-  const tags = data.allGhostTag.edges
-  const page = data.tagsPage
+    const tags = data.allGhostTag.edges
+    const page = data.tagsPage
 
-  return (
-    <React.Fragment>
-      <MetaData data={data} location={location} type="article" />
-      <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={sticky => (
-        <OverlayContainer render={overlay => (
-          <Layout isPost={true} overlay={overlay} header={<HeaderPage overlay={overlay} />} >
-            <TagsHeader title={page.title}/>
-            <TagsView pageContext={pageContext} tags={tags} isHome={true} />
-          </Layout>
-        )} />
-      )} />
-    </React.Fragment>
-  )
+    return (
+        <React.Fragment>
+            <MetaData data={data} location={location} type="article" />
+            <StickyNavContainer throttle={300} isPost={true} activeClass="nav-post-title-active" render={sticky => (
+                <OverlayContainer render={overlay => (
+                    <Layout isPost={true} overlay={overlay} header={<HeaderPage overlay={overlay} />} >
+                        <TagsHeader title={page.title}/>
+                        <TagsView pageContext={pageContext} tags={tags} isHome={true} />
+                    </Layout>
+                )} />
+            )} />
+        </React.Fragment>
+    )
 }
 
 TagsPage.propTypes = {
-  data: PropTypes.shape({
-    tagsPage: PropTypes.object.isRequired,
-    allGhostTag: PropTypes.object.isRequired,
-    file: PropTypes.object,
-  }).isRequired,
-  location: PropTypes.object.isRequired,
-  pageContext: PropTypes.object.isRequired,
+    data: PropTypes.shape({
+        tagsPage: PropTypes.object.isRequired,
+        allGhostTag: PropTypes.object.isRequired,
+        file: PropTypes.object,
+    }).isRequired,
+    location: PropTypes.object.isRequired,
+    pageContext: PropTypes.object.isRequired,
 }
 
 export default TagsPage
