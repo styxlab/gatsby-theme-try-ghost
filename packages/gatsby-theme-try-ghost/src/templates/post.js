@@ -38,6 +38,7 @@ const Post = ({ data, location, pageContext }) => {
     const toc = post.childHtmlRehype && post.childHtmlRehype.tableOfContents || []
     const htmlAst = post.childHtmlRehype && post.childHtmlRehype.htmlAst
     const transformedHtml = post.childHtmlRehype && post.childHtmlRehype.html
+    const url = resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)
 
     // Collection paths must be retrieved from pageContext
     previewPosts.forEach(({ node }) => node.collectionPath = pageContext.collectionPaths[node.id])
@@ -105,13 +106,13 @@ const Post = ({ data, location, pageContext }) => {
                                 }
 
                                 <section className="post-full-content">
-                                    <TableOfContents toc={toc} url={resolveUrl(basePath, pageContext.collectionPaths[post.id], post.slug, post.url)}/>
+                                    <TableOfContents toc={toc} url={url}/>
                                     <RenderContent htmlAst={htmlAst} html={transformedHtml || post.html} />
                                 </section>
 
                                 <Subscribe />
 
-                                <Comments id={post.id}/>
+                                <Comments id={post.id} title={post.title} url={url}/>
 
                             </article>
                         </div>
