@@ -14,7 +14,7 @@ const typeDefs = `
         meta_description: String
         postCount: Int
         url: String
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "fields.featureImageSharp")
     }
     type GhostAuthor implements Node @dontinfer {
         id: String
@@ -71,7 +71,7 @@ const typeDefs = `
         meta_title: String
         meta_description: String
         email_subject: String
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "fields.featureImageSharp")
         childHtmlRehype: HtmlRehype @link
     }
     type GhostPage implements Node @dontinfer {
@@ -110,7 +110,7 @@ const typeDefs = `
         twitter_description: String
         meta_title: String
         meta_description: String
-        featureImageSharp: File @link
+        featureImageSharp: File @link(from: "fields.featureImageSharp")
         childHtmlRehype: HtmlRehype @link
     }
     type GhostSettings implements Node @dontinfer {

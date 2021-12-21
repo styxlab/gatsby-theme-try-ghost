@@ -18,7 +18,7 @@ exports.onCreateNode = async function ({
     cache,
     store,
 }, pluginOptions) {
-    const { createNode } = actions
+    const { createNode, createNodeField } = actions
     const { lookup, exclude, verbose, disable } = _.merge({}, pluginDefaults, pluginOptions)
 
     // leave if node is excluded by user
@@ -71,7 +71,7 @@ exports.onCreateNode = async function ({
     fileNodes.map((fileNode, i) => {
         const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}`
 
-        node[id] = fileNode.id
+        createNodeField({ node, name: id, value: fileNode.id })
     })
 
     return {}
