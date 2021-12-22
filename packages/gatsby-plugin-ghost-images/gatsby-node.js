@@ -23,7 +23,8 @@ exports.onCreateNode = async function ({
   store
 }, pluginOptions) {
   const {
-    createNode
+    createNode,
+    createNodeField
   } = actions;
 
   const {
@@ -79,7 +80,11 @@ exports.onCreateNode = async function ({
 
   fileNodes.map((fileNode, i) => {
     const id = `${_.camelCase(`${allImgTags[i]}${ext}`)}`;
-    node[id] = fileNode.id;
+    createNodeField({
+      node,
+      name: id,
+      value: fileNode.id
+    });
   });
   return {};
 };
