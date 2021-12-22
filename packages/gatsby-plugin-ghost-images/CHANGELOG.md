@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-plugin-ghost-images/compare/gatsby-plugin-ghost-images@2.0.1...gatsby-plugin-ghost-images@2.0.2) (2021-12-22)
+
+**Note:** Version bump only for package gatsby-plugin-ghost-images
+
+
+
+
+
 ## [2.0.1](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-plugin-ghost-images/compare/gatsby-plugin-ghost-images@2.0.0...gatsby-plugin-ghost-images@2.0.1) (2021-09-19)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-transformer-rehype/compare/gatsby-transformer-rehype@2.0.0...gatsby-transformer-rehype@2.0.1) (2021-12-22)
+
+**Note:** Version bump only for package gatsby-transformer-rehype
+
+
+
+
+
 # [2.0.0](http://github.com/styxlab/gatsby-theme-try-ghost/tree/master/packages/gatsby-transformer-rehype/compare/gatsby-transformer-rehype@1.9.8...gatsby-transformer-rehype@2.0.0) (2021-03-02)
 
 **Note:** Version bump only for package gatsby-transformer-rehype

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/styxlab/gatsby-theme-try-ghost/compare/demo@2.0.2...demo@2.0.3) (2021-12-22)
+
+**Note:** Version bump only for package demo
+
+
+
+
+
 ## [2.0.2](https://github.com/styxlab/gatsby-theme-try-ghost/compare/demo@2.0.1...demo@2.0.2) (2021-11-02)
 
 **Note:** Version bump only for package demo

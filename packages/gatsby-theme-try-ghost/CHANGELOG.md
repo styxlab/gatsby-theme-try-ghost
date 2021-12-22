@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@2.0.1...gatsby-theme-try-ghost@2.0.2) (2021-12-22)
+
+
+### Features
+
+* pass additional params for cusdis support, maintain backward compatibility ([58c32d3](https://github.com/styxlab/gatsby-theme-try-ghost/commit/58c32d33dd0b83714b0db903b41ad65cd7ab8e3e))
+
+
+
+
+
 ## [2.0.1](https://github.com/styxlab/gatsby-theme-try-ghost/compare/gatsby-theme-try-ghost@2.0.0...gatsby-theme-try-ghost@2.0.1) (2021-09-19)
 
 
