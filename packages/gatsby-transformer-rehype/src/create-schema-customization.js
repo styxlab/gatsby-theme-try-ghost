@@ -9,7 +9,7 @@ const typeDefs = `
 // Is there a better way to check for existing types?
 const useTypeExists = (store, name) => (type) => {
     const types = store.getState().schemaCustomization.types
-    const plugin = types.find(node => node.plugin.name === name)
+    const plugin = types.find(node => node.plugin?.name === name)
 
     if (plugin === undefined) {
         return false
