@@ -2,13 +2,12 @@
 
 [![Released under MIT license.](https://badgen.net/github/license/micromatch/micromatch)](https://github.com/styxlab/gatsby-theme-try-ghost/blob/master/LICENSE)
 [![gatsby-theme-try-ghost npm package version.](https://badgen.net/npm/v/gatsby-theme-try-ghost)](https://www.npmjs.com/package/gatsby-theme-try-ghost)
-[![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)]()
 
 A Gatsby theme plugin for creating blogs from headless [Ghost CMS](https://ghost.org/changelog/jamstack/).
 
 Turn your Ghost blog into a flaring fast static website. This Gatsby theme is a frontend replacement of the Ghost handlebars engine featuring the standard Ghost Casper skin and functionality. All content is sourced from a headless Ghost CMS.
 
-## ⚠️ I am no longer maintaining these plugins, but PRs for fixes and version updates are most welcome!
+## ⚠️ I am no longer maintaining these plugins and am going to archive them soon.
 
 ## 🔥 Alternatives
 
